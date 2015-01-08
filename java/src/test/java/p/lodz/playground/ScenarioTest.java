@@ -22,7 +22,5 @@ public class ScenarioTest {
 	
 	Controler controller = new Controler(scenario);
 	controller.run();
-	
-	
     }
 }
