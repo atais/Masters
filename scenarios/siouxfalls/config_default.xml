@@ -4,15 +4,15 @@
 <config>
 
 	<module name="network">
-		<param name="inputNetworkFile" value="scenarios/siouxfalls/network.xml" />
+		<param name="inputNetworkFile" value="../scenarios/siouxfalls/network.xml" />
 	</module>
 
 	<module name="plans">
-		<param name="inputPlansFile" value="scenarios/siouxfalls/population-caronly.xml" />
+		<param name="inputPlansFile" value="../scenarios/siouxfalls/population-caronly.xml" />
 	</module>
 
 	<module name="facilities">
-		<param name="inputFacilitiesFile" value="scenarios/siouxfalls/facilities.xml" />
+		<param name="inputFacilitiesFile" value="../scenarios/siouxfalls/facilities.xml" />
 	</module>
 
 	<module name="scenario">
@@ -24,7 +24,7 @@
 		<param name="writeEventsInterval" value="1" />
 		<param name="writePlansInterval" value="1" />
 		<param name="eventsFileFormat" value="xml" />
-		<param name="outputDirectory" value="output/siouxfalls" />
+		<param name="outputDirectory" value="../output/siouxfalls" />
 		<param name="firstIteration" value="0" />
 		<param name="lastIteration" value="2" />
 		<param name="mobsim" value="qsim" />
@@ -210,8 +210,8 @@
 	</module>
 
 	<module name="transit">
-		<param name="transitScheduleFile" value="scenarios/siouxfalls/transitSchedule.xml" />
-		<param name="vehiclesFile" value="scenarios/siouxfalls/vehicles.xml" />
+		<param name="transitScheduleFile" value="../scenarios/siouxfalls/transitSchedule.xml" />
+		<param name="vehiclesFile" value="../scenarios/siouxfalls/vehicles.xml" />
 		<param name="transitModes" value="pt,bus" />
 	</module>
 

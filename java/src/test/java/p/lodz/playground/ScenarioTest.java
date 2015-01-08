@@ -13,7 +13,7 @@ public class ScenarioTest {
 
     @Test
     public void simpleTest() {
-	String defaultConfig = "scenarios/siouxfalls/config_default.xml";
+	String defaultConfig = "../scenarios/siouxfalls/config_default.xml";
 	Config config = ConfigUtils.loadConfig(defaultConfig);
 
 	Scenario scenario = ScenarioUtils.loadScenario(config);

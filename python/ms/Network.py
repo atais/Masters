@@ -39,9 +39,9 @@ def draw_network(f, node_size=0, node_color='red', node_alpha=0.5):
 
 if __name__ == '__main__':
     
-    draw_network('../scenarios/siouxfalls/Siouxfalls_network_PT.xml', 5)
-#     draw_network('../scenarios/nmbm/network.xml')
-#     draw_network('../scenarios/berlin/network.xml')
+    draw_network('../../scenarios/siouxfalls/network.xml', 5)
+#     draw_network('../../scenarios/nmbm/network.xml')
+#     draw_network('../../scenarios/berlin/network.xml')
 
     plt.axis('off')
     plt.margins(0,0)
