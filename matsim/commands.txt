@@ -1,0 +1,13 @@
+Full config:
+java -cp matsim-0.6.1.jar org.matsim.run.CreateFullConfig fullConfig.xml
+
+Prepare mvi:
+java -cp MATSim-r31599.jar:otfvis-0.7.0-SNAPSHOT.jar org.matsim.contrib.otfvis.OTFVis -convert input/0.events.xml.gz input/network.xml output/visualization.mvi 300
+
+
+Displaying MATSim Visualization Snapshots (mvi-files)
+java -cp MATSim-r31599.jar:otfvis-0.7.0-SNAPSHOT.jar org.matsim.contrib.otfvis.OTFVis output/visualization.mvi 
+
+Displaying MATSim Network files
+java -cp MATSim-r31599.jar:otfvis-0.7.0-SNAPSHOT.jar org.matsim.contrib.otfvis.OTFVis input/network.xml
+
