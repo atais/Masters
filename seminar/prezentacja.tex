@@ -57,7 +57,8 @@ jest to proces budowy modelu matematycznego i obserwacja czy jego zachowanie mo�
 
 \item {
 Wataru Nanya, Hiroshi Kitada, Azusa Hara, Yukiko Wakita, Tatsuhiro Tamaki, and Eisuke Kita\\
-\emph{Road Network Optimization for Increasing Traffic Flow}. International Conference on Simulation Technology, JSST 2013.}
+\emph{Road Network Optimization for Increasing Traffic Flow}. \\
+Int. Conference on Simulation Technology, JSST 2013.}
 
 \end{enumerate}
 \end{frame}
@@ -111,11 +112,11 @@ Wataru Nanya, Hiroshi Kitada, Azusa Hara, Yukiko Wakita, Tatsuhiro Tamaki, and E
 
 Autostrady:\\
 AX, $t_{AX}(p) =  50 + p$ min\\
-BY, $t_{YB}(p) =  50 + p$ min\\
+YB, $t_{YB}(p) =  50 + p$ min\\
 
 Drogi lokalne:\\
-BX, $t_{XB}(p) =  10p$ min\\
 AY, $t_{AY}(p) =  10p$ min\\
+XB, $t_{XB}(p) =  10p$ min\\
 \\
 Aut jest 6000 i wszystkie mają za zadanie przejechać trasę z A do B.
 
@@ -132,7 +133,7 @@ Jeśli p i q to liczby aut w tysiącach pokonujących odpowiednio trasy AXB i AY
 
 \begin{center}
 $p+q = 6 $\\
-$t_{AX}(p)+t_{BX}(p) = t_{AY}(q) + t_{BY}(q)$\\
+$t_{AX}(p)+t_{XB}(p) = t_{AY}(q) + t_{YB}(q)$\\
 $50+p+10p = 10q+50+q$
 \end{center}
 rozwiązaniem jest $p=q=3$.\\
@@ -164,7 +165,7 @@ Jeśli p, q i r to liczby aut w tysiącach pokonujących odpowiednio trasy AXB, 
 
 \begin{center}
 $p+q+r = 6 $\\
-$t_{AX}(p)+t_{BX}(p+r) = t_{AY}(q+r) + t_{BY}(q) = t_{AY}(q+r)+t_{YX}(r)+t_{XB}(p+r)$
+$t_{AX}(p)+t_{XB}(p+r) = t_{AY}(q+r) + t_{YB}(q) = t_{AY}(q+r)+t_{YX}(r)+t_{XB}(p+r)$
 \newline\\
 $50+p+10(p+r) = 10(q+r)+50+q = 10(q+r)+ 10 + r + 10(p+r)$
 \end{center}
@@ -241,66 +242,34 @@ Najlepszego rozwiązania będę poszukiwał wykorzystując algorytm genetyczny.
 \end{minipage}\hfill
 \end{frame}
 
-\section{Aplikacja knoWledge}
+\section{Aplikacja}
 
 \subsection{Analiza wymagań}
 \begin{frame}{Analiza wymagań} 
-\begin{itemize}
-\item{Użytkownik może korzystać z konta "tymczasowego" dla niezalogowanej sesji}
-\item{Użytkownik może się zarejestrować na portalu}
-\item{Użytkownik może się zalogować na portalu}
-\item{Użytkownik może komentować treść portalu, oceniać ją, co wpływa na treść wyświetlaną dla
-	danego użytkownika}
-\item{Użytkownik może dodawać do znajomych innych użytkowników portalu}	
-\item{Użytkownik może filtrować treść portalu względem gustów innych użytkowników}
-\end{itemize}
+
 \end{frame}
 
 
 \subsection{Projekt bazy danych}
 \begin{frame}{Projekt bazy danych}
-Informacje o użytkownikach są przechowywane w bazie danych
-\begin{itemize}
-\item{Tabela użytkowników}
-\item{Tabela komentarzy}
-\item{Tabela artykułów}
-\item{Tabela ocen}
-\end{itemize}
+
 \end{frame}
 
 
 \subsection{Implementacja: punkty kluczowe}
 \begin{frame}{Implementacja: punkty kluczowe} 
-\newtheorem{mydef4}{Filtrowanie uwspólnione}
-\begin{mydef4}
 
-Każdy użytkownik jest traktowany jako n-wymiarowy wektor pozycji dostępnych na portalu. Każdy element wektora jest oceną danej pozycji, np. w skali 0 (brak oceny) - 10. Dla przeciętnego użytkownika wektor ten będzie wektorem rzadkim, tzn. będzie występować dużo wartości zerowych. Algorytm, generuje rekomendację w oparciu o grupę użytkowników najbardziej podobnych do rozważanego użytkownika porównując miarę podobieństwa przy użyciu wzoru na cosinusową miarę podobieństwa wektorów:$ ^{[1]} $ \\ 
-
-\begin{center}
-$ podobieństwo(\overrightarrow{A},\overrightarrow{B}) = cos(\overrightarrow{A},\overrightarrow{B}) =  \frac{a_1 b_1 + a_2 b_2 + \ldots + a_n b_n }{ \sqrt{a_1^2 + a_2^2 + \ldots + a_n^2 }  \cdot \sqrt{b_1^2 + b_2^2 + \ldots + b_n^2 }} $
-\end{center}
-\end{mydef4}
 \end{frame}
 
 
 \subsection{Wdrożenie}
 \begin{frame}{Wdrożenie} 
 
-Przy pomocy Media Wiki API treść haseł Wikipedii będzie wyświetlana jako główna część strony.
-Oprócz tego z treści artykułu zostaną wyodrębnione jego kategorie oraz artykuły, do których zawiera bezpośrednie połączenia (linki). Na podstawie tych danych stworzona zostanie siatka powiązań pomiędzy hasłami a oceniając dany artykuł będziemy modyfikować wielkości odpowiadających elementów wektora ocen.
-
 \end{frame}
 
 
 \subsection{Przewidywane problemy}
 \begin{frame}{Przewidywane problemy} 
-\newtheorem{mydef3}{Zimny start (Cold start)}
-\begin{mydef3}
-Problem typowy dla systemów rekomendacyjnych. Przejawia się brakiem treści do analizy dla systemu, a co za tym idzie, niemożność przedstawienia wyników. $ ^{[1]} $
-\end{mydef3}
-
-Rozwiązanie:\\
-Integracja portalu z Facebookiem, korzystanie z profilu danego użytkownika.
 
 \end{frame}
 
@@ -310,24 +279,25 @@ Integracja portalu z Facebookiem, korzystanie z profilu danego użytkownika.
 \subsection{Dyskusja wyników}
 \begin{frame}{Dyskusja wyników} 
 
-Celem pracy jest uzyskanie działającej aplikacji sieciowej, dynamicznie pobierającej treść z portalu Wikipedia.org oraz działający system oceny tej treści.\\
-Drugim celem jest zbadanie efektywności systemu rekomendacyjnego przy pomocy pierwiastkowego błędu średniokwadratowego.  $ ^{[1]} $ \\
-
-\begin{center}$ RMSE = \sqrt{ \frac{1}{|\tau|} \displaystyle\sum\limits_{u,i \in  \tau } (\hat{r}_{ui}- r_{ui})^2}$ \end{center} 
-
-Błąd obliczany jest dla przygotowanych wcześniej, pewnych, zestawów danych.
-
 \end{frame}
 
 
 \subsection{Perspektywy dalszych badań w dziedzinie}
 \begin{frame}{Perspektywy dalszych badań w dziedzinie} 
 
-\begin{itemize}
-\item Wdrożenie hybrydowego systemu rekomendowania treści; uwspólnionego z kontekstowym.
-\item Zastosowanie innych funkcji matematycznych do wybierania treści podobnych
-\item Porównanie i ocena wybranych rozwiązań
-\end{itemize}
+\begin{figure}[h!]
+\includegraphics[width=0.50\textwidth]{img/berlin}
+\caption{Część mapy Berlina}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Perspektywy dalszych badań w dziedzinie} 
+
+\begin{figure}[h!]
+\includegraphics[width=0.55\textwidth]{img/berlin2}
+\caption{Mapa Berlina}
+\end{figure}
 
 \end{frame}
 
@@ -347,7 +317,7 @@ Błąd obliczany jest dla przygotowanych wcześniej, pewnych, zestawów danych.
 \bibitem{conference} 
 	Wataru Nanya, Hiroshi Kitada, Azusa Hara, Yukiko Wakita, Tatsuhiro Tamaki, and Eisuke Kita
 	\newblock \textit{Road Network Optimization for Increasing Traffic Flow}
-	\newblock Conference on Simulation Technology, JSST 2013.
+	\newblock Int. Conference on Simulation Technology, JSST 2013.
 
 \bibitem{reducingtheeffects}
 	Ana L. C. Bazzan and Franziska Klügl

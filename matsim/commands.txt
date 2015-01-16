@@ -18,4 +18,6 @@ java -cp MATSim-r31599.jar:otfvis-0.7.0-SNAPSHOT.jar org.matsim.contrib.otfvis.O
 RUN THE SNAPSHOT:
 java -Xmx1500m -cp MATSim-r31599.jar org.matsim.run.Controler ../scenarios/siouxfalls/config_default.xml
 java -Xmx1500m -cp MATSim-r31599.jar org.matsim.run.Controler ../scenarios/siouxfalls-cut/config_default.xml
-java -Xmx1500m -cp MATSim-r31599.jar org.matsim.run.Controler ../scenarios/siouxfalls/config_default-analysed.xml
+
+java -Xmx1500m -cp MATSim-r31599.jar org.matsim.run.Controler ../scenarios/siouxfalls/fullConfig-short.xml
+java -Xmx1500m -cp MATSim-r31599.jar org.matsim.run.Controler ../scenarios/siouxfalls-cut/fullConfig-short.xml

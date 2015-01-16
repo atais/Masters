@@ -10,12 +10,15 @@ import utils
 import networkx as nx
 import math as math
 import logging
+import os
 
         
 @timing
 def save_graph(graph, filename):
     A=nx.to_agraph(graph)
-    A.layout()           
+    A.layout()
+    if not os.path.exists(os.path.dirname(filename)):
+        os.makedirs(os.path.dirname(filename))           
     A.draw(filename+'.png')
     
 @timing
@@ -79,7 +82,7 @@ def color_edge_occupation(graph):
             scale_min = h
     return scale_min
 
-def generate_events_graph(network_file, events_file, interval=1, scale_threshold=0.22):
+def generate_events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
     """
         Generates a graph of events from network and event xml files
         Optional interval argument [hours], default is 1
@@ -100,14 +103,14 @@ def generate_events_graph(network_file, events_file, interval=1, scale_threshold
     
     while(pointer < 24):
         logging.info("Loading events starting from: " + str(pointer) + " h.")
-        graph = generate_network_graph(graph, network_file)
+        graph = generate_network_graph(network_file)
         
         links, i = count_events(events, i, pointer + interval)
         fill_graph(network, graph, links)
         
         scale_min = color_edge_occupation(graph)
         if (scale_min <= scale_threshold):
-            save_graph(graph,'../output/graph' + str(pointer) + '-' + str(pointer + interval))
+            save_graph(graph,'../output/'+folder+'/graph' + str(pointer) + '-' + str(pointer + interval))
         pointer += interval
     
     logging.info("Finished drawing events graphs...")
@@ -121,7 +124,7 @@ if __name__ == '__main__':
     
     
 #     graph = generate_network_graph('../../scenarios/siouxfalls/network.xml')
-    graph = generate_network_graph('../../scenarios/siouxfalls/analysed-network.xml')
+#     graph = generate_network_graph('../../scenarios/siouxfalls/analysed-network.xml')
 #     graph = generate_network_graph( '../../scenarios/siouxfalls-cut/network.xml')
 #     graph = generate_network_graph('../../scenarios/nmbm/network.xml')
 #     graph = generate_network_graph('../../scenarios/berlin/network.xml')
@@ -129,8 +132,9 @@ if __name__ == '__main__':
 #     graph = generate_facilities_graph('../../scenarios/siouxfalls-cut/facilities.xml')
     
 
-#     generate_events_graph('../../output/siouxfalls/output_network.xml', '../../output/50.events.xml')
+    generate_events_graph('../../output/siouxfalls/output_network.xml.gz', '../../output/siouxfalls/output_events.xml.gz', 's')
+    generate_events_graph('../../output/siouxfalls-cut/output_network.xml.gz', '../../output/siouxfalls-cut/output_events.xml.gz', 'sc')
     
-    save_graph(graph, '../output/graph')
+#     save_graph(graph, '../output/graph')
     pass
 

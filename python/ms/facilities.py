@@ -7,12 +7,18 @@ Created on 12 sty 2015
 from lxml import etree
 from ms.utils import timing
 import matplotlib.pyplot as plt
+from pylab import rcParams
 import networkx as nx
 import logging
+import os
 
+@timing
 def save_graph(filename):
     plt.axis('off')
-    plt.savefig(filename, dpi=600)
+    rcParams['figure.figsize'] = 40, 40
+    if not os.path.exists(os.path.dirname(filename)):
+        os.makedirs(os.path.dirname(filename))
+    plt.savefig(filename, dpi=800)
 
 @timing
 def draw_graph(graph, labels=False):
@@ -20,7 +26,6 @@ def draw_graph(graph, labels=False):
     
     node_size = list(nx.get_node_attributes(graph, 'size').values())
     node_color = list(nx.get_node_attributes(graph, 'color').values())
-    node_alpha = list(nx.get_node_attributes(graph, 'alpha').values())
     
     edges = graph.edges()        
     edge_size = [graph[u][v]['size'] for u, v in edges]
@@ -29,8 +34,7 @@ def draw_graph(graph, labels=False):
     
     nx.draw_networkx_nodes(graph, pos,
                            node_size=node_size,
-                           node_color=node_color,
-                           node_alpha=node_alpha)
+                           node_color=node_color)
     
     nx.draw_networkx_edges(graph, pos,
                            arrows=True,
@@ -47,7 +51,7 @@ def draw_graph(graph, labels=False):
     pass
 
 @timing
-def generate_facilities_graph(graph, xml, style=('rounded', 'black')):
+def generate_facilities_graph(graph, xml, style=(1, 'black')):
     """
         Generates a graph of facilities from xml file
             Optional node_style argument (border style, border color)
@@ -59,7 +63,7 @@ def generate_facilities_graph(graph, xml, style=('rounded', 'black')):
 
     for facility in facilities:
         attributes = dict(facility.items())
-        attributes['style'] = style[0]
+        attributes['size'] = style[0]
         attributes['color'] = style[1]
         attributes['pos'] = [float(attributes.get('x')), float(attributes.get('y'))]
         graph.add_node('fac' + attributes.get('id'), attributes)
@@ -98,10 +102,11 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
     
     graph = nx.DiGraph()
-    graph = generate_network_graph(graph, '../../scenarios/siouxfalls/analysed-network.xml')
-    graph = generate_facilities_graph(graph, '../../scenarios/siouxfalls/facilities.xml')
+    graph = generate_network_graph(graph, '../../scenarios/berlin/network.xml')
+#     graph = generate_network_graph(graph, '../../scenarios/siouxfalls/analysed-network.xml')
+#     graph = generate_facilities_graph(graph, '../../scenarios/siouxfalls/facilities.xml')
     
     draw_graph(graph)
-    save_graph("../output/sioux")
+    save_graph("../output/berlin")
 
     pass
