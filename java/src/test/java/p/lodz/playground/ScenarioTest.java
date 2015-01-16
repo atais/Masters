@@ -14,13 +14,19 @@ public class ScenarioTest {
     @Test
     public void simpleTest() {
 	String defaultConfig = "../scenarios/siouxfalls/config_default.xml";
-	Config config = ConfigUtils.loadConfig(defaultConfig);
-
-	Scenario scenario = ScenarioUtils.loadScenario(config);
-
-	Assert.assertNotNull(scenario);
+//	Config config = ConfigUtils.loadConfig(defaultConfig);
+//
+//	Scenario scenario = ScenarioUtils.loadScenario(config);
+//
+//	Assert.assertNotNull(scenario);
+//	
+//	Controler controller = new Controler(scenario);
+//	controller.run();
 	
-	Controler controller = new Controler(scenario);
-	controller.run();
+	final Controler controler = new Controler(new String[]{defaultConfig});
+	controler.setOverwriteFiles(true);
+	controler.run();
+
+	System.out.println("noz kurwa");
     }
 }

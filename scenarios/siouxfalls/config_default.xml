@@ -21,7 +21,7 @@
 		<param name="eventsFileFormat" value="xml" />
 		<param name="outputDirectory" value="../output/siouxfalls" />
 		<param name="firstIteration" value="0" />
-		<param name="lastIteration" value="50" />
+		<param name="lastIteration" value="1" />
 		<param name="mobsim" value="qsim" />
 	</module>
 
