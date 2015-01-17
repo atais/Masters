@@ -110,7 +110,7 @@ def generate_events_graph(network_file, events_file, folder='', interval=1, scal
         
         scale_min = color_edge_occupation(graph)
         if (scale_min <= scale_threshold):
-            save_graph(graph,'../output/'+folder+'/graph' + str(pointer) + '-' + str(pointer + interval))
+            save_graph(graph,'../output/'+folder+'/graph' + str(pointer) + '0-' + str(pointer + interval)+'0')
         pointer += interval
     
     logging.info("Finished drawing events graphs...")
@@ -132,9 +132,9 @@ if __name__ == '__main__':
 #     graph = generate_facilities_graph('../../scenarios/siouxfalls-cut/facilities.xml')
     
 
-    generate_events_graph('../../output/siouxfalls/output_network.xml.gz', '../../output/siouxfalls/output_events.xml.gz', 's')
-    generate_events_graph('../../output/siouxfalls-cut/output_network.xml.gz', '../../output/siouxfalls-cut/output_events.xml.gz', 'sc')
+#     generate_events_graph('../../output/siouxfalls/output_network.xml.gz', '../../output/siouxfalls/output_events.xml.gz', 's')
+#     generate_events_graph('../../output/siouxfalls-cut/output_network.xml.gz', '../../output/siouxfalls-cut/output_events.xml.gz', 'sc')
     
-#     save_graph(graph, '../output/graph')
+#     save_graph(graph, '../output/siux')
     pass
 

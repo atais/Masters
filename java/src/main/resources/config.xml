@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<project>
+		<!-- Default is "default" -->
+		<name>siouxfalls</name>
+		<!-- Default is "../output/" -->
+		<output-dir>../output/</output-dir>
+		<!-- Default is all available processors -->
+		<threads>4</threads>
+		<!-- Default is INFO -->
+		<log-level>INFO</log-level>
+	</project>
+	<scenario>
+		<config>../scenarios/siouxfalls/config.xml</config>
+		<network>../scenarios/siouxfalls/network.xml</network>
+		<population>../scenarios/siouxfalls/population.xml</population>
+		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
+		<!-- Default is 50 -->
+		<iterations>50</iterations>
+	</scenario>
+	<genetics>
+		<!-- Default is 35 -->
+		<population-size>35</population-size>
+		<!-- Default is 150 -->
+		<max-generations>150</max-generations>
+		<!-- Default is 0.15 -->
+		<elitism-rate>0.15</elitism-rate>
+		<!-- Default is 1.0 -->
+		<crossover-rate>1.0</crossover-rate>
+		<!-- Default is 0.1 -->
+		<mutation-rate>0.1</mutation-rate>
+		<!-- Default is 2 -->
+		<tournament-arity>2</tournament-arity>
+	</genetics>
+</config>
