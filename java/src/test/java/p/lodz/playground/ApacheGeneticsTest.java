@@ -17,7 +17,8 @@ package p.lodz.playground;
  * limitations under the License.
  */
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -95,8 +96,7 @@ public class ApacheGeneticsTest {
      * Initializes a random population.
      */
     private ElitisticListPopulation randomPopulation() {
-	List<Chromosome> popList = new LinkedList();
-
+	List<Chromosome> popList = new LinkedList<Chromosome>();
 	for (int i = 0; i < POPULATION_SIZE; i++) {
 	    BinaryChromosome randChrom = new FindOnes(
 		    BinaryChromosome.randomBinaryRepresentation(DIMENSION));

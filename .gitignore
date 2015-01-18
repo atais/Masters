@@ -1,6 +1,6 @@
 #### TEMPORARY ####
 output/
-
+python/tests/output
 
 *.class
 .DS_Store

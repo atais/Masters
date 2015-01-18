@@ -9,7 +9,6 @@ from ms.utils import timing
 import matplotlib.pyplot as plt
 from pylab import rcParams
 import networkx as nx
-import logging
 import os
 
 @timing
@@ -98,15 +97,10 @@ def generate_network_graph(graph, xml, node_style=(0, 'white'), edge_style=(1, '
     
     return graph
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-    
+def facilities_graph(network, facilities, output):
     graph = nx.DiGraph()
-    graph = generate_network_graph(graph, '../../scenarios/berlin/network.xml')
-#     graph = generate_network_graph(graph, '../../scenarios/siouxfalls/analysed-network.xml')
-#     graph = generate_facilities_graph(graph, '../../scenarios/siouxfalls/facilities.xml')
+    graph = generate_network_graph(graph, network)
+    graph = generate_facilities_graph(graph, facilities)
     
     draw_graph(graph)
-    save_graph("../output/berlin")
-
-    pass
+    save_graph(output)

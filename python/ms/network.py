@@ -82,7 +82,11 @@ def color_edge_occupation(graph):
             scale_min = h
     return scale_min
 
-def generate_events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
+def network_graph(network_file, output_file):
+    graph = generate_network_graph(network_file)
+    save_graph(graph, output_file)
+
+def events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
     """
         Generates a graph of events from network and event xml files
         Optional interval argument [hours], default is 1
@@ -110,31 +114,8 @@ def generate_events_graph(network_file, events_file, folder='', interval=1, scal
         
         scale_min = color_edge_occupation(graph)
         if (scale_min <= scale_threshold):
-            save_graph(graph,'../output/'+folder+'/graph' + str(pointer) + '0-' + str(pointer + interval)+'0')
+            save_graph(graph,folder+'/graph' + str(pointer) + '0-' + str(pointer + interval)+'0')
         pointer += interval
     
     logging.info("Finished drawing events graphs...")
     pass
-
-
-
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-    
-    
-#     graph = generate_network_graph('../../scenarios/siouxfalls/network.xml')
-#     graph = generate_network_graph('../../scenarios/siouxfalls/analysed-network.xml')
-#     graph = generate_network_graph( '../../scenarios/siouxfalls-cut/network.xml')
-#     graph = generate_network_graph('../../scenarios/nmbm/network.xml')
-#     graph = generate_network_graph('../../scenarios/berlin/network.xml')
-
-#     graph = generate_facilities_graph('../../scenarios/siouxfalls-cut/facilities.xml')
-    
-
-#     generate_events_graph('../../output/siouxfalls/output_network.xml.gz', '../../output/siouxfalls/output_events.xml.gz', 's')
-#     generate_events_graph('../../output/siouxfalls-cut/output_network.xml.gz', '../../output/siouxfalls-cut/output_events.xml.gz', 'sc')
-    
-#     save_graph(graph, '../output/siux')
-    pass
-

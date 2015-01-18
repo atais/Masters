@@ -3,7 +3,10 @@ package p.lodz.ms;
 public class StaticContainer {
 
     private static StaticContainer instance;
-
+    
+    public static final String networkFileName = "network.xml";
+    public static final String configFileName = "config.xml";
+    public static final String chromosomeFileName = "chromosome.txt";
     public static final String tripDurationsFileName = "parsed_tripdurations.txt";
     private static final String gaIterationPrefix = "ga.";
 

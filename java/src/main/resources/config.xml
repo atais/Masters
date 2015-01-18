@@ -9,6 +9,8 @@
 		<threads>4</threads>
 		<!-- Default is INFO -->
 		<log-level>INFO</log-level>
+		<!-- Default is "/usr/local/bin/python"-->
+		<python-path>/usr/local/bin/python</python-path>
 	</project>
 	<scenario>
 		<config>../scenarios/siouxfalls/config.xml</config>
