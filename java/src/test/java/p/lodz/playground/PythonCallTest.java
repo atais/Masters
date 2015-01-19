@@ -41,10 +41,11 @@ public class PythonCallTest {
 	PumpStreamHandler psh = new PumpStreamHandler(new LogOutputStream() {
 	    @Override
 	    protected void processLine(String line, int logLevel) {
-		if (line.contains("return")){
+		if (line.contains("return")) {
 		    pyReturn = line;
-		}else{
-		logger.log(Level.toLevel(logLevel), line);}
+		} else {
+		    logger.log(Level.toLevel(logLevel), line);
+		}
 	    }
 	});
 	executor.setStreamHandler(psh);

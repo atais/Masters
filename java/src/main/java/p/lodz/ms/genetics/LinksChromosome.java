@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.AbstractListChromosome;
 import org.apache.commons.math3.genetics.BinaryChromosome;
 import org.apache.commons.math3.genetics.InvalidRepresentationException;
@@ -58,14 +58,14 @@ public class LinksChromosome extends BinaryChromosome {
 		    Charset.defaultCharset());
 	    fitness = new Double(lines.iterator().next());
 	} catch (IOException e) {
-	    logger.error(e.getCause());
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
 	return fitness;
     }
 
     private String getTripsDurationFile() {
 	String fileName = StaticContainer.tripDurationsFileName;
-	String file = dir.getAbsolutePath() + fileName;
+	String file = dir.getAbsolutePath() + "/" + fileName;
 	return file;
     }
 

@@ -9,8 +9,7 @@ import p.lodz.ms.genetics.LinksGeneticAlgorithm;
 
 public class GeneticsModule {
 
-    private final static Logger logger = Logger
-	    .getLogger(GeneticsModule.class);
+    private final static Logger logger = Logger.getLogger(GeneticsModule.class);
 
     private Configuration config;
     private StaticContainer container;
@@ -20,28 +19,26 @@ public class GeneticsModule {
     private Double mutationRate;
     private Integer populationSize;
     private Integer tournamentArity;
-    
+
     private LinksGeneticAlgorithm ga;
 
     public GeneticsModule() {
 	readGAConfig();
-	
+
 	createGeneticAlgorithm();
     }
 
     private void createGeneticAlgorithm() {
-	ga = new LinksGeneticAlgorithm(
-		new OnePointCrossover<Integer>(), crossoverRate,
-		new BinaryMutation(), mutationRate, new TournamentSelection(
-			tournamentArity));
-	
-	
+	ga = new LinksGeneticAlgorithm(new OnePointCrossover<Integer>(),
+		crossoverRate, new BinaryMutation(), mutationRate,
+		new TournamentSelection(tournamentArity));
+
     }
 
     private void readGAConfig() {
 	config = Configuration.getInstance();
 	container = StaticContainer.getInstance();
-	
+
 	populationSize = config.getGaPopulationSize();
 	maxGenerations = config.getGaMaxGenerations();
 	elitismRate = config.getGaElitismRate();

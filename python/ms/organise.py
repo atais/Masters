@@ -22,8 +22,8 @@ def organise_output(output):
     
     source1 = number+'.events.xml.gz'
     source2 = number+'.tripdurations.txt'
-    dest1 = 'output_events.xml.gz'
-    dest2 = 'output_tripdurations.txt'
+    dest1 = '/output_events.xml.gz'
+    dest2 = '/output_tripdurations.txt'
     
     shutil.move(output+iters+lastiterdir+source1, output+dest1)
     shutil.move(output+iters+lastiterdir+source2, output+dest2)
@@ -33,10 +33,10 @@ def organise_output(output):
     tripdurationLines = open(output+dest2).readlines()
     tripduration = tripdurationLines[-1]
     time = re.match( r'.*duration: (\d+\.\d+) seconds.*', tripduration)
-    text_file = open(output+"parsed_tripdurations.txt", "w")
+    text_file = open(output+"/fitness.txt", "w")
     text_file.write(str(time.group(1)))
     text_file.close()
-    logging.info("Created : " + str(output+"parsed_tripdurations.txt"))
+    logging.info("Created : " + str(output+"/fitness.txt"))
     
     shutil.rmtree(output+iters)
     shutil.rmtree(output+'/tmp/')

@@ -33,7 +33,7 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     public Chromosome getFittestChromosome() {
 	// precalculate using threads
 	precalculate();
-	
+
 	// best so far
 	Chromosome bestChromosome = this.getChromosomes().get(0);
 	for (Chromosome chromosome : this.getChromosomes()) {
@@ -46,11 +46,12 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	return bestChromosome;
     }
 
-    // We need to precalculate the fitness using threads due to long calculations.
+    // We need to precalculate the fitness using threads due to long
+    // calculations.
     private void precalculate() {
 	Integer threads = Configuration.getInstance().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
-	for ( Chromosome chromosome : this.getChromosomes()) {
+	for (Chromosome chromosome : this.getChromosomes()) {
 	    Runnable worker = new MATSimThread(chromosome);
 	    executor.execute(worker);
 	}

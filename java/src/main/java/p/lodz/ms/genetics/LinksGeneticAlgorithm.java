@@ -25,10 +25,9 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	Population value = super.evolve(initial, condition);
 	// we need to increment iteration value in static container
 	// otherwise the chromosme does not know where is it's path
-	StaticContainer.getInstance().setGaCurrentIteration(getGenerationsEvolved());
+	StaticContainer.getInstance().setGaCurrentIteration(
+		getGenerationsEvolved());
 	return value;
     }
-    
-    
 
 }

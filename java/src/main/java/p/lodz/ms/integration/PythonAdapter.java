@@ -10,7 +10,7 @@ import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.Executor;
 import org.apache.commons.exec.LogOutputStream;
 import org.apache.commons.exec.PumpStreamHandler;
-import org.apache.log4j.Level;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
 import p.lodz.ms.Configuration;
@@ -41,7 +41,7 @@ public class PythonAdapter {
 		if (line.contains("return:")) {
 		    pyReturn = line;
 		} else {
-		    logger.log(Level.INFO, line);
+		    logger.info(line);
 		}
 	    }
 	});
@@ -51,11 +51,11 @@ public class PythonAdapter {
 	    executor.execute(cmdLine, resultHandler);
 	    resultHandler.waitFor();
 	} catch (ExecuteException e) {
-	    logger.error(e.getCause());
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (IOException e) {
-	    logger.error(e.getCause());
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (InterruptedException e) {
-	    logger.error(e.getCause());
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
 
 	pyReturn = pyReturn.substring(7);

@@ -18,7 +18,6 @@ public class PythonMethods extends PythonAdapter {
     private static final String organiseOutput = "organise_output";
     private static final String customizeConfig = "customize_config";
 
-
     public static PythonMethods getInstance() {
 	if (instance == null) {
 	    synchronized (Configuration.class) {
@@ -75,16 +74,13 @@ public class PythonMethods extends PythonAdapter {
 	String[] parameters = new String[] { output.getAbsolutePath() };
 	this.defaultCall(organiseOutput, parameters);
     }
-    
-    public void customizeConfig(File config, File facilities, File network, File population, File output, Integer iterations){
-	String[] parameters = new String[] {
-	    config.getAbsolutePath(), 
-	    facilities.getAbsolutePath(),
-	    network.getAbsolutePath(),
-	    population.getAbsolutePath(),
-	    output.getAbsolutePath(),
-	    iterations.toString()
-	};
+
+    public void customizeConfig(File config, File facilities, File network,
+	    File population, File output, Integer iterations) {
+	String[] parameters = new String[] { config.getAbsolutePath(),
+		facilities.getAbsolutePath(), network.getAbsolutePath(),
+		population.getAbsolutePath(), output.getAbsolutePath(),
+		iterations.toString() };
 	this.defaultCall(customizeConfig, parameters);
     }
 }

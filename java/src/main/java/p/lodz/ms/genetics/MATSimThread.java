@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
 import org.matsim.core.controler.Controler;
@@ -35,7 +36,7 @@ public class MATSimThread implements Runnable {
 	    logger.info("Clean-up");
 	    cleanAndGraph();
 	} catch (IOException e) {
-	    logger.error(e.getCause());
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
 
 	this.chromosome.getFitness();
@@ -43,11 +44,15 @@ public class MATSimThread implements Runnable {
 
     private void cleanAndGraph() {
 	PythonMethods.getInstance().organiseOutput(chromosome.getDir());
-	
-	PythonMethods.getInstance().networkGraph(destNetwork, new File(dir+StaticContainer.networkGraphName));
-	PythonMethods.getInstance().eventsGraph(destNetwork, new File(dir+StaticContainer.outputEventsFileName), new File(dir+StaticContainer.eventsFolderName));
+
+	// PythonMethods.getInstance().networkGraph(destNetwork, new
+	// File(dir+"/"+StaticContainer.networkGraphName));
+	// PythonMethods.getInstance().eventsGraph(destNetwork, new
+	// File(dir+"/"+StaticContainer.outputEventsFileName), new
+	// File(dir+"/"+StaticContainer.eventsFolderName));
     }
 
+    @SuppressWarnings("deprecation")
     private void runMatsim() {
 	final Controler controler = new Controler(
 		new String[] { destConfig.getAbsolutePath() });
@@ -60,7 +65,7 @@ public class MATSimThread implements Runnable {
 	FileUtils.forceMkdir(dir);
 
 	// write chromosome.txt binary
-	FileWriter writer = new FileWriter(dir +"/"
+	FileWriter writer = new FileWriter(dir + "/"
 		+ StaticContainer.chromosomeFileName);
 	writer.write(this.chromosome.toString());
 	writer.close();
@@ -68,11 +73,11 @@ public class MATSimThread implements Runnable {
 	// copy config
 	File baseConfig = new File(Configuration.getInstance()
 		.getScenarioConfig());
-	destConfig = new File(dir +"/"+ StaticContainer.configFileName);
+	destConfig = new File(dir + "/" + StaticContainer.configFileName);
 	FileUtils.copyFile(baseConfig, destConfig);
 
 	// parse chromosome to network
-	destNetwork = new File(dir +"/"+ StaticContainer.networkFileName);
+	destNetwork = new File(dir + "/" + StaticContainer.networkFileName);
 	PythonMethods.getInstance().convertBinaryToNetwork(this.chromosome,
 		destNetwork);
 
