@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<project>
-		<name>siouxfalls</name>
+		<name>siouxfalls-test</name>
 		<output-dir>../output/</output-dir>
 		<threads>4</threads>
 		<log-level>INFO</log-level>
+		<python-path>/usr/local/bin/python</python-path>
+		<python-main>../python/ms/call_center.py</python-main>
 	</project>
 	<scenario>
 		<config>../scenarios/siouxfalls/config.xml</config>
 		<network>../scenarios/siouxfalls/network.xml</network>
 		<population>../scenarios/siouxfalls/population.xml</population>
 		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
-		<iterations>50</iterations>
+		<iterations>1</iterations>
 	</scenario>
 	<genetics>
 		<population-size>35</population-size>

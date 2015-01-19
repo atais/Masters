@@ -38,6 +38,7 @@ public class LinksChromosome extends BinaryChromosome {
     }
 
     public static LinksChromosome parseString(String representation) {
+	representation = representation.replace(" ", "");
 	representation = representation.replace("[", "");
 	representation = representation.replace("]", "");
 	String[] numberStrs = representation.split(",");

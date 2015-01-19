@@ -12,7 +12,7 @@ import re
 
 def organise_output(output):
     logging.info("Cleaning up : " + str(output))
-    iters = 'ITERS/'
+    iters = '/ITERS/'
     
     dirs = [ (int((str(x)[3:])), x) for x in os.listdir(output+iters) if (not x.startswith('.'))]
     dirs = sorted(dirs, key=operator.itemgetter(0))
@@ -39,12 +39,12 @@ def organise_output(output):
     logging.info("Created : " + str(output+"parsed_tripdurations.txt"))
     
     shutil.rmtree(output+iters)
-    shutil.rmtree(output+'tmp/')
+    shutil.rmtree(output+'/tmp/')
     logging.info("Removed : " + str(iters))
-    logging.info("Removed : " + str('tmp/'))
+    logging.info("Removed : " + str('/tmp/'))
     
-    os.remove(output+'output_plans.xml.gz')
-    logging.info("Removed : " + str('output_plans.xml.gz'))
+    os.remove(output+'/output_plans.xml.gz')
+    logging.info("Removed : " + str('/output_plans.xml.gz'))
     
     pass
 

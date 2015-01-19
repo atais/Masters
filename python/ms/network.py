@@ -5,7 +5,7 @@ Created on 7 sty 2015
 '''
 
 from lxml import etree
-from ms.utils import timing
+from utils import timing
 import utils
 import networkx as nx
 import math as math

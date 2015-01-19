@@ -7,6 +7,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{listings}
 
 \title{Optymalizacja struktury sieci drogowej}
 \author{Michał Siatkowski} 
@@ -264,32 +265,39 @@ Najlepszego rozwiązania będę poszukiwał wykorzystując klasyczny algorytm ge
 
 \section{Aplikacja}
 
-\subsection{Analiza wymagań}
-\begin{frame}{Analiza wymagań} 
+\subsection{Dane wejściowe}
+\begin{frame}{Dane wejściowe}
 
-\end{frame}
-
-
-\subsection{Projekt bazy danych}
-\begin{frame}{Projekt bazy danych}
-
-\end{frame}
-
-
-\subsection{Implementacja: punkty kluczowe}
-\begin{frame}{Implementacja: punkty kluczowe} 
+\lstset{
+    language=xml,
+    tabsize=3,
+    rulesepcolor=\color{gray},
+    keywordstyle=\color{blue}\bf,
+    stringstyle=\color{red},
+    breaklines=true,
+    basicstyle=\ttfamily\scriptsize}
+\lstinputlisting[language=Xml]{img/config.xml}
 
 \end{frame}
 
 
 \subsection{Wdrożenie}
 \begin{frame}{Wdrożenie} 
-
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{img/trisquel}
+\caption{Logo Trisquel\cite{trisquel}}
+\end{figure}
 \end{frame}
 
 
 \subsection{Przewidywane problemy}
 \begin{frame}{Przewidywane problemy} 
+
+\begin{itemize}
+\item Brak gwarancji lepszego wyniku
+\item Długi czas obliczeń
+\item Duże wymagania dotyczące zasobów
+\end{itemize}
 
 \end{frame}
 
@@ -512,6 +520,10 @@ Wynik o $\approx 8 \%$ gorszy.
 	
 \bibitem{pydev} 
 	\url{http://pydev.org}
+	
+\bibitem{trisquel}
+	\url{https://trisquel.info}
+			
 
 \framebreak
 
@@ -530,7 +542,8 @@ Wynik o $\approx 8 \%$ gorszy.
 	
 \bibitem{urban}
 	\url{http://urbnews.pl/paradoks-braessa/}
-		
+	
+
 \end{thebibliography}
 \end{frame}
 

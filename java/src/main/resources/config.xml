@@ -11,6 +11,8 @@
 		<log-level>INFO</log-level>
 		<!-- Default is "/usr/local/bin/python"-->
 		<python-path>/usr/local/bin/python</python-path>
+		<!-- Default is "../python/ms/call_center.py" -->
+		<python-main>../python/ms/call_center.py</python-main>
 	</project>
 	<scenario>
 		<config>../scenarios/siouxfalls/config.xml</config>

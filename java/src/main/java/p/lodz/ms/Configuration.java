@@ -7,6 +7,7 @@ import org.apache.commons.configuration.XMLConfiguration;
 
 public class Configuration {
 
+    private static final String DEFAULTPYTHONMAIN = "../python/ms/call_center.py";
     private static final String DEFAULTPYTHONPATH = "/usr/local/bin/python";
     private static final String DEFAULTPNAME = "default";
     private static final String DEFAULTOUTPUT = "../output/";
@@ -28,7 +29,8 @@ public class Configuration {
     private Integer projectThreads;
     private String projectLogLevel;
     private String projectPythonPath;
-
+    private String projectPythonMain;
+    
     private String scenarioConfig;
     private String scenarioNetwork;
     private String scenarioPopulation;
@@ -70,6 +72,7 @@ public class Configuration {
 	this.projectThreads = config.getInteger("project.threads", DEFAULTTHREADS);
 	this.projectLogLevel = config.getString("project.log-level", DEFAULTLOG);
 	this.projectPythonPath = config.getString("project.python-path", DEFAULTPYTHONPATH);
+	this.projectPythonMain = config.getString("project.python-main", DEFAULTPYTHONMAIN);
 
 	this.scenarioConfig = config.getString("scenario.config");
 	this.scenarioNetwork = config.getString("scenario.network");
@@ -148,6 +151,10 @@ public class Configuration {
 
     public String getProjectPythonPath() {
 	return projectPythonPath;
+    }
+
+    public String getProjectPythonMain() {
+	return projectPythonMain;
     }
 
 }

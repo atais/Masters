@@ -17,6 +17,9 @@ public class MATSimThread implements Runnable {
 
     private final static Logger logger = Logger.getLogger(MATSimThread.class);
     private LinksChromosome chromosome;
+    private File destNetwork;
+    private File destConfig;
+    private File dir;
 
     public MATSimThread(Chromosome chromosome) {
 	this.chromosome = (LinksChromosome) chromosome;
@@ -25,8 +28,11 @@ public class MATSimThread implements Runnable {
     @Override
     public void run() {
 	try {
-	    File config = prepareStructure();
-	    runMatsim(config);
+	    logger.info("Preparing structure");
+	    prepareStructure();
+	    logger.info("Running MATSIM");
+	    runMatsim();
+	    logger.info("Clean-up");
 	    cleanAndGraph();
 	} catch (IOException e) {
 	    logger.error(e.getCause());
@@ -37,20 +43,24 @@ public class MATSimThread implements Runnable {
 
     private void cleanAndGraph() {
 	PythonMethods.getInstance().organiseOutput(chromosome.getDir());
+	
+	PythonMethods.getInstance().networkGraph(destNetwork, new File(dir+StaticContainer.networkGraphName));
+	PythonMethods.getInstance().eventsGraph(destNetwork, new File(dir+StaticContainer.outputEventsFileName), new File(dir+StaticContainer.eventsFolderName));
     }
 
-    private void runMatsim(File config) {
+    private void runMatsim() {
 	final Controler controler = new Controler(
-		new String[] { config.getAbsolutePath() });
+		new String[] { destConfig.getAbsolutePath() });
+	controler.setOverwriteFiles(true);
 	controler.run();
     }
 
-    private File prepareStructure() throws IOException {
-	File dir = chromosome.getDir();
-	FileUtils.forceMkdir(chromosome.getDir());
+    private void prepareStructure() throws IOException {
+	dir = chromosome.getDir();
+	FileUtils.forceMkdir(dir);
 
 	// write chromosome.txt binary
-	FileWriter writer = new FileWriter(dir
+	FileWriter writer = new FileWriter(dir +"/"
 		+ StaticContainer.chromosomeFileName);
 	writer.write(this.chromosome.toString());
 	writer.close();
@@ -58,11 +68,11 @@ public class MATSimThread implements Runnable {
 	// copy config
 	File baseConfig = new File(Configuration.getInstance()
 		.getScenarioConfig());
-	File destConfig = new File(dir + StaticContainer.configFileName);
+	destConfig = new File(dir +"/"+ StaticContainer.configFileName);
 	FileUtils.copyFile(baseConfig, destConfig);
 
 	// parse chromosome to network
-	File destNetwork = new File(dir + StaticContainer.networkFileName);
+	destNetwork = new File(dir +"/"+ StaticContainer.networkFileName);
 	PythonMethods.getInstance().convertBinaryToNetwork(this.chromosome,
 		destNetwork);
 
@@ -76,6 +86,5 @@ public class MATSimThread implements Runnable {
 	PythonMethods.getInstance().customizeConfig(destConfig, facilities,
 		destNetwork, population, dir, iterations);
 
-	return destConfig;
     }
 }

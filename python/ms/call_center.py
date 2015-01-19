@@ -4,12 +4,12 @@ Created on 18 sty 2015
 @author: michalsiatkowski
 '''
 import sys
-import ms.analyse as analyse
-import ms.binary_network as binary_network
-import ms.facilities as facilities
-import ms.network as network
-import ms.organise as organise
-import ms.config as config
+import analyse as analyse
+import binary_network as binary_network
+import facilities as facilities
+import network as network
+import organise as organise
+import config as config
 from inspect import getmembers, isfunction
 
 

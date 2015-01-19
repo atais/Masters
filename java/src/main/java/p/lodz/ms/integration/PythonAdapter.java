@@ -24,6 +24,7 @@ public class PythonAdapter {
     protected String defaultCall(String command, String... parameters) {
 	CommandLine cmdLine = new CommandLine(Configuration.getInstance()
 		.getProjectPythonPath());
+	cmdLine.addArgument(Configuration.getInstance().getProjectPythonMain());
 	cmdLine.addArgument(command);
 	for (String param : parameters) {
 	    cmdLine.addArgument(param);
@@ -57,6 +58,7 @@ public class PythonAdapter {
 	    logger.error(e.getCause());
 	}
 
+	pyReturn = pyReturn.substring(7);
 	return pyReturn;
     }
 
