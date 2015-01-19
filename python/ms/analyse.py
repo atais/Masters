@@ -63,4 +63,5 @@ def analyse_and_save(source, dist):
     network = not_one_way(network)
     
     network.write(dist)
+    pass
 

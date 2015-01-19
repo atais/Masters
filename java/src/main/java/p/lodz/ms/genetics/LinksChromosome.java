@@ -64,7 +64,7 @@ public class LinksChromosome extends BinaryChromosome {
     }
 
     private String getTripsDurationFile() {
-	String fileName = StaticContainer.tripDurationsFileName;
+	String fileName = StaticContainer.fitnessFilename;
 	String file = dir.getAbsolutePath() + "/" + fileName;
 	return file;
     }

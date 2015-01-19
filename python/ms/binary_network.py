@@ -37,6 +37,7 @@ def fromBinarytoXML(xml, binary, save):
 #             print 'removing node' + str(node.get('id'))
 
     network.write(save)
+    pass
 
 
 

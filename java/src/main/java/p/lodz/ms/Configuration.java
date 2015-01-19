@@ -172,4 +172,8 @@ public class Configuration {
 	return projectPythonMain;
     }
 
+    public String getProjectDir() {
+	return getProjectOutputDir() + "/" + getProjectName() + "/";
+    }
+
 }

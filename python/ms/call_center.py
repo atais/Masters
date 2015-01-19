@@ -36,4 +36,5 @@ def main(argv):
 
 if __name__ == '__main__':
     print_return = main(sys.argv[1:])
-    print 'return:'+str(print_return)
+    if print_return is not None:
+        print 'return:'+str(print_return)

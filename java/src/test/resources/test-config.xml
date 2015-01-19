@@ -16,8 +16,8 @@
 		<iterations>1</iterations>
 	</scenario>
 	<genetics>
-		<population-size>35</population-size>
-		<max-generations>150</max-generations>
+		<population-size>4</population-size>
+		<max-generations>2</max-generations>
 		<elitism-rate>0.15</elitism-rate>
 		<crossover-rate>1</crossover-rate>
 		<mutation-rate>0.1</mutation-rate>

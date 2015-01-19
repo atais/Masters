@@ -57,8 +57,15 @@ public class PythonAdapter {
 	} catch (InterruptedException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
-
-	pyReturn = pyReturn.substring(7);
+	
+	if (!pyReturn.isEmpty()) {
+	    try {
+		pyReturn = pyReturn.substring(7);
+	    } catch (StringIndexOutOfBoundsException e) {
+		logger.error(pyReturn);
+		logger.error(ExceptionUtils.getStackTrace(e));
+	    }
+	}
 	return pyReturn;
     }
 

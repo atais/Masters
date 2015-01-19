@@ -16,6 +16,7 @@ public class PythonMethods extends PythonAdapter {
     private static final String networkGraph = "network_graph";
     private static final String eventsGraph = "events_graph";
     private static final String organiseOutput = "organise_output";
+    private static final String organiseBest = "organise_best";
     private static final String customizeConfig = "customize_config";
 
     public static PythonMethods getInstance() {
@@ -28,6 +29,7 @@ public class PythonMethods extends PythonAdapter {
 	}
 	return instance;
     }
+
 
     private PythonMethods() {
     }
@@ -82,5 +84,10 @@ public class PythonMethods extends PythonAdapter {
 		population.getAbsolutePath(), output.getAbsolutePath(),
 		iterations.toString() };
 	this.defaultCall(customizeConfig, parameters);
+    }
+
+    public void organiseBest(File dir) {
+	String[] parameters = new String[] { dir.getAbsolutePath() };
+	this.defaultCall(organiseBest, parameters);
     }
 }

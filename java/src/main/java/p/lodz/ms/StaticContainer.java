@@ -10,9 +10,11 @@ public class StaticContainer {
     public static final String networkFileName = "network.xml";
     public static final String configFileName = "config.xml";
     public static final String chromosomeFileName = "chromosome.txt";
-    public static final String tripDurationsFileName = "fitness.txt";
-    private static final String gaIterationPrefix = "ga.";
+    public static final String fitnessFilename = "fitness.txt";
+    public static final String fitnessInitialFilename = "fitnessInitial.txt";
 
+    // starting does not matter
+    private String gaIterationPrefix = "ga.";
     // Always starts at 0 iteration
     private Integer gaCurrentIteration = 0;
 
@@ -40,5 +42,13 @@ public class StaticContainer {
 
     public String getGaCurrentIterationPath() {
 	return new String(gaIterationPrefix + getGaCurrentIteration() + "/");
+    }
+
+    public String getGaIterationPrefix() {
+	return gaIterationPrefix;
+    }
+
+    public void setGaIterationPrefix(String gaIterationPrefix) {
+	this.gaIterationPrefix = gaIterationPrefix;
     }
 }

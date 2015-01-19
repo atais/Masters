@@ -8,6 +8,8 @@ import operator
 import logging
 import shutil
 import re
+import numpy
+from matplotlib import pyplot
 
 
 def organise_output(output):
@@ -48,3 +50,25 @@ def organise_output(output):
     
     pass
 
+def organise_best(output):
+    distance = open(output+'/fitness.txt', "r")
+    dist = distance.readline()
+    distance.close()
+    
+    best = output+'/../best'
+    shutil.move(output, best)
+    
+    output = output+'/../../'
+    text_file = open(output+"fitness.txt", "ab+")
+    text_file.writelines(dist)
+    text_file.close()
+
+    y1 = numpy.fromfile(str(output+"/fitness.txt"), sep="\n")
+    v = numpy.fromfile(str(output+"/fitnessInitial.txt"), sep="\n")
+    y2 = numpy.linspace(v[0], v[0], num=len(y1))
+    
+    pyplot.plot(y1)
+    pyplot.plot(y2)
+        
+    pyplot.savefig(str(output+"/fitness.png"))
+    pass
