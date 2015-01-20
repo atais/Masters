@@ -6,6 +6,7 @@ import java.nio.file.DirectoryNotEmptyException;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -15,21 +16,17 @@ public class ConfigurationModule {
 
     private Configuration config;
 
-    public ConfigurationModule(String configFile) throws Exception {
+    public ConfigurationModule(String configFile) {
 	try {
 	    startConfiguration(configFile);
 	} catch (ConfigurationException e) {
-	    logger.error("Wrong configuration file as parameter");
-	    throw e;
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (ArrayIndexOutOfBoundsException e) {
-	    logger.error("Start the app with configuration file as parameter");
-	    throw e;
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (DirectoryNotEmptyException e) {
-	    logger.error("Project folder already exists, safe-break");
-	    throw e;
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (IOException e) {
-	    logger.error("Problem with creating the folder structure");
-	    throw e;
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
     }
 

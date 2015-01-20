@@ -15,8 +15,7 @@ import org.apache.commons.math3.genetics.BinaryChromosome;
 import org.apache.commons.math3.genetics.InvalidRepresentationException;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
-import p.lodz.ms.StaticContainer;
+import p.lodz.ms.manage.FileManager;
 
 public class LinksChromosome extends BinaryChromosome {
 
@@ -52,35 +51,17 @@ public class LinksChromosome extends BinaryChromosome {
     @Override
     public double fitness() {
 	double fitness = 0;
-	String file = getTripsDurationFile();
+	File file = FileManager.getFitnessFile(this);
 	try {
-	    List<String> lines = Files.readAllLines(Paths.get(file),
-		    Charset.defaultCharset());
+	    List<String> lines = Files
+		    .readAllLines(Paths.get(file.getAbsolutePath()),
+			    Charset.defaultCharset());
 	    fitness = new Double(lines.iterator().next());
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
+	    fitness = Double.MAX_VALUE;
 	}
 	return fitness;
-    }
-
-    private String getTripsDurationFile() {
-	String fileName = StaticContainer.fitnessFilename;
-	String file = dir.getAbsolutePath() + "/" + fileName;
-	return file;
-    }
-
-    public File getDir() {
-	if (dir == null) {
-	    String output = Configuration.getInstance().getProjectOutputDir();
-	    String projName = Configuration.getInstance().getProjectName()
-		    + "/";
-	    String iteration = StaticContainer.getInstance()
-		    .getGaCurrentIterationPath();
-	    String chromosome = this.getUuid().toString() + "/";
-	    String dirName = output + projName + iteration + chromosome;
-	    this.dir = new File(dirName);
-	}
-	return dir;
     }
 
     @Override

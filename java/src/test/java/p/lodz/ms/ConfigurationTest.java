@@ -1,10 +1,12 @@
 package p.lodz.ms;
 
+
 import java.net.URL;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class ConfigurationTest {
 

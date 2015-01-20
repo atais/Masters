@@ -51,24 +51,24 @@ def organise_output(output):
     pass
 
 def organise_best(output):
-    distance = open(output+'/fitness.txt', "r")
+    distance = open(os.path.join(output, 'fitness.txt'), "r")
     dist = distance.readline()
     distance.close()
     
-    best = output+'/../best'
-    shutil.move(output, best)
+    os.symlink(output, (output+'/../best'))
     
-    output = output+'/../../'
-    text_file = open(output+"fitness.txt", "ab+")
-    text_file.writelines(dist)
+    root = output+'/../../'
+
+    text_file = open((root+"fitness.txt"), "a+")
+    text_file.write(dist)
     text_file.close()
 
-    y1 = numpy.fromfile(str(output+"/fitness.txt"), sep="\n")
-    v = numpy.fromfile(str(output+"/fitnessInitial.txt"), sep="\n")
+    y1 = numpy.fromfile((root+"/fitness.txt"), sep="\n")
+    v = numpy.fromfile((root+"/fitnessInitial.txt"), sep="\n")
     y2 = numpy.linspace(v[0], v[0], num=len(y1))
     
     pyplot.plot(y1)
     pyplot.plot(y2)
-        
-    pyplot.savefig(str(output+"/fitness.png"))
+    
+    pyplot.savefig(os.path.join(root, 'fitness.png'))
     pass

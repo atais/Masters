@@ -10,6 +10,7 @@ import org.apache.commons.math3.exception.NumberIsTooLargeException;
 import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
+import org.apache.commons.math3.genetics.Population;
 
 import p.lodz.ms.Configuration;
 
@@ -58,6 +59,14 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	executor.shutdown();
 	while (!executor.isTerminated()) {
 	}
+    }
+
+    @Override
+    public Population nextGeneration() {
+	ElitisticListPopulation pop = (ElitisticListPopulation) super
+		.nextGeneration();
+	return (new LinksElitisticListPopulation(pop.getChromosomes(),
+		pop.getPopulationLimit(), pop.getElitismRate()));
     }
 
 }

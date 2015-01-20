@@ -11,6 +11,7 @@ import network as network
 import organise as organise
 import config as config
 from inspect import getmembers, isfunction
+import logging
 
 
 def get_all_members():
@@ -24,6 +25,7 @@ def get_all_members():
     return dict(members)
 
 def main(argv):
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
     members = get_all_members()
     if (argv):
         command = argv[0]

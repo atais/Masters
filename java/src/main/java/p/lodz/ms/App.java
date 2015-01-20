@@ -12,12 +12,8 @@ public class App {
 	args = new String[] { is.toString() };
 	// test only
 
-	try {
-	    new ConfigurationModule(args[0]);
-	    new GeneticsModule();
-	} catch (Exception e) {
-	    System.exit(1);
-	}
+	new ConfigurationModule(args[0]);
+	new GeneticsModule();
 	System.exit(0);
     }
 

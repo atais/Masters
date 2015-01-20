@@ -30,7 +30,6 @@ public class PythonMethods extends PythonAdapter {
 	return instance;
     }
 
-
     private PythonMethods() {
     }
 

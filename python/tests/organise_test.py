@@ -8,7 +8,7 @@ import unittest
 import os
 import shutil
 import logging
-from ms.organise import organise_output
+from ms.organise import organise_output, organise_best
 import zipfile
 from tests.utils import r
 
@@ -21,11 +21,19 @@ class AnalyseTest(unittest.TestCase):
             
         with zipfile.ZipFile(r('resources/dirty_siouxfalls.zip'), "r") as z:
             z.extractall(r("output/"))
+            
+        with zipfile.ZipFile(r('resources/best-chromosome.zip'), "r") as z:
+            z.extractall(r("output/"))
 
     def testStructureMain(self):
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
         organise_output(r('output/siouxfalls/'))
         pass        
+    
+    def testBestFunc(self):
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+        organise_best(r('output/siouxfalls/ga.0/chromosome'))
+        pass  
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

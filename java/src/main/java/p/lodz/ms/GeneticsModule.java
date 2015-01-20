@@ -2,14 +2,15 @@ package p.lodz.ms;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.BinaryMutation;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.FixedGenerationCount;
+import org.apache.commons.math3.genetics.GeneticAlgorithm;
 import org.apache.commons.math3.genetics.OnePointCrossover;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.genetics.StoppingCondition;
@@ -21,6 +22,8 @@ import p.lodz.ms.genetics.LinksElitisticListPopulation;
 import p.lodz.ms.genetics.LinksGeneticAlgorithm;
 import p.lodz.ms.genetics.MATSimThread;
 import p.lodz.ms.integration.PythonMethods;
+import p.lodz.ms.manage.FileManager;
+import p.lodz.ms.manage.GraphManager;
 
 public class GeneticsModule {
 
@@ -51,37 +54,48 @@ public class GeneticsModule {
 
 	// set the prefix for output clarification
 	StaticContainer.getInstance().setGaIterationPrefix("begin.");
+	logger.info("-----------------------");
 	logger.info("Loading initial network");
+	logger.info("-----------------------");
 	File network = new File(config.getScenarioNetwork());
 	LinksChromosome initial = PythonMethods.getInstance()
 		.convertNetworkToBinary(network);
 	new MATSimThread(initial).run();
-
-	File fitnessSource = new File(initial.getDir() + "/"
-		+ StaticContainer.fitnessFilename);
-	File fitnessDest = new File(Configuration.getInstance()
-		.getProjectDir()
-		+ StaticContainer.fitnessInitialFilename);
-
-	FileUtils.copyFile(fitnessSource, fitnessDest);
+	initialGraphMethods(initial);
 
 	// reset the prefix for output clarification
 	StaticContainer.getInstance().setGaIterationPrefix("ga.");
 
+	logger.info("--------------------------");
 	logger.info("Starting genetic algorithm");
-	Population population = randomPopulation(initial.getLength());
+	logger.info("--------------------------");
+	LinksElitisticListPopulation population = randomPopulation(initial
+		.getLength());
 	StoppingCondition stopCond = new FixedGenerationCount(maxGenerations);
 	Population finalPopulation = ga.evolve(population, stopCond);
+    }
+
+    private void initialGraphMethods(LinksChromosome initial) {
+	GraphManager.drawFacilitiesGraph(initial);
+	GraphManager.drawEventsGraph(initial);
+	GraphManager.drawNetworkGraph(initial);
+	FileManager.createInitialFitness(initial);
 
     }
 
-    private Population randomPopulation(int chromosomeLength) {
+    private LinksElitisticListPopulation randomPopulation(int chromosomeLength) {
 	List<Chromosome> popList = new LinkedList<Chromosome>();
 	for (int i = 0; i < populationSize; i++) {
-	    LinksChromosome randChrom = new LinksChromosome(
-		    LinksChromosome
-			    .randomBinaryRepresentation(chromosomeLength));
-	    popList.add(randChrom);
+	    // random binary list
+	    List<Integer> rList = new ArrayList<Integer>(chromosomeLength);
+	    for (int j = 0; j < chromosomeLength; j++) {
+		if (GeneticAlgorithm.getRandomGenerator().nextInt(10) < 2) {
+		    rList.add(0);
+		} else {
+		    rList.add(1);
+		}
+	    }
+	    popList.add(new LinksChromosome(rList));
 	}
 	return new LinksElitisticListPopulation(popList, popList.size(),
 		elitismRate);

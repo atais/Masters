@@ -4,6 +4,7 @@ public class StaticContainer {
 
     private static StaticContainer instance;
 
+    public static final String facilitiesGraphName = "facilities.png";
     public static final String outputEventsFileName = "output_events.xml.gz";
     public static final String eventsFolderName = "events";
     public static final String networkGraphName = "network.png";
@@ -13,7 +14,7 @@ public class StaticContainer {
     public static final String fitnessFilename = "fitness.txt";
     public static final String fitnessInitialFilename = "fitnessInitial.txt";
 
-    // starting does not matter
+    // starting value does not matter
     private String gaIterationPrefix = "ga.";
     // Always starts at 0 iteration
     private Integer gaCurrentIteration = 0;
@@ -50,5 +51,9 @@ public class StaticContainer {
 
     public void setGaIterationPrefix(String gaIterationPrefix) {
 	this.gaIterationPrefix = gaIterationPrefix;
+    }
+
+    public void increaseCurrentGeneration() {
+	setGaCurrentIteration(getGaCurrentIteration()+1);
     }
 }

@@ -17,8 +17,6 @@ package p.lodz.playground;
  * limitations under the License.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,6 +32,7 @@ import org.apache.commons.math3.genetics.OnePointCrossover;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.genetics.StoppingCondition;
 import org.apache.commons.math3.genetics.TournamentSelection;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -66,7 +65,7 @@ public class ApacheGeneticsTest {
 		new BinaryMutation(), MUTATION_RATE, new TournamentSelection(
 			TOURNAMENT_ARITY));
 
-	assertEquals(0, ga.getGenerationsEvolved());
+	Assert.assertEquals(0, ga.getGenerationsEvolved());
 
 	// initial population
 	Population initial = randomPopulation();
@@ -86,8 +85,8 @@ public class ApacheGeneticsTest {
 	// than the initial one
 	// however, for some implementations of GA, this need not be true :)
 
-	assertTrue(bestFinal.compareTo(bestInitial) > 0);
-	assertEquals(NUM_GENERATIONS, ga.getGenerationsEvolved());
+	Assert.assertTrue(bestFinal.compareTo(bestInitial) > 0);
+	Assert.assertEquals(NUM_GENERATIONS, ga.getGenerationsEvolved());
 
 	System.out.println(bestFinal);
     }
