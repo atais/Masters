@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.AbstractListChromosome;
 import org.apache.commons.math3.genetics.BinaryChromosome;
+import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.InvalidRepresentationException;
 import org.apache.log4j.Logger;
 
@@ -77,6 +78,11 @@ public class LinksChromosome extends BinaryChromosome {
 
     public UUID getUuid() {
 	return uuid;
+    }
+
+    @Override
+    protected boolean isSame(Chromosome another) {
+	return super.isSame(another);
     }
 
 }

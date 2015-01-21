@@ -33,6 +33,6 @@ public class FileManagerTest {
 
     @Test
     public void writeChromosomeNetworkTest() {
-	FileManager.writeChromosomeNetwork(chromosome);
+	FileManager.convertChromosomeToNetwork(chromosome);
     }
 }

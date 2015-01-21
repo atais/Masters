@@ -21,6 +21,7 @@ def save_graph(graph, filename):
         os.makedirs(os.path.dirname(filename))           
     A.draw(filename+'.png')
     
+    
 @timing
 def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'orange')):
     """

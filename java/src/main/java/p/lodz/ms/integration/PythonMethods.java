@@ -18,6 +18,7 @@ public class PythonMethods extends PythonAdapter {
     private static final String organiseOutput = "organise_output";
     private static final String organiseBest = "organise_best";
     private static final String customizeConfig = "customize_config";
+    private static final String fixChromosome = "fix_chromosome";
 
     public static PythonMethods getInstance() {
 	if (instance == null) {
@@ -33,6 +34,7 @@ public class PythonMethods extends PythonAdapter {
     private PythonMethods() {
     }
 
+    @Deprecated
     public void analyseNetwork(File source, File dest) {
 	String[] parameters = new String[] { source.getAbsolutePath(),
 		dest.getAbsolutePath() };
@@ -45,12 +47,24 @@ public class PythonMethods extends PythonAdapter {
 	return LinksChromosome.parseString(bin);
     }
 
+    public LinksChromosome fixChromosome(LinksChromosome chromosome) {
+	String defaultNetwork = Configuration.getInstance()
+		.getScenarioNetwork();
+	String[] parameters = new String[] { chromosome.toString(), defaultNetwork };
+	String bin = this.defaultCall(fixChromosome, parameters);
+	LinksChromosome retNetwork = null;
+	if (bin != null && !bin.isEmpty()){
+	    retNetwork = LinksChromosome.parseString(bin);
+	}
+	return retNetwork;
+    }
+
     public void convertBinaryToNetwork(LinksChromosome chromosome, File dest) {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
 	String[] parameters = new String[] { defaultNetwork,
 		chromosome.toString(), dest.getAbsolutePath() };
-	this.defaultCall(fromBinaryToXml, parameters);
+	defaultCall(fromBinaryToXml, parameters);
     }
 
     public void facilitiesGraph(File network, File facilities, File output) {
@@ -89,4 +103,5 @@ public class PythonMethods extends PythonAdapter {
 	String[] parameters = new String[] { dir.getAbsolutePath() };
 	this.defaultCall(organiseBest, parameters);
     }
+
 }

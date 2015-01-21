@@ -22,6 +22,7 @@ public class PythonAdapter {
     private String pyReturn = null;
 
     protected String defaultCall(String command, String... parameters) {
+	pyReturn = null;
 	CommandLine cmdLine = new CommandLine(Configuration.getInstance()
 		.getProjectPythonPath());
 	cmdLine.addArgument(Configuration.getInstance().getProjectPythonMain());
@@ -62,7 +63,6 @@ public class PythonAdapter {
 	    try {
 		pyReturn = pyReturn.substring(7);
 	    } catch (StringIndexOutOfBoundsException e) {
-		logger.error(pyReturn);
 		logger.error(ExceptionUtils.getStackTrace(e));
 	    }
 	}

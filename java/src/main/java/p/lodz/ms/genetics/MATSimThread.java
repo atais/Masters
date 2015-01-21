@@ -56,14 +56,17 @@ public class MATSimThread implements Runnable {
     }
 
     private void prepareStructure() throws IOException {
+	// fix if it is not valid :(
+	LinksChromosome newChromosome = PythonMethods.getInstance().fixChromosome(chromosome);
+	if (newChromosome != null && !chromosome.isSame(newChromosome)){
+	    chromosome = newChromosome;
+	}
+	
+	// parse chromosome to network
 	FileUtils.forceMkdir(FileManager.getChromosomeDir(chromosome));
-
+	FileManager.convertChromosomeToNetwork(chromosome);
 	// write chromosome.txt binary
 	FileManager.createChromosomeText(chromosome);
-
-	// parse chromosome to network
-	FileManager.writeChromosomeNetwork(chromosome);
-
 	// copy config
 	FileManager.prepareChromosomeConfig(chromosome);
     }

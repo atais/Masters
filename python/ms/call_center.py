@@ -11,6 +11,7 @@ import network as network
 import organise as organise
 import config as config
 from inspect import getmembers, isfunction
+import logging
 
 
 def get_all_members():

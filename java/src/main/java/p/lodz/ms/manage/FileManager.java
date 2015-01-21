@@ -64,7 +64,7 @@ public class FileManager {
 	}
     }
 
-    public static void writeChromosomeNetwork(LinksChromosome chromosome) {
+    public static void convertChromosomeToNetwork(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	File destNetwork = new File(chromosomeDir + "/"
 		+ StaticContainer.networkFileName);
@@ -102,4 +102,5 @@ public class FileManager {
 	String config = StaticContainer.configFileName;
 	return (chromosomeDir+"/"+config);
     }
+
 }
