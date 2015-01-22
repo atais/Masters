@@ -1,77 +1,85 @@
-\documentclass[a4paper,twoside,12pt]{report}
+\documentclass[twoside,12pt]{report}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+%\usepackage[polish]{babel}
 \usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{hyphenat}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{txfonts}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
 
+%\selectlanguage{polish}
+
+
+\geometry{a4paper,left=35mm,right=25mm,top=25mm,bottom=25mm}
+
+\renewcommand{\headrulewidth}{0.1pt}
 \renewcommand{\chaptername}{Rozdział}
 \renewcommand{\contentsname}{Spis treści}
 \renewcommand{\figurename}{Rys.}
 \renewcommand{\tablename}{Tab.}
+\renewcommand{\lstlistingname}{Listing}
 \renewcommand{\listfigurename}{Spis rysunków}
 \renewcommand{\listtablename}{Spis tabel}
+\renewcommand{\lstlistlistingname}{Spis listingów}
 \renewcommand{\bibname}{Bibliografia}
 
-\pagestyle{headings}
-
-\setlength{\textwidth}{14cm}
-\setlength{\textheight}{20cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\rightmark}
+\fancyfoot[LE,RO]{\thepage}
 
 \newtheorem{definition}{Definicja} % przykład nowego środowiska 
 \newtheorem{example}{Przykład}[chapter] % przykład nowego środowiska 
 \newtheorem{corollary}{Wniosek}[chapter] % przykład nowego środowiska 
 
-
 \begin{document}
+
+\includepdf[pages={1,2}]{img/title-page.pdf}
+
 \tableofcontents	% generuje spis treści ze stronami !!!
 
 \chapter{Wstęp} \label{rozdz.wstep} 
-{\em Praca MUSI stanowić samodzielne opracowanie przez dyplomanta WYBRANEGO TE\-MATU
-BADAWCZEGO pod kierunkiem promotora. 
-Temat i zakres pracy powinien wiązać się ze specjalnością, na której studiuje
-dyplomant.\\
-\indent Orientacyjna objętość pracy inżynierskiej/licencjackiej (I-go stopnia)
-to 50-80 stron, zaś pracy magisterskiej (II-go stopnia) -- 70-120 stron.}
 
 \section{Problematyka i zakres pracy}
-Niniejsza praca dotyczy zakresu (inżynierii oprogramowania/sieci
-komputero\-wych/gra\-fiki komputerowej/sztucznej inteligencji/algorytmów ewolucyjnych/technologii baz danych). ....\\
-\indent Głównym przedmiotem/celem pracy jest
-stworzenie/opracowanie/przeanalizo\-wanie/zaprojektowanie.... {\bf ten fragment
-pracy zawierać musi wyraźne określenie problemu badawczego oraz jego pogłębioną
-analizę}\\
 
-\indent Dlaczego podejmowanie tej tematyki jest potrzebne? Czy są inne
-rozwiązania tego problemu/tych problemów? Jakie? czy są lepsze/gorsze,
-tańsze/droższe, itp.
-\indent Przed jakimi wyzwaniami stoi osoba podejmująca tematykę? \\
-\indent {\bf Określić spodziewane efekty pracy:} W wyniku doświadczeń przeprowadzonych w zakresie pracy polepszeniu
-uległo.... podać konkretne wskaźniki rezultaty, jak np. przyspieszenie obliczeń,
-redukcja kosztu, nowe oprogramowanie itp. w złotówkach, sekundach, procentach,
-roboczogodzinach itp. 
+Niniejsza praca obejmuje zagadnienia z zakresu inżynierii oprogramowania i sztucznej inteligencji. Głównym jej celem jest stworzenie aplikacji optymalizującej strukturę sieci drogowej.\\
 
-{\bf (razem max. 3 strony - strona przeliczeniowa = 1800 znaków, średnio 30
-wierszy po 60 znaków)}
+Problemy komunikacji w dzisiejszych miastach są wszystkim znane. Zatory drogowe i korki w godzinach szczytu są chlebem powszednim. Pomimo wielu prób i sposobów, wciąż nie istnieje metoda jednoznacznie rozwiązująca tę kwestię. Bezspornie, dotyczy to wszystkich miast na świecie. Z teoretycznego punktu widzenia, jedynym rozwiązaniem jest komunikacja publiczna. Oczywistym jest jednak, że nigdy nie doprowadzimy do sytuacji, gdy wszyscy mieszkańcy zrezygnują ze swoich pojazdów. Dodatkowo, wiele usług wymaga oddzielnej formy transportu. W obliczu tych faktów wiele miast decyduje się na rozwój swojej infrastruktury drogowej. Budowa nowych tras oraz poszerzanie starych przynosi nadzieję mniejszych zatorów a co za tym idzie, szybszego przejazdu do celu. Niestety, historia pokazuje, że takie inwestycje nie zawsze przynoszą oczekiwane korzyści.\\
+
+Teorii próbujących wytłumaczyć te zjawiska, jak również dowodów, które je popierają lub obalają jest wiele. Jedną z najpopularniejszych oraz taką która została wykorzystana w niektórych miastach na świecie jest paradoks Braessa\cite{braess}. Jest to twierdzenie matematyczne orzekające, że w pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Ma ono również  zastosowanie w przypadku  sieci komputerowych oraz istnieją jego analogie dla doświadczeń fizycznych.\\
+
+Moim celem jest opracowanie metody, która dla danej struktury sieci drogowej zmodyfikuje ją wykorzystując powyższy paradoks. W efekcie poprzez zamknięcie wybranych ulic czas podróży dla całego modelu powinien ulec skróceniu.
 
 \section{Cele pracy}
-Wymienić w punktach cele pracy, rozpoczynając od celów poznawczych (dotyczą\-cych
-zebrania wiadomości, przybliżenia/popularyzacji technik / metod / zagaadnień).
-W~drugiej kolejności wyienić cele praktyczne.
-\subsubsection{Przybliżenie (popularyzacja) metody/technologii/systemu...}
-\subsubsection{Propozycja rozwiązania problemu....}
-\subsubsection{Opis zastosowania technologii X w problemie Y...}
-\subsubsection{Przedstawienie prototypu systemu/układu/aplikacji...}
-\subsubsection{Określenie przydatności algorytmu Z do rozwiązania problemu T.....
-}
-\subsubsection{Opracowanie strategii ... w celu poprawy wydajności/jakości...}
-\subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań, ich wartość
-praktyczna, lokalne i globalne możliwości zastosowania}
-\subsubsection{itp.}
+\subsubsection{Studia literaturowe.}
+Moje badania rozpocząłem od poszukiwania źródeł traktujących o opisywanym przeze mnie problemie. Paradoks Braessa został sformułowany w 1970 roku i był od tego czasu wykorzystywany przy planowaniu przestrzeni i infrastruktury wielu miast, np:
 
-Każdy cel opisać w minimum 2-3 zdaniach. Użyte określenia muszą być powszechnie
-zrozumiałe, nie stosujemy skrótów, slangu,  tzw. makaronizmów, np. ,,softłer''.
-{\bf cały podrozdział ok. 1 strony przeliczeniowej czyli 1800 znaków}
+\begin{itemize}
+\item Korea, Seul, likwidacja m.in. estakad Cheonggyecheon,
+\item Niemcy, Stuttgart, likwidacja dróg zbudowanych w latach 60,
+\item USA, Nowy Jork, czasowe zamknięcie ulicy 42,
+\item USA, Winnipeg.\cite{urban}
+\end{itemize}  
+
+\subsubsection{Propozycja rozwiązania problemu.}
+Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Jednak rozbudowa lub modyfikacja tej infrastruktury jest kosztowna i czasochłonna. Dlatego zdecydowałem się na przetestowanie rozwiązania zaproponowane przez Braessa. Istnieją jednak prace negujące lub podważające paradoks\cite{newinsights} , zatem przy potwierdzaniu wyniku optymalizacji nie będę kierował się wyłącznie założeniami zawartymi w twierdzeniu.
+
+\subsubsection{Opis zastosowania algorytmów genetycznych.}
+Ponieważ nie znalazłem żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowałem się losowe przeszukiwanie przestrzeni rozwiązań. Idealnym przykładem w przypadku takich poszukiwań są algorytmy genetyczne. 
+
+\subsubsection{Przedstawienie oceny optymalizacji.}
+Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Zdecydowałem si więc na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybrałem działa zupełnie oddzielnie od metody twierdzenia analizując zadane rozwiązanie - sieć drogową. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
+
+\subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań.}
+Paradoks Braessa nie jest jedynym twierdzeniem traktującym o problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach. Są jednak niemniej ważne.
+Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem ani decydującym głosem w decyzjach dotyczących ustalaniu rzeczywistego ruchu drogowego miasta. 
+
 
 \section{Metoda badawcza}
 \begin{itemize}
@@ -115,7 +123,7 @@ CO TO JEST}. \\
 
 
 
-\chapter{Tytuł części teoretycznej} \label{etykietarozdzialu2}
+\chapter{Optymalizacja struktury sieci drogowej} \label{etykietarozdzialu2}
 \section{Podstawowe definicje}
 Ten podrozdział powinien zawierać dokładny opis terminologii  pojęć zasadniczych dla tematu pracy, którymi autor będzie się posługiwał przy realizacji głównych celów pracy. 
 
@@ -137,173 +145,8 @@ W tym podrozdziale zostaną opisane.....
 \subsection{Wysokie koszty}
 ...............................
 
-\chapter{Dalsze uwagi o edycji i~formatowaniu pracy}
-Pracę w \LaTeX'u najlepiej składać w szablonie {\tt report}, ze względu na jendostronny wydruk (jak w {\tt article}) i możliwość dzielenia pracy na rozdziały, a co za tym idzie, tworzenia spisu treści, spisu tabel, rysunków. 
-\begin{example}
-Przyklad
-\end{example}
 
-\begin{corollary}
-Wniosek
-\end{corollary}
-\section{Bibliografia i przypisy}
-Spis litertury dołącza się  w \LaTeX'u automatycznie na końcu pracy (zob.
-komenda {\tt begin{thebibliography}}). Informacje o sposobie cytowania zawarte
-są na stronie Bibilioteki Głównej PŁ\\ także udostępnione na
-\underline{\tt http://ics.p.lodz.pl/\textasciitilde aniewiadomski}. \\
-
-\indent Przykład cytowania --  jak podaje praca \cite{kacprzyk86}, ......,
-jednakże autorzy [2] twierdzą, iż.....\\
-
-
-\indent Za każdym razem, kiedy w pracy pojawia się treść na podstawie jakiegoś
-tekstu źródłowego czyjegoś autorstwa, oznaczamy takie miejsce
-przypisem\footnote{Treść przypisu pierwszego}. Przypis zawierać musi  numer
-jakim w spisie literatury, czyli bibliografii, oznaczono tę pracę, np.
-tak\footnote{[3], ss. 3--6 (czyli praca trzecia w spisie literatury,
-wykorzystany fragment znajduje się na stronach od 3. do 6.)}. {\bf
-Wszystkie źródła tekstów, rysunków, danych, wykresów, schematów, kodów i
-informacji wykorzystanych w pracy muszą być zamieszczone w bibliografii.
-Wszystkie pozycje literatury zamieszczone w bibliografii muszą być cytowane w
-treści pracy, na dowód, iż zostały rzeczywiście użyte przy pisaniu pracy.}
-
-\subsubsection{Źródła elektroniczne}
-Źródła elektroniczne, zwłaszcza internetowe należy cytować z należytą uwagą na
-ich jakość. Nie cytujemy źródeł wątpliwej jakości lub wtórnie przekazujących
-czy też powielających wiedzę zawartą w innych źródłach, np. fora internetowe lub
-wikipedia.\\
-\indent {\bf Wszystkie wykorzystane źródła elektroniczne powinny być przez Autora
-pracy skopiowane \underline{w dniu ich wykorzystania} i
-dołączone np. na CD/DVD do wersji drukowanej pracy.\\
-\indent Odnośniki do źródeł elektronicznych muszą zawierać pełną ścieżkę, np. do
-pliku lub rysunku, a nie jedynie domenowy adres portalu, np.\newline {\tt
-http://serwer.com/temat/podtemat/katalog/plik\_strony.html} (stan na dzień:
-2009-12-05)\\
-ale nie\\
-{\tt www.portal.pl}.} (!!!!!)
-
-Niedochowanie tego wymogu może stać się powodem odrzucenia pracy ze wzglę\-dów
-formalnych (,,brak możliwości weryfikacji źródeł wykorzystanych w pracy''). 
-
-\section{Polskie akapity, cudzysłowy, itp.}
-Akapity stosujemy zawsze z wcięciem, ale bez wiersza odstępu pomiędzy akapitami. 
-Ta forma jest przyjęta dla publikacji polskojęzycznych. {\bf W szczególnych
-przypadkach (także w tym szablonie)} akapit występujący bezpośrednio po tytule
-rozdziału, sekcji, podsekcji itp. NIE JEST WCIĘTY.\\
-\indent Ten akapit JEST WCIĘTY. NIE MA także PUSTEGO WIERSZA pomiędzy tym
-akapitem a poprzednim. \\
-\indent Podobne uwagi dotyczą wszystkich innych elementów formatowania pracy --
-muszą być zgodne ze zwyczajami przyjętymi W JĘZYKU POLSKIM.	Np. cu\-dzysłowy
-wyglądają tak: ,,cudzysłów'', ale nie ''cudzysłów'', albo też `cudzysłów' czy
-``cudzysłów''. 
-
-
-
-\section{Definicje i wyrażenia matematyczne}
-\begin{definition} \label{def.definicja1}
-Niech $\cal X$ będzie przestrzenią.....
-\end{definition}
-
-Do definicji odnieść sie można poprzez jej etykietę: jak podano w Def.~\ref{def.definicja1}
-
-Przykładowe podkreślenie... \underline{tekst podkreślony}, pogrubienie: {\bf
-tekst pogrubiony} oraz wyrożnienie {\em tekst wyróżniony, czyli kursywa}. 
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału
-Dalszy tekst rozdziału a teraz koniec linii... \\
-\indent ... i nowy akapit. Akapity muszą być standardowo wcięte.  
-
-
-Przykład wzoru matematycznego numerowanego
-
-\begin{equation} \label{wzoreinsteina}
-E=m\cdot c^2
-\end{equation}
-
-{\bf Wszystkie symbole matematyczne występujące w tekście ,,na bieżąco'',
-czyli nieoznaczone numerem równania TAKŻE PISZEMY W TRYBIE MATEMA\-TYCZNYM, CZYLI
-K U R S Y W Ą} : $a=b\cdot c$, ale nie: a= b*c (!!)\\
-
-\indent Numeracja wzoru -- ZAWSZE w POSTACI (\#.\#\#)
-Jak podaje wzor (\ref{wzoreinsteina}).... (koniec linii). \\
-\indent Wyrażenia matematyczne można też wpisywać w wierszu -- używamy wów\-czas znaku '\$', który rozpoczyna i kończy wyrażenie, np. wg Einsteina $E=m\cdot c^2$...
-
-
-\section{Jak wstawiać rysunki? tabele? }
-A teraz pora na rysunek:
-\begin{figure}[!t]
-\centering
-%\includegraphics[width=7cm]{1figmftall} 
-\caption{Funkcja przynależności zbioru rozmytego -- Podpis ZAWSZE POD rysunkiem,
-numeracja w postaci \#.\#\#. } (wypada podać źródło, czyli literaturę,
-z której rysunek pochodzi, ewentualnie {\em opracowanie własne}.)
-\label{fig.funkcja.przyn}
-\end{figure}
-
-
-\begin{table}[!t]
-\centering
-\caption{Tytuł tabeli ZAWSZE NAD TABELĄ, numeracja w formie \#.\#\#. (wypada podać źródło, czyli literaturę,
-z której tabela pochodzi, ewentualnie {\em opracowanie własne}.)} 
-
-\label{tabls1}
-
-{\footnotesize 
-\vspace{5mm}
-\begin{tabular}{c c c c c}
-\hline\noalign{\smallskip}
-{\bf Alg.} & {\bf tytuł kolumny 1} & {\bf tytuł kolumny 1} & {\bf Tytuł kolumny
-3} & {\bf ....}     \\
-
-\hline\noalign{\smallskip}
-a & b & c & d & e  \vspace{3mm} \\ 
-\noalign{\smallskip}
- a & b & c & d & e \\
-
-\noalign{\smallskip}
-%%%
-\end{tabular}
-}
-\end{table}
-
-
-Rysunki i tabele nie powinny przekraczać 0.9 szerokości tekstu i zasadniczo
-powinny występować na górze strony. \\
-
-\indent Odnosić się do rysunku można poprzez jego etykietę ''label'', np. jak widać na rys. \ref{fig.funkcja.przyn}......
-
-Jak widać, rysunek nie wypada w dokumencie w tym samym miejscu co w kodzie, choć czasem się tak zdarza. Jeśli potrzebujesz przenieść rysunek, zajrzyj do rozdzialu 2.11. manuala pt. {\em Wstawki}. 
-
-\section{Listy wypunktowana i numerowana}
-
-\begin{itemize}
-\item pierwszy element listy wypunktowanej
-\item drugi...
-\item trzeci...
-\end{itemize}
-
-
-Nowy akapit z lista numerowaną. 
-\begin{enumerate}
- \item pierwszy element listy NUMEROWANEJ
- \item drugi...
- \item trzeci...
- \item trzeci...
- \item trzeci...
- \end{enumerate}
-
-\section{Przenoszenie wyrazów}
-Skorzystaj z polecenia {\tt hyphenation}\\ w preambule dokumentu, lub dziel
-wyrazy ,,ręcznie'' czyli właśnie tak jak tu: po\-dzie\-lo\-ne wy\-ra\-zy. 
-
-\chapter[Technologie i metody użyte...]{Technologie i metody użyte w~części
-badawczej}
+\chapter[Technologie i metody użyte...]{Technologie i metody użyte}
 
 {\em Tytuł tego rozdziału ma dwie wersje: zwykłą, (w kodzie: w nawiasach
 klamrowych), która
@@ -314,10 +157,14 @@ W rozdziale \ref{etykietarozdzialu2} podano podstawy teoretyczne i ogólny zakre
 pracy. W niniejszym rozdziale opisana zostanie technologia XYZ oraz metoda ABC
 użyta w części praktycznej, patrz rozdział~\ref{rozdz.czesc.prakt}. 
 
+
 \section{Sprzęt}
 ...................
 \subsection{Element 1}
 .........................
+
+
+
 \subsection{Element 2}
 ......................
 
@@ -407,23 +254,117 @@ Jak można kontynuować tę pracę, zwłaszcza pod kątem studiów
 uzupełniających magisterskich i/lub doktoranckich. Co jeszcze powinno być
 zrobione lub ulepszone? Co należy zmienić lub poprawić w pracy z dzisiejszego punktu widzenia?
 
+\section{Definicje i wyrażenia matematyczne}
+\begin{definition} \label{def.definicja1}
+Niech $\cal X$ będzie przestrzenią.....
+\end{definition}
 
-\addcontentsline{toc}{chapter}{Bibliografia} 
-\begin{thebibliography}{99}
-\bibitem{kacprzyk86}
-Kacprzyk J. (1986) Fuzzy sets in system analysis.  PWN, Warsaw (in Polish).
-\bibitem{kacprzyk99b}
-Kacprzyk J., Strykowski P. (1999) Linguistic Data Summaries for Intelligent Decision Support, Proceedings of EFDAN'99. 4-th European Workshop on Fuzzy Decision Analysis and Recognition Technology for Management, Planning and Optimization, Dortmund, 1999, 3--12.
-\bibitem{kacprzyk01d}
-Kacprzyk J., Yager R. R. (2001) Linguistic summaries of data using fuzzy logic. International Journal of General Systems 30:133--154 
+\begin{lstlisting}[caption=blabla, label=amb]
+def initialize(project_id)
+    @project = Project.find(project_id)
+end
+\end{lstlisting}
 
-\end{thebibliography}
+\begin{table}[!t]
+\centering
+\caption{Tytuł tabeli ZAWSZE NAD TABELĄ, numeracja w formie \#.\#\#. (wypada podać źródło, czyli literaturę,
+z której tabela pochodzi, ewentualnie {\em opracowanie własne}.)} 
+
+\label{tabls1}
+
+{\footnotesize 
+\vspace{5mm}
+\begin{tabular}{c c c c c}
+\hline\noalign{\smallskip}
+{\bf Alg.} & {\bf tytuł kolumny 1} & {\bf tytuł kolumny 1} & {\bf Tytuł kolumny
+3} & {\bf ....}     \\
+
+\hline\noalign{\smallskip}
+a & b & c & d & e  \vspace{3mm} \\ 
+\noalign{\smallskip}
+ a & b & c & d & e \\
+
+\noalign{\smallskip}
+%%%
+\end{tabular}
+}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+%\includegraphics[width=7cm]{1figmftall} 
+\caption{Funkcja przynależności zbioru rozmytego -- Podpis ZAWSZE POD rysunkiem,
+numeracja w postaci \#.\#\#. } (wypada podać źródło, czyli literaturę,
+z której rysunek pochodzi, ewentualnie {\em opracowanie własne}.)
+\label{fig.funkcja.przyn}
+\end{figure}
 
 \addcontentsline{toc}{chapter}{Spis rysunków} 
 \listoffigures
 
 \addcontentsline{toc}{chapter}{Spis tabel} 
 \listoftables
+
+\addcontentsline{toc}{chapter}{Spis listingów}
+\lstlistoflistings
+
+\addcontentsline{toc}{chapter}{Bibliografia} 
+\begin{thebibliography}{99}
+\bibitem{investigation} 
+	Leslie Arthur Keith Bloy, 
+	\newblock \textit{An investigation into Braess’ paradox}, 02/2007
+
+\bibitem{newinsights}
+	Rric Pas and Shari Principio
+	\newblock \textit{Braess’ paradox: Some new insights}, April 1996
+
+\bibitem{conference} 
+	Wataru Nanya, Hiroshi Kitada, Azusa Hara, Yukiko Wakita, Tatsuhiro Tamaki, and Eisuke Kita
+	\newblock \textit{Road Network Optimization for Increasing Traffic Flow}
+	\newblock Int. Conference on Simulation Technology, JSST 2013.
+
+\bibitem{reducingtheeffects}
+	Ana L. C. Bazzan and Franziska Klügl
+	\newblock \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}
+
+\bibitem{matsim} 
+	\url{http://matsim.org}	
+
+\bibitem{math}
+	\url{http://commons.apache.org/proper/commons-math}
+
+\bibitem{java} 
+	\url{http://www.java.com/pl/}
+
+\bibitem{eclipse} 
+	\url{https://eclipse.org}
+				
+\bibitem{python} 
+	\url{http://pl.python.org}
+	
+\bibitem{pydev} 
+	\url{http://pydev.org}
+	
+\bibitem{trisquel}
+	\url{https://trisquel.info}
+			
+\bibitem{matsim-userg}
+	M. Rieser, C. Dobler, T. Dubernet, D. Grether, A. Horni, G. Lammel, R. Waraich, M. Zilske, Kay W. Axhausen, Kai Nagel
+	\newblock \textit{MATSim User Guide}
+	\newblock updated September 12, 2014
+
+\bibitem{siux}
+	A. Chakirov
+	\newblock \textit{Enriched Sioux Falls Scenario with Dynamic Demand}
+	\newblock MATSim User Meeting, Zurich/Singapore, June 2013.
+	
+\bibitem{braess}
+	\url{http://pl.wikipedia.org/wiki/Paradoks_Braessa}
+	
+\bibitem{urban}
+	\url{http://urbnews.pl/paradoks-braessa/}
+
+\end{thebibliography}
 
 
 \addcontentsline{toc}{chapter}{Załączniki} 
@@ -433,6 +374,11 @@ Kacprzyk J., Yager R. R. (2001) Linguistic summaries of data using fuzzy logic. 
 \item Załącznik nr 2
 \item Załącznik nr 3
 \end{enumerate}
+
+\chapter*{Abstract}
+
+The purpose of the present bachelor thesis was to create an internet application with an integrated recommender system based on music resources. My work covered two main fields: creating the application as well as building a~recommender system and testing it efficiency.\\
+
 
 
 \end{document}
