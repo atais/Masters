@@ -7,7 +7,7 @@
 \usepackage{pdfpages}
 \usepackage{hyphenat}
 \usepackage{txfonts}
-\usepackage{hyperref}
+\usepackage[unicode]{hyperref}
 \usepackage{float}
 \usepackage{listings}
 \usepackage{caption}
@@ -42,6 +42,9 @@
 \newtheorem{example}{Przykład}[chapter] % przykład nowego środowiska 
 \newtheorem{corollary}{Wniosek}[chapter] % przykład nowego środowiska 
 
+\let\oldsection\chapter
+\def\chapter{\cleardoublepage\oldsection}
+
 \begin{document}
 
 \includepdf[pages={1,2}]{titlepage.pdf}
@@ -60,7 +63,7 @@ Teorii próbujących wytłumaczyć te zjawiska, jak również dowodów, które j
 
 Moim celem jest opracowanie metody, która dla danej struktury sieci drogowej zmodyfikuje ją wykorzystując prawidłowość z powyższego paradoksu. W efekcie poprzez zamknięcie wybranych ulic w danej sieci drogowej, średni czas podróży powinien ulec skróceniu.
 
-\section{Metoda badawcza.}
+\section{Metoda badawcza i cel pracy.}
 \subsubsection{Studia literaturowe.}
 Moje badania rozpocząłem od poszukiwania źródeł traktujących o opisywanym przeze mnie problemie. Paradoks Braessa został sformułowany w 1970 roku i był od tego czasu wykorzystywany przy planowaniu przestrzeni i infrastruktury wielu miast, np:
 
@@ -81,37 +84,26 @@ Ponieważ nie znalazłem żadnych przesłanek wykazujących jednoznaczną ocenę
 Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Zdecydowałem się więc na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybrałem działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
 
 \subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań.}
-Paradoks Braessa nie jest jedynym twierdzeniem traktującym o problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa-Thomsona\cite{downs} czy prawo Lewisa-Mogridge’a\cite{lewis}}
-. Są jednak niemniej ważne.
+Paradoks Braessa nie jest jedynym twierdzeniem traktującym o problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa-Thomsona\cite{downs} czy prawo Lewisa-Mogridge’a\cite{lewis}}. Są jednak niemniej ważne.
 Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem ani decydującym głosem w decyzjach dotyczących ustalaniu rzeczywistego ruchu drogowego miasta. 
 
 
 \section{Przegląd literatury w dziedzinie.}
-Rozszerzyć odpowiedni podpunkt z metody badawczej, np. wg podziału:
-\subsubsection{Źródła książkowe polskojęzyczne i tłumaczenia.}
-\subsubsection{Źródła książkowe obcojęzyczne.}
-\subsubsection{Artykuły naukowe, raporty z badań, komunikaty konferencyjne,
-dokumentacje techniczne, manuale, instrukcje}
-\subsubsection{Źródła elektroniczne.}
+By przybliżyć temat problemów komunikacyjnych i rozwiązania zaproponowanego przez Braessa polecam pracę magisterską \textit{Leslie Arthura Keith Bloy}\cite{investigation}. W pracy zostały opisane także inne (wymieniane również przeze mnie) twierdzenia. Publikacja \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}\cite{reducingtheeffects} jest bardzo dobrym uzupełnieniem tematu o interesującą mnie kwestię symulacji wieloagentowych. Prezentuje ona różnice w wynikach dla przypadku losowego wyboru drogi przez agentów oraz tej wybranej przy użyciu inteligencji kolektywnej\footnote{ang. Collective Intelligence (COIN)}. 
 
+Zbiorowa praca napisana na potrzeby międzynarodowej konferencji dotyczącej technologii symulacji\cite{reducingtheeffects} jest pozycją, która opisuje podobny do podejmowanego przeze mnie problem. Mianowicie skupia się na modyfikacjach drogi poprzez zmiany dostępności jej składowych.
+
+W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecę bardzo łatwo dostępną pozycję, która jest wstępem do tematu\cite{gene}. Wybrałem ją głównie ze względu na prosty opis problemu oraz brak zaawansowanych przykładów, które tylko skomplikowałyby dla mnie ujęcie prostego problemu.
 
 \section{Układ pracy.}
-Tematem pracy jest: ....., zaś za główny cel przyjęto ...... . 
-Rozdział \ref{rozdz.wstep} zawiera wstęp i cele pracy. W rozdziale drugim
-opisano/...... w Rozdziale 3. zawarto............ Rozdział 4. przedstawia..... 
-W podsumowaniu pracy przedstawiono..........................., z czego wynika,
-że ................  
-Najważniejszym wnioskiem/wynikiem/rezultatem pracy jest.................. {\bf wyraźnie określić
-CO TO JEST}. 
+Tematem pracy jest optymalizacja struktury sieci drogowej, zaś za główny cel przyjęto stworzenie rozwiązania, które wykorzystując algorytmy genetyczne odnajdzie najlepsze rozwiązanie.
+ 
+Rozdział \ref{rozdz.wstep} zawiera wstęp i cele pracy. W rozdziale \ref{rozdz.optymalizacja} przybliżam istotę optymalizacji struktur sieci drogowych
+oraz opisuję teoretycznie wykorzystane przeze mnie rozwiązania. W rozdziale \ref{rozdz.technologie} wymieniam technologie, w których wykonałem aplikację oraz przybliżam zewnętrzne biblioteki, o które oparłem swoje rozwiązanie. Głównym rozdziałem pracy jest rozdział \ref{rozdz.opis},
+w którym przedstawiam wykonaną aplikację oraz wyniki optymalizacji przykładowej sieci. W rozdziale podsumowującym \ref{rozdz.podsumowanie}, zawarłem wnioski oraz możliwości rozwoju pracy. Po rozdziale 5, podsumowującym, załączam spis rysunków, tabel, listingów i bibliografie, w tej kolejności.
 
-{\bf cały podrozdział ok. 1 strony}.
-
-
-
-\chapter{Optymalizacja struktury sieci drogowej.}
+\chapter{Optymalizacja struktury sieci drogowej.}\label{rozdz.optymalizacja} 
 \section{Podstawowe definicje.}
-Ten podrozdział powinien zawierać dokładny opis terminologii  pojęć zasadniczych dla tematu pracy, którymi autor będzie się posługiwał przy realizacji głównych celów pracy. 
-
 
 \begin{definition}\label{Sieć drogowa}
 Co chce to powiem
@@ -225,7 +217,7 @@ Czas przejazdu każdej z tych dróg wynosi wówczas $50+2+10(2+2)=92$ minuty.
 \end{figure}
 
 
-\chapter{Technologie i metody użyte.}
+\chapter{Technologie i metody użyte.}\label{rozdz.technologie} 
 \section{Symulator transportu.}
 
 
@@ -238,7 +230,7 @@ Czas przejazdu każdej z tych dróg wynosi wówczas $50+2+10(2+2)=92$ minuty.
 
 
 
-\section{Przestrzeń poszukiwań.}
+\section{Algorytmy genetyczne.}
 
 Najlepszego rozwiązania będę poszukiwał wykorzystując klasyczny algorytm genetyczny.
 
@@ -270,10 +262,10 @@ Najlepszego rozwiązania będę poszukiwał wykorzystując klasyczny algorytm ge
 \caption{Logo PyDev\cite{pydev}}
 \end{figure}
 
-\section{Zastosowany przykład, Siouxfalls.}
+\section{Badane miasto przykładowe: Siouxfalls}
 
 
-\chapter{Opis projektu.}
+\chapter{Opis projektu.}\label{rozdz.opis} 
 Ta część pracy może być podzielona na więcej rozdziałów, np kiedy autor chce
 w~szczególności podkreślić któryś z etapów projektu. W zależności od tematu i~celów pracy, pewne sekcje można dodać (np. przy projektowaniu sieci, instalacji
 i~konfiguracji serwerów usług sieciowych), inne zaś pominąć.
@@ -301,31 +293,17 @@ i~konfiguracji serwerów usług sieciowych), inne zaś pominąć.
 
 pewnie brakuje tekstu
 
-\section{Przewidywane problemy.}
-
-\begin{itemize}
-\item Brak gwarancji lepszego wyniku
-\item Długi czas obliczeń
-\item Duże wymagania dotyczące zasobów
-\end{itemize}
+\section{Wyniki.}
 
 
-\chapter{Podsumowanie.}
+\chapter{Podsumowanie.}\label{rozdz.podsumowanie} 
 \section{Dyskusja wyników.}
-Dzięki zrealizowaniu pracy poprawie uległa wydajność ....... Ponadto, o ??
-skrócony został czas ........, a koszty osiągnięcia zamierzonego efektu zostały
-zmniejszone z ???pln do ???pln za godzinę/ dzień/ jednostkę sprzętu.........
-\indent Które cele pracy udało sie zrealizować? co z tego wynika? Które cele
-pracy pozostały niezrealizowane i dlaczego? 
 
-\section{Ocena możliwości wdrożenia.}
-... ich wartość praktyczna, lokalne i globalne możliwości zastosowania, kwestia
-praw autorskich do powstałych produktów, itp. 
 
 \section{Perspektywy dalszych badań w dziedzinie.}
-Jak można kontynuować tę pracę, zwłaszcza pod kątem studiów
-uzupełniających magisterskich i/lub doktoranckich. Co jeszcze powinno być
-zrobione lub ulepszone? Co należy zmienić lub poprawić w pracy z dzisiejszego punktu widzenia?
+
+
+\section{Struktura projektu.}
 
 
 
@@ -356,6 +334,11 @@ zrobione lub ulepszone? Co należy zmienić lub poprawić w pracy z dzisiejszego
 \bibitem{reducingtheeffects}
 	Ana L. C. Bazzan and Franziska Klügl
 	\newblock \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}
+
+\bibitem{gene}
+	Mitchell Melanie
+	\newblock \textit{An Introduction to Genetic Algorithms}
+	\newblock First MIT Press paperback edition, 1998
 
 \bibitem{matsim} 
 	\url{http://matsim.org}	
@@ -396,6 +379,7 @@ zrobione lub ulepszone? Co należy zmienić lub poprawić w pracy z dzisiejszego
 	
 \bibitem{downs}
 	\url{http://pl.wikipedia.org/wiki/Paradoks_Downsa-Thomsona}
+	
 	
 \bibitem{lewis}
 	\url{http://pl.wikipedia.org/wiki/Prawo_Lewisa-Mogridge’a}

@@ -42,6 +42,7 @@ java/.project
 
 #### LATEX ###
 *.aux
+*.lol
 *.glo
 *.snm
 *.nav
