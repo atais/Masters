@@ -3,6 +3,8 @@
 test/output
 bin
 .settings
+.svn
+/.svn
 bin
 target
 output
