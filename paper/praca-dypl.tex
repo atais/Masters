@@ -7,10 +7,11 @@
 \usepackage{pdfpages}
 \usepackage{hyphenat}
 \usepackage{txfonts}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage[unicode]{hyperref}
 \usepackage{float}
 \usepackage{listings}
-\usepackage{caption}
 \usepackage{fancyhdr}
 \usepackage{indentfirst}
 \usepackage{geometry}
@@ -37,6 +38,7 @@
 \setlength{\headheight}{15.13202pt}
 \setlength{\parindent}{1.5em}
 \setlength{\emergencystretch}{3em}
+\urlstyle{rm}
 
 \newtheorem{definition}{Definicja} % przykład nowego środowiska 
 \newtheorem{example}{Przykład}[chapter] % przykład nowego środowiska 
@@ -105,97 +107,187 @@ w którym przedstawiam wykonaną aplikację oraz wyniki optymalizacji przykłado
 \chapter{Optymalizacja struktury sieci drogowej.}\label{rozdz.optymalizacja} 
 \section{Podstawowe definicje.}
 
-\begin{definition}\label{Sieć drogowa}
-Co chce to powiem
+\begin{definition}\label{Graf nieskierowany}
+Grafem (nieskierowanym) nazywamy parę zbiorów $(V,E)$. Elementy zbioru $V$ nazywają się \textit{wierzchołkami}, natomiast elementy zbioru $E$ nazywają się \textit{krawędziami}. Kada krawędź jest parą wierzchołków, tzn. $E \subseteq {{u,v}:u,v \in V}$
 \end{definition}
-
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=0.30\textwidth]{img/siec}
-\caption{Fragment sieci drogowej w Sioux Falls, Południowa Dakota.} 
+\includegraphics[width=0.40\textwidth]{img/graf1}
+\caption{Przykładowy graf nieskierowany\cite{grafy}.} 
 \end{center}
 \end{figure}
 
+Przykładowy graf nieskierowany może zostać opisany przez zbiory:
+\begin{center}
+\begin{math}
+V=\{1,2,3,4,5,6\} \hspace*{40px} E=\{\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{6,5\},\{6,1\},\{2,6\},\{3,6\},\{4,6\}\}
+\end{math}
+\end{center}
 
-\begin{definition}\label{Sieć drogowa w postaci grafu}
-Co chce to powiem
+\vspace*{30px}
+\begin{definition}\label{Graf skierowany}
+Grafem skierowanym nazywamy taki graf, w którym każda krawędź ma zdefiniowany początek i koniec, tzn. żeby pary były uporządkowane. Wtedy $E \subseteq V \times V = {{u,v}:u,v \in V}$.
+Krawędź $(u,v)$ najłatwiej wyobrazić sobie jako strzałkę od $u$ do $v$, dlatego często będziemy uznaczać ją przez $u \rightarrow v$.
 \end{definition}
 
-
 \begin{figure}[ht]
-\includegraphics[width=0.55\textwidth]{img/graf}
-\caption{Siec drogowa miasta Sioux Falls w postaci grafu.} 
+\begin{center}
+\includegraphics[width=0.40\textwidth]{img/graf2}
+\caption{Przykładowy graf skierowany\cite{grafy}.} 
+\end{center}
 \end{figure}
 
+Przykładowy graf skierowany może zostać opisany przez zbiory:
+\newline
+\begin{math}
+V=\{spodnie, buty, pasek, koszula, krawat, marynarka\}
+\end{math}
+\newline
+\begin{math}
+E=\{\{spodnie \rightarrow buty\},\{spodnie  \rightarrow pasek\},
+	\{pasek \rightarrow koszula\},\{koszula \rightarrow krawat\},
+	\{pasek \rightarrow marynarka\},\{krawat \rightarrow marynarka\}\}
+\end{math}
+
+\section{Sieć drogowa w postaci grafu}
+W przypadku sieci drogowej mamy oczywiście do czynienia z abstrakcyjną strukturą sieci. Przez sieć drogową rozumiemy bowiem układ dróg lub ulic np. w mieście. Podczas swoich badań posługuję się zawsze pewnym fragmentem większej sieci. Najlepiej te dane zobrazuje poniższy przykład.
+
 \begin{figure}[ht]
-\includegraphics[width=0.38\textwidth]{img/dopasowanie}
-\caption{Graf z dopasowaną geometrią \cite{siux}.}
+\begin{center}
+\includegraphics[width=0.35\textwidth]{img/siec}
+\caption{Fragment sieci drogowej miasta Sioux Falls, Południowa Dakota.} 
+\end{center}
+\end{figure}
+
+Posługując się powyższymi definicjami, tworząc graf z pewnej sieci drogowej, przyjmujemy, że zbiorem $V$, wierzchołków są skrzyżowania, natomiast zbiór krawędzi $E$ odnosi się do ulic pomiędzy tymi skrzyżowaniami.
+W mojej pracy posługuję się zawsze grafem skierowanym. W związku z tym, w przypadku ulic dwukierunkowych tworzę parę krawędzi z odpowiednimi kierunkami, nawet jeśli ulice nie są rozłączne w rzeczywistości.
+
+W celu potwierdzenia wiarygodności powyższego przykładu prezentuję graf nałożony na mapę miasta.
+
+\vspace*{50px}
+\begin{figure}[h]
+\begin{flushleft}
+\begin{minipage}[b]{.45\textwidth}
+	\includegraphics[width=.9\linewidth]{img/graf}
+	\caption{Siec drogowa miasta Sioux Falls w postaci grafu.}
+\end{minipage}%
+\end{flushleft}
+\begin{flushright}
+	\begin{minipage}[b]{.45\textwidth}
+	\flushright
+	\includegraphics[width=.9\linewidth]{img/dopasowanie}
+	\caption{Graf z dopasowaną geometrią \cite{siux}.}
+	\end{minipage}
+\end{flushright}
 \end{figure}
 
 \section{Paradoks Braessa.}
 
+Jak już wcześniej wspomniałem, jest to twierdzenie matematyczne orzekające, że w pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Autorem twierdzenia jest niemiecki matematyk Dietrich Braess\cite{braess}. Paradoks działa w oparciu o model ruchu drogowego, który ma następujące cechy:
 
-\begin{figure}[ht]
-\centering
-\begin{minipage}{.48\textwidth}
-\centering
+\begin{enumerate}
+\item Sieć drogowa składa się ze skończenie wielu węzłów i łączących je odcinków dróg
+\item Po sieci porusza się skończenie wiele pojazdów, każdy z nich ma wyznaczony węzeł startowy i węzeł docelowy
+\item Odcinki dróg mają przypisane sobie czasy przejazdu, przy czym czasy te mogą zależeć od liczby pokonujących dany odcinek pojazdów.
+\item Układ sieci drogowej i czasy przejazdu poszczególnych odcinków są znane pojazdom
+\item Celem pojazdów jest przejazd przez sieć z węzłów początkowych do docelowych po trasie złożonej z odcinków drogowych tak, by zminimalizować łączny czas ich pokonania
+\item Decyzje o wyborze tras pojazdy podejmują indywidualnie i niezależnie od siebie
+\end{enumerate}
+Przedstawię paradoks w oparciu o przykład z oryginalnego artykułu Dietricha Braessa.
 
-\includegraphics[width=0.7\textwidth]{img/braess1}
-\caption{Wyjściowy układ drogowy}
+\subsection{Przykładowy wyjściowy układ drogowy.}
+\subsubsection{Sieć drogowa i auta}
 
-\end{minipage}\hfill
-\begin{minipage}{.48\textwidth}
-Autostrady:
-AX, $t_{AX}(p) =  50 + p$ min
-YB, $t_{YB}(p) =  50 + p$ min
+Przykład sytuacji, w której ujawnia się paradoks Braessa jest skonstruowany z czterech miast $A, B, X i Y$. Są one połączone odcinkami drogowymi jak na rysunku i z następującymi czasami przejazdu, przy czym $p$ oznacza gęstość ruchu w tysiącach aut.
 
-Drogi lokalne:
-AY, $t_{AY}(p) =  10p$ min
-XB, $t_{XB}(p) =  10p$ min
+\vspace*{10px}
+\begin{figure}[h]
+\begin{flushleft}
+\begin{minipage}{.50\textwidth}
+Autostrady:\newline
+AX, $t_{AX}(p) =  50 + p$ min\newline
+YB, $t_{YB}(p) =  50 + p$ min\newline
 
+\vspace*{20px}
+Drogi lokalne:\newline
+AY, $t_{AY}(p) =  10p$ min\newline
+XB, $t_{XB}(p) =  10p$ min\newline
+
+\vspace*{20px}
 Aut jest 6000 i wszystkie mają za zadanie przejechać trasę z A do B.
-\end{minipage}\hfill
+\end{minipage}%
+\end{flushleft}
+\begin{flushright}
+	\begin{minipage}{.50\textwidth}
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/braess1}
+	\caption{Wyjściowy układ drogowy}
+	\end{minipage}
+\end{flushright}
 \end{figure}
 
 
+\subsubsection{Analiza równowagi Nasha}
+
+Każde auto musi zdecydować się na wybór trasy albo AXB albo AYB.
+
 Równowaga Nasha to taka sytuacja, w której każdy z samochodów spowoduje wydłużenie swojego czasu jazdy, zmieniając decyzję co do wyboru trasy przy niezmienionych decyzjach pozostałych aut.
 \newline\newline
-Jeśli p i q to liczby aut w tysiącach pokonujących odpowiednio trasy AXB i AYB, otrzymujmy równania:
+Jeśli $p$ i $q$ to liczby aut w tysiącach pokonujących odpowiednio trasy AXB i AYB, otrzymujmy równania:
 
 \begin{center}
-$p+q = 6 $
-$t_{AX}(p)+t_{XB}(p) = t_{AY}(q) + t_{YB}(q)$
-$50+p+10p = 10q+50+q$
+\begin{math}
+p+q = 6 \newline
+t_{AX}(p)+t_{XB}(p) = t_{AY}(q) + t_{YB}(q) \newline
+50+p+10p = 10q+50+q \newline
+\end{math}
 \end{center}
 rozwiązaniem jest $p=q=3$.
 Przy tej gęstości ruchu pokonanie obu dostępnych tras zabiera $50+3+30=83$ minuty.
 
-
-
-\begin{figure}[ht]
-\includegraphics[width=0.7\textwidth]{img/braess2}
-\caption{Uzupełniony układ drogowy}
-\end{figure}
-
+\subsection{Przykładowy, uzupełniony układ drogowy.}
+\subsubsection{Sieć drogowa i auta}
 Do wyjściowego układu drogowego dodana zostaje autostrada:
 
-YX, $t_{YX}(p) =  10 + p$ min
+\vspace*{70px}
+\begin{figure}[h]
+\begin{flushleft}
+\begin{minipage}{.50\textwidth}
+Autostrady:\newline
+YX, $t_{YX}(p) =  10 + p$ min\newline
 
+\vspace*{20px}
 Aut jest nadal 6000 i wszystkie mają za zadanie przejechać trasę z A do B.
+\end{minipage}%
+\end{flushleft}
+\begin{flushright}
+	\begin{minipage}{.50\textwidth}
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/braess2}
+	\caption{Uzupełniony układ drogowy}
+	\end{minipage}
+\end{flushright}
+\end{figure}
 
+\subsubsection{Analiza równowagi Nasha}
 
-
-Jeśli p, q i r to liczby aut w tysiącach pokonujących odpowiednio trasy AXB, AYB i AYXB, otrzymujmy równania:
+Jeśli $p$, $q$ i $r$ to liczby aut w tysiącach pokonujących odpowiednio trasy AXB, AYB i AYXB, otrzymujmy równania:
 
 \begin{center}
-$p+q+r = 6 $
-$t_{AX}(p)+t_{XB}(p+r) = t_{AY}(q+r) + t_{YB}(q) = t_{AY}(q+r)+t_{YX}(r)+t_{XB}(p+r)$
-\newline
-$50+p+10(p+r) = 10(q+r)+50+q = 10(q+r)+ 10 + r + 10(p+r)$
+\begin{math}
+p+q+r = 6 \newline
+t_{AX}(p)+t_{XB}(p+r) = t_{AY}(q+r) + t_{YB}(q) = t_{AY}(q+r)+t_{YX}(r)+t_{XB}(p+r)\newline
+50+p+10(p+r) = 10(q+r)+50+q = 10(q+r)+ 10 + r + 10(p+r)\newline
+\end{math}
 \end{center}
 rozwiązaniem jest $p=q=r=2$.
 Czas przejazdu każdej z tych dróg wynosi wówczas $50+2+10(2+2)=92$ minuty.
+
+\subsection{Wyjaśnienie intuicyjne.}
+Wąskim gardłem systemu są drogi lokalne, na których czas przejazdu bardzo szybko wzrasta wraz z intensywnością ruchu. Po pojawieniu się dodatkowej drogi dostępna staje się nowa trasa, prowadząca oprócz nowego skrótu YX tylko drogami lokalnymi.
+
+Z perspektywy całości systemu nowy odcinek drogowy odciąża ruch na autostradach, gdzie jest to mało odczuwalne, a w zamian jeszcze bardziej zagęszcza ruch na drogach lokalnych, powodując wydłużenie czasu podróży.
 
 \section{Składowa silnie spójna.}
 
@@ -305,18 +397,24 @@ pewnie brakuje tekstu
 
 \section{Struktura projektu.}
 
-
-
-\addcontentsline{toc}{chapter}{Spis rysunków} 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename} 
 \listoffigures
 
-\addcontentsline{toc}{chapter}{Spis tabel} 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename} 
 \listoftables
 
-\addcontentsline{toc}{chapter}{Spis listingów}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
 \lstlistoflistings
 
-\addcontentsline{toc}{chapter}{Bibliografia} 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname} 
 \begin{thebibliography}{99}
 \bibitem{investigation} 
 	Leslie Arthur Keith Bloy, 
@@ -380,14 +478,18 @@ pewnie brakuje tekstu
 \bibitem{downs}
 	\url{http://pl.wikipedia.org/wiki/Paradoks_Downsa-Thomsona}
 	
-	
 \bibitem{lewis}
-	\url{http://pl.wikipedia.org/wiki/Prawo_Lewisa-Mogridge’a}
+	\href{http://pl.wikipedia.org/wiki/Prawo_Lewisa-Mogridge\%E2\%80\%99a}
+	    {http://pl.wikipedia.org/wiki/Prawo\_Lewisa-Mogridge\textquoteright{}a}
+	   
+\bibitem{grafy}
+	\url{http://www.mimuw.edu.pl/~kowalik/asd/2003/wyklady/grafy.pdf}
 
 \end{thebibliography}
 
-
-\addcontentsline{toc}{chapter}{Załączniki} 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Załączniki}
 \chapter*{Załączniki}
 \begin{enumerate}
 \item Załącznik nr 1
@@ -395,7 +497,11 @@ pewnie brakuje tekstu
 \item Załącznik nr 3
 \end{enumerate}
 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
+
 
 The purpose of the present bachelor thesis was to create an internet application with an integrated recommender system based on music resources. My work covered two main fields: creating the application as well as building a~recommender system and testing it efficiency.
 
