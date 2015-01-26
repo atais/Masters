@@ -32,6 +32,8 @@
 \renewcommand{\lstlistlistingname}{Spis listingów}
 \renewcommand{\bibname}{Bibliografia}
 
+\linespread{1.3} % Jeśli chcesz używać interlinii równej 1,5 jako wartość należy wstawić "1.3".
+
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\rightmark}
@@ -166,21 +168,21 @@ W mojej pracy posługuję się zawsze grafem skierowanym. W związku z tym, w pr
 
 W celu potwierdzenia wiarygodności powyższego przykładu prezentuję graf nałożony na mapę miasta.
 
-\vspace*{50px}
+\vspace*{30px}
 \begin{figure}[h]
 \begin{flushleft}
-\begin{minipage}[b]{.47\textwidth}
+	\begin{subfigure}[]{.45\textwidth}
 	\centering
-	\includegraphics[width=.9\linewidth]{img/graf}
+	\includegraphics[width=\linewidth]{img/graf}
 	\caption{Siec drogowa miasta Sioux Falls w postaci grafu.}
-\end{minipage}%
+	\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}[b]{.47\textwidth}
+	\begin{subfigure}[]{.45\textwidth}
 	\centering
-	\includegraphics[width=.9\linewidth]{img/dopasowanie}
+	\includegraphics[width=\linewidth]{img/dopasowanie}
 	\caption{Graf z dopasowaną geometrią \cite{siux}.}
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
@@ -206,7 +208,7 @@ Przykład sytuacji, w której ujawnia się paradoks Braessa jest skonstruowany z
 \vspace*{15px}
 \begin{figure}[h]
 \begin{flushleft}
-\begin{minipage}{.50\textwidth}
+\begin{subfigure}{.50\textwidth}
 Autostrady:\newline
 AX, $t_{AX}(p) =  50 + p$ min\newline
 YB, $t_{YB}(p) =  50 + p$ min\newline
@@ -218,14 +220,14 @@ XB, $t_{XB}(p) =  10p$ min\newline
 
 \vspace*{15px}
 Aut jest 6000 i wszystkie mają za zadanie przejechać trasę z $A$ do $B$.
-\end{minipage}%
+\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}{.50\textwidth}
+	\begin{subfigure}{.50\textwidth}
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/braess1}
 	\caption{Wyjściowy układ drogowy}
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
@@ -255,20 +257,20 @@ Do wyjściowego układu drogowego dodana zostaje autostrada:
 \vspace*{60px}
 \begin{figure}[h]
 \begin{flushleft}
-\begin{minipage}{.50\textwidth}
-Autostrady:\newline
-YX, $t_{YX}(p) =  10 + p$ min\newline
-
-\vspace*{15px}
-Aut jest nadal 6000 i wszystkie mają za zadanie przejechać trasę z $A$ do $B$.
-\end{minipage}%
+	\begin{subfigure}{.50\textwidth}
+	Autostrady:\newline
+	YX, $t_{YX}(p) =  10 + p$ min\newline
+	
+	\vspace*{15px}
+	Aut jest nadal 6000 i wszystkie mają za zadanie przejechać trasę z $A$ do $B$.
+	\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}{.50\textwidth}
+	\begin{subfigure}{.50\textwidth}
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/braess2}
 	\caption{Uzupełniony układ drogowy}
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
@@ -441,21 +443,21 @@ Tablica tworzona w ten sposób może być modyfikowana przez algorytm genetyczny
 
 \begin{figure}[ht]
 \begin{flushleft}
-	\begin{minipage}[c]{.47\textwidth}
+	\begin{subfigure}[c]{.47\textwidth}
 	\vspace*{80px}
 	\centering
 	\includegraphics[width=\textwidth]{img/bool}
 	\caption{Fragment sieci w postaci tablicy binarnej }
 	\label{left-example}
-\end{minipage}%
+\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}[c]{.47\textwidth}
+	\begin{subfigure}[c]{.47\textwidth}
 	\centering
 	\includegraphics[width=\textwidth]{img/bool-efect}
 	\caption{Fragment sieci w postaci grafu}
 	\label{right-example}
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
@@ -517,36 +519,36 @@ Użyte przeze mnie technologie są poniekąd wymuszone przez języki w jakich zo
 
 \begin{figure}[h]
 \begin{flushleft}
-	\begin{minipage}[]{.47\textwidth}
+	\begin{subfigure}[]{.47\textwidth}
 	\centering
 	\includegraphics[width=0.8\textwidth]{img/java}
 	\caption{Logo Java\cite{java}}
-\end{minipage}%
+\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}[]{.47\textwidth}
+	\begin{subfigure}[]{.47\textwidth}
 	\centering
 	\includegraphics[width=0.8\textwidth]{img/eclipse}
 	\caption{Logo IDE Eclipse\cite{eclipse}}	
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
 \begin{figure}[h]
 \begin{flushleft}
-	\begin{minipage}[]{.47\textwidth}
+	\begin{subfigure}[]{.47\textwidth}
 	\vspace*{30px}
 	\centering
 	\includegraphics[width=0.8\textwidth]{img/py}
 	\caption{Logo Python\cite{python}}
-	\end{minipage}%
+	\end{subfigure}%
 \end{flushleft}
 \begin{flushright}
-	\begin{minipage}[]{.47\textwidth}
+	\begin{subfigure}[]{.47\textwidth}
 	\centering
 	\includegraphics[width=0.8\textwidth]{img/pydev}
 	\caption{Logo PyDev\cite{pydev}}
-	\end{minipage}
+	\end{subfigure}
 \end{flushright}
 \end{figure}
 
@@ -585,25 +587,26 @@ Prezentuję również ruch drogowy w najbardziej intensywnych godzinach dnia, tj
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth, angle=90]{{{img/sioux/graph6.00-7.00}}}
+%bottom right top left
+\includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph6.00-7.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 6.00-7.00.} 
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth, angle=90]{{{img/sioux/graph7.00-8.00}}}
+\includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph7.00-8.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 7.00-8.00.} 
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth, angle=90]{{{img/sioux/graph16.00-17.00}}}
+\includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph16.00-17.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 16.00-17.00.} 
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth, angle=90]{{{img/sioux/graph17.00-18.00}}}
+\includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 17.00-18.00.} 
 \end{figure}
 
