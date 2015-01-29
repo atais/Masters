@@ -27,7 +27,7 @@ class Test(unittest.TestCase):
         
         binary_network.fromBinarytoXML(mother_file, binary, r('output/binary-network.xml'))
         self.assertTrue(os.path.exists(r('output/binary-network.xml')), "file created")
-        
+        print "binary test done"
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFromXMLtoBinary']

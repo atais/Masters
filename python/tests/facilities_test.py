@@ -19,8 +19,9 @@ class Test(unittest.TestCase):
         facilities = r('resources/facilities.xml')
         output = r("output/facilities")
         
-        fac.facilities_graph(network, facilities, output)
+        fac.draw_facilities_graph(network, facilities, output)
         self.assertTrue(os.path.exists(r('output/facilities.png')), "file created")
+        print "facilities test done"
 
 
 if __name__ == "__main__":

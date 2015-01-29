@@ -33,7 +33,8 @@ class AnalyseTest(unittest.TestCase):
     def testBestFunc(self):
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
         organise_best(r('output/siouxfalls/ga.0/chromosome'))
-        pass  
+    
+        print "organise test done"
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

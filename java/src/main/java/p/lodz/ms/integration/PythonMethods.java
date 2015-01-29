@@ -2,6 +2,8 @@ package p.lodz.ms.integration;
 
 import java.io.File;
 
+import org.apache.commons.math3.genetics.Chromosome;
+
 import p.lodz.ms.Configuration;
 import p.lodz.ms.genetics.LinksChromosome;
 
@@ -12,13 +14,13 @@ public class PythonMethods extends PythonAdapter {
     private static final String analyseGraph = "analyse_and_save";
     private static final String fromXmltoBinary = "fromXMLtoBinary";
     private static final String fromBinaryToXml = "fromBinarytoXML";
-    private static final String facilitiesGraph = "facilities_graph";
-    private static final String networkGraph = "network_graph";
-    private static final String eventsGraph = "events_graph";
+    private static final String facilitiesGraph = "draw_facilities_graph";
+    private static final String networkGraph = "draw_network_graph";
+    private static final String eventsGraph = "draw_events_graph";
     private static final String organiseOutput = "organise_output";
     private static final String organiseBest = "organise_best";
     private static final String customizeConfig = "customize_config";
-    private static final String fixChromosome = "fix_chromosome";
+    private static final String checkChromosome = "array_strongly_connected";
 
     public static PythonMethods getInstance() {
 	if (instance == null) {
@@ -47,16 +49,12 @@ public class PythonMethods extends PythonAdapter {
 	return LinksChromosome.parseString(bin);
     }
 
-    public LinksChromosome fixChromosome(LinksChromosome chromosome) {
+    public boolean checkChromosome(Chromosome chromosome) {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
 	String[] parameters = new String[] { chromosome.toString(), defaultNetwork };
-	String bin = this.defaultCall(fixChromosome, parameters);
-	LinksChromosome retNetwork = null;
-	if (bin != null && !bin.isEmpty()){
-	    retNetwork = LinksChromosome.parseString(bin);
-	}
-	return retNetwork;
+	String answer = this.defaultCall(checkChromosome, parameters);
+	return Boolean.parseBoolean(answer);
     }
 
     public void convertBinaryToNetwork(LinksChromosome chromosome, File dest) {

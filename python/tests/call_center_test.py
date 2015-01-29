@@ -16,6 +16,7 @@ class Test(unittest.TestCase):
         output = (r('output/network-analised.xml'))
         
         call_center.main(['analyse_and_save', str(source), str(output)])
+        print "call center test done"
 
 
 if __name__ == "__main__":

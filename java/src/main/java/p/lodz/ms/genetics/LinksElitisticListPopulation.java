@@ -61,6 +61,7 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	}
     }
 
+    // To maintain the type during generations
     @Override
     public Population nextGeneration() {
 	ElitisticListPopulation pop = (ElitisticListPopulation) super

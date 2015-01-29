@@ -23,6 +23,8 @@ public class Configuration {
     private static final Double DEFAULTGACROSSOVER = 1.0;
     private static final Double DEFAULTGAMUTATION = 0.1;
     private static final Integer DEFAULTGAARITY = 2;
+    private static final Integer DEFAULTGAMAXMUTATION = 5;
+    private static final Integer DEFAULTGAMAXCROSSOVER = 5;
 
     private static Configuration instance;
     private String projectName;
@@ -44,6 +46,8 @@ public class Configuration {
     private Double gaCrossoverRate;
     private Double gaMutationRate;
     private Integer gaTournamentArity;
+    private Integer gaMaxMutationAttempts;
+    private Integer gaMaxCrossoverAttempts;
 
     public static Configuration getInstance() {
 	if (instance == null) {
@@ -101,6 +105,10 @@ public class Configuration {
 		DEFAULTGAMUTATION);
 	this.gaTournamentArity = config.getInteger("genetics.tournament-arity",
 		DEFAULTGAARITY);
+	this.gaMaxMutationAttempts = config.getInteger(
+		"genetics.max-mutation-attempts", DEFAULTGAMAXMUTATION);
+	this.gaMaxCrossoverAttempts = config.getInteger(
+		"genetics.max-crossover-attempts", DEFAULTGAMAXCROSSOVER);
 	return this;
     }
 
@@ -174,6 +182,14 @@ public class Configuration {
 
     public String getProjectDir() {
 	return getProjectOutputDir() + "/" + getProjectName() + "/";
+    }
+
+    public Integer getGaMaxMutationAttempts() {
+	return gaMaxMutationAttempts;
+    }
+
+    public Integer getGaMaxCrossoverAttempts() {
+	return gaMaxCrossoverAttempts;
     }
 
 }

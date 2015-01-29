@@ -9,7 +9,7 @@
 		<threads>4</threads>
 		<!-- Default is INFO -->
 		<log-level>INFO</log-level>
-		<!-- Default is "/usr/local/bin/python"-->
+		<!-- Default is "/usr/local/bin/python" -->
 		<python-path>/usr/local/bin/python</python-path>
 		<!-- Default is "../python/ms/call_center.py" -->
 		<python-main>../python/ms/call_center.py</python-main>
@@ -35,5 +35,9 @@
 		<mutation-rate>0.1</mutation-rate>
 		<!-- Default is 2 -->
 		<tournament-arity>2</tournament-arity>
+		<!-- Default is 5 -->
+		<max-mutation-attempts>5</max-mutation-attempts>
+		<!-- Default is 5 -->
+		<max-crossover-attempts>5</max-crossover-attempts>
 	</genetics>
 </config>

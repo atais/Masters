@@ -11,6 +11,7 @@ import networkx as nx
 import math as math
 import logging
 import os
+from ms.network_to_graph import xml_to_graph
 
         
 @timing
@@ -21,6 +22,8 @@ def save_graph(graph, filename):
         os.makedirs(os.path.dirname(filename))           
     A.draw(filename+'.png')
     
+def correct_pos(node_attr):
+    return "%f,%f"%(float(node_attr.get('x')),float(node_attr.get('y')))
     
 @timing
 def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'orange')):
@@ -31,25 +34,16 @@ def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'o
             
         Returns a networkx graph
     """
-    graph = nx.DiGraph()
-    network = etree.parse(xml)
-    nodes = network.findall(".//node")
-    links = network.findall('.//link')
+    node_attr = {}
+    node_attr['style'] = node_style[0]
+    node_attr['color'] = node_style[1]
     
-    for node in nodes:
-        attributes = dict(node.items())
-        attributes['style'] = node_style[0]
-        attributes['color'] = node_style[1]
-        attributes['pos'] = "%f,%f"%(float(attributes.get('x')),float(attributes.get('y')))
-        graph.add_node(attributes.get('id'), attributes)
-    
-    for link in links:
-        attributes = dict(link.items())
-        attributes['occupied'] = 0
-        attributes['penwidth'] = edge_style[0]
-        attributes['color'] = edge_style[1]
-        graph.add_edge(attributes.get('from'), attributes.get('to'), attributes)
-    
+    edge_attr = {}
+    edge_attr['occupied'] = 0
+    edge_attr['penwidth'] = edge_style[0]
+    edge_attr['color'] = edge_style[1]
+
+    graph = xml_to_graph(xml, node_attr=node_attr, link_attr=edge_attr, pos_function=correct_pos)
     return graph
 
 def count_events(events, i, pointer):
@@ -83,11 +77,7 @@ def color_edge_occupation(graph):
             scale_min = h
     return scale_min
 
-def network_graph(network_file, output_file):
-    graph = generate_network_graph(network_file)
-    save_graph(graph, output_file)
-
-def events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
+def draw_events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
     """
         Generates a graph of events from network and event xml files
         Optional interval argument [hours], default is 1
@@ -120,3 +110,7 @@ def events_graph(network_file, events_file, folder='', interval=1, scale_thresho
     
     logging.info("Finished drawing events graphs...")
     pass
+
+def draw_network_graph(network_file, output_file):
+    graph = generate_network_graph(network_file)
+    save_graph(graph, output_file)

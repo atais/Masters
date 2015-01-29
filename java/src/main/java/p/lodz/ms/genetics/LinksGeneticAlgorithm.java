@@ -27,6 +27,8 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 		selectionPolicy);
     }
 
+    // we need to keep track of the current generation counter
+    // as well as, each best chromosome needs some special care
     @Override
     public Population nextGeneration(Population current) {
 	logger.info("--------------------------");
@@ -39,6 +41,7 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	return next;
     }
 
+    // special stuff for best chromosome
     private void moveBestChromosome(LinksChromosome chromosome) {
 	logger.info("--------------------------");
 	logger.info("Working with the best chromosome: "

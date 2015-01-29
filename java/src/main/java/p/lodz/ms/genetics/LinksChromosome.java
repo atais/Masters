@@ -24,7 +24,6 @@ public class LinksChromosome extends BinaryChromosome {
 	    .getLogger(LinksChromosome.class);
 
     private final UUID uuid;
-    private File dir;
 
     public LinksChromosome(Integer[] representation)
 	    throws InvalidRepresentationException {

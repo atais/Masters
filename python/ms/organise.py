@@ -13,6 +13,12 @@ from matplotlib import pyplot
 
 
 def organise_output(output):
+    ''' 
+    cleaning up output folder after matsim simulation
+    removing all iteration folder & other not important
+    moving the output_tripdurations file & parsing it to fitness.txt
+    '''
+    
     logging.info("Cleaning up : " + str(output))
     iters = '/ITERS/'
     
@@ -51,6 +57,11 @@ def organise_output(output):
     pass
 
 def organise_best(output):
+    '''
+    organising the folder of the best chromosome in generation
+    creating a symlink to the best chromosome folder
+    adding score to fitness graph in main dir
+    '''
     distance = open(os.path.join(output, 'fitness.txt'), "r")
     dist = distance.readline()
     distance.close()

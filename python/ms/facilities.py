@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from pylab import rcParams
 import networkx as nx
 import os
+from ms.network_to_graph import xml_to_graph
 
 @timing
 def save_graph(filename):
@@ -60,14 +61,21 @@ def generate_facilities_graph(graph, xml, style=(1, 'black')):
     network = etree.parse(xml)
     facilities = network.findall(".//facility")
 
+    node_attr = {}
+    node_attr['size'] = style[0]
+    node_attr['color'] = style[1]
+
     for facility in facilities:
-        attributes = dict(facility.items())
-        attributes['size'] = style[0]
-        attributes['color'] = style[1]
-        attributes['pos'] = [float(attributes.get('x')), float(attributes.get('y'))]
-        graph.add_node('fac' + attributes.get('id'), attributes)
+        current_node_attr = {}
+        current_node_attr.update(dict(facility.items()))
+        current_node_attr.update(node_attr)
+        current_node_attr['pos'] = correct_pos(current_node_attr)
+        graph.add_node('fac_' + current_node_attr.get('id'), current_node_attr)
     return graph
 
+def correct_pos(node_attr):
+    return [float(node_attr.get('x')), float(node_attr.get('y'))]
+    
 @timing
 def generate_network_graph(graph, xml, node_style=(0, 'white'), edge_style=(1, 'orange')):
     """
@@ -77,27 +85,19 @@ def generate_network_graph(graph, xml, node_style=(0, 'white'), edge_style=(1, '
             
         Returns a networkx graph
     """
-    network = etree.parse(xml)
-    nodes = network.findall(".//node")
-    links = network.findall('.//link')
+    node_attr = {}
+    node_attr['size'] = node_style[0]
+    node_attr['color'] = node_style[1]
     
-    for node in nodes:
-        attributes = dict(node.items())
-        attributes['size'] = node_style[0]
-        attributes['color'] = node_style[1]
-        attributes['pos'] = [float(attributes.get('x')), float(attributes.get('y'))]
-        graph.add_node(attributes.get('id'), attributes)
-        
-    for link in links:
-        attributes = dict(link.items())
-        attributes['occupied'] = 0
-        attributes['size'] = edge_style[0]
-        attributes['color'] = edge_style[1]
-        graph.add_edge(attributes.get('from'), attributes.get('to'), attributes)
-    
+    edge_attr = {}
+    edge_attr['occupied'] = 0
+    edge_attr['size'] = edge_style[0]
+    edge_attr['color'] = edge_style[1]
+
+    graph = xml_to_graph(xml, node_attr=node_attr, link_attr=edge_attr, pos_function=correct_pos)
     return graph
 
-def facilities_graph(network, facilities, output):
+def draw_facilities_graph(network, facilities, output):
     graph = nx.DiGraph()
     graph = generate_network_graph(graph, network)
     graph = generate_facilities_graph(graph, facilities)
