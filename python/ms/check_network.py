@@ -3,10 +3,13 @@ Created on 26 sty 2015
 
 @author: michalsiatkowski
 '''
-from ms.binary_network import fromBinarytoXML
 from lxml import etree
-from ms import network_to_graph
-import networkx as networkx
+import networkx
+
+from binary_network import fromBinarytoXML
+from network_to_graph import network_to_graph
+from utils import timing
+
 
 def is_strongly_connected(network):
     graph = network_to_graph(network)
@@ -17,8 +20,9 @@ def xml_strongly_connected(xml):
     network = etree.parse(xml)
     return is_strongly_connected(network)
 
+@timing
 def array_strongly_connected(array, oryginal_xml):
-    network = fromBinarytoXML(array, oryginal_xml)
+    network = fromBinarytoXML(oryginal_xml, array)
     return is_strongly_connected(network)
     
     

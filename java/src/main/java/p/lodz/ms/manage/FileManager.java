@@ -68,8 +68,7 @@ public class FileManager {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	File destNetwork = new File(chromosomeDir + "/"
 		+ StaticContainer.networkFileName);
-	PythonMethods.getInstance().convertBinaryToNetwork(chromosome,
-		destNetwork);
+	new PythonMethods().convertBinaryToNetwork(chromosome, destNetwork);
     }
 
     public static void prepareChromosomeConfig(LinksChromosome chromosome) {
@@ -89,8 +88,8 @@ public class FileManager {
 		    .getScenarioPopulation());
 	    Integer iterations = Configuration.getInstance()
 		    .getScenarioIterations();
-	    PythonMethods.getInstance().customizeConfig(chromosomeConfig,
-		    facilities, network, population, chromosomeDir, iterations);
+	    new PythonMethods().customizeConfig(chromosomeConfig, facilities,
+		    network, population, chromosomeDir, iterations);
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
@@ -100,7 +99,7 @@ public class FileManager {
     public static String getChromosomeConfig(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	String config = StaticContainer.configFileName;
-	return (chromosomeDir+"/"+config);
+	return (chromosomeDir + "/" + config);
     }
 
 }

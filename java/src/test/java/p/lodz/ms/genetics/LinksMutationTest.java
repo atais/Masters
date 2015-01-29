@@ -5,15 +5,15 @@ import java.net.URL;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.math3.genetics.Chromosome;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
-import p.lodz.ms.genetics.workers.MATSimThread;
 import p.lodz.ms.integration.PythonMethods;
 
-public class MATSimThreadTest {
+import com.vividsolutions.jts.util.Assert;
+
+public class LinksMutationTest {
 
     private Chromosome chromosome;
     private Configuration config;
@@ -33,11 +33,9 @@ public class MATSimThreadTest {
     }
 
     @Test
-    public void matsimTest() {
-	MATSimThread t = new MATSimThread(chromosome);
-	t.run();
-	System.out.println(chromosome.getFitness());
-	Assert.assertNotNull(chromosome.getFitness());
+    public void simpleTest() {
+	LinksMutation mutation = new LinksMutation();
+	Chromosome mutated = mutation.mutate(chromosome);
+	Assert.isTrue(mutated.toString().contains("0"));
     }
-
 }

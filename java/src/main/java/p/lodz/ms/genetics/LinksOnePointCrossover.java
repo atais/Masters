@@ -18,9 +18,9 @@ public class LinksOnePointCrossover extends OnePointCrossover<Integer> {
 	int max = Configuration.getInstance().getGaMaxCrossoverAttempts();
 
 	ChromosomePair crossovered = super.crossover(first, second);
-	boolean isStronglyConnected1 = PythonMethods.getInstance()
+	boolean isStronglyConnected1 = new PythonMethods()
 		.checkChromosome(crossovered.getFirst());
-	boolean isStronglyConnected2 = PythonMethods.getInstance()
+	boolean isStronglyConnected2 = new PythonMethods()
 		.checkChromosome(crossovered.getSecond());
 
 	boolean isStronglyConnected = isStronglyConnected1
@@ -28,10 +28,10 @@ public class LinksOnePointCrossover extends OnePointCrossover<Integer> {
 
 	while ((attempt < max) && !isStronglyConnected) {
 	    crossovered = super.crossover(first, second);
-	    isStronglyConnected1 = PythonMethods.getInstance().checkChromosome(
-		    crossovered.getFirst());
-	    isStronglyConnected2 = PythonMethods.getInstance().checkChromosome(
-		    crossovered.getSecond());
+	    isStronglyConnected1 = new PythonMethods()
+		    .checkChromosome(crossovered.getFirst());
+	    isStronglyConnected2 = new PythonMethods()
+		    .checkChromosome(crossovered.getSecond());
 	    isStronglyConnected = isStronglyConnected1 && isStronglyConnected2;
 	    ++attempt;
 	}

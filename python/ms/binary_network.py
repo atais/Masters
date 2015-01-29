@@ -3,9 +3,11 @@ Created on 18 sty 2015
 
 @author: michalsiatkowski
 '''
-from lxml import etree
 import ast
 import logging
+
+from lxml import etree
+
 
 def fromXMLtoBinary(xml):
     network = etree.parse(xml)

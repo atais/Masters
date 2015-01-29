@@ -9,8 +9,6 @@ import p.lodz.ms.genetics.LinksChromosome;
 
 public class PythonMethods extends PythonAdapter {
 
-    private static PythonMethods instance;
-
     private static final String analyseGraph = "analyse_and_save";
     private static final String fromXmltoBinary = "fromXMLtoBinary";
     private static final String fromBinaryToXml = "fromBinarytoXML";
@@ -21,20 +19,6 @@ public class PythonMethods extends PythonAdapter {
     private static final String organiseBest = "organise_best";
     private static final String customizeConfig = "customize_config";
     private static final String checkChromosome = "array_strongly_connected";
-
-    public static PythonMethods getInstance() {
-	if (instance == null) {
-	    synchronized (Configuration.class) {
-		if (instance == null) {
-		    instance = new PythonMethods();
-		}
-	    }
-	}
-	return instance;
-    }
-
-    private PythonMethods() {
-    }
 
     @Deprecated
     public void analyseNetwork(File source, File dest) {
@@ -52,7 +36,8 @@ public class PythonMethods extends PythonAdapter {
     public boolean checkChromosome(Chromosome chromosome) {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
-	String[] parameters = new String[] { chromosome.toString(), defaultNetwork };
+	String[] parameters = new String[] { chromosome.toString(),
+		defaultNetwork };
 	String answer = this.defaultCall(checkChromosome, parameters);
 	return Boolean.parseBoolean(answer);
     }

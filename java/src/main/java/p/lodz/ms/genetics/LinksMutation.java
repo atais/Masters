@@ -15,13 +15,12 @@ public class LinksMutation extends BinaryMutation {
 	int attempt = 0;
 	int max = Configuration.getInstance().getGaMaxMutationAttempts();
 	Chromosome mutated = super.mutate(original);
-	boolean isStronglyConnected = PythonMethods.getInstance()
+	boolean isStronglyConnected = new PythonMethods()
 		.checkChromosome(mutated);
 
 	while ((attempt < max) && !isStronglyConnected) {
 	    mutated = super.mutate(original);
-	    isStronglyConnected = PythonMethods.getInstance().checkChromosome(
-		    mutated);
+	    isStronglyConnected = new PythonMethods().checkChromosome(mutated);
 	    ++attempt;
 	}
 

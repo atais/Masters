@@ -3,25 +3,33 @@ Created on 18 sty 2015
 
 @author: michalsiatkowski
 '''
-import sys
-import analyse as analyse
-import binary_network as binary_network
-import facilities as facilities
-import network as network
-import organise as organise
-import config as config
 from inspect import getmembers, isfunction
 import logging
+import sys
+
+import analyse
+
+import binary_network
+import check_network
+import config
+import facilities
+import network
+import network_to_graph
+import organise
+import utils
 
 
 def get_all_members():
     members = []
     members.extend(getmembers(analyse, isfunction))
     members.extend(getmembers(binary_network, isfunction))
+    members.extend(getmembers(check_network, isfunction))
+    members.extend(getmembers(config, isfunction))
     members.extend(getmembers(facilities, isfunction))
     members.extend(getmembers(network, isfunction))
+    members.extend(getmembers(network_to_graph, isfunction))
     members.extend(getmembers(organise, isfunction))
-    members.extend(getmembers(config, isfunction))
+    members.extend(getmembers(utils, isfunction))
     return dict(members)
 
 def main(argv):

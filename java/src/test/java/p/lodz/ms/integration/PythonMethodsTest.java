@@ -1,4 +1,4 @@
-package p.lodz.ms.genetics;
+package p.lodz.ms.integration;
 
 import java.io.File;
 import java.net.URL;
@@ -10,10 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
-import p.lodz.ms.genetics.workers.MATSimThread;
-import p.lodz.ms.integration.PythonMethods;
 
-public class MATSimThreadTest {
+public class PythonMethodsTest {
 
     private Chromosome chromosome;
     private Configuration config;
@@ -33,11 +31,14 @@ public class MATSimThreadTest {
     }
 
     @Test
-    public void matsimTest() {
-	MATSimThread t = new MATSimThread(chromosome);
-	t.run();
-	System.out.println(chromosome.getFitness());
-	Assert.assertNotNull(chromosome.getFitness());
+    public void testCheckSpeed() {
+	long startTime = System.nanoTime();
+	boolean result = new PythonMethods().checkChromosome(chromosome);
+	long endTime = System.nanoTime();
+
+	long duration = (endTime - startTime) / 1000000;
+	System.err.println(duration);
+	Assert.assertTrue(result);
     }
 
 }

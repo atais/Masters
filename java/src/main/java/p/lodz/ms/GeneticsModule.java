@@ -3,15 +3,13 @@ package p.lodz.ms;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.commons.math3.genetics.BinaryMutation;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.FixedGenerationCount;
-import org.apache.commons.math3.genetics.GeneticAlgorithm;
-import org.apache.commons.math3.genetics.OnePointCrossover;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.genetics.StoppingCondition;
 import org.apache.commons.math3.genetics.TournamentSelection;
@@ -20,7 +18,10 @@ import org.apache.log4j.Logger;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.genetics.LinksElitisticListPopulation;
 import p.lodz.ms.genetics.LinksGeneticAlgorithm;
-import p.lodz.ms.genetics.MATSimThread;
+import p.lodz.ms.genetics.LinksMutation;
+import p.lodz.ms.genetics.LinksOnePointCrossover;
+import p.lodz.ms.genetics.workers.ChromosomeInitializer;
+import p.lodz.ms.genetics.workers.MATSimThread;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
 import p.lodz.ms.manage.GraphManager;
@@ -38,18 +39,13 @@ public class GeneticsModule {
     private Integer tournamentArity;
 
     public GeneticsModule() {
-	try {
-	    readGAConfig();
-	    runGeneticAlgorithm();
-	} catch (IOException e) {
-	    logger.error(ExceptionUtils.getStackTrace(e));
-	}
+	readGAConfig();
     }
 
-    private void runGeneticAlgorithm() throws IOException {
+    public void runGeneticAlgorithm() throws IOException {
 	LinksGeneticAlgorithm ga = new LinksGeneticAlgorithm(
-		new OnePointCrossover<Integer>(), crossoverRate,
-		new BinaryMutation(), mutationRate, new TournamentSelection(
+		new LinksOnePointCrossover(), crossoverRate,
+		new LinksMutation(), mutationRate, new TournamentSelection(
 			tournamentArity));
 
 	// set the prefix for output clarification
@@ -58,7 +54,7 @@ public class GeneticsModule {
 	logger.info("Loading initial network");
 	logger.info("-----------------------");
 	File network = new File(config.getScenarioNetwork());
-	LinksChromosome initial = PythonMethods.getInstance()
+	LinksChromosome initial = new PythonMethods()
 		.convertNetworkToBinary(network);
 	new MATSimThread(initial).run();
 	initialGraphMethods(initial);
@@ -83,20 +79,21 @@ public class GeneticsModule {
 
     }
 
-    private LinksElitisticListPopulation randomPopulation(int chromosomeLength) {
-	List<Chromosome> popList = new LinkedList<Chromosome>();
+    protected LinksElitisticListPopulation randomPopulation(int chromosomeLength) {
+	List<Chromosome> popList = Collections
+		.synchronizedList(new ArrayList<Chromosome>());
+
+	Integer threads = Configuration.getInstance().getProjectThreads();
+	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (int i = 0; i < populationSize; i++) {
-	    // random binary list
-	    List<Integer> rList = new ArrayList<Integer>(chromosomeLength);
-	    for (int j = 0; j < chromosomeLength; j++) {
-		if (GeneticAlgorithm.getRandomGenerator().nextInt(10) < 2) {
-		    rList.add(0);
-		} else {
-		    rList.add(1);
-		}
-	    }
-	    popList.add(new LinksChromosome(rList));
+	    Runnable worker = new ChromosomeInitializer(popList,
+		    chromosomeLength);
+	    executor.execute(worker);
 	}
+	executor.shutdown();
+	while (!executor.isTerminated()) {
+	}
+
 	return new LinksElitisticListPopulation(popList, popList.size(),
 		elitismRate);
     }

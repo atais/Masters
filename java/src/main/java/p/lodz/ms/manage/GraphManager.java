@@ -19,7 +19,7 @@ public class GraphManager {
 	File fOutput = new File(chromosomeDir + "/"
 		+ StaticContainer.facilitiesGraphName);
 
-	PythonMethods.getInstance().facilitiesGraph(network, facilities,
+	new PythonMethods().facilitiesGraph(network, facilities,
 		fOutput);
     }
 
@@ -33,7 +33,7 @@ public class GraphManager {
 	File eOutput = new File(chromosomeDir + "/"
 		+ StaticContainer.eventsFolderName);
 
-	PythonMethods.getInstance().eventsGraph(network, events, eOutput);
+	new PythonMethods().eventsGraph(network, events, eOutput);
     }
 
     public static void drawNetworkGraph(LinksChromosome chromosome) {
@@ -44,6 +44,6 @@ public class GraphManager {
 	File nOutput = new File(chromosomeDir + "/"
 		+ StaticContainer.networkGraphName);
 
-	PythonMethods.getInstance().networkGraph(network, nOutput);
+	new PythonMethods().networkGraph(network, nOutput);
     }
 }

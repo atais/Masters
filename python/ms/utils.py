@@ -33,4 +33,4 @@ def scale(value, top):
     h = 0.3 - h
     if(h < 0):
         h = 0
-    return "%f,%f,%f"%(h, s, v), h
+    return "%f,%f,%f" % (h, s, v), h

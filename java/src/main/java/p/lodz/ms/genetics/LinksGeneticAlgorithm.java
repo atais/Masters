@@ -52,8 +52,8 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	logger.info("Drawing network");
 	GraphManager.drawNetworkGraph(chromosome);
 	logger.info("... doing all the best!");
-	PythonMethods.getInstance().organiseBest(
-		FileManager.getChromosomeDir(chromosome));
+	new PythonMethods().organiseBest(FileManager
+		.getChromosomeDir(chromosome));
     }
 
 }

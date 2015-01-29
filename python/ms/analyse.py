@@ -4,7 +4,9 @@ Created on 10 sty 2015
 @author: michalsiatkowski
 '''
 import logging
+
 from lxml import etree
+
 
 def same_pos_crossroad(network):
     nodes = network.findall(".//node")

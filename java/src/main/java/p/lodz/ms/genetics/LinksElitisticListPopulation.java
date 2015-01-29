@@ -13,6 +13,7 @@ import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
 
 import p.lodz.ms.Configuration;
+import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
 

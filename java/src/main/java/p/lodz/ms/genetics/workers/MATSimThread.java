@@ -1,4 +1,4 @@
-package p.lodz.ms.genetics;
+package p.lodz.ms.genetics.workers;
 
 import java.io.IOException;
 
@@ -8,6 +8,7 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
 import org.matsim.core.controler.Controler;
 
+import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
 
@@ -43,8 +44,8 @@ public class MATSimThread implements Runnable {
     }
 
     private void cleanAndGraph() {
-	PythonMethods.getInstance().organiseOutput(
-		FileManager.getChromosomeDir(chromosome));
+	new PythonMethods().organiseOutput(FileManager
+		.getChromosomeDir(chromosome));
     }
 
     @SuppressWarnings("deprecation")

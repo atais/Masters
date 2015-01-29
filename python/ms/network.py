@@ -11,19 +11,19 @@ import networkx as nx
 import math as math
 import logging
 import os
-from ms.network_to_graph import xml_to_graph
+from network_to_graph import xml_to_graph
 
         
 @timing
 def save_graph(graph, filename):
-    A=nx.to_agraph(graph)
+    A = nx.to_agraph(graph)
     A.layout()
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))           
-    A.draw(filename+'.png')
+    A.draw(filename + '.png')
     
 def correct_pos(node_attr):
-    return "%f,%f"%(float(node_attr.get('x')),float(node_attr.get('y')))
+    return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))
     
 @timing
 def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'orange')):
@@ -67,12 +67,12 @@ def color_edge_occupation(graph):
         Scale edges for traffic
         Returns the smallest Hue value in edges (0-1)
     '''
-    scale_min=1
+    scale_min = 1
     edges = graph.edges()
     for u, v in edges:
         value = float(graph[u][v].get('occupied'))
         top = float(graph[u][v].get('capacity'))
-        graph[u][v]['color'],h = utils.scale(value, top)
+        graph[u][v]['color'], h = utils.scale(value, top)
         if (h < scale_min):
             scale_min = h
     return scale_min
@@ -105,7 +105,7 @@ def draw_events_graph(network_file, events_file, folder='', interval=1, scale_th
         
         scale_min = color_edge_occupation(graph)
         if (scale_min <= scale_threshold):
-            save_graph(graph,folder+'/graph' + str(pointer) + '0-' + str(pointer + interval)+'0')
+            save_graph(graph, folder + '/graph' + str(pointer) + '0-' + str(pointer + interval) + '0')
         pointer += interval
     
     logging.info("Finished drawing events graphs...")

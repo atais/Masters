@@ -4,7 +4,7 @@ Created on 18 sty 2015
 @author: michalsiatkowski
 '''
 import unittest
-import ms.network as net
+from ms.network import draw_network_graph
 import os
 import logging
 import shutil
@@ -27,7 +27,7 @@ class Test(unittest.TestCase):
         print "network test start"
         graph = r('resources/ga-network.xml')
         out = r('output/network')
-        net.draw_network_graph(graph, out)
+        draw_network_graph(graph, out)
         self.assertTrue(os.path.exists(r('output/network.png')), "file not created")
         print "network test done"
 #     def testNetworkEvents(self):
@@ -36,5 +36,5 @@ class Test(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testNetworkMain']
+    # import sys;sys.argv = ['', 'Test.testNetworkMain']
     unittest.main()
