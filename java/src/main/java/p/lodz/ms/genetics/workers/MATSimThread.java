@@ -27,10 +27,8 @@ public class MATSimThread implements Runnable {
 	    logger.info("--------------------------");
 	    logger.info("Preparing structure");
 	    prepareStructure();
-	    logger.info("--------------------------");
 	    logger.info("Running MATSIM");
 	    runMatsim();
-	    logger.info("--------------------------");
 	    logger.info("Clean-up");
 	    cleanAndGraph();
 	    logger.info("--------------------------");

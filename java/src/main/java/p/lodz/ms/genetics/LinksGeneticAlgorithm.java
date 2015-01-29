@@ -31,10 +31,8 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
     // as well as, each best chromosome needs some special care
     @Override
     public Population nextGeneration(Population current) {
-	logger.info("--------------------------");
 	logger.info("Evaluating generation: " + this.getGenerationsEvolved()
 		+ "/" + Configuration.getInstance().getGaMaxGenerations());
-	logger.info("--------------------------");
 	moveBestChromosome((LinksChromosome) current.getFittestChromosome());
 	Population next = super.nextGeneration(current);
 	StaticContainer.getInstance().increaseCurrentGeneration();
@@ -49,11 +47,10 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 
 	logger.info("Drawing events");
 	GraphManager.drawEventsGraph(chromosome);
-	logger.info("Drawing network");
-	GraphManager.drawNetworkGraph(chromosome);
 	logger.info("... doing all the best!");
 	new PythonMethods().organiseBest(FileManager
 		.getChromosomeDir(chromosome));
+	logger.info("--------------------------");
     }
 
 }

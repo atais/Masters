@@ -19,8 +19,11 @@ def save_graph(graph, filename):
     A = nx.to_agraph(graph)
     A.layout()
     if not os.path.exists(os.path.dirname(filename)):
-        os.makedirs(os.path.dirname(filename))           
-    A.draw(filename + '.png')
+        os.makedirs(os.path.dirname(filename))   
+    
+    if not ".png" in filename: 
+        filename = filename + ".png"        
+    A.draw(filename)
     
 def correct_pos(node_attr):
     return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))
@@ -77,6 +80,7 @@ def color_edge_occupation(graph):
             scale_min = h
     return scale_min
 
+@timing
 def draw_events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
     """
         Generates a graph of events from network and event xml files

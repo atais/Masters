@@ -10,6 +10,7 @@ import shutil
 import re
 import numpy
 from matplotlib import pyplot
+from network import draw_network_graph
 
 
 def organise_output(output):
@@ -54,6 +55,8 @@ def organise_output(output):
     os.remove(output+'/output_plans.xml.gz')
     logging.info("Removed : " + str('/output_plans.xml.gz'))
     
+    draw_network_graph(output+'/network.xml',output+'/network.png')
+    logging.info("Created a network graph")
     pass
 
 def organise_best(output):
@@ -70,8 +73,12 @@ def organise_best(output):
     
     root = output+'/../../'
 
+    existed_before = os.path.exists((root+"fitness.txt"))
     text_file = open((root+"fitness.txt"), "a+")
+    if (existed_before):
+        text_file.write("\n")
     text_file.write(dist)
+        
     text_file.close()
 
     y1 = numpy.fromfile((root+"/fitness.txt"), sep="\n")

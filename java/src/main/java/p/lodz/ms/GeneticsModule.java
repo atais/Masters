@@ -86,8 +86,7 @@ public class GeneticsModule {
 	Integer threads = Configuration.getInstance().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (int i = 0; i < populationSize; i++) {
-	    Runnable worker = new ChromosomeInitializer(popList,
-		    chromosomeLength);
+	    Runnable worker = new ChromosomeInitializer(popList);
 	    executor.execute(worker);
 	}
 	executor.shutdown();

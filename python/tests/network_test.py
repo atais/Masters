@@ -4,7 +4,7 @@ Created on 18 sty 2015
 @author: michalsiatkowski
 '''
 import unittest
-from ms.network import draw_network_graph
+from ms.network import draw_network_graph, draw_events_graph
 import os
 import logging
 import shutil
@@ -30,9 +30,11 @@ class Test(unittest.TestCase):
         draw_network_graph(graph, out)
         self.assertTrue(os.path.exists(r('output/network.png')), "file not created")
         print "network test done"
-#     def testNetworkEvents(self):
-#         net.draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events.xml.gz'), r('output/test'))
-#         self.assertTrue(os.path.exists(r('output/test')), "path created")
+        
+        
+    def testNetworkEvents(self):
+        draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events.xml.gz'), r('output/test'))
+        self.assertTrue(os.path.exists(r('output/test')), "path created")
 
 
 if __name__ == "__main__":

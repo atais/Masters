@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
+import p.lodz.ms.genetics.LinksChromosome;
 
 public class PythonMethodsTest {
 
@@ -39,6 +40,19 @@ public class PythonMethodsTest {
 	long duration = (endTime - startTime) / 1000000;
 	System.err.println(duration);
 	Assert.assertTrue(result);
+    }
+
+    @Test
+    public void createRandom() {
+	long startTime = System.nanoTime();
+	LinksChromosome randomChromosome = new PythonMethods()
+		.createRandomChromosome();
+	long endTime = System.nanoTime();
+
+	long duration = (endTime - startTime) / 1000000;
+	System.err.println(duration);
+	Assert.assertTrue(!randomChromosome.toString().isEmpty());
+	System.err.println(randomChromosome);
     }
 
 }

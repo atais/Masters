@@ -19,6 +19,7 @@ public class PythonMethods extends PythonAdapter {
     private static final String organiseBest = "organise_best";
     private static final String customizeConfig = "customize_config";
     private static final String checkChromosome = "array_strongly_connected";
+    private static final String randomChromosome = "create_randomized_sc_graph";
 
     @Deprecated
     public void analyseNetwork(File source, File dest) {
@@ -31,6 +32,14 @@ public class PythonMethods extends PythonAdapter {
 	String[] parameters = new String[] { xml.getAbsolutePath() };
 	String bin = this.defaultCall(fromXmltoBinary, parameters);
 	return LinksChromosome.parseString(bin);
+    }
+
+    public LinksChromosome createRandomChromosome() {
+	String defaultNetwork = Configuration.getInstance()
+		.getScenarioNetwork();
+	String[] parameters = new String[] { defaultNetwork };
+	String answer = this.defaultCall(randomChromosome, parameters);
+	return LinksChromosome.parseString(answer);
     }
 
     public boolean checkChromosome(Chromosome chromosome) {
