@@ -7,20 +7,16 @@ import unittest
 from tests.utils import r
 from matplotlib import pyplot
 import numpy
+from ms.network import draw_network_graph
 
 
 class Test(unittest.TestCase):
 
     def testName(self):
         
-#         y1 = numpy.fromfile(r('resources/fitness.txt'), sep="\n")
-#         v = numpy.fromfile(r('resources/fitnessInitial.txt'), sep="\n")
-#         y2 = numpy.linspace(v[0], v[0], num=len(y1))
-#         
-#         pyplot.plot(y1)
-#         pyplot.plot(y2)
-#             
-#         pyplot.show()
+#         graph = r('resources/dupanetwork.xml')
+#         out = r('output/network')
+#         draw_network_graph(graph, out)
         pass
 
 

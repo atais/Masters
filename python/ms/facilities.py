@@ -94,7 +94,7 @@ def generate_network_graph(graph, xml, node_style=(0, 'white'), edge_style=(1, '
     edge_attr['size'] = edge_style[0]
     edge_attr['color'] = edge_style[1]
 
-    graph = xml_to_graph(xml, node_attr=node_attr, link_attr=edge_attr, pos_function=correct_pos)
+    graph = xml_to_graph(xml, graph=graph, node_attr=node_attr, link_attr=edge_attr, pos_function=correct_pos)
     return graph
 
 def draw_facilities_graph(network, facilities, output):

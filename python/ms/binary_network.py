@@ -36,7 +36,6 @@ def fromBinarytoXML(xml, binary, save=None):
     
     binary = binary.replace('"', "");
     bArray = ast.literal_eval(binary)
-    
     for idx, link in enumerate(links):
         if bArray[idx] == 0:
             link.getparent().remove(link)

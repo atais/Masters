@@ -8,13 +8,13 @@ import networkx as networkx
 from lxml import etree
 
 def default_pos(node_attr):
-    return [float(node_attr.get('x')), float(node_attr.get('y'))]
+    return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))
 
 def xml_to_graph(xml, node_attr={}, link_attr={}, pos_function=default_pos):
     network = etree.parse(xml)
     return network_to_graph(network, node_attr=node_attr, link_attr=link_attr, pos_function=pos_function)
 
-def network_to_graph(network, graph=networkx.DiGraph(), node_attr={}, link_attr={}, pos_function=default_pos):
+def network_to_graph(network, graph=None, node_attr={}, link_attr={}, pos_function=default_pos):
     '''
     converts network (lxml) to networkx DiGraph
     network - lxml
@@ -24,6 +24,8 @@ def network_to_graph(network, graph=networkx.DiGraph(), node_attr={}, link_attr=
     pos_function - pass function to add ["pos"] attribute in desired manner manner
                     look @ default_pos
     '''
+    if graph is None:
+        graph = networkx.DiGraph()
     nodes = network.findall(".//node")
     
     for node in nodes:
