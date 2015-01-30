@@ -8,7 +8,6 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.genetics.LinksElitisticListPopulation;
@@ -31,7 +30,7 @@ public class GeneticsModuleTest {
 	chromosome = new PythonMethods().convertNetworkToBinary(network);
     }
 
-    @Test
+    // @Test
     public void realTest() throws IOException {
 	GeneticsModule gm = new GeneticsModule();
 	Assert.assertNotNull(gm);

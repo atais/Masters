@@ -91,9 +91,10 @@ public class PythonMethods extends PythonAdapter {
 	this.defaultCall(customizeConfig, parameters);
     }
 
-    public void organiseBest(File dir) {
+    public Boolean organiseBest(File dir) {
 	String[] parameters = new String[] { dir.getAbsolutePath() };
-	this.defaultCall(organiseBest, parameters);
+	String s = this.defaultCall(organiseBest, parameters);
+	return Boolean.valueOf(s);
     }
 
 }

@@ -36,8 +36,6 @@ def organise_output(output):
     
     shutil.move(output+iters+lastiterdir+source1, output+dest1)
     shutil.move(output+iters+lastiterdir+source2, output+dest2)
-    logging.info("Moved : " + str(source1) + " to " + str(dest1))
-    logging.info("Moved : " + str(source2) + " to " + str(dest2))
     
     tripdurationLines = open(output+dest2).readlines()
     tripduration = tripdurationLines[-1]
@@ -47,17 +45,48 @@ def organise_output(output):
     text_file.close()
     logging.info("Created : " + str(output+"/fitness.txt"))
     
-    shutil.rmtree(output+iters)
-    shutil.rmtree(output+'/tmp/')
-    logging.info("Removed : " + str(iters))
-    logging.info("Removed : " + str('/tmp/'))
-    
-    os.remove(output+'/output_plans.xml.gz')
-    logging.info("Removed : " + str('/output_plans.xml.gz'))
-    
     draw_network_graph(output+'/network.xml',output+'/network.png')
     logging.info("Created a network graph")
+
+    shutil.rmtree(output+iters)
+    shutil.rmtree(output+'/tmp/')
+    os.remove(output+'/logfile.log')
+    os.remove(output+'/logfileWarningsErrors.log')
+    os.remove(output+'/output_config.xml.gz')
+    os.remove(output+'/output_facilities.xml.gz')
+    os.remove(output+'/output_network.xml.gz')
+    os.remove(output+'/output_personAttributes.xml.gz')
+    #os.remove(output+'/output_plans.xml.gz')
     pass
+
+def remove_output_events(output):
+    output = output+'/../'
+    dirs = [x for x in os.listdir(output) if (not x.startswith('.') and x != 'best')]
+    for dirname in dirs:
+        os.remove(output+dirname+'/output_events.xml.gz')
+    pass
+
+def store_chromosomes(output):
+    chromosomes = output+'/../'
+    root = output+'/../../'
+    
+    dirs = [x for x in os.listdir(chromosomes) if (not x.startswith('.') and x != 'best')]
+    for dirname in dirs:
+        binf = open(os.path.join(chromosomes+dirname, 'chromosome.txt'), "r")
+        binary = binf.readline()
+        binf.close()
+        
+        text_file = open((root+"chromosomes.txt"), "a+")
+        text_file.write(binary+"\n")
+        text_file.close()
+    
+    lines = open((root+"chromosomes.txt"), "r").readlines()
+    slines = set(lines)
+    
+    r = False
+    if(len(lines) != len(slines)):
+        r = True
+    return r
 
 def organise_best(output):
     '''
@@ -73,12 +102,8 @@ def organise_best(output):
     
     root = output+'/../../'
 
-    existed_before = os.path.exists((root+"fitness.txt"))
     text_file = open((root+"fitness.txt"), "a+")
-    if (existed_before):
-        text_file.write("\n")
-    text_file.write(dist)
-        
+    text_file.write(dist+"\n")
     text_file.close()
 
     y1 = numpy.fromfile((root+"/fitness.txt"), sep="\n")
@@ -89,4 +114,5 @@ def organise_best(output):
     pyplot.plot(y2)
     
     pyplot.savefig(os.path.join(root, 'fitness.png'))
-    pass
+    remove_output_events(output)
+    return store_chromosomes(output)

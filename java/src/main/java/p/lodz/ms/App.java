@@ -1,18 +1,17 @@
 package p.lodz.ms;
 
+import java.io.IOException;
+
 public class App {
 
-    // public static void main(String[] args) {
-    // // test only
-    // ClassLoader classloader = Thread.currentThread()
-    // .getContextClassLoader();
-    // URL is = classloader.getResource("config.xml");
-    // args = new String[] { is.toString() };
-    // // test only
-    //
-    // new ConfigurationModule(args[0]);
-    // new GeneticsModule();
-    // System.exit(0);
-    // }
+    private static ConfigurationModule configModule;
+    private static GeneticsModule geneticsModule;
+
+    public static void main(String[] args) throws IOException {
+	configModule = new ConfigurationModule(args[0]);
+	geneticsModule = new GeneticsModule();
+	geneticsModule.runGeneticAlgorithm();
+	System.exit(0);
+    }
 
 }

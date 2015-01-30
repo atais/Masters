@@ -48,8 +48,11 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	logger.info("Drawing events");
 	GraphManager.drawEventsGraph(chromosome);
 	logger.info("... doing all the best!");
-	new PythonMethods().organiseBest(FileManager
+	Boolean duplicates = new PythonMethods().organiseBest(FileManager
 		.getChromosomeDir(chromosome));
+	if (duplicates){
+	    logger.warn("There are duplicates in chromosomes!");
+	}
 	logger.info("--------------------------");
     }
 

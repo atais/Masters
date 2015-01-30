@@ -14,6 +14,8 @@ public class Configuration {
     private static final Integer DEFAULTTHREADS = Runtime.getRuntime()
 	    .availableProcessors();
     private static final String DEFAULTLOG = "INFO";
+    private static final String DEFAULTLOGFILE = "logfile.log";
+    
 
     private static final Integer DEFAULTSCENARIOITER = 50;
 
@@ -31,6 +33,7 @@ public class Configuration {
     private String projectOutputDir;
     private Integer projectThreads;
     private String projectLogLevel;
+    private String projectLogFile;
     private String projectPythonPath;
     private String projectPythonMain;
 
@@ -81,6 +84,8 @@ public class Configuration {
 		DEFAULTTHREADS);
 	this.projectLogLevel = config
 		.getString("project.log-level", DEFAULTLOG);
+	this.projectLogFile = config
+		.getString("project.log-filename", DEFAULTLOGFILE);
 	this.projectPythonPath = config.getString("project.python-path",
 		DEFAULTPYTHONPATH);
 	this.projectPythonMain = config.getString("project.python-main",
@@ -126,6 +131,10 @@ public class Configuration {
 
     public String getProjectLogLevel() {
 	return projectLogLevel;
+    }
+    
+    public String getProjectLogFile() {
+	return projectLogFile;
     }
 
     public String getScenarioConfig() {
