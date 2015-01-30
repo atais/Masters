@@ -50,9 +50,7 @@ public class GeneticsModule {
 
 	// set the prefix for output clarification
 	StaticContainer.getInstance().setGaIterationPrefix("begin.");
-	logger.info("-----------------------");
 	logger.info("Loading initial network");
-	logger.info("-----------------------");
 	File network = new File(config.getScenarioNetwork());
 	LinksChromosome initial = new PythonMethods()
 		.convertNetworkToBinary(network);
@@ -62,7 +60,6 @@ public class GeneticsModule {
 	// reset the prefix for output clarification
 	StaticContainer.getInstance().setGaIterationPrefix("ga.");
 
-	logger.info("--------------------------");
 	logger.info("Starting genetic algorithm");
 	logger.info("--------------------------");
 	LinksElitisticListPopulation population = randomPopulation(initial
