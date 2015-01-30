@@ -25,8 +25,8 @@ public class Configuration {
     private static final Double DEFAULTGACROSSOVER = 1.0;
     private static final Double DEFAULTGAMUTATION = 0.1;
     private static final Integer DEFAULTGAARITY = 2;
-    private static final Integer DEFAULTGAMAXMUTATION = 5;
-    private static final Integer DEFAULTGAMAXCROSSOVER = 5;
+    private static final Integer DEFAULTGAMAXMUTATION = 10;
+    private static final Integer DEFAULTGAMAXCROSSOVER = 10;
 
     private static Configuration instance;
     private String projectName;

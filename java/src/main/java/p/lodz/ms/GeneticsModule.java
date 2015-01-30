@@ -73,6 +73,7 @@ public class GeneticsModule {
 	GraphManager.drawEventsGraph(initial);
 	GraphManager.drawNetworkGraph(initial);
 	FileManager.createInitialFitness(initial);
+	FileManager.removeOutputEvents(initial);
 
     }
 

@@ -37,9 +37,9 @@
 		<mutation-rate>0.1</mutation-rate>
 		<!-- Default is 2 -->
 		<tournament-arity>2</tournament-arity>
-		<!-- Default is 5 -->
-		<max-mutation-attempts>5</max-mutation-attempts>
-		<!-- Default is 5 -->
-		<max-crossover-attempts>5</max-crossover-attempts>
+		<!-- Default is 10 -->
+		<max-mutation-attempts>10</max-mutation-attempts>
+		<!-- Default is 10 -->
+		<max-crossover-attempts>10</max-crossover-attempts>
 	</genetics>
 </config>

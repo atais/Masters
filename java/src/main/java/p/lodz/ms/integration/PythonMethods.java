@@ -17,6 +17,7 @@ public class PythonMethods extends PythonAdapter {
     private static final String eventsGraph = "draw_events_graph";
     private static final String organiseOutput = "organise_output";
     private static final String organiseBest = "organise_best";
+    private static final String removeOutputEvents = "remove_output_events";
     private static final String customizeConfig = "customize_config";
     private static final String checkChromosome = "array_strongly_connected";
     private static final String randomChromosome = "create_randomized_sc_graph";
@@ -95,6 +96,11 @@ public class PythonMethods extends PythonAdapter {
 	String[] parameters = new String[] { dir.getAbsolutePath() };
 	String s = this.defaultCall(organiseBest, parameters);
 	return Boolean.valueOf(s);
+    }
+    
+    public void removeOutputEvents(File dir) {
+	String[] parameters = new String[] { dir.getAbsolutePath() };
+	this.defaultCall(removeOutputEvents, parameters);
     }
 
 }

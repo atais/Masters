@@ -56,7 +56,7 @@ def organise_output(output):
     os.remove(output+'/output_facilities.xml.gz')
     os.remove(output+'/output_network.xml.gz')
     os.remove(output+'/output_personAttributes.xml.gz')
-    #os.remove(output+'/output_plans.xml.gz')
+    os.remove(output+'/output_plans.xml.gz')
     pass
 
 def remove_output_events(output):

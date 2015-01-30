@@ -95,6 +95,11 @@ public class FileManager {
 	}
 
     }
+    
+    public static void removeOutputEvents(LinksChromosome chromosome){
+	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
+	new PythonMethods().removeOutputEvents(chromosomeDir);
+    }
 
     public static String getChromosomeConfig(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
