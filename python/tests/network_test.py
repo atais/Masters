@@ -22,6 +22,9 @@ class Test(unittest.TestCase):
         if os.path.exists(r('output/test')):
             shutil.rmtree(r('output/test'))
         
+        if os.path.exists(r('output/test_big')):
+            shutil.rmtree(r('output/test_big'))
+        
 
     def testNetworkGraph(self):
         print "network test start"
@@ -30,10 +33,13 @@ class Test(unittest.TestCase):
         draw_network_graph(graph, out)
         self.assertTrue(os.path.exists(r('output/network.png')), "file not created")
         print "network test done"
-        
+         
         
     def testNetworkEvents(self):
         draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events.xml.gz'), r('output/test'))
+        self.assertTrue(os.path.exists(r('output/test')), "path created")
+        
+        draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events_big.xml.gz'), r('output/test_big'))
         self.assertTrue(os.path.exists(r('output/test')), "path created")
 
 

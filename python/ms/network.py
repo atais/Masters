@@ -12,9 +12,9 @@ import math as math
 import logging
 import os
 from network_to_graph import xml_to_graph
+import gzip
 
         
-@timing
 def save_graph(graph, filename):
     A = nx.to_agraph(graph)
     A.layout()
@@ -28,7 +28,6 @@ def save_graph(graph, filename):
 def correct_pos(node_attr):
     return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))
     
-@timing
 def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'orange')):
     """
         Generates a graph from network xml file
@@ -87,11 +86,15 @@ def draw_events_graph(network_file, events_file, folder='', interval=1, scale_th
         Optional interval argument [hours], default is 1
     """
     logging.info("Starting to generate events graphs...")
-    
     logging.info("Loading events... might take some time")
-    events_tree = etree.parse(events_file)
-    events = (events_tree.xpath("//event[@type='entered link']"))
     
+    events = []
+    xml_fin = gzip.open(events_file)
+    context = etree.iterparse(xml_fin, tag='event')
+    for _, element in context:
+        if (str(element.get('type')) == 'entered link'):
+            events.append(element)
+            
     logging.info("Loading network...")
     network = etree.parse(network_file)
     
