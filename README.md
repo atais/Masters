@@ -46,5 +46,7 @@ python -m tests discover
 Remember to install matsim first
 ```
 mvn install -Dmaven.test.skip=true
-mvn test -pl :p.lodz.ms -Dtest=AppTest
+mvn -Dtest=AppTestLinux test
+or (check the config file)
+mvn -Dtest=AppTest test
 ```
