@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
         binary = check_network.create_randomized_sc_graph(mother_file)
         result = check_network.array_strongly_connected(binary, mother_file)
         self.assertTrue(result  , "false!")
-        print binary
+        # print binary
         pass
 
 
