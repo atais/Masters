@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<project>
+		<name>siouxfalls-test</name>
+		<output-dir>../output/</output-dir>
+		<threads>4</threads>
+		<log-level>INFO</log-level>
+		<python-path>/home/atais/.linuxbrew/bin/python</python-path>
+		<python-main>../python/ms/call_center.py</python-main>
+	</project>
+	<scenario>
+		<config>../scenarios/siouxfalls/config.xml</config>
+		<network>../scenarios/siouxfalls/network.xml</network>
+		<population>../scenarios/siouxfalls/population.xml</population>
+		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
+		<iterations>1</iterations>
+	</scenario>
+	<genetics>
+		<population-size>4</population-size>
+		<max-generations>10</max-generations>
+		<elitism-rate>0.15</elitism-rate>
+		<crossover-rate>1</crossover-rate>
+		<mutation-rate>0.1</mutation-rate>
+		<tournament-arity>2</tournament-arity>
+	</genetics>
+</config>
