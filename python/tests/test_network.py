@@ -41,6 +41,8 @@ class Test(unittest.TestCase):
         
         draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events_big.xml.gz'), r('output/test_big'))
         self.assertTrue(os.path.exists(r('output/test')), "path created")
+        
+        self.assertTrue(True)
 
 
 if __name__ == "__main__":

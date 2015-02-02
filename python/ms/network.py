@@ -48,17 +48,6 @@ def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'o
     graph = xml_to_graph(xml, node_attr=node_attr, link_attr=edge_attr, pos_function=correct_pos)
     return graph
 
-def count_events(events, i, pointer):
-    links = {}
-    while (i < len(events)) and ((math.floor(float(events[i].get('time')) / 3600) <= pointer) or (pointer == 23)):
-        event = events[i]
-        i += 1
-        if event.get('link') in links:
-            links[event.get('link')] += 1
-        else:
-            links[event.get('link')] = 0
-    return links, i
-
 def fill_graph(network, graph, links):
     for k, v in links.items():
         link = network.xpath("//link[@id='" + k + "']")[0]
@@ -79,41 +68,58 @@ def color_edge_occupation(graph):
             scale_min = h
     return scale_min
 
+def add_event(links, event):
+    if event.get('link') in links:
+        links[event.get('link')] += 1
+    else:
+        links[event.get('link')] = 0
+    return links
+
 @timing
-def draw_events_graph(network_file, events_file, folder='', interval=1, scale_threshold=0.22):
+def draw_events_graph(network_file, events_file, folder='', interval=3600, scale_threshold=0.22):
     """
         Generates a graph of events from network and event xml files
-        Optional interval argument [hours], default is 1
+        Optional interval argument [seconds], default is 3600 (1h)
     """
     logging.info("Starting to generate events graphs...")
-    logging.info("Loading events... might take some time")
     
-    events = []
-    xml_fin = gzip.open(events_file)
-    context = etree.iterparse(xml_fin, tag='event')
-    for _, element in context:
-        if (str(element.get('type')) == 'entered link'):
-            events.append(element)
-            
     logging.info("Loading network...")
     network = etree.parse(network_file)
     
-    # setting up starting time
-    # full hour of the 1st event
-    i = 0
-    pointer = math.floor(float(events[i].get('time')) / 3600)
-    
-    while(pointer < 24):
-        logging.info("Loading events starting from: " + str(pointer) + " h.")
-        graph = generate_network_graph(network_file)
-        
-        links, i = count_events(events, i, pointer + interval)
-        fill_graph(network, graph, links)
-        
-        scale_min = color_edge_occupation(graph)
-        if (scale_min <= scale_threshold):
-            save_graph(graph, folder + '/graph' + str(pointer) + '0-' + str(pointer + interval) + '0')
-        pointer += interval
+    logging.info("Loading events... ")
+    xml_fin = gzip.open(events_file)
+    context = etree.iterparse(xml_fin, tag='event')
+
+    start_marker = 0 
+    end_marker = 0
+    marker_22 = 22 * 60 * 60
+    links = {}
+    for _, element in context:
+        if (str(element.get('type')) == 'entered link'):
+            current_marker = float(element.get('time'))
+            if ((current_marker <= end_marker) or (end_marker > marker_22)):
+                pass
+            elif ((current_marker > end_marker)):
+                graph = generate_network_graph(network_file)
+                fill_graph(network, graph, links)
+                scale_min = color_edge_occupation(graph)
+                if (scale_min <= scale_threshold):
+                    save_graph(graph, folder + '/events' + str(start_marker) + '-' + str(end_marker))
+                links = {}
+                start_marker = (math.floor(current_marker) / 3600) * 3600
+                end_marker = start_marker + interval
+                pass
+            elif ((start_marker == 0) or (end_marker == 0)):
+                # start from full hour of the first event
+                start_marker = (math.floor(current_marker) / 3600) * 3600
+                end_marker = start_marker + interval
+                pass
+            # add the event anyway
+            add_event(links, element)
+            element.clear()
+            while element.getprevious() is not None:
+                del element.getparent()[0]
+    del context
     
     logging.info("Finished drawing events graphs...")
     pass
