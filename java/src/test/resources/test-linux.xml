@@ -4,7 +4,7 @@
 		<name>siouxfalls-test</name>
 		<output-dir>../output/</output-dir>
 		<threads>4</threads>
-		<log-level>INFO</log-level>
+		<log-level>DEBUG</log-level>
 		<python-path>/home/atais/.linuxbrew/bin/python</python-path>
 		<python-main>../python/ms/call_center.py</python-main>
 	</project>

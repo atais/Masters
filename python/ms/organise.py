@@ -70,6 +70,7 @@ def store_chromosomes(output):
     chromosomes = output+'/../'
     root = output+'/../../'
     
+    r = False
     dirs = [x for x in os.listdir(chromosomes) if (not x.startswith('.') and x != 'best')]
     for dirname in dirs:
         binf = open(os.path.join(chromosomes+dirname, 'chromosome.txt'), "r")
@@ -77,15 +78,13 @@ def store_chromosomes(output):
         binf.close()
         
         text_file = open((root+"chromosomes.txt"), "a+")
-        text_file.write(binary+"\n")
+        lines = text_file.readlines()
+        if binary not in lines:
+            text_file.write(binary+"\n")
+        else:
+            r = True
         text_file.close()
     
-    lines = open((root+"chromosomes.txt"), "r").readlines()
-    slines = set(lines)
-    
-    r = False
-    if(len(lines) != len(slines)):
-        r = True
     return r
 
 def organise_best(output):
