@@ -43,9 +43,9 @@ def organise_output(output):
     text_file = open(output+"/fitness.txt", "w")
     text_file.write(str(time.group(1)))
     text_file.close()
-    logging.info("Created : " + str(output+"/fitness.txt"))
+    logging.info("Created : " + str(output+"fitness.txt"))
     
-    draw_network_graph(output+'/network.xml',output+'/network.png')
+    draw_network_graph(os.path.join(output,'network.xml'),os.path.join(output,'network.png'))
     logging.info("Created a network graph")
 
     shutil.rmtree(output+iters)
