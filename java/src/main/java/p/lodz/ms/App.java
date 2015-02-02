@@ -11,7 +11,6 @@ public class App {
 	configModule = new ConfigurationModule(args[0]);
 	geneticsModule = new GeneticsModule();
 	geneticsModule.runGeneticAlgorithm();
-	System.exit(0);
     }
 
 }
