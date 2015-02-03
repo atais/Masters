@@ -19,9 +19,9 @@ public class ChromosomeInitializer implements Runnable {
 
     @Override
     public void run() {
-	logger.debug("Creating random network");
 	LinksChromosome chromosome = new PythonMethods()
 		.createRandomChromosome();
 	popList.add(chromosome);
+	logger.info("Created #" + popList.size() + ". random network");
     }
 }

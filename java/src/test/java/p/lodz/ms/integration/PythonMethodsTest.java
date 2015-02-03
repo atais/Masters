@@ -28,7 +28,6 @@ public class PythonMethodsTest {
 
 	File network = new File(config.getScenarioNetwork());
 	chromosome = new PythonMethods().convertNetworkToBinary(network);
-
     }
 
     @Test

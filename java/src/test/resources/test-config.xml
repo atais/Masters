@@ -7,13 +7,16 @@
 		<log-level>DEBUG</log-level>
 		<python-path>/usr/local/bin/python</python-path>
 		<python-main>../python/ms/call_center.py</python-main>
+		<java-path>/usr/bin/java</java-path>
+		<matsim-jar>../matsim/matsim-r31927mod.jar</matsim-jar>
+		<matsim-xmx>2g</matsim-xmx>
 	</project>
 	<scenario>
 		<config>../scenarios/siouxfalls/config.xml</config>
 		<network>../scenarios/siouxfalls/network.xml</network>
 		<population>../scenarios/siouxfalls/population.xml</population>
 		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
-		<iterations>1</iterations>
+		<iterations>4</iterations>
 	</scenario>
 	<genetics>
 		<population-size>4</population-size>

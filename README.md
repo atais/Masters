@@ -49,7 +49,10 @@ python -m tests discover
 ### Maven install
 Remember to install matsim first
 ```
-mvn install -Dmaven.test.skip=true
+mvn clean install -P release -Dmaven.test.skip=true
+```
+The main project
+```
 mvn -Dtest=AppTestLinux test
 or (check the config file)
 mvn -Dtest=AppTest test

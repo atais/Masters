@@ -4,11 +4,13 @@ import java.io.IOException;
 
 public class App {
 
-    private static ConfigurationModule configModule;
     private static GeneticsModule geneticsModule;
 
     public static void main(String[] args) throws IOException {
-	configModule = new ConfigurationModule(args[0]);
+	new ConfigurationModule(args[0]);
+	Runtime.getRuntime().addShutdownHook(
+		StaticContainer.getInstance().getCloseChildThread());
+
 	geneticsModule = new GeneticsModule();
 	geneticsModule.runGeneticAlgorithm();
     }

@@ -1,13 +1,19 @@
 package p.lodz.ms.genetics.workers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
-import org.matsim.core.controler.Controler;
 
+import p.lodz.ms.Configuration;
+import p.lodz.ms.StaticContainer;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
@@ -46,12 +52,37 @@ public class MATSimThread implements Runnable {
 		.getChromosomeDir(chromosome));
     }
 
-    @SuppressWarnings("deprecation")
     private void runMatsim() throws InterruptedException {
-	final Controler controler = new Controler(
-		new String[] { FileManager.getChromosomeConfig(chromosome) });
-	controler.setOverwriteFiles(true);
-	controler.run();
+	List<String> command = new ArrayList<String>();
+
+	command.add(Configuration.getInstance().getProjectJavaPath());
+	command.add(Configuration.getInstance().getProjectMatsimXmxArg());
+	command.add("-cp");
+	command.add(Configuration.getInstance().getProjectMatsimJar());
+	command.add("org.matsim.run.Controler");
+	command.add(FileManager.getChromosomeConfig(chromosome));
+
+	try {
+	    ProcessBuilder builder = new ProcessBuilder(command);
+	    Process process = builder.start();
+	    StaticContainer.getInstance().addChildProcess(process);
+	    InputStream is = process.getInputStream();
+	    InputStreamReader isr = new InputStreamReader(is);
+	    BufferedReader br = new BufferedReader(isr);
+	    String line;
+	    while ((line = br.readLine()) != null) {
+		if (line.contains("### ITERATION")) {
+		    logger.info(line);
+		}
+	    }
+	    process.waitFor();
+	    StaticContainer.getInstance().removeChildProcess(process);
+	} catch (IOException e) {
+	    logger.error(ExceptionUtils.getStackTrace(e));
+	} catch (InterruptedException e) {
+	    logger.error(ExceptionUtils.getStackTrace(e));
+	}
+
     }
 
     private void prepareStructure() throws IOException {

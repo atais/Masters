@@ -1,15 +1,13 @@
 package p.lodz.ms.integration;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecuteResultHandler;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteException;
-import org.apache.commons.exec.ExecuteWatchdog;
-import org.apache.commons.exec.Executor;
-import org.apache.commons.exec.LogOutputStream;
-import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
@@ -19,40 +17,30 @@ public class PythonAdapter {
 
     private final static Logger logger = Logger.getLogger(PythonAdapter.class);
 
-    private String pyReturn = null;
+    protected String defaultCall(String... commands) {
+	String pyReturn = null;
 
-    protected String defaultCall(String command, String... parameters) {
-	pyReturn = null;
-	CommandLine cmdLine = new CommandLine(Configuration.getInstance()
-		.getProjectPythonPath());
-	cmdLine.addArgument(Configuration.getInstance().getProjectPythonMain());
-	cmdLine.addArgument(command);
-	for (String param : parameters) {
-	    cmdLine.addArgument(param);
-	}
+	List<String> command = new ArrayList<String>();
+	command.add(Configuration.getInstance().getProjectPythonPath());
+	command.add(Configuration.getInstance().getProjectPythonMain());
+	command.addAll(Arrays.asList(commands));
 
-	DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-
-	ExecuteWatchdog watchdog = new ExecuteWatchdog(
-		ExecuteWatchdog.INFINITE_TIMEOUT);
-	Executor executor = new DefaultExecutor();
-	PumpStreamHandler psh = new PumpStreamHandler(new LogOutputStream() {
-	    @Override
-	    protected void processLine(String line, int logLevel) {
+	ProcessBuilder builder = new ProcessBuilder(command);
+	Process process;
+	try {
+	    process = builder.start();
+	    InputStream is = process.getInputStream();
+	    InputStreamReader isr = new InputStreamReader(is);
+	    BufferedReader br = new BufferedReader(isr);
+	    String line;
+	    while ((line = br.readLine()) != null) {
 		if (line.contains("return:")) {
 		    pyReturn = line;
 		} else {
 		    logger.info(line);
 		}
 	    }
-	});
-	executor.setStreamHandler(psh);
-	executor.setWatchdog(watchdog);
-	try {
-	    executor.execute(cmdLine, resultHandler);
-	    resultHandler.waitFor();
-	} catch (ExecuteException e) {
-	    logger.error(ExceptionUtils.getStackTrace(e));
+	    process.waitFor();
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (InterruptedException e) {

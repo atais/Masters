@@ -15,6 +15,11 @@
 		<python-path>/usr/local/bin/python</python-path>
 		<!-- Default is "../python/ms/call_center.py" -->
 		<python-main>../python/ms/call_center.py</python-main>
+		<!-- Default is "/usr/bin/java" -->
+		<java-path>/usr/bin/java</java-path>
+		<matsim-jar>../matsim/matsim-r31927mod.jar</matsim-jar>
+		<!-- Default is "2g" -->
+		<matsim-xmx>2g</matsim-xmx>
 	</project>
 	<scenario>
 		<config>../scenarios/siouxfalls/config.xml</config>

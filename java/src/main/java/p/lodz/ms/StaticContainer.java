@@ -1,5 +1,9 @@
 package p.lodz.ms;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class StaticContainer {
 
     private static StaticContainer instance;
@@ -19,6 +23,10 @@ public class StaticContainer {
     // Always starts at 0 iteration
     private Integer gaCurrentIteration = 0;
 
+    private Thread closeChildThread;
+    private List<Process> childProcess = Collections
+	    .synchronizedList(new ArrayList<Process>());
+
     public static StaticContainer getInstance() {
 	if (instance == null) {
 	    synchronized (Configuration.class) {
@@ -31,6 +39,13 @@ public class StaticContainer {
     }
 
     private StaticContainer() {
+	closeChildThread = new Thread() {
+	    public void run() {
+		for (Process p : childProcess) {
+		    p.destroy();
+		}
+	    }
+	};
     }
 
     public Integer getGaCurrentIteration() {
@@ -54,6 +69,19 @@ public class StaticContainer {
     }
 
     public void increaseCurrentGeneration() {
-	setGaCurrentIteration(getGaCurrentIteration()+1);
+	setGaCurrentIteration(getGaCurrentIteration() + 1);
     }
+
+    public Thread getCloseChildThread() {
+	return closeChildThread;
+    }
+
+    public void addChildProcess(Process p) {
+	this.childProcess.add(p);
+    }
+
+    public void removeChildProcess(Process p) {
+	this.childProcess.remove(p);
+    }
+
 }

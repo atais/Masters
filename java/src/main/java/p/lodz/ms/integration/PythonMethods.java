@@ -24,83 +24,89 @@ public class PythonMethods extends PythonAdapter {
 
     @Deprecated
     public void analyseNetwork(File source, File dest) {
-	String[] parameters = new String[] { source.getAbsolutePath(),
-		dest.getAbsolutePath() };
-	this.defaultCall(analyseGraph, parameters);
+	String[] parameters = new String[] { analyseGraph,
+		source.getAbsolutePath(), dest.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
     public LinksChromosome convertNetworkToBinary(File xml) {
-	String[] parameters = new String[] { xml.getAbsolutePath() };
-	String bin = this.defaultCall(fromXmltoBinary, parameters);
+	String[] parameters = new String[] { fromXmltoBinary,
+		xml.getAbsolutePath() };
+	String bin = this.defaultCall(parameters);
 	return LinksChromosome.parseString(bin);
     }
 
     public LinksChromosome createRandomChromosome() {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
-	String[] parameters = new String[] { defaultNetwork };
-	String answer = this.defaultCall(randomChromosome, parameters);
+	String[] parameters = new String[] { randomChromosome, defaultNetwork };
+	String answer = this.defaultCall(parameters);
 	return LinksChromosome.parseString(answer);
     }
 
     public boolean checkChromosome(Chromosome chromosome) {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
-	String[] parameters = new String[] { chromosome.toString(),
-		defaultNetwork };
-	String answer = this.defaultCall(checkChromosome, parameters);
+	String[] parameters = new String[] { checkChromosome,
+		chromosome.toString(), defaultNetwork };
+	String answer = this.defaultCall(parameters);
 	return Boolean.parseBoolean(answer);
     }
 
     public void convertBinaryToNetwork(LinksChromosome chromosome, File dest) {
 	String defaultNetwork = Configuration.getInstance()
 		.getScenarioNetwork();
-	String[] parameters = new String[] { defaultNetwork,
+	String[] parameters = new String[] { fromBinaryToXml, defaultNetwork,
 		chromosome.toString(), dest.getAbsolutePath() };
-	defaultCall(fromBinaryToXml, parameters);
+	defaultCall(parameters);
     }
 
     public void facilitiesGraph(File network, File facilities, File output) {
-	String[] parameters = new String[] { network.getAbsolutePath(),
-		facilities.getAbsolutePath(), output.getAbsolutePath() };
-	this.defaultCall(facilitiesGraph, parameters);
+	String[] parameters = new String[] { facilitiesGraph,
+		network.getAbsolutePath(), facilities.getAbsolutePath(),
+		output.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
     public void networkGraph(File network, File output) {
-	String[] parameters = new String[] { network.getAbsolutePath(),
-		output.getAbsolutePath() };
-	this.defaultCall(networkGraph, parameters);
+	String[] parameters = new String[] { networkGraph,
+		network.getAbsolutePath(), output.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
     public void eventsGraph(File network, File events, File output) {
-	String[] parameters = new String[] { network.getAbsolutePath(),
-		events.getAbsolutePath(), output.getAbsolutePath() };
-	this.defaultCall(eventsGraph, parameters);
+	String[] parameters = new String[] { eventsGraph,
+		network.getAbsolutePath(), events.getAbsolutePath(),
+		output.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
     public void organiseOutput(File output) {
-	String[] parameters = new String[] { output.getAbsolutePath() };
-	this.defaultCall(organiseOutput, parameters);
+	String[] parameters = new String[] { organiseOutput,
+		output.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
     public void customizeConfig(File config, File facilities, File network,
 	    File population, File output, Integer iterations) {
-	String[] parameters = new String[] { config.getAbsolutePath(),
-		facilities.getAbsolutePath(), network.getAbsolutePath(),
-		population.getAbsolutePath(), output.getAbsolutePath(),
-		iterations.toString() };
-	this.defaultCall(customizeConfig, parameters);
+	String[] parameters = new String[] { customizeConfig,
+		config.getAbsolutePath(), facilities.getAbsolutePath(),
+		network.getAbsolutePath(), population.getAbsolutePath(),
+		output.getAbsolutePath(), iterations.toString() };
+	this.defaultCall(parameters);
     }
 
     public Boolean organiseBest(File dir) {
-	String[] parameters = new String[] { dir.getAbsolutePath() };
-	String s = this.defaultCall(organiseBest, parameters);
+	String[] parameters = new String[] { organiseBest,
+		dir.getAbsolutePath() };
+	String s = this.defaultCall(parameters);
 	return Boolean.valueOf(s);
     }
-    
+
     public void removeOutputEvents(File dir) {
-	String[] parameters = new String[] { dir.getAbsolutePath() };
-	this.defaultCall(removeOutputEvents, parameters);
+	String[] parameters = new String[] { removeOutputEvents,
+		dir.getAbsolutePath() };
+	this.defaultCall(parameters);
     }
 
 }

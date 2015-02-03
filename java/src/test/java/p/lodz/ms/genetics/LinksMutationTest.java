@@ -5,13 +5,12 @@ import java.net.URL;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.math3.genetics.Chromosome;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
 import p.lodz.ms.integration.PythonMethods;
-
-import com.vividsolutions.jts.util.Assert;
 
 public class LinksMutationTest {
 
@@ -36,6 +35,6 @@ public class LinksMutationTest {
     public void simpleTest() {
 	LinksMutation mutation = new LinksMutation();
 	Chromosome mutated = mutation.mutate(chromosome);
-	Assert.isTrue(mutated.toString().contains("0"));
+	Assert.assertTrue(mutated.toString().contains("0"));
     }
 }

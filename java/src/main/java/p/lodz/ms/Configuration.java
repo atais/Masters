@@ -9,13 +9,14 @@ public class Configuration {
 
     private static final String DEFAULTPYTHONMAIN = "../python/ms/call_center.py";
     private static final String DEFAULTPYTHONPATH = "/usr/local/bin/python";
+    private static final String DEFAULTJAVAPATH = "/usr/bin/java";
     private static final String DEFAULTPNAME = "default";
     private static final String DEFAULTOUTPUT = "../output/";
     private static final Integer DEFAULTTHREADS = Runtime.getRuntime()
 	    .availableProcessors();
     private static final String DEFAULTLOG = "INFO";
     private static final String DEFAULTLOGFILE = "logfile.log";
-    
+    private static final String DEFAULTMATSIMXMX = "2g";
 
     private static final Integer DEFAULTSCENARIOITER = 50;
 
@@ -35,7 +36,10 @@ public class Configuration {
     private String projectLogLevel;
     private String projectLogFile;
     private String projectPythonPath;
+    private String projectJavaPath;
     private String projectPythonMain;
+    private String projectMatsimJar;
+    private String projectMatsimXmx;
 
     private String scenarioConfig;
     private String scenarioNetwork;
@@ -84,12 +88,17 @@ public class Configuration {
 		DEFAULTTHREADS);
 	this.projectLogLevel = config
 		.getString("project.log-level", DEFAULTLOG);
-	this.projectLogFile = config
-		.getString("project.log-filename", DEFAULTLOGFILE);
+	this.projectLogFile = config.getString("project.log-filename",
+		DEFAULTLOGFILE);
 	this.projectPythonPath = config.getString("project.python-path",
 		DEFAULTPYTHONPATH);
 	this.projectPythonMain = config.getString("project.python-main",
 		DEFAULTPYTHONMAIN);
+	this.projectMatsimJar = config.getString("project.matsim-jar");
+	this.projectJavaPath = config.getString("project.java-path",
+		DEFAULTJAVAPATH);
+	this.projectMatsimXmx = config.getString("project.matsim-xmx",
+		DEFAULTMATSIMXMX);
 
 	this.scenarioConfig = config.getString("scenario.config");
 	this.scenarioNetwork = config.getString("scenario.network");
@@ -132,7 +141,7 @@ public class Configuration {
     public String getProjectLogLevel() {
 	return projectLogLevel;
     }
-    
+
     public String getProjectLogFile() {
 	return projectLogFile;
     }
@@ -199,6 +208,22 @@ public class Configuration {
 
     public Integer getGaMaxCrossoverAttempts() {
 	return gaMaxCrossoverAttempts;
+    }
+
+    public String getProjectMatsimJar() {
+	return projectMatsimJar;
+    }
+
+    public String getProjectMatsimXmx() {
+	return projectMatsimXmx;
+    }
+
+    public String getProjectMatsimXmxArg() {
+	return "-Xmx" + getProjectMatsimXmx();
+    }
+
+    public String getProjectJavaPath() {
+	return projectJavaPath;
     }
 
 }
