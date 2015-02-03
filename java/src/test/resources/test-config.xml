@@ -4,7 +4,7 @@
 		<name>siouxfalls-test</name>
 		<output-dir>../output/</output-dir>
 		<threads>4</threads>
-		<log-level>DEBUG</log-level>
+		<log-level>INFO</log-level>
 		<python-path>/usr/local/bin/python</python-path>
 		<python-main>../python/ms/call_center.py</python-main>
 		<java-path>/usr/bin/java</java-path>
@@ -16,10 +16,10 @@
 		<network>../scenarios/siouxfalls/network.xml</network>
 		<population>../scenarios/siouxfalls/population.xml</population>
 		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
-		<iterations>4</iterations>
+		<iterations>9</iterations>
 	</scenario>
 	<genetics>
-		<population-size>4</population-size>
+		<population-size>9</population-size>
 		<max-generations>10</max-generations>
 		<elitism-rate>0.15</elitism-rate>
 		<crossover-rate>1</crossover-rate>

@@ -8,7 +8,7 @@
 		<!-- Default is all available processors -->
 		<threads>4</threads>
 		<!-- Default is INFO -->
-		<log-level>DEBUG</log-level>
+		<log-level>INFO</log-level>
 		<!-- Default is logfile.log -->
 		<log-filename>logfile.log</log-filename>
 		<!-- Default is "/usr/local/bin/python" -->

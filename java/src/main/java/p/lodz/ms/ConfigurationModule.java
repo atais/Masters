@@ -52,9 +52,7 @@ public class ConfigurationModule {
 	logger.info("Creating output folder with project folder inside");
 	File folder = new File(config.getProjectDir());
 	if (folder.listFiles().length > 1) {
-	    logger.error("WATCH OUT THE PROJECT DIR NOT EMPTY!");
-	    logger.error("WATCH OUT THE PROJECT DIR NOT EMPTY!");
-	    logger.error("WATCH OUT THE PROJECT DIR NOT EMPTY!");
+	    logger.warn("WATCH OUT THE PROJECT DIR NOT EMPTY!");
 	}
 	FileUtils.forceMkdir(new File(config.getProjectDir()));
     }

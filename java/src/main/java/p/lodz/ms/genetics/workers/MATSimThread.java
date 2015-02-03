@@ -74,6 +74,15 @@ public class MATSimThread implements Runnable {
 		if (line.contains("### ITERATION")) {
 		    logger.info(line);
 		}
+		else if (line.contains("ERROR")){
+		    logger.error(line);
+		}
+		else if (line.contains("WARN")){
+		    logger.warn(line);
+		}
+		else if (line.contains("FATAL")){
+		    logger.fatal(line);
+		}
 	    }
 	    process.waitFor();
 	    StaticContainer.getInstance().removeChildProcess(process);
