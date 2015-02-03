@@ -36,8 +36,7 @@ brew install caskroom/cask/brew-cask python freetype maven
 
 Final step, python dependencies
 ```
-pip install lxml Pillow networkx matplotlib numpy 
-pip install pygraphviz
+pip install lxml Pillow networkx matplotlib numpy pygraphviz 
 ```
 
 
