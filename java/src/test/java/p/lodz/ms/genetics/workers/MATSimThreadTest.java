@@ -1,4 +1,4 @@
-package p.lodz.ms.genetics;
+package p.lodz.ms.genetics.workers;
 
 import java.io.File;
 import java.net.URL;
@@ -36,7 +36,6 @@ public class MATSimThreadTest {
     public void matsimTest() {
 	MATSimThread t = new MATSimThread(chromosome);
 	t.run();
-	System.out.println(chromosome.getFitness());
 	Assert.assertNotNull(chromosome.getFitness());
     }
 

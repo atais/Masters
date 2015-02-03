@@ -1,0 +1,4 @@
+java -Xmx2g -cp MATSim-r31901.jar org.matsim.run.Controler perfromance/performance_AStarLandmarks.xml
+java -Xmx2g -cp MATSim-r31901.jar org.matsim.run.Controler perfromance/performance_Dijkstra.xml
+java -Xmx2g -cp MATSim-r31901.jar org.matsim.run.Controler perfromance/performance_FastAStarLandmarks.xml
+java -Xmx2g -cp MATSim-r31901.jar org.matsim.run.Controler perfromance/performance_FastDijkstra.xml

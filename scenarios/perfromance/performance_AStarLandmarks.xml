@@ -14,16 +14,16 @@
 
 	<module name="controler" >
 		<!-- PARAMETER  -->
-		<param name="outputDirectory" value="../output/siouxfalls" />
-		<param name="lastIteration" value="50" />
-		<param name="writeEventsInterval" value="50" />
+		<param name="outputDirectory" value="../output/performance_AStarLandmarks" />
+		<param name="lastIteration" value="100" />
+		<param name="writeEventsInterval" value="100" />
 		<!-- PARAMETER  -->
 
 		<param name="writePlansInterval" value="0" />
 		<param name="writeSnapshotsInterval" value="0" />
 		<param name="eventsFileFormat" value="xml" />
 		<param name="mobsim" value="qsim" />
-		<param name="routingAlgorithmType" value="Dijkstra" />
+		<param name="routingAlgorithmType" value="AStarLandmarks" />
 	</module>
 
 <!-- ====================================================================== -->
