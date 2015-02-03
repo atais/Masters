@@ -135,7 +135,7 @@ public class Configuration {
     }
 
     public Integer getProjectThreads() {
-	return projectThreads-1 > 0 ? projectThreads-1 : 1;
+	return projectThreads;
     }
 
     public String getProjectLogLevel() {

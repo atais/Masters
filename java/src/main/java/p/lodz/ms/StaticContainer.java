@@ -68,10 +68,6 @@ public class StaticContainer {
 	this.gaIterationPrefix = gaIterationPrefix;
     }
 
-    public void increaseCurrentGeneration() {
-	setGaCurrentIteration(getGaCurrentIteration() + 1);
-    }
-
     public Thread getCloseChildThread() {
 	return closeChildThread;
     }
@@ -82,6 +78,10 @@ public class StaticContainer {
 
     public void removeChildProcess(Process p) {
 	this.childProcess.remove(p);
+    }
+
+    public void increaseGaCurrentIteration() {
+	this.gaCurrentIteration++;
     }
 
 }

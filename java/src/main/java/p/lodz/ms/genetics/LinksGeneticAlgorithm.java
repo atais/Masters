@@ -6,6 +6,7 @@ import org.apache.commons.math3.genetics.GeneticAlgorithm;
 import org.apache.commons.math3.genetics.MutationPolicy;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.genetics.SelectionPolicy;
+import org.apache.commons.math3.genetics.StoppingCondition;
 import org.apache.log4j.Logger;
 
 import p.lodz.ms.Configuration;
@@ -29,14 +30,24 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 
     // we need to keep track of the current generation counter
     // as well as, each best chromosome needs some special care
-    @Override
-    public Population nextGeneration(Population current) {
-	logger.info("Evaluating generation: " + this.getGenerationsEvolved()
-		+ "/" + Configuration.getInstance().getGaMaxGenerations());
-	moveBestChromosome((LinksChromosome) current.getFittestChromosome());
-	Population next = super.nextGeneration(current);
-	StaticContainer.getInstance().increaseCurrentGeneration();
-	return next;
+    public Population evolve(final Population initial,
+	    final StoppingCondition condition) {
+	Population current = initial;
+	while (!condition.isSatisfied(current)) {
+	    logger.info("Evaluating generation: "
+		    + StaticContainer.getInstance().getGaCurrentIteration()
+		    + "/" + Configuration.getInstance().getGaMaxGenerations());
+	    moveBestChromosome((LinksChromosome) current.getFittestChromosome());
+	    current = nextGeneration(current);
+	    StaticContainer.getInstance().increaseGaCurrentIteration();
+	}
+	return current;
+    }
+
+    public Population evolve(final Population initial,
+	    final StoppingCondition condition, final int startGenetation) {
+	StaticContainer.getInstance().setGaCurrentIteration(startGenetation);
+	return this.evolve(initial, condition);
     }
 
     // special stuff for best chromosome
@@ -50,10 +61,14 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	logger.info("... doing all the best!");
 	Boolean duplicates = new PythonMethods().organiseBest(FileManager
 		.getChromosomeDir(chromosome));
-	if (duplicates){
+	if (duplicates) {
 	    logger.warn("There are duplicates in chromosomes!");
 	}
 	logger.info("--------------------------");
     }
 
+    @Override
+    public int getGenerationsEvolved() {
+	return StaticContainer.getInstance().getGaCurrentIteration();
+    }
 }
