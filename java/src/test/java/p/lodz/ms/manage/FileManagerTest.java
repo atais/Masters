@@ -14,7 +14,6 @@ import p.lodz.ms.genetics.LinksChromosome;
 public class FileManagerTest {
 
     private LinksChromosome chromosome;
-    private Configuration config;
 
     @Before
     public void prepare() throws ConfigurationException, IOException {
@@ -25,8 +24,8 @@ public class FileManagerTest {
 		.getContextClassLoader();
 	URL is = classloader.getResource("test-config.xml");
 
-	config = new Configuration(is.toString());
-	
+	new Configuration(is.toString());
+
 	FileUtils.forceMkdir(FileManager.getChromosomeDir(chromosome));
     }
 
