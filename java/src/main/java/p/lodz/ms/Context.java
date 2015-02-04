@@ -1,23 +1,19 @@
 package p.lodz.ms;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.log4j.Logger;
+
 public class Context {
 
+    private final static Logger logger = Logger.getLogger(Context.class);
     private static Context instance;
-
-    public static final String facilitiesGraphName = "facilities.png";
-    public static final String outputEventsFileName = "output_events.xml.gz";
-    public static final String eventsFolderName = "events";
-    public static final String networkGraphName = "network.png";
-    public static final String networkFileName = "network.xml";
-    public static final String configFileName = "config.xml";
-    public static final String chromosomeFileName = "chromosome.txt";
-    public static final String fitnessFilename = "fitness.txt";
-    public static final String fitnessInitialFilename = "fitnessInitial.txt";
 
     // properties
     private Properties properties;
@@ -55,6 +51,15 @@ public class Context {
 		}
 	    }
 	};
+
+	properties = new Properties();
+	try {
+	    InputStream is = Context.class
+		    .getResourceAsStream("/config.properties");
+	    properties.load(is);
+	} catch (IOException e) {
+	    logger.error(ExceptionUtils.getStackTrace(e));
+	}
     }
 
     // Current iteration stuff
@@ -106,7 +111,7 @@ public class Context {
     }
 
     // properties
-    public String getProperty(String input) {
+    public String getProp(String input) {
 	return properties.getProperty(input);
     }
 
