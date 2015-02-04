@@ -7,7 +7,7 @@ import org.apache.commons.math3.genetics.ChromosomePair;
 import org.apache.commons.math3.genetics.OnePointCrossover;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
+import p.lodz.ms.Context;
 import p.lodz.ms.integration.PythonMethods;
 
 public class LinksOnePointCrossover extends OnePointCrossover<Integer> {
@@ -19,7 +19,7 @@ public class LinksOnePointCrossover extends OnePointCrossover<Integer> {
     public ChromosomePair crossover(Chromosome first, Chromosome second)
 	    throws DimensionMismatchException, MathIllegalArgumentException {
 	int attempt = 0;
-	int max = Configuration.getInstance().getGaMaxCrossoverAttempts();
+	int max = Context.getI().getConfig().getGaMaxCrossoverAttempts();
 
 	ChromosomePair crossovered = super.crossover(first, second);
 	boolean isStronglyConnected1 = new PythonMethods()

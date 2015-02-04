@@ -34,7 +34,8 @@ public class ConfigurationModule {
 
     private void startConfiguration(String configFile)
 	    throws ConfigurationException, IOException {
-	config = Configuration.getInstance().readXMLFile(configFile);
+	config = new Configuration(configFile);
+	
 	logger.setLevel(Level.toLevel(config.getProjectLogLevel()));
 
 	if (!config.getProjectLogFile().isEmpty()) {
@@ -51,9 +52,10 @@ public class ConfigurationModule {
 
 	logger.info("Creating output folder with project folder inside");
 	File folder = new File(config.getProjectDir());
-	if (folder.listFiles().length > 1) {
+	boolean empty = (folder.listFiles().length > 1) ? false : true;
+	FileUtils.forceMkdir(new File(config.getProjectDir()));
+	if (!empty) {
 	    logger.warn("WATCH OUT THE PROJECT DIR NOT EMPTY!");
 	}
-	FileUtils.forceMkdir(new File(config.getProjectDir()));
     }
 }

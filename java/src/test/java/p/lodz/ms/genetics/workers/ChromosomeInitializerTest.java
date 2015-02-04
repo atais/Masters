@@ -1,6 +1,5 @@
 package p.lodz.ms.genetics.workers;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,23 +11,13 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.junit.Before;
 import org.junit.Test;
 
-import p.lodz.ms.Configuration;
-
 public class ChromosomeInitializerTest {
 
     private int populationSize;
     private List<Chromosome> popList;
-    private Configuration config;
 
     @Before
     public void prepare() throws ConfigurationException {
-	ClassLoader classloader = Thread.currentThread()
-		.getContextClassLoader();
-	URL is = classloader.getResource("test-config.xml");
-
-	config = Configuration.getInstance();
-	config.readXMLFile(is.toString());
-
 	populationSize = 4;
 	popList = Collections.synchronizedList(new ArrayList<Chromosome>());
     }

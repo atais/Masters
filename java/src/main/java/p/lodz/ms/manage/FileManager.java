@@ -8,8 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
-import p.lodz.ms.StaticContainer;
+import p.lodz.ms.Context;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 
@@ -18,17 +17,16 @@ public class FileManager {
     private final static Logger logger = Logger.getLogger(FileManager.class);
 
     public static File getChromosomeDir(LinksChromosome chromosome) {
-	String output = Configuration.getInstance().getProjectOutputDir();
-	String projName = Configuration.getInstance().getProjectName() + "/";
-	String iteration = StaticContainer.getInstance()
-		.getGaCurrentIterationPath();
+	String output = Context.getI().getConfig().getProjectOutputDir();
+	String projName = Context.getI().getConfig().getProjectName() + "/";
+	String iteration = Context.getI().getGaCurrentIterationPath();
 	String uuid = chromosome.getUuid().toString();
 	String dirName = output + projName + iteration + uuid;
 	return new File(dirName);
     }
 
     public static File getFitnessFile(LinksChromosome chromosome) {
-	String fileName = StaticContainer.fitnessFilename;
+	String fileName = Context.fitnessFilename;
 	String file = getChromosomeDir(chromosome) + "/" + fileName;
 	return new File(file);
     }
@@ -40,9 +38,9 @@ public class FileManager {
      */
     public static void createInitialFitness(LinksChromosome chromosome) {
 	File fitnessSource = new File(getChromosomeDir(chromosome) + "/"
-		+ StaticContainer.fitnessFilename);
-	File fitnessDest = new File(Configuration.getInstance().getProjectDir()
-		+ StaticContainer.fitnessInitialFilename);
+		+ Context.fitnessFilename);
+	File fitnessDest = new File(Context.getI().getConfig().getProjectDir()
+		+ Context.fitnessInitialFilename);
 
 	try {
 	    FileUtils.copyFile(fitnessSource, fitnessDest);
@@ -56,7 +54,7 @@ public class FileManager {
 
 	try {
 	    FileWriter writer = new FileWriter(chromosomeDir + "/"
-		    + StaticContainer.chromosomeFileName);
+		    + Context.chromosomeFileName);
 	    writer.write(chromosome.toString());
 	    writer.close();
 	} catch (IOException e) {
@@ -67,26 +65,26 @@ public class FileManager {
     public static void convertChromosomeToNetwork(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	File destNetwork = new File(chromosomeDir + "/"
-		+ StaticContainer.networkFileName);
+		+ Context.networkFileName);
 	new PythonMethods().convertBinaryToNetwork(chromosome, destNetwork);
     }
 
     public static void prepareChromosomeConfig(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 
-	File baseConfig = new File(Configuration.getInstance()
+	File baseConfig = new File(Context.getI().getConfig()
 		.getScenarioConfig());
 	File chromosomeConfig = new File(chromosomeDir + "/"
-		+ StaticContainer.configFileName);
+		+ Context.configFileName);
 	try {
 	    FileUtils.copyFile(baseConfig, chromosomeConfig);
 	    File network = new File(chromosomeDir + "/"
-		    + StaticContainer.networkFileName);
-	    File facilities = new File(Configuration.getInstance()
+		    + Context.networkFileName);
+	    File facilities = new File(Context.getI().getConfig()
 		    .getScenarioFacilities());
-	    File population = new File(Configuration.getInstance()
+	    File population = new File(Context.getI().getConfig()
 		    .getScenarioPopulation());
-	    Integer iterations = Configuration.getInstance()
+	    Integer iterations = Context.getI().getConfig()
 		    .getScenarioIterations();
 	    new PythonMethods().customizeConfig(chromosomeConfig, facilities,
 		    network, population, chromosomeDir, iterations);
@@ -95,15 +93,15 @@ public class FileManager {
 	}
 
     }
-    
-    public static void removeOutputEvents(LinksChromosome chromosome){
+
+    public static void removeOutputEvents(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	new PythonMethods().removeOutputEvents(chromosomeDir);
     }
 
     public static String getChromosomeConfig(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
-	String config = StaticContainer.configFileName;
+	String config = Context.configFileName;
 	return (chromosomeDir + "/" + config);
     }
 

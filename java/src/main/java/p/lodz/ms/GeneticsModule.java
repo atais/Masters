@@ -49,7 +49,7 @@ public class GeneticsModule {
 			tournamentArity));
 
 	// set the prefix for output clarification
-	StaticContainer.getInstance().setGaIterationPrefix("begin.");
+	Context.getI().setGaIterationPrefix("begin.");
 	logger.info("Loading initial network");
 	File network = new File(config.getScenarioNetwork());
 	LinksChromosome initial = new PythonMethods()
@@ -58,7 +58,7 @@ public class GeneticsModule {
 	initialGraphMethods(initial);
 
 	// reset the prefix for output clarification
-	StaticContainer.getInstance().setGaIterationPrefix("ga.");
+	Context.getI().setGaIterationPrefix("ga.");
 
 	logger.info("Starting genetic algorithm");
 	logger.info("--------------------------");
@@ -81,7 +81,7 @@ public class GeneticsModule {
 	List<Chromosome> popList = Collections
 		.synchronizedList(new ArrayList<Chromosome>());
 
-	Integer threads = Configuration.getInstance().getProjectThreads();
+	Integer threads = Context.getI().getConfig().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (int i = 0; i < populationSize; i++) {
 	    Runnable worker = new ChromosomeInitializer(popList);
@@ -96,7 +96,7 @@ public class GeneticsModule {
     }
 
     private void readGAConfig() {
-	config = Configuration.getInstance();
+	config = Context.getI().getConfig();
 
 	populationSize = config.getGaPopulationSize();
 	maxGenerations = config.getGaMaxGenerations();

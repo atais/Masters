@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) throws IOException {
 	new ConfigurationModule(args[0]);
 	Runtime.getRuntime().addShutdownHook(
-		StaticContainer.getInstance().getCloseChildThread());
+		Context.getI().getCloseChildThread());
 
 	geneticsModule = new GeneticsModule();
 	geneticsModule.runGeneticAlgorithm();

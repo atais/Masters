@@ -9,8 +9,7 @@ import org.apache.commons.math3.genetics.SelectionPolicy;
 import org.apache.commons.math3.genetics.StoppingCondition;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
-import p.lodz.ms.StaticContainer;
+import p.lodz.ms.Context;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
 import p.lodz.ms.manage.GraphManager;
@@ -35,18 +34,18 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	Population current = initial;
 	while (!condition.isSatisfied(current)) {
 	    logger.info("Evaluating generation: "
-		    + StaticContainer.getInstance().getGaCurrentIteration()
-		    + "/" + Configuration.getInstance().getGaMaxGenerations());
+		    + Context.getI().getGaCurrentIteration() + "/"
+		    + Context.getI().getConfig().getGaMaxGenerations());
 	    moveBestChromosome((LinksChromosome) current.getFittestChromosome());
 	    current = nextGeneration(current);
-	    StaticContainer.getInstance().increaseGaCurrentIteration();
+	    Context.getI().increaseGaCurrentIteration();
 	}
 	return current;
     }
 
     public Population evolve(final Population initial,
 	    final StoppingCondition condition, final int startGenetation) {
-	StaticContainer.getInstance().setGaCurrentIteration(startGenetation);
+	Context.getI().setGaCurrentIteration(startGenetation);
 	return this.evolve(initial, condition);
     }
 
@@ -69,6 +68,6 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 
     @Override
     public int getGenerationsEvolved() {
-	return StaticContainer.getInstance().getGaCurrentIteration();
+	return Context.getI().getGaCurrentIteration();
     }
 }

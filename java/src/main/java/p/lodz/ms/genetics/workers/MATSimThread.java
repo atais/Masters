@@ -12,8 +12,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
-import p.lodz.ms.StaticContainer;
+import p.lodz.ms.Context;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
@@ -55,17 +54,17 @@ public class MATSimThread implements Runnable {
     private void runMatsim() throws InterruptedException {
 	List<String> command = new ArrayList<String>();
 
-	command.add(Configuration.getInstance().getProjectJavaPath());
-	command.add(Configuration.getInstance().getProjectMatsimXmxArg());
+	command.add(Context.getI().getConfig().getProjectJavaPath());
+	command.add(Context.getI().getConfig().getProjectMatsimXmxArg());
 	command.add("-cp");
-	command.add(Configuration.getInstance().getProjectMatsimJar());
+	command.add(Context.getI().getConfig().getProjectMatsimJar());
 	command.add("org.matsim.run.Controler");
 	command.add(FileManager.getChromosomeConfig(chromosome));
 
 	try {
 	    ProcessBuilder builder = new ProcessBuilder(command);
 	    Process process = builder.start();
-	    StaticContainer.getInstance().addChildProcess(process);
+	    Context.getI().addChildProcess(process);
 	    InputStream is = process.getInputStream();
 	    InputStreamReader isr = new InputStreamReader(is);
 	    BufferedReader br = new BufferedReader(isr);
@@ -73,19 +72,16 @@ public class MATSimThread implements Runnable {
 	    while ((line = br.readLine()) != null) {
 		if (line.contains("### ITERATION")) {
 		    logger.info(line);
-		}
-		else if (line.contains("ERROR")){
+		} else if (line.contains("ERROR")) {
 		    logger.error(line);
-		}
-		else if (line.contains("WARN")){
+		} else if (line.contains("WARN")) {
 		    logger.warn(line);
-		}
-		else if (line.contains("FATAL")){
+		} else if (line.contains("FATAL")) {
 		    logger.fatal(line);
 		}
 	    }
 	    process.waitFor();
-	    StaticContainer.getInstance().removeChildProcess(process);
+	    Context.getI().removeChildProcess(process);
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (InterruptedException e) {

@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.apache.commons.math3.genetics.Chromosome;
 
-import p.lodz.ms.Configuration;
+import p.lodz.ms.Context;
 import p.lodz.ms.genetics.LinksChromosome;
 
 public class PythonMethods extends PythonAdapter {
@@ -37,16 +37,14 @@ public class PythonMethods extends PythonAdapter {
     }
 
     public LinksChromosome createRandomChromosome() {
-	String defaultNetwork = Configuration.getInstance()
-		.getScenarioNetwork();
+	String defaultNetwork = Context.getI().getConfig().getScenarioNetwork();
 	String[] parameters = new String[] { randomChromosome, defaultNetwork };
 	String answer = this.defaultCall(parameters);
 	return LinksChromosome.parseString(answer);
     }
 
     public boolean checkChromosome(Chromosome chromosome) {
-	String defaultNetwork = Configuration.getInstance()
-		.getScenarioNetwork();
+	String defaultNetwork = Context.getI().getConfig().getScenarioNetwork();
 	String[] parameters = new String[] { checkChromosome,
 		chromosome.toString(), defaultNetwork };
 	String answer = this.defaultCall(parameters);
@@ -54,8 +52,7 @@ public class PythonMethods extends PythonAdapter {
     }
 
     public void convertBinaryToNetwork(LinksChromosome chromosome, File dest) {
-	String defaultNetwork = Configuration.getInstance()
-		.getScenarioNetwork();
+	String defaultNetwork = Context.getI().getConfig().getScenarioNetwork();
 	String[] parameters = new String[] { fromBinaryToXml, defaultNetwork,
 		chromosome.toString(), dest.getAbsolutePath() };
 	defaultCall(parameters);

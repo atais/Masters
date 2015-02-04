@@ -2,8 +2,7 @@ package p.lodz.ms.manage;
 
 import java.io.File;
 
-import p.lodz.ms.Configuration;
-import p.lodz.ms.StaticContainer;
+import p.lodz.ms.Context;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 
@@ -12,26 +11,22 @@ public class GraphManager {
     public static void drawFacilitiesGraph(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 
-	File network = new File(chromosomeDir + "/"
-		+ StaticContainer.networkFileName);
-	File facilities = new File(Configuration.getInstance()
+	File network = new File(chromosomeDir + "/" + Context.networkFileName);
+	File facilities = new File(Context.getI().getConfig()
 		.getScenarioFacilities());
 	File fOutput = new File(chromosomeDir + "/"
-		+ StaticContainer.facilitiesGraphName);
+		+ Context.facilitiesGraphName);
 
-	new PythonMethods().facilitiesGraph(network, facilities,
-		fOutput);
+	new PythonMethods().facilitiesGraph(network, facilities, fOutput);
     }
 
     public static void drawEventsGraph(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 
-	File network = new File(chromosomeDir + "/"
-		+ StaticContainer.networkFileName);
+	File network = new File(chromosomeDir + "/" + Context.networkFileName);
 	File events = new File(chromosomeDir + "/"
-		+ StaticContainer.outputEventsFileName);
-	File eOutput = new File(chromosomeDir + "/"
-		+ StaticContainer.eventsFolderName);
+		+ Context.outputEventsFileName);
+	File eOutput = new File(chromosomeDir + "/" + Context.eventsFolderName);
 
 	new PythonMethods().eventsGraph(network, events, eOutput);
     }
@@ -39,10 +34,8 @@ public class GraphManager {
     public static void drawNetworkGraph(LinksChromosome chromosome) {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 
-	File network = new File(chromosomeDir + "/"
-		+ StaticContainer.networkFileName);
-	File nOutput = new File(chromosomeDir + "/"
-		+ StaticContainer.networkGraphName);
+	File network = new File(chromosomeDir + "/" + Context.networkFileName);
+	File nOutput = new File(chromosomeDir + "/" + Context.networkGraphName);
 
 	new PythonMethods().networkGraph(network, nOutput);
     }

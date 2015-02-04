@@ -3,10 +3,11 @@ package p.lodz.ms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
-public class StaticContainer {
+public class Context {
 
-    private static StaticContainer instance;
+    private static Context instance;
 
     public static final String facilitiesGraphName = "facilities.png";
     public static final String outputEventsFileName = "output_events.xml.gz";
@@ -18,27 +19,35 @@ public class StaticContainer {
     public static final String fitnessFilename = "fitness.txt";
     public static final String fitnessInitialFilename = "fitnessInitial.txt";
 
+    // properties
+    private Properties properties;
+
+    // main configuration
+    private Configuration config;
+
     // starting value does not matter
-    private String gaIterationPrefix = "ga.";
-    // Always starts at 0 iteration
+    private String gaIterationPrefix;
+
+    // Should start at 0 iteration
     private Integer gaCurrentIteration = 0;
 
     private Thread closeChildThread;
     private List<Process> childProcess = Collections
 	    .synchronizedList(new ArrayList<Process>());
 
-    public static StaticContainer getInstance() {
+    public static Context getI() {
 	if (instance == null) {
 	    synchronized (Configuration.class) {
 		if (instance == null) {
-		    instance = new StaticContainer();
+		    instance = new Context();
 		}
 	    }
 	}
 	return instance;
     }
 
-    private StaticContainer() {
+    private Context() {
+	// just a thread that kills the child processes
 	closeChildThread = new Thread() {
 	    public void run() {
 		for (Process p : childProcess) {
@@ -48,6 +57,7 @@ public class StaticContainer {
 	};
     }
 
+    // Current iteration stuff
     public Integer getGaCurrentIteration() {
 	return gaCurrentIteration;
     }
@@ -56,6 +66,11 @@ public class StaticContainer {
 	this.gaCurrentIteration = gaCurrentIteration;
     }
 
+    public void increaseGaCurrentIteration() {
+	this.gaCurrentIteration++;
+    }
+
+    // currentIterationPath
     public String getGaCurrentIterationPath() {
 	return new String(gaIterationPrefix + getGaCurrentIteration() + "/");
     }
@@ -68,6 +83,7 @@ public class StaticContainer {
 	this.gaIterationPrefix = gaIterationPrefix;
     }
 
+    // to kill the matsim threads (in case)
     public Thread getCloseChildThread() {
 	return closeChildThread;
     }
@@ -80,8 +96,18 @@ public class StaticContainer {
 	this.childProcess.remove(p);
     }
 
-    public void increaseGaCurrentIteration() {
-	this.gaCurrentIteration++;
+    // main configuration
+    public Configuration getConfig() {
+	return config;
+    }
+
+    public void setConfig(Configuration mainConfig) {
+	this.config = mainConfig;
+    }
+
+    // properties
+    public String getProperty(String input) {
+	return properties.getProperty(input);
     }
 
 }

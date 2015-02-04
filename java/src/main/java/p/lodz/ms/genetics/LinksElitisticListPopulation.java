@@ -12,7 +12,7 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
 
-import p.lodz.ms.Configuration;
+import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
@@ -51,7 +51,7 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     // We need to precalculate the fitness using threads due to long
     // calculations.
     private void precalculate() {
-	Integer threads = Configuration.getInstance().getProjectThreads();
+	Integer threads = Context.getI().getConfig().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (Chromosome chromosome : this.getChromosomes()) {
 	    Runnable worker = new MATSimThread(chromosome);

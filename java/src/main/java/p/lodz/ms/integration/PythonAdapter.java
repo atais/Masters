@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
+import p.lodz.ms.Context;
 
 public class PythonAdapter {
 
@@ -21,8 +21,8 @@ public class PythonAdapter {
 	String pyReturn = null;
 
 	List<String> command = new ArrayList<String>();
-	command.add(Configuration.getInstance().getProjectPythonPath());
-	command.add(Configuration.getInstance().getProjectPythonMain());
+	command.add(Context.getI().getConfig().getProjectPythonPath());
+	command.add(Context.getI().getConfig().getProjectPythonMain());
 	command.addAll(Arrays.asList(commands));
 
 	ProcessBuilder builder = new ProcessBuilder(command);

@@ -29,7 +29,6 @@ public class Configuration {
     private static final Integer DEFAULTGAMAXMUTATION = 10;
     private static final Integer DEFAULTGAMAXCROSSOVER = 10;
 
-    private static Configuration instance;
     private String projectName;
     private String projectOutputDir;
     private Integer projectThreads;
@@ -56,31 +55,21 @@ public class Configuration {
     private Integer gaMaxMutationAttempts;
     private Integer gaMaxCrossoverAttempts;
 
-    public static Configuration getInstance() {
-	if (instance == null) {
-	    synchronized (Configuration.class) {
-		if (instance == null) {
-		    instance = new Configuration();
-		}
-	    }
-	}
-	return instance;
+    public Configuration(File configFile) throws ConfigurationException {
+	this(new XMLConfiguration(configFile));
     }
 
-    private Configuration() {
+    public Configuration(String configFile) throws ConfigurationException {
+	this(new XMLConfiguration(configFile));
     }
 
-    public Configuration readXMLFile(File configFile)
+    public Configuration(XMLConfiguration configFile)
 	    throws ConfigurationException {
-	return readConfig(new XMLConfiguration(configFile));
+	readConfig(configFile);
+	Context.getI().setConfig(this);
     }
 
-    public Configuration readXMLFile(String configFile)
-	    throws ConfigurationException {
-	return readConfig(new XMLConfiguration(configFile));
-    }
-
-    private Configuration readConfig(XMLConfiguration config) {
+    private void readConfig(XMLConfiguration config) {
 	this.projectName = config.getString("project.name", DEFAULTPNAME);
 	this.projectOutputDir = config.getString("project.output-dir",
 		DEFAULTOUTPUT);
@@ -123,7 +112,6 @@ public class Configuration {
 		"genetics.max-mutation-attempts", DEFAULTGAMAXMUTATION);
 	this.gaMaxCrossoverAttempts = config.getInteger(
 		"genetics.max-crossover-attempts", DEFAULTGAMAXCROSSOVER);
-	return this;
     }
 
     public String getProjectName() {

@@ -25,8 +25,7 @@ public class MATSimThreadTest {
 		.getContextClassLoader();
 	URL is = classloader.getResource("test-config.xml");
 
-	config = Configuration.getInstance();
-	config.readXMLFile(is.toString());
+	config = new Configuration(is.toString());
 
 	network = new File(config.getScenarioNetwork());
 

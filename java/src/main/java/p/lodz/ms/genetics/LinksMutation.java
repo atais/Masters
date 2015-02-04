@@ -5,7 +5,7 @@ import org.apache.commons.math3.genetics.BinaryMutation;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
 
-import p.lodz.ms.Configuration;
+import p.lodz.ms.Context;
 import p.lodz.ms.integration.PythonMethods;
 
 public class LinksMutation extends BinaryMutation {
@@ -17,7 +17,7 @@ public class LinksMutation extends BinaryMutation {
     public Chromosome mutate(Chromosome original)
 	    throws MathIllegalArgumentException {
 	int attempt = 0;
-	int max = Configuration.getInstance().getGaMaxMutationAttempts();
+	int max = Context.getI().getConfig().getGaMaxMutationAttempts();
 	Chromosome mutated = super.mutate(original);
 	boolean isStronglyConnected = new PythonMethods()
 		.checkChromosome(mutated);

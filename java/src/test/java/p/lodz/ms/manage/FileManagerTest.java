@@ -25,8 +25,7 @@ public class FileManagerTest {
 		.getContextClassLoader();
 	URL is = classloader.getResource("test-config.xml");
 
-	config = Configuration.getInstance();
-	config.readXMLFile(is.toString());
+	config = new Configuration(is.toString());
 	
 	FileUtils.forceMkdir(FileManager.getChromosomeDir(chromosome));
     }

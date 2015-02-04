@@ -1,12 +1,10 @@
 package p.lodz.ms;
 
-
 import java.net.URL;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.junit.Assert;
 import org.junit.Test;
-
 
 public class ConfigurationTest {
 
@@ -16,8 +14,7 @@ public class ConfigurationTest {
 		.getContextClassLoader();
 	URL is = classloader.getResource("test-config.xml");
 
-	Configuration config = Configuration.getInstance().readXMLFile(
-		is.toString());
+	Configuration config = new Configuration(is.toString());
 
 	Assert.assertEquals("siouxfalls", config.getProjectName());
     }

@@ -23,8 +23,7 @@ public class LinksMutationTest {
 		.getContextClassLoader();
 	URL is = classloader.getResource("test-config.xml");
 
-	config = Configuration.getInstance();
-	config.readXMLFile(is.toString());
+	config = new Configuration(is.toString());
 
 	File network = new File(config.getScenarioNetwork());
 	chromosome = new PythonMethods().convertNetworkToBinary(network);
