@@ -6,14 +6,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.math3.genetics.Chromosome;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
 import p.lodz.ms.genetics.LinksChromosome;
-import p.lodz.ms.genetics.workers.MATSimThread;
 import p.lodz.ms.integration.PythonMethods;
 
 public class MATSimThreadTest {
@@ -46,7 +44,7 @@ public class MATSimThreadTest {
     @Test
     public void speedTest() {
 
-	for (int i = 2; i <= 4; i++) {
+	for (int i = 1; i <= 4; i++) {
 	    long startTime = System.nanoTime();
 	    runTest(i);
 	    long endTime = System.nanoTime();
