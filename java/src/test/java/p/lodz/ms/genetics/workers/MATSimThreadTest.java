@@ -12,13 +12,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import p.lodz.ms.Configuration;
+import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.genetics.workers.MATSimThread;
 import p.lodz.ms.integration.PythonMethods;
 
 public class MATSimThreadTest {
 
-    private Chromosome chromosome;
     private Configuration config;
+    private File network;
 
     @Before
     public void build() throws ConfigurationException {
@@ -29,12 +30,14 @@ public class MATSimThreadTest {
 	config = Configuration.getInstance();
 	config.readXMLFile(is.toString());
 
-	File network = new File(config.getScenarioNetwork());
-	chromosome = new PythonMethods().convertNetworkToBinary(network);
+	network = new File(config.getScenarioNetwork());
+
     }
 
     // @Test
     public void matsimTest() {
+	LinksChromosome chromosome = new PythonMethods()
+		.convertNetworkToBinary(network);
 	MATSimThread t = new MATSimThread(chromosome);
 	t.run();
 	Assert.assertNotNull(chromosome.getFitness());
@@ -43,12 +46,12 @@ public class MATSimThreadTest {
     @Test
     public void speedTest() {
 
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 2; i <= 4; i++) {
 	    long startTime = System.nanoTime();
 	    runTest(i);
 	    long endTime = System.nanoTime();
 	    long duration = (endTime - startTime) / 1000000;
-	    System.out.println("The test took " + duration + " ms");
+	    System.err.println("The test took " + duration + " ms");
 	}
 
     }
@@ -56,6 +59,8 @@ public class MATSimThreadTest {
     private void runTest(int threads) {
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (int i = 0; i < 12; i++) {
+	    LinksChromosome chromosome = new PythonMethods()
+		    .convertNetworkToBinary(network);
 	    Runnable worker = new MATSimThread(chromosome);
 	    executor.execute(worker);
 	}
