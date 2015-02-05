@@ -10,9 +10,8 @@ import p.lodz.ms.integration.PythonMethods;
 
 public class LinksMutation extends BinaryMutation {
 
-    private final static Logger logger = Logger
-	    .getLogger(LinksMutation.class);
-    
+    private final static Logger logger = Logger.getLogger(LinksMutation.class);
+
     @Override
     public Chromosome mutate(Chromosome original)
 	    throws MathIllegalArgumentException {

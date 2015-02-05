@@ -52,8 +52,7 @@ public class GeneticsModule {
 	Context.getI().setGaIterationPrefix("begin.");
 	logger.info("Loading initial network");
 	File network = new File(config.getScenarioNetwork());
-	LinksChromosome initial = new PythonMethods()
-		.convertNetworkToBinary(network);
+	LinksChromosome initial = new PythonMethods().xmlToBin(network);
 	new MATSimThread(initial).run();
 	initialGraphMethods(initial);
 

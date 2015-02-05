@@ -35,7 +35,7 @@ public class ConfigurationModule {
     private void startConfiguration(String configFile)
 	    throws ConfigurationException, IOException {
 	config = new Configuration(configFile);
-	
+
 	logger.setLevel(Level.toLevel(config.getProjectLogLevel()));
 
 	if (!config.getProjectLogFile().isEmpty()) {

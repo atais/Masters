@@ -2,7 +2,6 @@ package p.lodz.ms.genetics;
 
 import org.junit.Test;
 
-
 public class LinksChromosomeTest {
 
     @Test

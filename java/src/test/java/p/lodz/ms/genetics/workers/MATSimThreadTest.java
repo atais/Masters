@@ -33,8 +33,7 @@ public class MATSimThreadTest {
 
     // @Test
     public void matsimTest() {
-	LinksChromosome chromosome = new PythonMethods()
-		.convertNetworkToBinary(network);
+	LinksChromosome chromosome = new PythonMethods().xmlToBin(network);
 	MATSimThread t = new MATSimThread(chromosome);
 	t.run();
 	Assert.assertNotNull(chromosome.getFitness());
@@ -56,8 +55,7 @@ public class MATSimThreadTest {
     private void runTest(int threads) {
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
 	for (int i = 0; i < 12; i++) {
-	    LinksChromosome chromosome = new PythonMethods()
-		    .convertNetworkToBinary(network);
+	    LinksChromosome chromosome = new PythonMethods().xmlToBin(network);
 	    Runnable worker = new MATSimThread(chromosome);
 	    executor.execute(worker);
 	}

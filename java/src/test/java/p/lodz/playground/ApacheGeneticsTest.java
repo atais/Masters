@@ -17,7 +17,6 @@ package p.lodz.playground;
  * limitations under the License.
  */
 
-
 import java.util.LinkedList;
 import java.util.List;
 

@@ -69,7 +69,7 @@ public class FileManager {
 	File chromosomeDir = FileManager.getChromosomeDir(chromosome);
 	File destNetwork = new File(chromosomeDir + "/"
 		+ Context.getI().getProp("file.network"));
-	new PythonMethods().convertBinaryToNetwork(chromosome, destNetwork);
+	new PythonMethods().binToXml(chromosome, destNetwork);
     }
 
     public static void prepareChromosomeConfig(LinksChromosome chromosome) {
