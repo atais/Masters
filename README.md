@@ -31,7 +31,7 @@ Continue brewing
 ```
 brew doctor
 brew update && upgrade
-brew install caskroom/cask/brew-cask python freetype maven
+brew install python freetype maven
 ```
 
 Final step, python dependencies
