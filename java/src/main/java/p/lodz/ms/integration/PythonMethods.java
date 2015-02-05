@@ -53,8 +53,8 @@ public class PythonMethods extends PythonAdapter {
 
     public void convertBinaryToNetwork(LinksChromosome chromosome, File dest) {
 	String defaultNetwork = Context.getI().getConfig().getScenarioNetwork();
-	String[] parameters = new String[] { fromBinaryToXml, defaultNetwork,
-		chromosome.toString(), dest.getAbsolutePath() };
+	String[] parameters = new String[] { fromBinaryToXml,
+		chromosome.toString(), defaultNetwork, dest.getAbsolutePath() };
 	defaultCall(parameters);
     }
 

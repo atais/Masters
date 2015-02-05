@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
 
     def testNetworkGraph(self):
         print "network test start"
-        graph = r('resources/ga-network.xml')
+        graph = r('resources/default-network.xml')
         out = r('output/network')
         draw_network_graph(graph, out)
         self.assertTrue(os.path.exists(r('output/network.png')), "file not created")
@@ -36,10 +36,10 @@ class Test(unittest.TestCase):
          
         
     def testNetworkEvents(self):
-        draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events.xml.gz'), r('output/test'))
+        draw_events_graph(r('resources/default-network.xml'), r('resources/output_events.xml.gz'), r('output/test'))
         self.assertTrue(os.path.exists(r('output/test')), "path created")
         
-        draw_events_graph(r('resources/proper-network.xml'), r('resources/output_events_big.xml.gz'), r('output/test_big'))
+        draw_events_graph(r('resources/default-network.xml'), r('resources/output_events_big.xml.gz'), r('output/test_big'))
         self.assertTrue(os.path.exists(r('output/test')), "path created")
         
         self.assertTrue(True)

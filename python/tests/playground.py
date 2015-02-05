@@ -7,7 +7,7 @@ import unittest
 from tests.utils import r
 import ms.network as network
 import networkx as nx
-import ms.network_simplify as simple
+import ms.graph_simplify as simple
 
 
 class Test(unittest.TestCase):
@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
         graph = network.generate_network_graph(xml)
         
         simple_graph = simple.to_simple_graph(graph)
-                
+              
         network.save_graph(simple_graph, r('output/test'))
         network.save_graph(graph, r('output/network'))
         pass

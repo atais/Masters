@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
             os.remove(r('output/facilities.png'))
 
     def testFacilitiesMain(self):
-        network = r('resources/proper-network.xml')
+        network = r('resources/default-network.xml')
         facilities = r('resources/facilities.xml')
         output = r("output/facilities")
         
