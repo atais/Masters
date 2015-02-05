@@ -6,7 +6,7 @@ Created on 18 sty 2015
 import os
 import unittest
 
-import ms.analyse 
+import ms.network_analyse
 from utils import r 
 
 
@@ -20,7 +20,7 @@ class AnalyseTest(unittest.TestCase):
         source = (r('resources/default-network.xml'))
         output = (r('output/network-analised.xml'))
         
-        ms.analyse.analyse_and_save(source, output)
+        ms.network_analyse.analyse_and_save(source, output)
         self.assertTrue(os.path.exists(r('output/network-analised.xml')), "file created")
         print "analyse test done"
 

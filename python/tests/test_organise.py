@@ -8,7 +8,7 @@ import unittest
 import os
 import shutil
 import logging
-from ms.organise import organise_output, organise_best
+from ms.organise_output import organise_output, organise_best
 import zipfile
 from tests.utils import r
 

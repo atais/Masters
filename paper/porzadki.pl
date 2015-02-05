@@ -24,6 +24,11 @@
 #   przeformatowaniu (próba usunięcia przeniesień wyrazów) (uwaga na ew. 
 #   znaki komentarza - "%"!)
 
+##################
+# URUCHAMIANIE:
+# perl porzadki.pl plik
+##################
+
 use strict;
 #--------------------------------------------------
 # use warnings;

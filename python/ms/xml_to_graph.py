@@ -12,9 +12,9 @@ def default_pos(node_attr):
 
 def xml_to_graph(xml, graph=None, node_attr={}, link_attr={}, pos_function=default_pos):
     network = etree.parse(xml)
-    return network_to_graph(network, graph=graph, node_attr=node_attr, link_attr=link_attr, pos_function=pos_function)
+    return lxml_to_graph(network, graph=graph, node_attr=node_attr, link_attr=link_attr, pos_function=pos_function)
 
-def network_to_graph(network, graph=None, node_attr={}, link_attr={}, pos_function=default_pos):
+def lxml_to_graph(network, graph=None, node_attr={}, link_attr={}, pos_function=default_pos):
     '''
     converts network (lxml) to networkx DiGraph
     network - lxml

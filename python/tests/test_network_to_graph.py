@@ -4,7 +4,7 @@ Created on 26 sty 2015
 @author: michalsiatkowski
 '''
 import unittest
-from ms.network_to_graph import xml_to_graph
+from ms.xml_to_graph import xml_to_graph
 from tests.utils import r
 from ms.network import generate_network_graph
 

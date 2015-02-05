@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from pylab import rcParams
 import networkx as nx
 import os
-from network_to_graph import xml_to_graph
+from ms.xml_to_graph import xml_to_graph
 
 @timing
 def save_graph(filename):

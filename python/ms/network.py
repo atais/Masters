@@ -11,7 +11,7 @@ import networkx as nx
 import math as math
 import logging
 import os
-from network_to_graph import xml_to_graph
+from ms.xml_to_graph import xml_to_graph
 import gzip
 
         

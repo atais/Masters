@@ -5,7 +5,7 @@ Created on 18 sty 2015
 '''
 import unittest
 import os
-import ms.facilities as fac
+import ms.network_facilities as fac
 from utils import r 
 
 class Test(unittest.TestCase):
