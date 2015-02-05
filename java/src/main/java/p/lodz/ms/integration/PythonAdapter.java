@@ -1,13 +1,15 @@
 package p.lodz.ms.integration;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecuteResultHandler;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+import org.apache.commons.exec.ExecuteWatchdog;
+import org.apache.commons.exec.Executor;
+import org.apache.commons.exec.LogOutputStream;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
@@ -17,30 +19,36 @@ public class PythonAdapter {
 
     private final static Logger logger = Logger.getLogger(PythonAdapter.class);
 
+    private String pyReturn = null;
+
     protected String defaultCall(String... commands) {
-	String pyReturn = null;
 
-	List<String> command = new ArrayList<String>();
-	command.add(Context.getI().getConfig().getProjectPythonPath());
-	command.add(Context.getI().getConfig().getProjectPythonMain());
-	command.addAll(Arrays.asList(commands));
+	CommandLine cmdLine = new CommandLine(Context.getI().getConfig()
+		.getProjectPythonPath());
+	cmdLine.addArgument(Context.getI().getConfig().getProjectPythonMain());
+	cmdLine.addArguments(commands);
 
-	ProcessBuilder builder = new ProcessBuilder(command);
-	Process process;
-	try {
-	    process = builder.start();
-	    InputStream is = process.getInputStream();
-	    InputStreamReader isr = new InputStreamReader(is);
-	    BufferedReader br = new BufferedReader(isr);
-	    String line;
-	    while ((line = br.readLine()) != null) {
+	logger.debug(cmdLine.toString());
+
+	DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
+	Executor executor = new DefaultExecutor();
+	executor.setStreamHandler(new PumpStreamHandler(new LogOutputStream() {
+	    @Override
+	    protected void processLine(String line, int logLevel) {
 		if (line.contains("return:")) {
 		    pyReturn = line;
 		} else {
-		    logger.info(line);
+		    logger.warn(line);
 		}
 	    }
-	    process.waitFor();
+	}));
+	executor.setWatchdog(new ExecuteWatchdog(
+		ExecuteWatchdog.INFINITE_TIMEOUT));
+	try {
+	    executor.execute(cmdLine, resultHandler);
+	    resultHandler.waitFor();
+	} catch (ExecuteException e) {
+	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (InterruptedException e) {
@@ -56,5 +64,4 @@ public class PythonAdapter {
 	}
 	return pyReturn;
     }
-
 }

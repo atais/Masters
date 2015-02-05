@@ -68,6 +68,7 @@ public class GeneticsModule {
     }
 
     private void initialGraphMethods(LinksChromosome initial) {
+	logger.info("Extra actions with initial chromosome");
 	GraphManager.drawFacilitiesGraph(initial);
 	GraphManager.drawEventsGraph(initial);
 	GraphManager.drawNetworkGraph(initial);
