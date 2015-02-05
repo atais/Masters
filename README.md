@@ -46,15 +46,13 @@ pip install lxml Pillow networkx matplotlib numpy pygraphviz
 python -m tests discover
 ```
 ### Maven install
-Remember to install matsim first
+To install matsim, use
 ```
 mvn clean install -P release -Dmaven.test.skip=true
 ```
 The main project
 ```
 mvn -Dtest=AppTestLinux test
-```
-or (check the config file)
-```
+mvn -Dtest=AppTestAzure test
 mvn -Dtest=AppTest test
 ```
