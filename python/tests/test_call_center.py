@@ -22,7 +22,6 @@ class Test(unittest.TestCase):
         
         result = call_center.main(['xml_to_binary', str(source)])
         self.assertIsNotNone(result)
-        print result
 
 
 
