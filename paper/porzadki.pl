@@ -75,7 +75,7 @@ sub PoprawNielamliwe {
 	&NielamliweInicjaly;
 	&NielamliweDaty;
 	&NielamliweBibliograf;
-	&NielamliweJednostki;
+#	&NielamliweJednostki;
 	&NielamliweTytuly;
 #	&NielamliweInne;
 #	&NielamliweWyliczenia;
