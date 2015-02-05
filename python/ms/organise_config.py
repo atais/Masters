@@ -5,6 +5,7 @@ Created on 19 sty 2015
 '''
 from lxml import etree
 
+
 def customize_config(config, facilities, network, population, output, iterations):
     xml = etree.parse(config)
     

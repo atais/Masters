@@ -3,15 +3,17 @@ Created on 26 sty 2015
 
 @author: michalsiatkowski
 '''
+import ast
+from random import randint
+
 from lxml import etree
 import networkx
 
-from ms.xml_to_binary import xml_to_binary
-from ms.binary_to_xml import binary_to_xml
+from binary_to_xml import binary_to_xml
+from xml_to_binary import xml_to_binary
+from xml_to_graph import lxml_to_graph
 from utils import timing
-from random import randint
-import ast
-from ms.xml_to_graph import lxml_to_graph
+
 
 def lxml_strongly_connected(lxml):
     graph = lxml_to_graph(lxml)
@@ -30,10 +32,10 @@ def create_randomized_sc_graph(oryginal_xml):
     array = ast.literal_eval(xml_to_binary(oryginal_xml))
     
     start = 0
-    stop = randint(1,4)
+    stop = randint(1, 4)
     
     while start < stop:
-        index = randint(0, len(array)-1)
+        index = randint(0, len(array) - 1)
         if (array[index] is 1):
             temp = list(array)
             temp[index] = 0

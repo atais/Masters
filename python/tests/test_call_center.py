@@ -16,7 +16,16 @@ class Test(unittest.TestCase):
         output = (r('output/network-analised.xml'))
         
         call_center.main(['analyse_and_save', str(source), str(output)])
-        print "call center test done"
+
+    def testMain2(self):
+        source = (r('resources/default-network.xml'))
+        
+        result = call_center.main(['xml_to_binary', str(source)])
+        self.assertIsNotNone(result)
+        print result
+
+
+
 
 
 if __name__ == "__main__":

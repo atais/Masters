@@ -3,7 +3,8 @@ Created on 5 lut 2015
 
 @author: michalsiatkowski
 '''
-from ms import graph_simplify
+from graph_simplify import to_simple_graph 
+
 
 def simple_graph_to_binary(graph):
     binary = []
@@ -13,5 +14,5 @@ def simple_graph_to_binary(graph):
     return str(binary)
 
 def graph_to_binary(graph):
-    graph = graph_simplify.to_simple_graph(graph)
+    graph = to_simple_graph(graph)
     return simple_graph_to_binary(graph)

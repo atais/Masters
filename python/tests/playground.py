@@ -6,7 +6,6 @@ Created on 19 sty 2015
 import unittest
 from tests.utils import r
 import ms.network as network
-import networkx as nx
 import ms.graph_simplify as simple
 
 

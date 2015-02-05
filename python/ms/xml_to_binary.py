@@ -4,8 +4,9 @@ Created on 18 sty 2015
 @author: michalsiatkowski
 '''
 from lxml import etree
-import ms.xml_to_graph as xml_to_graph
-from ms.graph_to_binary import graph_to_binary
+
+from graph_to_binary import graph_to_binary
+import xml_to_graph as xml_to_graph
 
 
 def xml_to_binary(xml):

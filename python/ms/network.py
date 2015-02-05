@@ -4,17 +4,19 @@ Created on 7 sty 2015
 @author: michalsiatkowski
 '''
 
-from lxml import etree
-from utils import timing
-import utils
-import networkx as nx
-import math as math
+import gzip
 import logging
 import os
-from ms.xml_to_graph import xml_to_graph
-import gzip
 
-        
+from lxml import etree
+
+import math as math
+import networkx as nx
+from utils import timing
+import utils
+from xml_to_graph import xml_to_graph
+
+
 def save_graph(graph, filename):
     A = nx.to_agraph(graph)
     A.layout()

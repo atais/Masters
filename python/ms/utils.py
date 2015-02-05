@@ -3,8 +3,9 @@ Created on 10 sty 2015
 
 @author: michalsiatkowski
 '''
-import time
 import logging
+import time
+
 
 def timing(f):
     '''

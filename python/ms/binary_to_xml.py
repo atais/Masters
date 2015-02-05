@@ -3,10 +3,13 @@ Created on 5 lut 2015
 
 @author: michalsiatkowski
 '''
-from lxml import etree
 import ast
-from xml_to_graph import lxml_to_graph
+
+from lxml import etree
+
 from graph_simplify import to_simple_graph
+from xml_to_graph import lxml_to_graph
+
 
 def binary_to_xml(binary, xml, save=None):
     ory_network = etree.parse(xml)

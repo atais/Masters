@@ -4,13 +4,16 @@ Created on 12 sty 2015
 @author: michalsiatkowski
 '''
 
-from lxml import etree
-from utils import timing
-import matplotlib.pyplot as plt
-from pylab import rcParams
-import networkx as nx
 import os
-from ms.xml_to_graph import xml_to_graph
+
+from lxml import etree
+from pylab import rcParams
+
+import matplotlib.pyplot as plt
+import networkx as nx
+from utils import timing
+from xml_to_graph import xml_to_graph
+
 
 @timing
 def save_graph(filename):

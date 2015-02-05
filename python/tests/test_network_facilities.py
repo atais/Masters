@@ -21,7 +21,6 @@ class Test(unittest.TestCase):
         
         fac.draw_facilities_graph(network, facilities, output)
         self.assertTrue(os.path.exists(r('output/facilities.png')), "file created")
-        print "facilities test done"
 
 
 if __name__ == "__main__":

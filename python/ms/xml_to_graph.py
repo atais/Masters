@@ -4,8 +4,10 @@ Created on 26 sty 2015
 @author: michalsiatkowski
 '''
 
-import networkx as networkx
 from lxml import etree
+
+import networkx as networkx
+
 
 def default_pos(node_attr):
     return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))

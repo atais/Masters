@@ -20,7 +20,6 @@ class Test(unittest.TestCase):
         new_network = binary_to_xml(binary, mother_file) 
         graph = lxml_to_graph(new_network)
         network.save_graph(graph, r('output/network'))
-        print "binary test done"
 
 
 if __name__ == "__main__":

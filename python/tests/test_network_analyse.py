@@ -22,7 +22,6 @@ class AnalyseTest(unittest.TestCase):
         
         ms.network_analyse.analyse_and_save(source, output)
         self.assertTrue(os.path.exists(r('output/network-analised.xml')), "file created")
-        print "analyse test done"
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

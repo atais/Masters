@@ -7,14 +7,13 @@ from inspect import getmembers, isfunction
 import sys
 
 from ms import binary_to_xml
+from ms import network
 from ms import network_analyse
 from ms import network_check
 from ms import network_facilities
-from ms import network
 from ms import organise_config
 from ms import organise_output
 from ms import xml_to_binary
-
 import utils
 
 
