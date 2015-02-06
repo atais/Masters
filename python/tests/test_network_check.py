@@ -30,6 +30,12 @@ class Test(unittest.TestCase):
         self.assertTrue(result  , "false!")
         # print binary
         pass
+    
+    def testStressTest(self):
+        for i in range(0, 1000):
+            mother_file = r('resources/network.xml')
+            binary = network_check.create_randomized_sc_graph(mother_file)
+            
 
 
 if __name__ == "__main__":

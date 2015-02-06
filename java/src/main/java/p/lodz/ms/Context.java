@@ -72,7 +72,7 @@ public class Context {
     }
 
     public void increaseGaCurrentIteration() {
-	this.gaCurrentIteration++;
+	this.gaCurrentIteration += 1;
     }
 
     // currentIterationPath

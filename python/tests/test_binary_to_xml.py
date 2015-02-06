@@ -21,7 +21,6 @@ class Test(unittest.TestCase):
         graph = lxml_to_graph(new_network)
         network.save_graph(graph, r('output/network'))
 
-
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.test_binary_to_xml']
     unittest.main()

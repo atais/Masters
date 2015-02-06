@@ -24,6 +24,7 @@ def binary_to_xml(binary, xml, save=None):
             removed_edge = ory_graph.edges()[idx]
             id_to_remove = ory_graph[removed_edge[0]][removed_edge[1]]
             for node_id in id_to_remove.get('path'):
+                print node_id
                 node = ory_network.xpath("//node[@id='" + str(node_id) + "']")[0]
                 node.getparent().remove(node)
                 
