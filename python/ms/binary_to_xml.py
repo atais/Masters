@@ -24,16 +24,18 @@ def binary_to_xml(binary, xml, save=None):
             removed_edge = ory_graph.edges()[idx]
             id_to_remove = ory_graph[removed_edge[0]][removed_edge[1]]
             for node_id in id_to_remove.get('path'):
-                print node_id
-                node = ory_network.xpath("//node[@id='" + str(node_id) + "']")[0]
-                node.getparent().remove(node)
-                
-                links_from = (ory_network.xpath("//link[@from='" + node_id + "']"))
-                for link in links_from:
-                    link.getparent().remove(link)
-                links_to = (ory_network.xpath("//link[@to='" + node_id + "']"))
-                for link in links_to:
-                    link.getparent().remove(link)
+                try:
+                    node = ory_network.xpath("//node[@id='" + str(node_id) + "']")[0]
+                    node.getparent().remove(node)
+                    
+                    links_from = (ory_network.xpath("//link[@from='" + node_id + "']"))
+                    for link in links_from:
+                        link.getparent().remove(link)
+                    links_to = (ory_network.xpath("//link[@to='" + node_id + "']"))
+                    for link in links_to:
+                        link.getparent().remove(link)
+                except IndexError:
+                    pass
     
     if (save is not None):
         ory_network.write(save)
