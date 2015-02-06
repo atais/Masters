@@ -61,6 +61,8 @@ public class MATSimThread implements Runnable {
 	command.add("org.matsim.run.Controler");
 	command.add(FileManager.getChromosomeConfig(chromosome));
 
+	logger.debug(command);
+	
 	try {
 	    ProcessBuilder builder = new ProcessBuilder(command);
 	    Process process = builder.start();
@@ -77,6 +79,8 @@ public class MATSimThread implements Runnable {
 		} else if (line.contains("WARN")) {
 		    logger.warn(line);
 		} else if (line.contains("FATAL")) {
+		    logger.fatal(line);
+		} else if (line.contains("Exception")) {
 		    logger.fatal(line);
 		}
 	    }

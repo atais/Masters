@@ -36,7 +36,15 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     @Override
     public Chromosome getFittestChromosome() {
 	// precalculate using threads
-	if (this.getChromosomes().get(0).getFitness() == Double.MAX_VALUE) {
+	boolean needsToPrecalc = false;
+	for (Chromosome chromosome : getChromosomes()) {
+	    if (chromosome.getFitness() == Double.MAX_VALUE) {
+		needsToPrecalc = true;
+		break;
+	    }
+	}
+
+	if (needsToPrecalc) {
 	    precalculate();
 	}
 
@@ -69,19 +77,20 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     // To maintain the type during generations
     @Override
     public Population nextGeneration() {
-	 // initialize a new generation with the same parameters
-	LinksElitisticListPopulation nextGeneration =
-                new LinksElitisticListPopulation(getPopulationLimit(), getElitismRate());
+	// initialize a new generation with the same parameters
+	LinksElitisticListPopulation nextGeneration = new LinksElitisticListPopulation(
+		getPopulationLimit(), getElitismRate());
 
-        final List<Chromosome> oldChromosomes = getChromosomeList();
-        Collections.sort(oldChromosomes);
+	final List<Chromosome> oldChromosomes = getChromosomeList();
+	Collections.sort(oldChromosomes);
 
-        // index of the last "not good enough" chromosome
-        int boundIndex = (int) FastMath.ceil((1.0 - getElitismRate()) * oldChromosomes.size());
-        for (int i = 0; i < boundIndex; i++) {
-            nextGeneration.addChromosome(oldChromosomes.get(i));
-        }
-        return nextGeneration;
+	// index of the last "not good enough" chromosome
+	int boundIndex = (int) FastMath.ceil((1.0 - getElitismRate())
+		* oldChromosomes.size());
+	for (int i = 0; i < boundIndex; i++) {
+	    nextGeneration.addChromosome(oldChromosomes.get(i));
+	}
+	return nextGeneration;
     }
 
 }

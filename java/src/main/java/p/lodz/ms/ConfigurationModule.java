@@ -44,7 +44,6 @@ public class ConfigurationModule {
 	    fa.setFile(config.getProjectDir() + "/"
 		    + config.getProjectLogFile());
 	    fa.setLayout(new PatternLayout("%d{ISO8601} %-5p (%t-%c{1}) %m%n"));
-	    fa.setThreshold(Level.toLevel(config.getProjectLogLevel()));
 	    fa.setAppend(true);
 	    fa.activateOptions();
 	    Logger.getRootLogger().addAppender(fa);

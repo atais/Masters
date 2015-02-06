@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<project>
-		<name>siouxfalls-test</name>
+		<name>siouxfalls-fake</name>
 		<output-dir>../output/</output-dir>
 		<threads>4</threads>
 		<log-level>INFO</log-level>
@@ -19,8 +19,8 @@
 		<iterations>1</iterations>
 	</scenario>
 	<genetics>
-		<population-size>4</population-size>
-		<max-generations>10</max-generations>
+		<population-size>8</population-size>
+		<max-generations>20</max-generations>
 		<elitism-rate>0.10</elitism-rate>
 		<crossover-rate>1</crossover-rate>
 		<mutation-rate>0.1</mutation-rate>

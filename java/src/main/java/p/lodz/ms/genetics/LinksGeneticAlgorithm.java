@@ -29,15 +29,15 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 
     // we need to keep track of the current generation counter
     // as well as, each best chromosome needs some special care
-    public Population evolve(final Population initial,
+    public Population evolve(final LinksElitisticListPopulation initial,
 	    final StoppingCondition condition) {
-	Population current = initial;
+	LinksElitisticListPopulation current = initial;
 	while (!condition.isSatisfied(current)) {
 	    logger.info("Evaluating generation: "
 		    + Context.getI().getGaCurrentIteration() + "/"
 		    + Context.getI().getConfig().getGaMaxGenerations());
 	    moveBestChromosome((LinksChromosome) current.getFittestChromosome());
-	    current = nextGeneration(current);
+	    current = (LinksElitisticListPopulation) nextGeneration(current);
 	    Context.getI().increaseGaCurrentIteration();
 	}
 	return current;
