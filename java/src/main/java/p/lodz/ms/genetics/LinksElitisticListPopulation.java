@@ -1,5 +1,6 @@
 package p.lodz.ms.genetics;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,6 +12,7 @@ import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
+import org.apache.commons.math3.util.FastMath;
 
 import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
@@ -34,7 +36,9 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     @Override
     public Chromosome getFittestChromosome() {
 	// precalculate using threads
-	precalculate();
+	if (this.getChromosomes().get(0).getFitness() == Double.MAX_VALUE) {
+	    precalculate();
+	}
 
 	// best so far
 	Chromosome bestChromosome = this.getChromosomes().get(0);
@@ -65,10 +69,19 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     // To maintain the type during generations
     @Override
     public Population nextGeneration() {
-	ElitisticListPopulation pop = (ElitisticListPopulation) super
-		.nextGeneration();
-	return (new LinksElitisticListPopulation(pop.getChromosomes(),
-		pop.getPopulationLimit(), pop.getElitismRate()));
+	 // initialize a new generation with the same parameters
+	LinksElitisticListPopulation nextGeneration =
+                new LinksElitisticListPopulation(getPopulationLimit(), getElitismRate());
+
+        final List<Chromosome> oldChromosomes = getChromosomeList();
+        Collections.sort(oldChromosomes);
+
+        // index of the last "not good enough" chromosome
+        int boundIndex = (int) FastMath.ceil((1.0 - getElitismRate()) * oldChromosomes.size());
+        for (int i = 0; i < boundIndex; i++) {
+            nextGeneration.addChromosome(oldChromosomes.get(i));
+        }
+        return nextGeneration;
     }
 
 }

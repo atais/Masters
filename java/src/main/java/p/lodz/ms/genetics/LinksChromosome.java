@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.math3.genetics.AbstractListChromosome;
 import org.apache.commons.math3.genetics.BinaryChromosome;
 import org.apache.commons.math3.genetics.Chromosome;
@@ -58,7 +57,7 @@ public class LinksChromosome extends BinaryChromosome {
 			    Charset.defaultCharset());
 	    fitness = new Double(lines.iterator().next());
 	} catch (IOException e) {
-	    logger.error(ExceptionUtils.getStackTrace(e));
+	    logger.warn("Trying to read not calculated fitness, may be on purpose.");
 	    fitness = Double.MAX_VALUE;
 	}
 	return fitness;

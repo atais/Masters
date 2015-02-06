@@ -12,9 +12,9 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.FixedGenerationCount;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.genetics.StoppingCondition;
-import org.apache.commons.math3.genetics.TournamentSelection;
 import org.apache.log4j.Logger;
 
+import p.lodz.ms.genetics.LinkTournamentSelection;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.genetics.LinksElitisticListPopulation;
 import p.lodz.ms.genetics.LinksGeneticAlgorithm;
@@ -45,7 +45,7 @@ public class GeneticsModule {
     public void runGeneticAlgorithm() throws IOException {
 	LinksGeneticAlgorithm ga = new LinksGeneticAlgorithm(
 		new LinksOnePointCrossover(), crossoverRate,
-		new LinksMutation(), mutationRate, new TournamentSelection(
+		new LinksMutation(), mutationRate, new LinkTournamentSelection(
 			tournamentArity));
 
 	// set the prefix for output clarification

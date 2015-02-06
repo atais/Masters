@@ -21,7 +21,7 @@
 	<genetics>
 		<population-size>20</population-size>
 		<max-generations>10</max-generations>
-		<elitism-rate>0.15</elitism-rate>
+		<elitism-rate>0.10</elitism-rate>
 		<crossover-rate>1</crossover-rate>
 		<mutation-rate>0.1</mutation-rate>
 		<tournament-arity>2</tournament-arity>
