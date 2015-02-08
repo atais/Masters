@@ -52,9 +52,12 @@ def generate_network_graph(xml, node_style=('solid', 'white'), edge_style=(2, 'o
 
 def fill_graph(network, graph, links):
     for k, v in links.items():
-        link = network.xpath("//link[@id='" + k + "']")[0]
-        graph[link.get('from')][link.get('to')]['occupied'] = v
-        
+        ## Fake Matsim walkaround
+        try:
+            link = network.xpath("//link[@id='" + k + "']")[0]
+            graph[link.get('from')][link.get('to')]['occupied'] = v
+        except IndexError:
+            pass
 def color_edge_occupation(graph):
     '''
         Scale edges for traffic

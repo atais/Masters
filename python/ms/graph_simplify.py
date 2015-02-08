@@ -5,7 +5,6 @@ Created on 5 lut 2015
 '''
 import networkx as nx
 
-
 def to_simple_graph(graph):
     simple_graph = nx.DiGraph()
     
@@ -48,6 +47,8 @@ def dfs_main_edges(G, source, mainNodes):
         stack = [(start, iter(G[start]))]
         
         # Path is to remember what edges are between main nodes
+        node_from = start
+        node_to = None
         path = []
         while stack:
             _, children = stack[-1]
@@ -57,11 +58,14 @@ def dfs_main_edges(G, source, mainNodes):
                     # we do not want a generator
                     # yield parent, child
                     visited.add(child)
-                    path.append(child)
+                    node_to = child
+                    path.append((node_from,node_to))
+                    node_from = node_to
                     stack.append((child, iter(G[child])))
                 if  child in zip(*mainNodes)[0] and child != source:
-                    path.remove(child)
-                    mainNeighbours.append((child, set(path)))
+                    mainNeighbours.append((child, path))
+                    node_from = source
+                    node_to = None
                     path = []
                     stack.pop()
                     

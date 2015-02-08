@@ -9,6 +9,7 @@ from lxml import etree
 
 from graph_simplify import to_simple_graph
 from xml_to_graph import lxml_to_graph
+import logging
 
 
 def binary_to_xml(binary, xml, save=None):
@@ -23,20 +24,26 @@ def binary_to_xml(binary, xml, save=None):
         if (val == 0):
             removed_edge = ory_graph.edges()[idx]
             id_to_remove = ory_graph[removed_edge[0]][removed_edge[1]]
-            for node_id in id_to_remove.get('path'):
+            for path in id_to_remove.get('path'):
                 try:
-                    node = ory_network.xpath("//node[@id='" + str(node_id) + "']")[0]
-                    node.getparent().remove(node)
-                    
-                    links_from = (ory_network.xpath("//link[@from='" + node_id + "']"))
-                    for link in links_from:
-                        link.getparent().remove(link)
-                    links_to = (ory_network.xpath("//link[@to='" + node_id + "']"))
-                    for link in links_to:
-                        link.getparent().remove(link)
+                    logging.debug('removing '+str(path))
+                    link = (ory_network.xpath("//link[@from='" + str(path[0]) + "' and @to='" + str(path[1]) + "'] "))[0]
+                    link.getparent().remove(link)
+
                 except IndexError:
-                    pass
-    
+                    logging.warn('could not remove ' + str(path))
+       
+    # find orphaned nodes
+    nodes = ory_network.findall('.//node')
+    for node in nodes:
+        links_from = (ory_network.xpath("//link[@from='" + node.get('id') + "']"))
+        links_to = (ory_network.xpath("//link[@to='" + node.get('id') + "']"))
+        
+        if ((not links_from) or (not links_to)):
+            logging.debug('removing '+etree.tostring(node))
+            node.getparent().remove(node) 
+        
+        
     if (save is not None):
         ory_network.write(save)
     return ory_network
