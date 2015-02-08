@@ -85,19 +85,18 @@ public class PythonMethods extends PythonAdapter {
 	this.defaultCall(parameters);
     }
 
-    public Boolean organiseBest(File dir) {
+    public void organiseBest(File dir) {
 	String command = c.getProp("python.organise.best");
 
 	String[] parameters = new String[] { command, dir.getAbsolutePath() };
-	String s = this.defaultCall(parameters);
-	return Boolean.valueOf(s);
+	this.defaultCall(parameters);
     }
 
-    public void organiseOutput(File output) {
+    public Double organiseOutput(File output) {
 	String command = c.getProp("python.organise.output");
-
 	String[] parameters = new String[] { command, output.getAbsolutePath() };
-	this.defaultCall(parameters);
+	String ret = this.defaultCall(parameters);
+	return Double.parseDouble(ret);
     }
 
     public void removeOutputEvents(File dir) {

@@ -59,7 +59,8 @@ def organise_output(output):
     os.remove(output + '/output_network.xml.gz')
     os.remove(output + '/output_personAttributes.xml.gz')
     os.remove(output + '/output_plans.xml.gz')
-    pass
+    ### Returns fitness
+    return time.group(1);
 
 def remove_output_events(output):
     output = output + '/../'
@@ -67,27 +68,6 @@ def remove_output_events(output):
     for dirname in dirs:
         os.remove(output + dirname + '/output_events.xml.gz')
     pass
-
-def store_chromosomes(output):
-    chromosomes = output + '/../'
-    root = output + '/../../'
-    
-    r = False
-    dirs = [x for x in os.listdir(chromosomes) if (not x.startswith('.') and x != 'best')]
-    for dirname in dirs:
-        binf = open(os.path.join(chromosomes + dirname, 'chromosome.txt'), "r")
-        binary = binf.readline()
-        binf.close()
-        
-        text_file = open((root + "chromosomes.txt"), "a+")
-        lines = text_file.readlines()
-        if binary not in lines:
-            text_file.write(binary + "\n")
-        else:
-            r = True
-        text_file.close()
-    
-    return r
 
 def organise_best(output):
     '''
@@ -116,4 +96,4 @@ def organise_best(output):
     
     pyplot.savefig(os.path.join(root, 'fitness.png'))
     remove_output_events(output)
-    return store_chromosomes(output)
+    pass

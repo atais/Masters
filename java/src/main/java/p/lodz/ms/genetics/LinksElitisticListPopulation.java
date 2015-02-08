@@ -1,5 +1,6 @@
 package p.lodz.ms.genetics;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -13,11 +14,15 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
 import org.apache.commons.math3.util.FastMath;
+import org.apache.log4j.Logger;
 
 import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
+
+    private final static Logger logger = Logger
+	    .getLogger(LinksElitisticListPopulation.class);
 
     public LinksElitisticListPopulation(int populationLimit, double elitismRate)
 	    throws NotPositiveException, OutOfRangeException {
@@ -36,17 +41,16 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     @Override
     public Chromosome getFittestChromosome() {
 	// precalculate using threads
-	boolean needsToPrecalc = false;
+	List<Chromosome> needToPrecalc = new ArrayList<Chromosome>();
 	for (Chromosome chromosome : getChromosomes()) {
-	    if (chromosome.getFitness() == Double.MAX_VALUE) {
-		needsToPrecalc = true;
-		break;
+	    // .fitness not .getFitness!!!
+	    if (chromosome.fitness() == Double.MAX_VALUE) {
+		needToPrecalc.add(chromosome);
 	    }
 	}
-
-	if (needsToPrecalc) {
-	    precalculate();
-	}
+	logger.info("Precalculating " + needToPrecalc.size() + "/"
+		+ getChromosomes().size());
+	precalculate(needToPrecalc);
 
 	// best so far
 	Chromosome bestChromosome = this.getChromosomes().get(0);
@@ -62,10 +66,10 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 
     // We need to precalculate the fitness using threads due to long
     // calculations.
-    private void precalculate() {
+    private void precalculate(List<Chromosome> needToPrecalc) {
 	Integer threads = Context.getI().getConfig().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
-	for (Chromosome chromosome : this.getChromosomes()) {
+	for (Chromosome chromosome : needToPrecalc) {
 	    Runnable worker = new MATSimThread(chromosome);
 	    executor.execute(worker);
 	}

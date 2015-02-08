@@ -58,6 +58,7 @@ def fill_graph(network, graph, links):
             graph[link.get('from')][link.get('to')]['occupied'] = v
         except IndexError:
             pass
+
 def color_edge_occupation(graph):
     '''
         Scale edges for traffic

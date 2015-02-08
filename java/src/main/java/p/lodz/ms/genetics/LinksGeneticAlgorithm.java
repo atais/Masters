@@ -33,9 +33,11 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	    final StoppingCondition condition) {
 	LinksElitisticListPopulation current = initial;
 	while (!condition.isSatisfied(current)) {
+	    logger.info("--------------------------");
 	    logger.info("Evaluating generation: "
 		    + Context.getI().getGaCurrentIteration() + "/"
 		    + Context.getI().getConfig().getGaMaxGenerations());
+	    logger.info("--------------------------");
 	    moveBestChromosome((LinksChromosome) current.getFittestChromosome());
 	    current = (LinksElitisticListPopulation) nextGeneration(current);
 	    Context.getI().increaseGaCurrentIteration();
@@ -58,11 +60,8 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
 	logger.info("Drawing events");
 	GraphManager.drawEventsGraph(chromosome);
 	logger.info("... doing all the best!");
-	Boolean duplicates = new PythonMethods().organiseBest(FileManager
+	new PythonMethods().organiseBest(FileManager
 		.getChromosomeDir(chromosome));
-	if (duplicates) {
-	    logger.warn("There are duplicates in chromosomes!");
-	}
 	logger.info("--------------------------");
     }
 

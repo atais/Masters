@@ -13,6 +13,7 @@ import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.log4j.Logger;
 
 import p.lodz.ms.Context;
+import p.lodz.ms.db.ChromosomeDao;
 import p.lodz.ms.genetics.LinksChromosome;
 import p.lodz.ms.integration.PythonMethods;
 import p.lodz.ms.manage.FileManager;
@@ -47,8 +48,9 @@ public class MATSimThread implements Runnable {
     }
 
     private void cleanAndGraph() {
-	new PythonMethods().organiseOutput(FileManager
+	Double fitness = new PythonMethods().organiseOutput(FileManager
 		.getChromosomeDir(chromosome));
+	ChromosomeDao.writeChromosome(chromosome, fitness);
     }
 
     private void runMatsim() throws InterruptedException {
@@ -62,7 +64,7 @@ public class MATSimThread implements Runnable {
 	command.add(FileManager.getChromosomeConfig(chromosome));
 
 	logger.debug(command);
-	
+
 	try {
 	    ProcessBuilder builder = new ProcessBuilder(command);
 	    Process process = builder.start();
@@ -73,7 +75,7 @@ public class MATSimThread implements Runnable {
 	    String line;
 	    while ((line = br.readLine()) != null) {
 		if (line.contains("### ITERATION")) {
-		    logger.info(line);
+		    logger.debug(line);
 		} else if (line.contains("ERROR")) {
 		    logger.error(line);
 		} else if (line.contains("WARN")) {
