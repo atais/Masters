@@ -69,4 +69,6 @@ public class LinksGeneticAlgorithm extends GeneticAlgorithm {
     public int getGenerationsEvolved() {
 	return Context.getI().getGaCurrentIteration();
     }
+    
+    
 }

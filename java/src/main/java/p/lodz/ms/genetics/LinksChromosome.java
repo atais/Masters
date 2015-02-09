@@ -42,8 +42,8 @@ public class LinksChromosome extends BinaryChromosome {
     public double fitness() {
 	return ChromosomeDao.readChromosomeScore(this);
     }
-    
-    //disabling cache.
+
+    // disabling cache.
     @Override
     public double getFitness() {
 	return this.fitness();
@@ -64,11 +64,6 @@ public class LinksChromosome extends BinaryChromosome {
 	return uuid;
     }
 
-    @Override
-    protected boolean isSame(Chromosome another) {
-	return super.isSame(another);
-    }
-
     public String getShortId() {
 	String id = this.toString();
 	id = id.replace("[", "");
@@ -76,6 +71,11 @@ public class LinksChromosome extends BinaryChromosome {
 	id = id.replaceAll(",", "");
 	id = id.replaceAll(" ", "");
 	return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	return super.isSame((Chromosome) obj);
     }
 
 }

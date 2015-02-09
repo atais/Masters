@@ -17,6 +17,7 @@
 \usepackage{geometry}
 \usepackage{verbatim}
 \usepackage{parskip}
+\usepackage{blindtext}
 
 \widowpenalty=10000
 \clubpenalty=10000
@@ -91,7 +92,7 @@ Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej 
 Ponieważ nie znaleźliśmy żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowaliśmy się na losowe przeszukiwanie przestrzeni rozwiązań.~Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, które zostały wykorzystane w~pracy.
 
 \subsubsection{Przedstawienie oceny optymalizacji.}
-Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego, w~celu potwierdzenia jego słuszności, zdecydowaliśmy się na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybraliśmy działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
+Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego, w~celu potwierdzenia jego słuszności, zdecydowaliśmy się na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który został wybrany działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
 
 \subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań.}
 Paradoks Braessa nie jest jedynym twierdzeniem traktującym o~problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa Thomsona\cite{downs} czy prawo Lewisa Mogridge’a\cite{lewis}}. Są jednak niemniej ważne. Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem, ani decydującym głosem w~decyzjach dotyczących ustalaniu rzeczywistej sieci drogowej miasta. 
@@ -482,7 +483,7 @@ Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzc
 
 Algorytm poszukiwania punktów artykulacji wykorzystuje przeszukiwanie grafu w~głąb. Podczas nierekurencyjnego przejścia, wierzchołek zostaje oznaczony jako punkt artykulacji, wtedy i~tylko wtedy, jeśli jest on korzeniem posiada więcej niż dwóch synów. A~wierzchołek $ v $ nie będący korzeniem drzewa DFS jest punktem artykulacji wtedy i~tylko wtedy, gdy przynajmniej dla jednego jego syna nie istnieje krawędź wtórna $ \{u,w\} $, taka że wierzchołek $ u~$ jest potomkiem $ v $ i~$ w~$ jest przodkiem $ v $.
 
-Punkty te są wykorzystywane, by podczas losowych mutacji i~krzyżowań w~algorytmie genetycznym nie doszło do stworzenia grafu innego niż grafu skierowanego silnie spójnego. Krok sprawdzenia jest wykonywany podczas każdorazowego zamykania drogi, zatem za każdym razem gdy zostaje wprowadzona nowa wartość $,,0''$ w~tablicy.
+Punkty te są wykorzystywane, by podczas losowych mutacji i~krzyżowań w~algorytmie genetycznym nie doszło do stworzenia grafu innego niż grafu skierowanego silnie spójnego. Krok sprawdzenia jest wykonywany podczas każdorazowego zamykania drogi, zatem za każdym razem gdy zostaje wprowadzona nowa wartość ,,$0$'' w~tablicy.
 
 \chapter{Technologie i~metody użyte.}\label{rozdz.technologie} 
 \section{Symulator transportu.}
@@ -501,7 +502,7 @@ Oczywiście MATSim nie jest jedynym dostępnym symulatorem transportu. Podobnych
 
 Projekt The Apache Commons jest tworzony przez Apache Software Foundation. Głównym celem projektu jest stworzenie wolnego oprogramowania do wielokrotnego użytku w~języku Java. Projekt podzielony jest na trzy główne części: proper, sandbox, i~dormant\cite{math}.
 
-W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułów różniących się funkcjonalnością i~celem. W~przypadku Apache Commons Math jest to moduł zapewniający rozwiązywania problemów głównie matematycznych i~statystycznych. Znajduje się w~nim implementacja podstawowej formy algorytmu genetycznego, którą rozszerzamy w~pracy.
+W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułów różniących się funkcjonalnością i~celem. Apache Commons Math jest modułem zapewniającym rozwiązywania problemów głównie matematycznych i~statystycznych. Znajduje się w~nim implementacja podstawowej formy algorytmu genetycznego, którą rozszerzamy w~pracy.
 
 \begin{figure}[ht]
 \centering
@@ -511,7 +512,7 @@ W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułó
 
 \section{Obsługa grafów.}
 
-Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał naszych oczekiwań zarówno pod względem wydajności jak i~stabilności zdecydowaliśmy się na stworzenie własnej implementacji. W~tym celu wykorzystałem dojrzały projekt NetworkX.~Jest to biblioteka wykonana w~języku Python stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji BSD-new\cite{networkx}. 
+Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał naszych oczekiwań zarówno pod względem wydajności jak i~stabilności zdecydowaliśmy się na stworzenie własnej implementacji. W~tym celu wykorzystaliśmy dojrzały projekt NetworkX. Jest to biblioteka wykonana w~języku Python stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji BSD-new\cite{networkx}. 
 
 \begin{figure}[ht]
 \centering
@@ -626,11 +627,11 @@ Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-3} prezentujemy ruch drogowy w~naj
 
 \chapter{Opis projektu.}\label{rozdz.opis} 
 
-W niniejszym rozdziale opiszę strukturę swojego projektu z~opisem jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowałem się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku operacji i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których wykonałem projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
+W niniejszym rozdziale opisujemy strukturę projektu z~opisem jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowaliśmy się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku operacji i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których został wykonany projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
 
 \section{Dane wejściowe.}
 
-Poniżej przedstawiam przykładowy plik konfiguracyjny dla projektu z~opisem jego funkcji.
+Przykładowy plik konfiguracyjny dla projektu z~opisem jego funkcji przedstawiono na listingu \ref{exconfig}.
 
 \lstset{
     language=xml,
@@ -640,7 +641,7 @@ Poniżej przedstawiam przykładowy plik konfiguracyjny dla projektu z~opisem jeg
     stringstyle=\color{red},
     breaklines=true,
     basicstyle=\ttfamily\scriptsize}
-\lstinputlisting[language=Xml, caption=Plik konfiguracyjny projektu]{img/config.xml}
+\lstinputlisting[language=Xml, caption=Plik konfiguracyjny projektu, label=exconfig]{img/config.xml} 
 
 \vspace*{15px}
 
@@ -659,41 +660,44 @@ Grupa \textit{project} odpowiada za główne ustawienia całego projektu, w~\tex
 
 Wyjaśnienie opcji \textit{project}:
 \begin{itemize}
-\item name - nazwa projektu, używana jako katalog wyjściowy
-\item output dir - katalog, gdzie zapisujemy wyniki
-\item threads - ilość wątków, które mają być użyte podczas obliczeń
-\item log level - poziom logowania Log4J\footnote{zewnętrzna biblioteka do logowania, dostępne poziomy: DEBUG, INFO, WARN, ERROR i~FATAL}
-\item python path - ścieżka instalacji Pythona
-\item python main - folder ze skryptami pomocniczymi
+\item name - nazwa projektu, używana jako katalog wyjściowy,
+\item output dir - katalog, gdzie zapisujemy wyniki,
+\item threads - ilość wątków, które mają być użyte podczas obliczeń,
+\item log level - poziom logowania Log4J\footnote{zewnętrzna biblioteka do logowania, dostępne poziomy: DEBUG, INFO, WARN, ERROR i~FATAL},
+\item python path - ścieżka instalacji Pythona,
+\item python main - folder ze skryptami pomocniczymi,
+\item java-path - ścieżka instalacji Javy,
+\item matsim-jar - scieżka do biblioteki MATSim,
+\item matsim-xmx - parametr maksymalnej przydzielonej pamięci dla symulacji MATSim.
 \end{itemize}
 
 \vspace*{15px}
 
 Wyjaśnienie opcji \textit{scenario}:
 \begin{itemize}
-\item config - scieżka dostępu pliku konfiguracyjnego scenariusz MATSim
-\item network - scieżka dostępu pliku z~siecią wejściową scenariusza
-\item population - scieżka dostępu pliku z~populacja scenariusza
-\item facilities - scieżka dostępu pliku z~budynkami scenariusza
-\item iterations - ilość iteracji symulacji MATSima
+\item config - scieżka dostępu pliku konfiguracyjnego scenariusz MATSim,
+\item network - scieżka dostępu pliku z~siecią wejściową scenariusza,
+\item population - scieżka dostępu pliku z~populacja scenariusza,
+\item facilities - scieżka dostępu pliku z~budynkami scenariusza,
+\item iterations - ilość iteracji symulacji MATSima.
 \end{itemize}
 
 \vspace*{15px}
 
 Wyjaśnienie opcji \textit{genetics}:
 \begin{itemize}
-\item population size - rozmiar populacji
-\item max generations - ilość testowanych generacji (warunek stopu)
-\item elitism rate - ułamek najlepszych chromosomów populacji biorący udział w~kolejnej iteracji
-\item crossover rate - szansa na krzyżowanie osobników
-\item mutation rate - szansa na mutacje osobników
-\item tournament rate - ilość osobników biorących udział w~turnieju
+\item population size - rozmiar populacji,
+\item max generations - ilość testowanych generacji (warunek stopu),
+\item elitism rate - ilość najlepszych chromosomów biorących udział w~kolejnej iteracji,
+\item crossover rate - szansa na krzyżowanie osobników,
+\item mutation rate - szansa na mutacje osobników,
+\item tournament rate - ilość osobników biorących udział w~turnieju.
 \end{itemize}
 
 
 \section{Wdrożenie.}
 
-Ze względu na duże wymagania sprzętowe obliczeń, a~zarazem ograniczoną przenośność rozwiązania z~powodu skorzystania z~Pythona, zdecydowałem się na usprawnienie rozwiązania. Wykorzystując system Linux Trisquel stworzyłem maszynę wirtualną spełniającą wszystkie wymagania do uruchomienia aplikacji. Dzięki temu mogłem wykorzystać inne maszyny oprócz tej, na której tworzyłem rozwiązanie, bez problemu przystosowania czy instalowania dużej ilości zewnętrznego oprogramowania i~bibliotek\cite{trisquel}.
+Ze względu na duże wymagania sprzętowe obliczeń, a~zarazem ograniczoną przenośność rozwiązania z~powodu skorzystania z~Pythona, zdecydowaliśmy się na usprawnienie rozwiązania. Wykorzystując system Linux Ubuntu stworzyliśmy maszynę wirtualną spełniającą wszystkie wymagania do uruchomienia aplikacji. Dzięki temu stało się możliwe wykorzystanie innych maszyny oprócz tej, na której tworzyłem rozwiązanie, bez problemu przystosowania czy instalowania dużej ilości zewnętrznego oprogramowania i~bibliotek\cite{trisquel}.
 
 \begin{figure}[ht]
 \centering
@@ -706,7 +710,6 @@ Ze względu na duże wymagania sprzętowe obliczeń, a~zarazem ograniczoną prze
 
 \chapter{Podsumowanie.}\label{rozdz.podsumowanie} 
 \section{Dyskusja wyników.}
-
 
 \section{Perspektywy dalszych badań w~dziedzinie.}
 
@@ -829,11 +832,9 @@ Ze względu na duże wymagania sprzętowe obliczeń, a~zarazem ograniczoną prze
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Abstract}
-\chapter*{Abstract}
+%\chapter*{Abstract}
 
-
-Yet to come\ldots{}
-
+\blindtext[4]
 
 
 \end{document}

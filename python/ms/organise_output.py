@@ -13,6 +13,7 @@ from matplotlib import pyplot
 import numpy
 
 from network import draw_network_graph
+from organise_iters import organise_iters_in, organise_iters_best
 
 
 def organise_output(output):
@@ -21,7 +22,7 @@ def organise_output(output):
     removing all iteration folder & other not important
     moving the output_tripdurations file & parsing it to fitness.txt
     '''
-    
+    organise_iters_in(output)
     logging.info("Cleaning up : " + str(output))
     iters = '/ITERS/'
     
@@ -59,7 +60,7 @@ def organise_output(output):
     os.remove(output + '/output_network.xml.gz')
     os.remove(output + '/output_personAttributes.xml.gz')
     os.remove(output + '/output_plans.xml.gz')
-    ### Returns fitness
+    # ## Returns fitness
     return time.group(1);
 
 def remove_output_events(output):
@@ -78,6 +79,7 @@ def organise_best(output):
     creating a symlink to the best chromosome folder
     adding score to fitness graph in main dir
     '''
+    organise_iters_best(output)
     distance = open(os.path.join(output, 'fitness.txt'), "r")
     dist = distance.readline()
     distance.close()

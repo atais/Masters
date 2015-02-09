@@ -13,11 +13,15 @@ import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
+import org.apache.log4j.Logger;
 
 import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
+
+    private final static Logger logger = Logger
+	    .getLogger(LinksElitisticListPopulation.class);
 
     // needs to be overriden
     private double elitismRate;
@@ -103,9 +107,20 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	}
 	this.elitismRate = elitismRate;
     }
-    
+
     public double getElitismRate() {
-        return this.elitismRate;
+	return this.elitismRate;
+    }
+
+    // do not accept copies
+    @Override
+    public void addChromosome(Chromosome chromosome)
+	    throws NumberIsTooLargeException {
+	if (!(getChromosomes().contains(chromosome))) {
+	    super.addChromosome(chromosome);
+	} else {
+	    logger.debug("Not accepting copies in the same generation");
+	}
     }
 
 }
