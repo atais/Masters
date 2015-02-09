@@ -28,11 +28,12 @@ public class ChromosomeDao {
 
     public static void writeChromosome(LinksChromosome lch, Double fitness) {
 	String id = lch.getShortId();
+	String uuid = lch.getUuid().toString();
 	try {
 	    if (DBConnector.getI().getDao().idExists(id)) {
-		updateCheck(id, fitness);
+		updateCheck(id, fitness, uuid);
 	    } else {
-		Chromosome chromo = new Chromosome(id, fitness);
+		Chromosome chromo = new Chromosome(id, fitness, uuid);
 		DBConnector.getI().getDao().create(chromo);
 	    }
 	} catch (SQLException e) {
@@ -41,12 +42,12 @@ public class ChromosomeDao {
 
     }
 
-    private static void updateCheck(String id, Double fitness)
+    private static void updateCheck(String id, Double fitness, String uuid)
 	    throws SQLException {
 	Chromosome current = DBConnector.getI().getDao().queryForId(id);
 	if (fitness < current.getScore()) {
 	    logger.warn("Updating chromosome's score " + id);
-	    Chromosome chromo = new Chromosome(id, fitness);
+	    Chromosome chromo = new Chromosome(id, fitness, uuid);
 	    DBConnector.getI().getDao().update(chromo);
 	}
     }

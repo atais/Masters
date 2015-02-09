@@ -30,7 +30,7 @@ public class DBConnectorTest {
     @Test
     public void dbTest() throws SQLException {
 	String id = "0000001";
-	Chromosome chro = new Chromosome(id);
+	Chromosome chro = new Chromosome(id, 0.01, "");
 
 	DBConnector.getI().getDao().create(chro);
 	Assert.assertEquals(chro, DBConnector.getI().getDao().queryForId(id));
