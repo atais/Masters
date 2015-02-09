@@ -37,17 +37,17 @@ public class MATSimThread implements Runnable {
 	    logger.debug("--------------------------");
 	    logger.debug("Preparing structure");
 	    prepareStructure();
-	    if (chromosome.fitness() == Double.NEGATIVE_INFINITY) {
+	    if (chromosome.getFitness() == Double.NEGATIVE_INFINITY) {
 		logger.info("Running MATSIM");
 		runMatsim();
 		logger.debug("Clean-up");
 		cleanAndGraph();
 	    } else {
-		String fitness = Double.toString(this.chromosome.fitness());
+		String fitness = Double.toString(this.chromosome.getFitness());
 		File f = FileManager.getFitnessFile(this.chromosome);
 		Files.write(f.toPath(), fitness.getBytes(),
 			new OpenOption[] { StandardOpenOption.CREATE });
-		logger.warn("Skipping calculations!!!");
+		logger.info("Skipping calculations!");
 	    }
 	    logger.debug("--------------------------");
 	} catch (IOException e) {
@@ -55,7 +55,6 @@ public class MATSimThread implements Runnable {
 	} catch (InterruptedException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
-	this.chromosome.getFitness();
     }
 
     private void cleanAndGraph() {
@@ -94,7 +93,9 @@ public class MATSimThread implements Runnable {
 		} else if (line.contains("FATAL")) {
 		    logger.fatal(line);
 		} else if (line.contains("Exception")) {
-		    logger.fatal(line);
+		    if (!line.contains("do not use except of you have to")) {
+			logger.fatal(line);
+		    }
 		}
 	    }
 	    process.waitFor();

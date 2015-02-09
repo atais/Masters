@@ -42,7 +42,7 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	boolean requirePrecalc = false;
 	for (Chromosome chromosome : this.getChromosomes()) {
 	    // fitness not GETfitness!
-	    if (chromosome.fitness() == Double.NEGATIVE_INFINITY) {
+	    if (chromosome.getFitness() == Double.NEGATIVE_INFINITY) {
 		requirePrecalc = true;
 		break;
 	    }

@@ -21,7 +21,7 @@ public class ChromosomeDao {
 	} catch (SQLException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (NullPointerException e) {
-	    logger.info("Trying to read not calculated fitness, may be on purpose.");
+	    logger.debug("Trying to read not calculated fitness, may be on purpose.");
 	}
 	return score;
     }

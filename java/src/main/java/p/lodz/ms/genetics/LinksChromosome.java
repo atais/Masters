@@ -42,6 +42,12 @@ public class LinksChromosome extends BinaryChromosome {
     public double fitness() {
 	return ChromosomeDao.readChromosomeScore(this);
     }
+    
+    //disabling cache.
+    @Override
+    public double getFitness() {
+	return this.fitness();
+    }
 
     @Override
     public String toString() {
