@@ -67,15 +67,15 @@
 
 Niniejsza praca obejmuje zagadnienia z~zakresu inżynierii oprogramowania i~sztucznej inteligencji. Głównym jej celem jest stworzenie aplikacji optymalizującej strukturę sieci drogowej.
 
-Problemy komunikacji w~dzisiejszych miastach są wszystkim znane. Zatory drogowe i~korki w~godzinach szczytu są chlebem powszednim. Pomimo wielu prób i~sposobów, wciąż nie istnieje metoda jednoznacznie rozwiązująca tę kwestię. Bezspornie, dotyczy to wszystkich miast na świecie. Z~teoretycznego punktu widzenia, jedynym rozwiązaniem jest komunikacja publiczna. Oczywistym jest jednak, że nigdy nie doprowadzimy do sytuacji, gdy wszyscy mieszkańcy zrezygnują ze swoich pojazdów. Dodatkowo, wiele osób i~usług wymaga oddzielnej formy transportu. W~obliczu tych faktów miasta decydują się na rozwój swojej infrastruktury drogowej. Budowa nowych tras oraz poszerzanie starych przynosi nadzieję mniejszych zatorów a~co za tym idzie, szybszego przejazdu do celu. Niestety, historia pokazuje, że takie inwestycje nie zawsze przynoszą oczekiwane korzyści.
+Problemy komunikacji w~dzisiejszych miastach są wszystkim znane. Zatory drogowe i~korki w~godzinach szczytu są chlebem powszednim. Pomimo wielu prób i~sposobów, wciąż nie istnieje metoda jednoznacznie rozwiązująca tę kwestię. Bezspornie, dotyczy to wszystkich miast na świecie. Z~teoretycznego punktu widzenia, jedynym rozwiązaniem jest komunikacja publiczna. Oczywistym jest jednak, że nigdy nie doprowadzimy do sytuacji, gdy wszyscy mieszkańcy zrezygnują ze swoich pojazdów. Dodatkowo, wiele osób i~usług wymaga oddzielnej formy transportu. W~obliczu tych faktów miasta decydują się na rozwój swojej infrastruktury drogowej. Budowa nowych tras oraz poszerzanie starych przynosi nadzieję mniejszych zatorów, a~co za tym idzie, szybszego przejazdu do celu. Niestety, historia pokazuje, że takie inwestycje nie zawsze przynoszą oczekiwane korzyści.
 
-Teorii próbujących wytłumaczyć te zjawiska, jak również dowodów, które je popierają lub obalają jest wiele. Jedną z~najpopularniejszych oraz taką która została wykorzystana w~niektórych miastach na świecie jest paradoks Braessa\cite{braess}. Jest to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Ma ono również  zastosowanie w~przypadku  sieci komputerowych oraz istnieją jego analogie dla doświadczeń fizycznych.
+Teorii próbujących wytłumaczyć te zjawiska, jak również dowodów, które je popierają lub obalają jest wiele. Jedną z~najpopularniejszych oraz taką która została wykorzystana w~niektórych miastach na świecie jest paradoks Braessa\cite{braess}. Jest to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego, czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Ma ono również  zastosowanie w~przypadku  sieci komputerowych oraz istnieją jego analogie dla doświadczeń fizycznych.
 
-Moim celem jest opracowanie metody, która dla danej struktury sieci drogowej zmodyfikuje ją wykorzystując prawidłowość z~powyższego paradoksu. W~efekcie poprzez zamknięcie wybranych ulic w~danej sieci drogowej, średni czas podróży powinien ulec skróceniu.
+Celem pracy jest opracowanie metody, która dla danej struktury sieci drogowej, zmodyfikuje ją wykorzystując prawidłowość z~powyższego paradoksu. W~efekcie poprzez zamknięcie wybranych ulic w~danej sieci drogowej, średni czas podróży powinien ulec skróceniu.
 
 \section{Metoda badawcza i~cel pracy.}
 \subsubsection{Studia literaturowe.}
-Moje badania rozpocząłem od poszukiwania źródeł traktujących o~opisywanym przeze mnie problemie. Paradoks Braessa został sformułowany w~1970 roku i~był od tego czasu wykorzystywany przy planowaniu przestrzeni i~infrastruktury wielu miast, np:
+Badania rozpoczęliśmy od poszukiwania źródeł traktujących o~opisywanym problemie. Paradoks Braessa został sformułowany w~1970 roku i~był od tego czasu wykorzystywany przy planowaniu przestrzeni i~infrastruktury wielu miast, np:
 
 \begin{itemize}
 \item Korea, Seul, likwidacja m.in. estakad Cheonggyecheon,
@@ -85,32 +85,31 @@ Moje badania rozpocząłem od poszukiwania źródeł traktujących o~opisywanym 
 \end{itemize}  
 
 \subsubsection{Propozycja rozwiązania problemu.}
-Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Rozbudowa lub modyfikacja tej infrastruktury jest jednak kosztowna i~czasochłonna. Dlatego zdecydowałem się na przetestowanie rozwiązania zaproponowanego przez Braessa. Ponieważ istnieją prace negujące lub podważające paradoks\cite{newinsights} , zdecydowałem by przy potwierdzaniu wyniku optymalizacji nie kierować się wyłącznie założeniami zawartymi w~twierdzeniu.
+Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Rozbudowa lub modyfikacja tej infrastruktury jest jednak kosztowna i~czasochłonna. Z tego powodu postanowiliśmy sprawdzić rozwiązanie zaproponowane przez Braessa. Ponieważ istnieją prace negujące lub podważające paradoks\cite{newinsights} , zdecydowaliśmy by przy potwierdzaniu wyniku optymalizacji nie kierować się wyłącznie założeniami zawartymi w~twierdzeniu.
 
 \subsubsection{Opis zastosowania algorytmów genetycznych.}
-Ponieważ nie znalazłem żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowałem się losowe przeszukiwanie przestrzeni rozwiązań.~Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, na które się zdecydowałem w~swojej pracy.
+Ponieważ nie znaleźliśmy żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowaliśmy się na losowe przeszukiwanie przestrzeni rozwiązań. Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, które zostały wykorzystane w pracy.
 
 \subsubsection{Przedstawienie oceny optymalizacji.}
-Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Zdecydowałem się więc na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybrałem działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
+Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego, w celu potwierdzenia jego słuszności, zdecydowaliśmy się na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybraliśmy działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
 
 \subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań.}
-Paradoks Braessa nie jest jedynym twierdzeniem traktującym o~problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa Thomsona\cite{downs} czy prawo Lewisa Mogridge’a\cite{lewis}}. Są jednak niemniej ważne.
-Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem ani decydującym głosem w~decyzjach dotyczących ustalaniu rzeczywistego ruchu drogowego miasta. 
+Paradoks Braessa nie jest jedynym twierdzeniem traktującym o~problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa Thomsona\cite{downs} czy prawo Lewisa Mogridge’a\cite{lewis}}. Są jednak niemniej ważne. Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem, ani decydującym głosem w~decyzjach dotyczących ustalaniu rzeczywistej sieci drogowej miasta. 
 
 
 \section{Przegląd literatury w~dziedzinie.}
-By przybliżyć temat problemów komunikacyjnych i~rozwiązania zaproponowanego przez Braessa polecam pracę magisterską \textit{Leslie Arthura Keith Bloy}\cite{investigation}. W~pracy zostały opisane także inne (wymieniane również przeze mnie) twierdzenia. Publikacja \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}\cite{reducingtheeffects} jest bardzo dobrym uzupełnieniem tematu o~interesującą mnie kwestię symulacji wieloagentowych. Prezentuje ona różnice w~wynikach dla przypadku losowego wyboru drogi przez agentów oraz tej wybranej przy użyciu inteligencji kolektywnej\footnote{ang. Collective Intelligence (COIN)}. 
+By przybliżyć temat problemów komunikacyjnych i~rozwiązania zaproponowanego przez Braessa polecamy pracę magisterską \textit{Leslie Arthura Keith Bloy}\cite{investigation}. W~pracy zostały opisane również inne twierdzenia dotyczące ruchu drogowego. Publikacja \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}\cite{reducingtheeffects} jest bardzo dobrym uzupełnieniem tematu o~interesującą nas kwestię symulacji wieloagentowych. Prezentuje ona różnice w~wynikach dla przypadku losowego wyboru drogi przez agentów oraz tej wybranej przy użyciu inteligencji kolektywnej\footnote{ang. Collective Intelligence (COIN)}. 
 
-Zbiorowa praca napisana na potrzeby międzynarodowej konferencji dotyczącej technologii symulacji\cite{reducingtheeffects} jest pozycją, która opisuje podobny do podejmowanego przeze mnie problem. Mianowicie skupia się na modyfikacjach drogi poprzez zmiany dostępności jej składowych.
+Zbiorowa praca napisana na potrzeby międzynarodowej konferencji dotyczącej technologii symulacji\cite{reducingtheeffects} jest pozycją, która opisuje podobny do podejmowanego przez nas problem. Mianowicie skupia się na modyfikacjach drogi poprzez zmiany dostępności jej składowych.
 
-W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecę bardzo łatwo dostępną pozycję, która jest wstępem do tematu\cite{gene}. Wybrałem ją głównie ze względu na prosty opis problemu oraz brak zaawansowanych przykładów, które tylko skomplikowałyby dla mnie ujęcie prostego problemu.
+W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecamy pozycję, która jest wstępem do tej tematyki\cite{gene}. Pozycja zawiera bogaty zestaw problemów przykładowych wraz z opisem ich rozwiązania. Ponadto dogłębnie opisuje ona każdy aspekt działania zastosowanych algorytmów. 
 
 \section{Układ pracy.}
 Tematem pracy jest optymalizacja struktury sieci drogowej, zaś za główny cel przyjęto stworzenie rozwiązania, które wykorzystując algorytmy genetyczne odnajdzie najlepsze rozwiązanie.
  
-Rozdział \ref{rozdz.wstep} zawiera wstęp i~cele pracy. W~rozdziale \ref{rozdz.optymalizacja} przybliżam istotę optymalizacji struktur sieci drogowych
-oraz opisuję teoretycznie wykorzystane przeze mnie rozwiązania. W~rozdziale \ref{rozdz.technologie} wymieniam technologie, w~których wykonałem aplikację oraz przybliżam zewnętrzne biblioteki, o~które oparłem swoje rozwiązanie. Głównym rozdziałem pracy jest rozdział \ref{rozdz.opis},
-w którym przedstawiam wykonaną aplikację oraz wyniki optymalizacji przykładowej sieci. W~rozdziale podsumowującym \ref{rozdz.podsumowanie}, zawarłem wnioski oraz możliwości rozwoju pracy. Po rozdziale 5, podsumowującym, załączam spis rysunków, tabel, listingów i~bibliografie, w~tej kolejności.
+Rozdział \ref{rozdz.wstep} zawiera wstęp i~cele pracy. W~rozdziale \ref{rozdz.optymalizacja} przybliżamy istotę optymalizacji struktur sieci drogowych
+oraz opisujemy teoretycznie, wykorzystane przeze nas rozwiązania. W~rozdziale \ref{rozdz.technologie} wymieniamy technologie, w~których wykonaliśmy aplikację oraz przybliżamy zewnętrzne biblioteki, o~które oparliśmy swoje rozwiązanie. Głównym rozdziałem pracy jest rozdział \ref{rozdz.opis},
+w którym przedstawiamy wykonaną aplikację oraz wyniki optymalizacji przykładowej sieci. W~rozdziale podsumowującym \ref{rozdz.podsumowanie}, zawarliśmy wnioski oraz możliwości rozwoju pracy. Po rozdziale 5, podsumowującym, załączamy spis rysunków, tabel, listingów i~bibliografie, w~tej kolejności.
 
 \chapter{Optymalizacja struktury sieci drogowej.}\label{rozdz.optymalizacja} 
 \section{Podstawowe definicje.}
@@ -169,9 +168,9 @@ W przypadku sieci drogowej mamy oczywiście do czynienia z~abstrakcyjną struktu
 \end{figure}
 
 Posługując się powyższymi definicjami, tworząc graf z~pewnej sieci drogowej, przyjmujemy, że zbiorem $V$, wierzchołków są skrzyżowania, natomiast zbiór krawędzi $E$ odnosi się do ulic pomiędzy tymi skrzyżowaniami.
-W mojej pracy posługuję się zawsze grafem skierowanym. W~związku z~tym, w~przypadku ulic dwukierunkowych tworzę parę krawędzi z~odpowiednimi kierunkami, nawet jeśli ulice nie są rozłączne w~rzeczywistości.
+W pracy posługujemy się zawsze grafem skierowanym. W~związku z~tym, w~przypadku ulic dwukierunkowych tworzone są pary krawędzi z~odpowiednimi kierunkami, nawet jeśli ulice nie są rozłączne w~rzeczywistości.
 
-W celu potwierdzenia wiarygodności powyższego przykładu prezentuję graf nałożony na mapę miasta\cite{siux}.
+W celu potwierdzenia wiarygodności powyższego przykładu prezentujemy graf nałożony na mapę miasta\cite{siux}.
 
 \vspace*{30px}
 \begin{figure}[h]
@@ -193,7 +192,7 @@ W celu potwierdzenia wiarygodności powyższego przykładu prezentuję graf nał
 
 \section{Paradoks Braessa.}
 
-Jak już wcześniej wspomniałem, jest to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Autorem twierdzenia jest niemiecki matematyk Dietrich Braess\cite{braess}. Paradoks działa w~oparciu o~model ruchu drogowego, który ma następujące cechy:
+Jak już wcześniej wspomnieliśmy, jest to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Autorem twierdzenia jest niemiecki matematyk Dietrich Braess\cite{braess}. Paradoks działa w~oparciu o~model ruchu drogowego, który ma następujące cechy:
 
 \begin{enumerate}
 \item Sieć drogowa składa się ze skończenie wielu węzłów i~łączących je odcinków dróg
@@ -203,7 +202,7 @@ Jak już wcześniej wspomniałem, jest to twierdzenie matematyczne orzekające, 
 \item Celem pojazdów jest przejazd przez sieć z~węzłów początkowych do docelowych po trasie złożonej z~odcinków drogowych tak, by zminimalizować łączny czas ich pokonania
 \item Decyzje o~wyborze tras pojazdy podejmują indywidualnie i~niezależnie od siebie
 \end{enumerate}
-Przedstawię paradoks w~oparciu o~przykład z~oryginalnego artykułu Dietricha Braessa\cite{paradox}.
+Paradoks przedstawiamy w~oparciu o~przykład z~oryginalnego artykułu Dietricha Braessa\cite{paradox}.
 
 \subsection{Przykładowy, wyjściowy układ drogowy.}
 \subsubsection{Sieć drogowa i~auta}
@@ -305,7 +304,7 @@ Na potrzeby symulatora, sieć drogowa przedstawiona w~postaci grafu skierowanego
 \textbf{Grafem skierowanym silnie spójnym} nazywamy graf skierowany w~którym jest możliwe dotarcie do każdego wierzchołka zaczynając z~dowolnego innego poprzez dowolną ilość krawędzi. Wszystkie wierzchołki w~grafie skierowanym silnie spójnym muszą zatem posiadać przynajmniej jedną krawędź wchodzącą i~wychodzącą\cite{silniespojny}.
 \end{definition}
 
-W sprawdzaniu grafu pod względem spójności, wykorzystuję algorytm Tarjana do znajdowania składowych silnie spójnych.
+W sprawdzaniu grafu pod względem spójności, wykorzystujemy algorytm Tarjana do znajdowania składowych silnie spójnych.
 \newline
 \begin{definition}\label{Algorytm Tarjana}
 Podstawowym założeniem \textbf{algorytmu Tarjana} jest przeszukiwanie grafu w~głąb zaczynając od dowolnego wierzchołka wybranego w~sposób arbitralny. Tak jak w~przypadku klasycznego przeszukiwania w~głąb, każdy sąsiadujący wierzchołek po odwiedzeniu zostaje oznaczony i~algorytm nigdy ponownie go nie odwiedza. Dzięki temu, tworzymy kolekcję przeszukanych drzew, która jest drzewem rozpinającym grafu. Składowe silnie spójne są następnie odnajdowane jako poddrzewa, a~korzenie tych poddrzew są nazywane korzeniami składowych silnie spójnych. Każdy wierzchołek grafu może być wybrany na korzeń składowej silnie spójnej jeśli zostanie wybrany jako pierwszy wierzchołek podczas przeszukiwania w~głąb.
@@ -323,14 +322,14 @@ Podstawowym założeniem \textbf{algorytmu Tarjana} jest przeszukiwanie grafu w~
 \caption{Przykładowy graf z zaznaczonymi składowymi silnie spójnymi.}
 \end{figure}
 
-W efekcie, zawsze przed rozpoczęciem symulacji sprawdzam, czy graf jest grafem skierowanym silnie spójnym lub dokładniej mówiąc, czy posiada tylko jedną składową silnie spójną.
+W efekcie, zawsze przed rozpoczęciem symulacji sprawdzamy, czy graf jest grafem skierowanym silnie spójnym lub dokładniej mówiąc, czy posiada tylko jedną składową silnie spójną.
 
 \section{Klasyczny algorytm genetyczny.}
 
 Idea algorytmu genetycznego została zaczerpnięta z~nauk przyrodniczych opisujących zjawiska doboru naturalnego i~dziedziczenia. Mechanizmy te polegają na
 przetrwaniu osobników najlepiej dostosowanych w~danym środowisku, podczas gdy
 osobniki gorzej przystosowane sa eliminowane. Z~kolei te osobniki, które przetrwają
-- przekazują informacje genetyczna swoim potomkom. Krzyżowanie informacji genetycznej otrzymanej od ”rodziców” prowadzi do sytuacji, w~której kolejne pokolenia sa przeciętnie coraz lepiej dostosowane do warunków środowiska; mamy wiec tu do czynienia ze swoistym procesem optymalizacji. 
+- przekazują informacje genetyczną swoim potomkom. Krzyżowanie informacji genetycznej otrzymanej od ,,rodziców'' prowadzi do sytuacji, w~której kolejne pokolenia sa przeciętnie coraz lepiej dostosowane do warunków środowiska; mamy tu więc do czynienia ze swoistym procesem optymalizacji. 
 
 \subsection{Podstawowe pojecia algorytmów genetycznych}
 
@@ -412,12 +411,13 @@ Najłatwiej wyobrazić sobie powyższe kroki analizując je na schemacie:
 
 \subsection{Operacje klasyczne, krzyżowanie.}
 
-Operacja krzyżowania jest podstawową operacją algorytmów genetycznych służącą do rekombinacji materiału genetycznego. Operacja opiera się na dwóch chromosomach, których części materiału genetycznego zostają wymieszane w~celu otworzenia nowego chromosomu. Podstawowa operacja krzyżowania opiera się o~jeden punkt krzyżowania i~została przedstawiona na poglądowym schemacie poniżej\cite{gene mutikrzyz}.
+Operacja krzyżowania jest podstawową operacją algorytmów genetycznych służącą do rekombinacji materiału genetycznego. Operacja opiera się na dwóch chromosomach, których części materiału genetycznego zostają wymieszane w~celu otworzenia nowego chromosomu. Podstawowa operacja krzyżowania opiera się o~jeden punkt krzyżowania i~została przedstawiona na poglądowym schemacie \ref{krzyzowanie} \cite{gene mutikrzyz}.
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=\textwidth]{img/crossover}
 \caption{Ogólny schemat operacji krzyżowania.}
+\label{krzyzowanie}
 \end{center}
 \end{figure}
 
@@ -436,14 +436,14 @@ Proces rekombinacji przez krzyżowanie nie byłby w~stanie odkryć całej przest
 
 W swojej pracy posługuję się przede wszystkim grafami. W~tym wypadku klasyczna odmiana algorytmu genetycznego musiałaby zostać zmodyfikowana na potrzeby wykorzystania grafów jako chromosomów. Dodatkowo wymagałoby to zastosowania nowych sposobów krzyżowania i~mutacji jednostek. 
 
-Zdecydowałem, że zamiast przystosowywać algorytm genetyczny do nowej struktury, przystosuję strukturę do algorytmu. Ponieważ moim zadaniem jest zdecydowanie o~zamknięciu lub nie, danej ulicy (krawędzi grafu) postanowiłem opisać tę strukturę jako listę opisującą ten stan. Zgodnie z~tą myślą, sieć drogowa (graf) jest tłumaczona na tablicę elementów przyjmujących wartości:
+Zdecydowaliśmy, że zamiast przystosowywać algorytm genetyczny do nowej struktury, przystosujemy strukturę do algorytmu. Ponieważ naszym zadaniem jest zdecydowanie o~zamknięciu lub nie, danej ulicy (krawędzi grafu) postanowiłem opisać tę strukturę jako listę opisującą ten stan. Zgodnie z~tą myślą, sieć drogowa (graf) jest tłumaczona na tablicę elementów przyjmujących wartości:
 
 \begin{itemize}
 \item 1 (prawda) - dla ulicy (węzła), który jest przejezdny,
 \item 0 (fałsz) - dla ulicy (węzła) zamkniętego dla ruchu.
 \end{itemize}
 
-Tablica tworzona w~ten sposób może być modyfikowana przez algorytm genetyczny, jak również bez problemu mogę z~niej odtworzyć stan obecny sieci drogowej. Za przykład podaję sytuację przedstawioną niżej.
+Tablica tworzona w~ten sposób może być modyfikowana przez algorytm genetyczny, jak również bez problemu możemy z~niej odtworzyć stan obecny sieci drogowej. Za przykład podajemy sytuację przedstawioną na rysunkach \ref{left-example} i \ref{right-example}.
 
 
 \begin{figure}[ht]
@@ -466,27 +466,28 @@ Tablica tworzona w~ten sposób może być modyfikowana przez algorytm genetyczny
 \end{flushright}
 \end{figure}
 
-Przedstawiony na rysunku \ref{left example} fragment sieci zawiera kolejne elementy zerowe, które w~tłumaczeniu na przykładowy graf \ref{right example}, są zaznaczone kolorem zielonym. W~tym przypadku krawędzie te zostaną wyłączone z~ruchu. 
+Przedstawiony na rysunku \ref{left-example} fragment sieci zawiera kolejne elementy zerowe, które w~tłumaczeniu na przykładowy graf \ref{right-example}, są zaznaczone kolorem zielonym. W~tym przypadku krawędzie te zostaną wyłączone z~ruchu. 
 
 \section{Punkty artykulacji grafu.}
 
-Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzchołek, którego usunięcie z~grafu spowoduje zwiększenie liczby spójnych składowych. Na rysunku, punktem artykulacji jest wierzchołek$nr 0$.
+Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzchołek, którego usunięcie z~grafu spowoduje zwiększenie liczby spójnych składowych. Na rysunku \ref{artykulacja}, punktem artykulacji jest wierzchołek o numerze $0$.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/articulation}
 \caption{Przykład grafu z zaznaczonym punktem artykulacji.}
+\label{artykulacja}
 \end{center}
 \end{figure}
 
-Algorytm poszukiwania punktów artykulacji wykorzystuje przeszukiwanie grafu w~głąb. Podczas nierekurencyjnego przejścia, sprawdza najwyższy poziom zagłębienia, do którego wierzchołki sięgają w~drzewie. Wierzchołek $n$ jest punktem artykulacyjnym wtedy, i~tylko wtedy, jeżeli istnieje poddrzewo z~korzeniem w~punkcie $n$, takie, w~którym żaden poprzednik i~następnik $n$ nie są połączeni w~drzewie DFS. 
+Algorytm poszukiwania punktów artykulacji wykorzystuje przeszukiwanie grafu w~głąb. Podczas nierekurencyjnego przejścia, wierzchołek zostaje oznaczony jako punkt artykulacji, wtedy i tylko wtedy, jeśli jest on korzeniem posiada więcej niż dwóch synów. A wierzchołek $ v $ nie będący korzeniem drzewa DFS jest punktem artykulacji wtedy i tylko wtedy, gdy przynajmniej dla jednego jego syna nie istnieje krawędź wtórna $ \{u,w\} $, taka że wierzchołek $ u $ jest potomkiem $ v $ i $ w $ jest przodkiem $ v $.
 
-Punkty te wykorzystuję, by podczas losowych mutacji i~krzyżowań w~algorytmie genetycznym nie doszło do stworzenia grafu innego niż grafu skierowanego silnie spójnego. Krok sprawdzenia jest wykonywany podczas każdorazowego zamykania drogi, zatem za każdym razem gdy zostaje wprowadzona nowa wartość $"0"$ w~tablicy.
+Punkty te są wykorzystywane, by podczas losowych mutacji i~krzyżowań w~algorytmie genetycznym nie doszło do stworzenia grafu innego niż grafu skierowanego silnie spójnego. Krok sprawdzenia jest wykonywany podczas każdorazowego zamykania drogi, zatem za każdym razem gdy zostaje wprowadzona nowa wartość $,,0''$ w~tablicy.
 
 \chapter{Technologie i~metody użyte.}\label{rozdz.technologie} 
 \section{Symulator transportu.}
 
-MATSim dostarcza framework\footnote{pl. szkielet do budowy aplikacji} do implementacji szerokiej skali symulacji transportu opartych na agentach. Składa się z~wielu modułów, które mogą zostać połączone lub używane oddzielnie. Moduły można zastępować własnymi implementacjami w~celu przetestowania pojedynczych aspektów pracy\cite{matsim}.
+MATSim jest środowiskiem\footnote{ang. framework, pl. szkielet do budowy aplikacji} do implementacji szerokiej skali symulacji transportu opartych na agentach. Składa się z~wielu modułów, które mogą zostać połączone lub używane oddzielnie. Moduły można zastępować własnymi implementacjami w~celu przetestowania pojedynczych aspektów pracy\cite{matsim}.
 
 \begin{figure}[ht]
 \centering
@@ -494,13 +495,13 @@ MATSim dostarcza framework\footnote{pl. szkielet do budowy aplikacji} do impleme
 \caption{Logo symulatora transportu MATSim} 
 \end{figure}
 
-Oczywiście MATSim nie jest jedynym dostępnym symulatorem transportu. Podobnych rozwiązań jest wiele. Swój wybór jednak motywowałem przede wszystkim dostępnością materiałów szkoleniowych i~przykładowymi scenariuszami. MATSim jest żywym projektem oparty o~licencję open source\footnote{pol. otwarte oprogramowanie}. Dysponuje szerokim zasobem przykładów i~gotowych scenariuszy, w~dodatku udostępniając prace wielu osób na swoim repozytorium.
+Oczywiście MATSim nie jest jedynym dostępnym symulatorem transportu. Podobnych rozwiązań jest wiele. Wybór motywowaliśmy jednak przede wszystkim dostępnością materiałów szkoleniowych i~przykładowymi scenariuszami. MATSim jest żywym projektem oparty o~licencję open source\footnote{pol. otwarte oprogramowanie}. Dysponuje szerokim zasobem przykładów i~gotowych scenariuszy, w~dodatku udostępniając prace wielu osób na swoim repozytorium.
 
 \section{Algorytmy genetyczne.}
 
-Projekt The Apache Commons jest tworzony przez Apache Software Foundation, formalnie przez Jakarta Project. Głównym celem projektu jest stworzenie wolnego oprogramowania do wielokrotnego użytku w~języku Java. Projekt podzielony jest na trzy główne części: proper, sandbox, i~dormant\cite{math}.
+Projekt The Apache Commons jest tworzony przez Apache Software Foundation. Głównym celem projektu jest stworzenie wolnego oprogramowania do wielokrotnego użytku w~języku Java. Projekt podzielony jest na trzy główne części: proper, sandbox, i~dormant\cite{math}.
 
-W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułów różniących się funkcjonalnością i~celem. W~moim przypadku Apache Commons Math to moduł zapewniający rozwiązywania problemów głównie matematycznych i~statystycznych. Znajduje się w~nim implementacja podstawowej formy algorytmu genetycznego, którą rozszerzam w~swojej pracy.
+W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułów różniących się funkcjonalnością i~celem. W~przypadku Apache Commons Math jest to moduł zapewniający rozwiązywania problemów głównie matematycznych i~statystycznych. Znajduje się w~nim implementacja podstawowej formy algorytmu genetycznego, którą rozszerzamy w~pracy.
 
 \begin{figure}[ht]
 \centering
@@ -510,7 +511,7 @@ W przypadku głównej części Apache Commons Proper wyróżniamy wiele modułó
 
 \section{Obsługa grafów.}
 
-Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał moich oczekiwań zarówno pod względem wydajności jak i~stabilności zdecydowałem się na stworzenie własnej implementacji. W~tym celu wykorzystałem dojrzały projekt NetworkX.~Jest to biblioteka wykonana w~języku Python stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji BSD new\cite{networkx}. 
+Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał naszych oczekiwań zarówno pod względem wydajności jak i~stabilności zdecydowaliśmy się na stworzenie własnej implementacji. W~tym celu wykorzystałem dojrzały projekt NetworkX.~Jest to biblioteka wykonana w~języku Python stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji BSD-new\cite{networkx}. 
 
 \begin{figure}[ht]
 \centering
@@ -520,7 +521,7 @@ Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał moich oczekiw
 
 \section{Technologie i~metodologie programistyczne.}
 
-Użyte przeze mnie technologie są poniekąd wymuszone przez języki w~jakich zostały stworzone wykorzystywane przeze mnie rozwiązania. W~przypadku symulatora MATSim jest to Java. Zdecydowałem się natomiast na wykorzystanie Pythona głównie ze względu na przeważającą przewagę biblioteki NetworkX nad bibliotekami obsługującymi grafy w~języku Java. Nie jest to wyjątek, gdyż ogólnie rozwiązania dostarczane dla Python'a, szczególnie w~przypadku problemów akademickich, są dużo lepsze. Poniżej zestaw narzędzi, które wykorzystałem przy swojej pracy.  
+Użyte przez nas technologie są poniekąd wymuszone przez języki w~jakich zostały stworzone wykorzystywane pomocnicze rozwiązania. W~przypadku symulatora MATSim jest to Java. Zdecydowaliśmy się natomiast na wykorzystanie Pythona głównie ze względu na przeważającą przewagę biblioteki NetworkX nad bibliotekami obsługującymi grafy w~języku Java. Nie jest to wyjątek, gdyż ogólnie rozwiązania dostarczane dla Python'a, szczególnie w~przypadku problemów akademickich, są dużo lepsze. Poniżej zestaw narzędzi, które wykorzystaliśmy w procesie tworzenia aplikacji.  
 
 \begin{figure}[h]
 \begin{flushleft}
