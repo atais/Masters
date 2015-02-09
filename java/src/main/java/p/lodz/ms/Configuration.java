@@ -7,27 +7,27 @@ import org.apache.commons.configuration.XMLConfiguration;
 
 public class Configuration {
 
-    private static final String DEFAULTPYTHONMAIN = "../python/ms/call_center.py";
-    private static final String DEFAULTPYTHONPATH = "/usr/local/bin/python";
-    private static final String DEFAULTJAVAPATH = "/usr/bin/java";
-    private static final String DEFAULTPNAME = "default";
-    private static final String DEFAULTOUTPUT = "../output/";
-    private static final Integer DEFAULTTHREADS = Runtime.getRuntime()
+    private final String DEFAULTPYTHONMAIN = "../python/ms/call_center.py";
+    private final String DEFAULTPYTHONPATH = "/usr/local/bin/python";
+    private final String DEFAULTJAVAPATH = "/usr/bin/java";
+    private final String DEFAULTPNAME = "default";
+    private final String DEFAULTOUTPUT = "../output/";
+    private final Integer DEFAULTTHREADS = Runtime.getRuntime()
 	    .availableProcessors();
-    private static final String DEFAULTLOG = "INFO";
-    private static final String DEFAULTLOGFILE = "logfile.log";
-    private static final String DEFAULTMATSIMXMX = "2g";
+    private final String DEFAULTLOG = "INFO";
+    private final String DEFAULTLOGFILE = "logfile.log";
+    private final String DEFAULTMATSIMXMX = "2g";
 
-    private static final Integer DEFAULTSCENARIOITER = 50;
+    private final Integer DEFAULTSCENARIOITER = 50;
 
-    private static final Integer DEFAULTGAPOPULATION = 35;
-    private static final Integer DEFAULTGAMAXGEN = 150;
-    private static final Double DEFAULTGAELITISM = 0.15;
-    private static final Double DEFAULTGACROSSOVER = 1.0;
-    private static final Double DEFAULTGAMUTATION = 0.1;
-    private static final Integer DEFAULTGAARITY = 2;
-    private static final Integer DEFAULTGAMAXMUTATION = 10;
-    private static final Integer DEFAULTGAMAXCROSSOVER = 10;
+    private final Integer DEFAULTGAPOPULATION = 35;
+    private final Integer DEFAULTGAMAXGEN = 150;
+    private final Double DEFAULTGAELITISM = 2.0;
+    private final Double DEFAULTGACROSSOVER = 1.0;
+    private final Double DEFAULTGAMUTATION = 0.8;
+    private final Integer DEFAULTGAARITY = 2;
+    private final Integer DEFAULTGAMAXMUTATION = 10;
+    private final Integer DEFAULTGAMAXCROSSOVER = 10;
 
     private String projectName;
     private String projectOutputDir;
