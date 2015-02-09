@@ -1,6 +1,5 @@
 package p.lodz.ms.genetics;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -13,16 +12,11 @@ import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
-import org.apache.commons.math3.util.FastMath;
-import org.apache.log4j.Logger;
 
 import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
-
-    private final static Logger logger = Logger
-	    .getLogger(LinksElitisticListPopulation.class);
 
     public LinksElitisticListPopulation(int populationLimit, double elitismRate)
 	    throws NotPositiveException, OutOfRangeException {
@@ -41,16 +35,17 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
     @Override
     public Chromosome getFittestChromosome() {
 	// precalculate using threads
-	List<Chromosome> needToPrecalc = new ArrayList<Chromosome>();
-	for (Chromosome chromosome : getChromosomes()) {
-	    // .fitness not .getFitness!!!
-	    if (chromosome.fitness() == Double.MAX_VALUE) {
-		needToPrecalc.add(chromosome);
+	boolean requirePrecalc = false;
+	for (Chromosome chromosome : this.getChromosomes()) {
+	    // fitness not GETfitness!
+	    if (chromosome.fitness() == Double.NEGATIVE_INFINITY) {
+		requirePrecalc = true;
+		break;
 	    }
 	}
-	logger.info("Precalculating " + needToPrecalc.size() + "/"
-		+ getChromosomes().size());
-	precalculate(needToPrecalc);
+	if (requirePrecalc) {
+	    precalculate();
+	}
 
 	// best so far
 	Chromosome bestChromosome = this.getChromosomes().get(0);
@@ -66,10 +61,10 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 
     // We need to precalculate the fitness using threads due to long
     // calculations.
-    private void precalculate(List<Chromosome> needToPrecalc) {
+    private void precalculate() {
 	Integer threads = Context.getI().getConfig().getProjectThreads();
 	ExecutorService executor = Executors.newFixedThreadPool(threads);
-	for (Chromosome chromosome : needToPrecalc) {
+	for (Chromosome chromosome : getChromosomeList()) {
 	    Runnable worker = new MATSimThread(chromosome);
 	    executor.execute(worker);
 	}
@@ -88,10 +83,8 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	final List<Chromosome> oldChromosomes = getChromosomeList();
 	Collections.sort(oldChromosomes);
 
-	// index of the last "not good enough" chromosome
-	int boundIndex = (int) FastMath.ceil((1.0 - getElitismRate())
-		* oldChromosomes.size());
-	for (int i = 0; i < boundIndex; i++) {
+	// how many are copied from previous gen
+	for (int i = 0; i < getElitismRate(); i++) {
 	    nextGeneration.addChromosome(oldChromosomes.get(i));
 	}
 	return nextGeneration;

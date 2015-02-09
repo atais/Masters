@@ -10,6 +10,8 @@ import java.util.Properties;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
+import p.lodz.ms.db.DBConnector;
+
 public class Context {
 
     private final static Logger logger = Logger.getLogger(Context.class);
@@ -49,6 +51,7 @@ public class Context {
 		for (Process p : childProcess) {
 		    p.destroy();
 		}
+		DBConnector.getI().closeConnection();
 	    }
 	};
 

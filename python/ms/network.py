@@ -93,40 +93,43 @@ def draw_events_graph(network_file, events_file, folder='', interval=3600, scale
     network = etree.parse(network_file)
     
     logging.info("Loading events... ")
-    xml_fin = gzip.open(events_file)
-    context = etree.iterparse(xml_fin, tag='event')
-
-    start_marker = 0 
-    end_marker = 0
-    marker_22 = 22 * 60 * 60
-    links = {}
-    for _, element in context:
-        if (str(element.get('type')) == 'entered link'):
-            current_marker = float(element.get('time'))
-            if ((current_marker <= end_marker) or (end_marker > marker_22)):
-                pass
-            elif ((current_marker > end_marker)):
-                graph = generate_network_graph(network_file)
-                fill_graph(network, graph, links)
-                scale_min = color_edge_occupation(graph)
-                if (scale_min <= scale_threshold):
-                    save_graph(graph, folder + '/events' + str(start_marker) + '-' + str(end_marker))
-                links = {}
-                start_marker = (math.floor(current_marker) / 3600) * 3600
-                end_marker = start_marker + interval
-                pass
-            elif ((start_marker == 0) or (end_marker == 0)):
-                # start from full hour of the first event
-                start_marker = (math.floor(current_marker) / 3600) * 3600
-                end_marker = start_marker + interval
-                pass
-            # add the event anyway
-            add_event(links, element)
-            element.clear()
-            while element.getprevious() is not None:
-                del element.getparent()[0]
-    del context
+    try:
+        xml_fin = gzip.open(events_file)
+        context = etree.iterparse(xml_fin, tag='event')
     
+        start_marker = 0 
+        end_marker = 0
+        marker_22 = 22 * 60 * 60
+        links = {}
+        for _, element in context:
+            if (str(element.get('type')) == 'entered link'):
+                current_marker = float(element.get('time'))
+                if ((current_marker <= end_marker) or (end_marker > marker_22)):
+                    pass
+                elif ((current_marker > end_marker)):
+                    graph = generate_network_graph(network_file)
+                    fill_graph(network, graph, links)
+                    scale_min = color_edge_occupation(graph)
+                    if (scale_min <= scale_threshold):
+                        save_graph(graph, folder + '/events' + str(start_marker) + '-' + str(end_marker))
+                    links = {}
+                    start_marker = (math.floor(current_marker) / 3600) * 3600
+                    end_marker = start_marker + interval
+                    pass
+                elif ((start_marker == 0) or (end_marker == 0)):
+                    # start from full hour of the first event
+                    start_marker = (math.floor(current_marker) / 3600) * 3600
+                    end_marker = start_marker + interval
+                    pass
+                # add the event anyway
+                add_event(links, element)
+                element.clear()
+                while element.getprevious() is not None:
+                    del element.getparent()[0]
+        del context
+    except IOError:
+        logging.info("No events loaded")
+        pass
     logging.info("Finished drawing events graphs...")
     pass
 

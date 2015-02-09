@@ -12,7 +12,7 @@ public class ChromosomeDao {
     private final static Logger logger = Logger.getLogger(ChromosomeDao.class);
 
     public static Double readChromosomeScore(LinksChromosome chromosome) {
-	double score = Double.MAX_VALUE;
+	double score = Double.NEGATIVE_INFINITY;
 	Chromosome chromo;
 	try {
 	    String id = chromosome.getShortId();
@@ -21,7 +21,7 @@ public class ChromosomeDao {
 	} catch (SQLException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (NullPointerException e) {
-	    logger.warn("Trying to read not calculated fitness, may be on purpose.");
+	    logger.info("Trying to read not calculated fitness, may be on purpose.");
 	}
 	return score;
     }

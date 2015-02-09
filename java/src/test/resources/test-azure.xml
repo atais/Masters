@@ -20,9 +20,9 @@
 	<genetics>
 		<population-size>24</population-size>
 		<max-generations>200</max-generations>
-		<elitism-rate>0.10</elitism-rate>
+		<elitism-rate>2</elitism-rate>
 		<crossover-rate>1</crossover-rate>
-		<mutation-rate>0.2</mutation-rate>
+		<mutation-rate>0.8</mutation-rate>
 		<tournament-arity>4</tournament-arity>
 	</genetics>
 </config>

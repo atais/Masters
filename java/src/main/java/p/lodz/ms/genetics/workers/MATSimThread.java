@@ -1,9 +1,13 @@
 package p.lodz.ms.genetics.workers;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +34,27 @@ public class MATSimThread implements Runnable {
     @Override
     public void run() {
 	try {
-	    logger.info("--------------------------");
-	    logger.info("Preparing structure");
+	    logger.debug("--------------------------");
+	    logger.debug("Preparing structure");
 	    prepareStructure();
-	    logger.info("Running MATSIM");
-	    runMatsim();
-	    logger.info("Clean-up");
-	    cleanAndGraph();
-	    logger.info("--------------------------");
+	    if (chromosome.fitness() == Double.NEGATIVE_INFINITY) {
+		logger.info("Running MATSIM");
+		runMatsim();
+		logger.debug("Clean-up");
+		cleanAndGraph();
+	    } else {
+		String fitness = Double.toString(this.chromosome.fitness());
+		File f = FileManager.getFitnessFile(this.chromosome);
+		Files.write(f.toPath(), fitness.getBytes(),
+			new OpenOption[] { StandardOpenOption.CREATE });
+		logger.warn("Skipping calculations!!!");
+	    }
+	    logger.debug("--------------------------");
 	} catch (IOException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	} catch (InterruptedException e) {
 	    logger.error(ExceptionUtils.getStackTrace(e));
 	}
-
 	this.chromosome.getFitness();
     }
 

@@ -66,7 +66,10 @@ def remove_output_events(output):
     output = output + '/../'
     dirs = [x for x in os.listdir(output) if (not x.startswith('.') and x != 'best')]
     for dirname in dirs:
-        os.remove(output + dirname + '/output_events.xml.gz')
+        try:
+            os.remove(output + dirname + '/output_events.xml.gz')
+        except OSError:
+            pass
     pass
 
 def organise_best(output):

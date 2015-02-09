@@ -56,4 +56,8 @@ public class DBConnector {
     public synchronized Dao<Chromosome, String> getDao() {
 	return chromosomeDao;
     }
+
+    public void closeConnection() {
+	this.connectionSource.closeQuietly();
+    }
 }

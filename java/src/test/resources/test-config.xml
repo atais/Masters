@@ -19,11 +19,11 @@
 		<iterations>1</iterations>
 	</scenario>
 	<genetics>
-		<population-size>8</population-size>
+		<population-size>16</population-size>
 		<max-generations>20</max-generations>
-		<elitism-rate>0.10</elitism-rate>
+		<elitism-rate>2</elitism-rate>
 		<crossover-rate>1</crossover-rate>
-		<mutation-rate>0.1</mutation-rate>
+		<mutation-rate>0.8</mutation-rate>
 		<tournament-arity>2</tournament-arity>
 	</genetics>
 </config>
