@@ -15,6 +15,7 @@ import networkx as nx
 from utils import timing
 import utils
 from xml_to_graph import xml_to_graph
+import datetime
 
 
 def save_graph(graph, filename):
@@ -111,7 +112,9 @@ def draw_events_graph(network_file, events_file, folder='', interval=3600, scale
                     fill_graph(network, graph, links)
                     scale_min = color_edge_occupation(graph)
                     if (scale_min <= scale_threshold):
-                        save_graph(graph, folder + '/events' + str(start_marker) + '-' + str(end_marker))
+                        file_begin = str(datetime.timedelta(seconds=start_marker))
+                        file_end = str(datetime.timedelta(seconds=end_marker))
+                        save_graph(graph, folder + '/events' + file_begin + '-' + file_end)
                     links = {}
                     start_marker = (math.floor(current_marker) / 3600) * 3600
                     end_marker = start_marker + interval
