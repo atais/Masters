@@ -12,11 +12,15 @@ from matplotlib import pyplot
 
 
 def plot_iters_from(folder):
-    y = numpy.fromfile((folder + "/iters.txt"), sep="\n")
-    pyplot.plot(y)
-     
-    x1,x2,y1,_ = pyplot.axis()
-    pyplot.axis((x1,x2,y1,float(y[6])))
+    #Fake matsim pass
+    try:
+        y = numpy.fromfile((folder + "/iters.txt"), sep="\n")
+        pyplot.plot(y)
+         
+        x1,x2,y1,_ = pyplot.axis()
+        pyplot.axis((x1,x2,y1,float(y[6])))
+    except IOError:
+        pass
     pass
 
 def organise_iters_in(output):
