@@ -227,7 +227,7 @@
 
 <!-- ====================================================================== -->
 
-	<module name="vspExperimental" >
+<!-- 	<module name="vspExperimental" >
 		<param name="chainBasedModes" value="car" />
 		<param name="inputMZ05File" value="" />
 		<param name="isAbleToOverwritePtInteractionParams" value="false" />
@@ -240,7 +240,7 @@
 		<param name="scoreMSAStartsAtIteration" value="null" />
 		<param name="vspDefaultsCheckingLevel" value="ignore" />
 		<param name="writingOutputEvents" value="false" />
-	</module>
+	</module> -->
 
 <!-- ====================================================================== -->
 
