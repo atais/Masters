@@ -112,16 +112,21 @@ def draw_events_graph(network_file, events_file, folder='', interval=3600, scale
                     fill_graph(network, graph, links)
                     scale_min = color_edge_occupation(graph)
                     if (scale_min <= scale_threshold):
-                        file_begin = str(datetime.timedelta(seconds=start_marker))
-                        file_end = str(datetime.timedelta(seconds=end_marker))
+                        hours, remainder = divmod(int(start_marker), 3600)
+                        minutes, _ = divmod(remainder, 60) 
+                        file_begin = '%02d.%02d' % (hours, minutes)
+                        
+                        hours, remainder = divmod(int(end_marker), 3600)
+                        minutes, _ = divmod(remainder, 60) 
+                        file_end = '%02d.%02d' % (hours, minutes)
                         save_graph(graph, folder + '/events' + file_begin + '-' + file_end)
                     links = {}
-                    start_marker = (math.floor(current_marker) / 3600) * 3600
+                    start_marker = (math.floor(current_marker / 3600)) * 3600
                     end_marker = start_marker + interval
                     pass
                 elif ((start_marker == 0) or (end_marker == 0)):
                     # start from full hour of the first event
-                    start_marker = (math.floor(current_marker) / 3600) * 3600
+                    start_marker = (math.floor(current_marker / 3600)) * 3600
                     end_marker = start_marker + interval
                     pass
                 # add the event anyway
