@@ -9,6 +9,7 @@ import org.apache.commons.math3.exception.NotPositiveException;
 import org.apache.commons.math3.exception.NullArgumentException;
 import org.apache.commons.math3.exception.NumberIsTooLargeException;
 import org.apache.commons.math3.exception.OutOfRangeException;
+import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.genetics.Chromosome;
 import org.apache.commons.math3.genetics.ElitisticListPopulation;
 import org.apache.commons.math3.genetics.Population;
@@ -17,6 +18,9 @@ import p.lodz.ms.Context;
 import p.lodz.ms.genetics.workers.MATSimThread;
 
 public class LinksElitisticListPopulation extends ElitisticListPopulation {
+
+    // needs to be overriden
+    private double elitismRate;
 
     public LinksElitisticListPopulation(int populationLimit, double elitismRate)
 	    throws NotPositiveException, OutOfRangeException {
@@ -88,6 +92,20 @@ public class LinksElitisticListPopulation extends ElitisticListPopulation {
 	    nextGeneration.addChromosome(oldChromosomes.get(i));
 	}
 	return nextGeneration;
+    }
+
+    @Override
+    public void setElitismRate(final double elitismRate)
+	    throws OutOfRangeException {
+	if (elitismRate < 0 || elitismRate > this.getPopulationLimit()) {
+	    throw new OutOfRangeException(LocalizedFormats.ELITISM_RATE,
+		    elitismRate, 0, this.getPopulationLimit());
+	}
+	this.elitismRate = elitismRate;
+    }
+    
+    public double getElitismRate() {
+        return this.elitismRate;
     }
 
 }
