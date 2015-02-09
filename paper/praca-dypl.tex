@@ -85,13 +85,13 @@ Badania rozpoczęliśmy od poszukiwania źródeł traktujących o~opisywanym pro
 \end{itemize}  
 
 \subsubsection{Propozycja rozwiązania problemu.}
-Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Rozbudowa lub modyfikacja tej infrastruktury jest jednak kosztowna i~czasochłonna. Z tego powodu postanowiliśmy sprawdzić rozwiązanie zaproponowane przez Braessa. Ponieważ istnieją prace negujące lub podważające paradoks\cite{newinsights} , zdecydowaliśmy by przy potwierdzaniu wyniku optymalizacji nie kierować się wyłącznie założeniami zawartymi w~twierdzeniu.
+Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Rozbudowa lub modyfikacja tej infrastruktury jest jednak kosztowna i~czasochłonna. Z~tego powodu postanowiliśmy sprawdzić rozwiązanie zaproponowane przez Braessa. Ponieważ istnieją prace negujące lub podważające paradoks\cite{newinsights} , zdecydowaliśmy by przy potwierdzaniu wyniku optymalizacji nie kierować się wyłącznie założeniami zawartymi w~twierdzeniu.
 
 \subsubsection{Opis zastosowania algorytmów genetycznych.}
-Ponieważ nie znaleźliśmy żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowaliśmy się na losowe przeszukiwanie przestrzeni rozwiązań. Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, które zostały wykorzystane w pracy.
+Ponieważ nie znaleźliśmy żadnych przesłanek wykazujących jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, zdecydowaliśmy się na losowe przeszukiwanie przestrzeni rozwiązań.~Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, które zostały wykorzystane w~pracy.
 
 \subsubsection{Przedstawienie oceny optymalizacji.}
-Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego, w celu potwierdzenia jego słuszności, zdecydowaliśmy się na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybraliśmy działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
+Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego, w~celu potwierdzenia jego słuszności, zdecydowaliśmy się na zastosowanie zewnętrznego systemu oceny. Taką rolę spełniają systemy symulacji. System, który wybraliśmy działa zupełnie oddzielnie od metody twierdzenia, symulując rzeczywisty ruch na danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich agentów biorących udział w~danym scenariuszu. Zakładając stały zestaw agentów dla zmieniających się w~wyżej opisany sposób sieci, dążymy oczywiście do minimalizacji średniego czasu przejazdu.
 
 \subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań.}
 Paradoks Braessa nie jest jedynym twierdzeniem traktującym o~problemach komunikacyjnych miast. Wiele teorii jest opartych głownie na socjologicznych lub psychologicznych założeniach\footnote{np. paradoks Downsa Thomsona\cite{downs} czy prawo Lewisa Mogridge’a\cite{lewis}}. Są jednak niemniej ważne. Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem, ani decydującym głosem w~decyzjach dotyczących ustalaniu rzeczywistej sieci drogowej miasta. 
@@ -102,7 +102,7 @@ By przybliżyć temat problemów komunikacyjnych i~rozwiązania zaproponowanego 
 
 Zbiorowa praca napisana na potrzeby międzynarodowej konferencji dotyczącej technologii symulacji\cite{reducingtheeffects} jest pozycją, która opisuje podobny do podejmowanego przez nas problem. Mianowicie skupia się na modyfikacjach drogi poprzez zmiany dostępności jej składowych.
 
-W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecamy pozycję, która jest wstępem do tej tematyki\cite{gene}. Pozycja zawiera bogaty zestaw problemów przykładowych wraz z opisem ich rozwiązania. Ponadto dogłębnie opisuje ona każdy aspekt działania zastosowanych algorytmów. 
+W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecamy pozycję, która jest wstępem do tej tematyki\cite{gene}. Pozycja zawiera bogaty zestaw problemów przykładowych wraz z~opisem ich rozwiązania. Ponadto dogłębnie opisuje ona każdy aspekt działania zastosowanych algorytmów. 
 
 \section{Układ pracy.}
 Tematem pracy jest optymalizacja struktury sieci drogowej, zaś za główny cel przyjęto stworzenie rozwiązania, które wykorzystując algorytmy genetyczne odnajdzie najlepsze rozwiązanie.
@@ -443,7 +443,7 @@ Zdecydowaliśmy, że zamiast przystosowywać algorytm genetyczny do nowej strukt
 \item 0 (fałsz) - dla ulicy (węzła) zamkniętego dla ruchu.
 \end{itemize}
 
-Tablica tworzona w~ten sposób może być modyfikowana przez algorytm genetyczny, jak również bez problemu możemy z~niej odtworzyć stan obecny sieci drogowej. Za przykład podajemy sytuację przedstawioną na rysunkach \ref{left-example} i \ref{right-example}.
+Tablica tworzona w~ten sposób może być modyfikowana przez algorytm genetyczny, jak również bez problemu możemy z~niej odtworzyć stan obecny sieci drogowej. Za przykład podajemy sytuację przedstawioną na rysunkach \ref{left-example} i~\ref{right-example}.
 
 
 \begin{figure}[ht]
@@ -470,7 +470,7 @@ Przedstawiony na rysunku \ref{left-example} fragment sieci zawiera kolejne eleme
 
 \section{Punkty artykulacji grafu.}
 
-Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzchołek, którego usunięcie z~grafu spowoduje zwiększenie liczby spójnych składowych. Na rysunku \ref{artykulacja}, punktem artykulacji jest wierzchołek o numerze $0$.
+Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzchołek, którego usunięcie z~grafu spowoduje zwiększenie liczby spójnych składowych. Na rysunku \ref{artykulacja}, punktem artykulacji jest wierzchołek o~numerze $0$.
 
 \begin{figure}[h]
 \begin{center}
@@ -480,7 +480,7 @@ Punktem artykulacji\footnote{ang. articulation point lub cut vertex} jest wierzc
 \end{center}
 \end{figure}
 
-Algorytm poszukiwania punktów artykulacji wykorzystuje przeszukiwanie grafu w~głąb. Podczas nierekurencyjnego przejścia, wierzchołek zostaje oznaczony jako punkt artykulacji, wtedy i tylko wtedy, jeśli jest on korzeniem posiada więcej niż dwóch synów. A wierzchołek $ v $ nie będący korzeniem drzewa DFS jest punktem artykulacji wtedy i tylko wtedy, gdy przynajmniej dla jednego jego syna nie istnieje krawędź wtórna $ \{u,w\} $, taka że wierzchołek $ u $ jest potomkiem $ v $ i $ w $ jest przodkiem $ v $.
+Algorytm poszukiwania punktów artykulacji wykorzystuje przeszukiwanie grafu w~głąb. Podczas nierekurencyjnego przejścia, wierzchołek zostaje oznaczony jako punkt artykulacji, wtedy i~tylko wtedy, jeśli jest on korzeniem posiada więcej niż dwóch synów. A~wierzchołek $ v $ nie będący korzeniem drzewa DFS jest punktem artykulacji wtedy i~tylko wtedy, gdy przynajmniej dla jednego jego syna nie istnieje krawędź wtórna $ \{u,w\} $, taka że wierzchołek $ u~$ jest potomkiem $ v $ i~$ w~$ jest przodkiem $ v $.
 
 Punkty te są wykorzystywane, by podczas losowych mutacji i~krzyżowań w~algorytmie genetycznym nie doszło do stworzenia grafu innego niż grafu skierowanego silnie spójnego. Krok sprawdzenia jest wykonywany podczas każdorazowego zamykania drogi, zatem za każdym razem gdy zostaje wprowadzona nowa wartość $,,0''$ w~tablicy.
 
@@ -521,7 +521,7 @@ Ponieważ moduł do wizualizacji rozwiązań MATSim nie spełniał naszych oczek
 
 \section{Technologie i~metodologie programistyczne.}
 
-Użyte przez nas technologie są poniekąd wymuszone przez języki w~jakich zostały stworzone wykorzystywane pomocnicze rozwiązania. W~przypadku symulatora MATSim jest to Java. Zdecydowaliśmy się natomiast na wykorzystanie Pythona głównie ze względu na przeważającą przewagę biblioteki NetworkX nad bibliotekami obsługującymi grafy w~języku Java. Nie jest to wyjątek, gdyż ogólnie rozwiązania dostarczane dla Python'a, szczególnie w~przypadku problemów akademickich, są dużo lepsze. Poniżej zestaw narzędzi, które wykorzystaliśmy w procesie tworzenia aplikacji.  
+Użyte przez nas technologie są poniekąd wymuszone przez języki w~jakich zostały stworzone wykorzystywane pomocnicze rozwiązania. W~przypadku symulatora MATSim jest to Java. Zdecydowaliśmy się natomiast na wykorzystanie Pythona głównie ze względu na przeważającą przewagę biblioteki NetworkX nad bibliotekami obsługującymi grafy w~języku Java. Nie jest to wyjątek, gdyż ogólnie rozwiązania dostarczane dla Python'a, szczególnie w~przypadku problemów akademickich, są dużo lepsze. Poniżej zestaw narzędzi, które wykorzystaliśmy w~procesie tworzenia aplikacji.  
 
 \begin{figure}[h]
 \begin{flushleft}
@@ -558,11 +558,11 @@ Użyte przez nas technologie są poniekąd wymuszone przez języki w~jakich zost
 \end{flushright}
 \end{figure}
 
-Loga pochodzą ze stron dostawców\cite{java}\cite{eclipse}\cite{python}\cite{pydev}.
+Logo pochodzą ze stron dostawców\cite{java}\cite{eclipse}\cite{python}\cite{pydev}.
 
 \section{Badane miasto przykładowe: Siouxfalls}
 
-Główną zaletą korzystania z~MATSima, o~której już wcześniej wspomniałem, jest dość pokaźny zbiór danych przykładowych. Jednym z~nich jest materiał zaprezentowany przez twórców aplikacji, który udostępnili w~2013 roku na zgromadzeniu użytkowników platformy\cite{siux}. Przykład ten dotyczy miasta Sioux Falls w~Południowej Dakocie. Domyślnie scenariusz składa się z:
+Główną zaletą korzystania z~MATSima, o~której już wcześniej wspominaliśmy, jest dość pokaźny zbiór danych przykładowych. Jednym z~nich jest materiał zaprezentowany przez twórców aplikacji, który udostępnili w~2013 roku na zgromadzeniu użytkowników platformy\cite{siux}. Przykład ten dotyczy miasta Sioux Falls w~Południowej Dakocie. Domyślnie scenariusz składa się z:
 
 \begin{itemize}
 \item dwóch grup zapotrzebowania bez charakterystyk socjodemograficznych:
@@ -576,52 +576,57 @@ Główną zaletą korzystania z~MATSima, o~której już wcześniej wspomniałem,
 \end{itemize}
 
 \vspace*{20px}
-Po zapoznaniu się z~przykładem, dostarcza on nawet za dużo danych, które by mnie interesowały. Dostosowałem go zatem do swoich potrzeb poprzez:
+Po zapoznaniu się z~przykładem, dostarcza on nawet za dużo danych, które by nas interesowały. Dostosowaliśmy go zatem do swoich potrzeb poprzez:
 
 \begin{itemize}
 \item usunięcie transportu publicznego,
 \item wyposażenie każdego agenta w~swój samochód.
 \end{itemize}
 
-Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla mnie pozytywnym efektem) i~skróciły obliczenia związane z~symulacjami. Poniżej prezentuję  rozkład miejsc pracy, domostw i~innych zakładów nałożonych na graf sieci drogowej miasta.
+Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozytywnym efektem) i~skróciły obliczenia związane z~symulacjami. Na rysunku \ref{siouxbudynki}  prezentujemy  rozkład miejsc pracy, domostw i~innych zakładów nałożonych na graf sieci drogowej miasta.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.80\textwidth]{img/sioux/facilities}
 \caption{Rozkład budynków na grafie miasta Sioux Falls.} 
+\label{siouxbudynki}
 \end{figure}
 
-Prezentuję również ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Obrazki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru.
+Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. Ponadto, przedstawiają one jedynie fragment sieci, w którym ruch jest najbardziej wzmożony.
 
 \begin{figure}[ht]
 \centering
 %bottom right top left
 \includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph6.00-7.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 6.00-7.00.} 
+\label{ex-sioux-1}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph7.00-8.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 7.00-8.00.} 
+\label{ex-sioux-2}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph16.00-17.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 16.00-17.00.} 
+\label{ex-sioux-3}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[trim=15cm 5cm 10cm 25cm, clip=true, totalheight=0.55\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 17.00-18.00.} 
+\label{ex-sioux-3}
 \end{figure}
 
 
 \chapter{Opis projektu.}\label{rozdz.opis} 
 
-W tym rozdziale opiszę strukturę swojego projektu z~opisem jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowałem się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku operacji i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których wykonałem projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
+W niniejszym rozdziale opiszę strukturę swojego projektu z~opisem jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowałem się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku operacji i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których wykonałem projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
 
 \section{Dane wejściowe.}
 
