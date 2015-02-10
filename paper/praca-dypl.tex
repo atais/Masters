@@ -422,7 +422,7 @@ Proces rekombinacji przez krzyżowanie nie byłby w~stanie odkryć całej przest
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=0.55\textwidth]{img/mutation}
+\includegraphics[width=0.580\textwidth]{img/mutation}
 \caption{Ogólny schemat operacji mutacji.}
 \end{center}
 \end{figure}
@@ -583,44 +583,44 @@ Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozyty
 \begin{figure}[ht]
 \centering
 \includegraphics[totalheight=0.6\textheight]{img/sioux/network}
-\caption{Sieć miasta Sioux Falls w postaci grafu.} 
+\caption{Graf sieci miasta Sioux Falls wykorzystany w badaniach.} 
 \label{siouxsiec}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1\textwidth]{img/sioux/facilities}
+\includegraphics[width=1.2\textwidth]{img/sioux/facilities}
 \caption{Rozkład budynków na grafie miasta Sioux Falls.} 
 \label{siouxbudynki}
 \end{figure}
 
-Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. 
+Na rysunkach \ref{ex-sioux-1} i \ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. 
 
 \begin{figure}[ht]
 \centering
 %bottom right top left
-\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph6.00-7.00}}}
+\includegraphics[totalheight=0.580\textheight, angle=90]{{{img/sioux/graph6.00-7.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 6.00-7.00.} 
 \label{ex-sioux-1}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph7.00-8.00}}}
-\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 7.00-8.00.} 
-\label{ex-sioux-2}
-\end{figure}
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[totalheight=0.580\textheight, angle=90]{{{img/sioux/graph7.00-8.00}}}
+%\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 7.00-8.00.} 
+%\label{ex-sioux-2}
+%\end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph16.00-17.00}}}
+\includegraphics[totalheight=0.580\textheight, angle=90]{{{img/sioux/graph16.00-17.00}}}
 \caption{Natężenie ruchu w mieście Sioux Falls w godzinach 16.00-17.00.} 
 \label{ex-sioux-3}
 \end{figure}
 
 %\begin{figure}[ht]
 %\centering
-%\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
+%\includegraphics[totalheight=0.580\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
 %\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 17.00-18.00.} 
 %\label{ex-sioux-4}
 %\end{figure}
@@ -722,7 +722,7 @@ Korzystając z powyższego rozwiązania, dzięki któremu projekt jest możliwy 
 
 Ostatnią ważną kwestią przed realizacją samego zadania optymalizacji jest dobór jego ustawień. Część z nich jest oczywiście stała lub nie ma wpływu bezpośrednio na obliczenia. Kluczową rolę dla ostatecznego wyniku odgrywają jednak parametry samej symulacji.
 
-Podczas badań wykorzystane zostały główne ustawienia zaczerpnięte od twórców przykładu Sioux Falls. Symulator zawiera również parametr ilości iteracji. Zgodnie z założeniami symulatora, podczas każdej kolejnej iteracji, celem agenta jest zwiększenie jego średniego wyniku. Dąży on zatem do optymalizacji swoich planów dnia względem warunków na drodze. Przekłada się to bezpośrednio również na średni czas podróży każdego agenta. Twórcy zalecają stosowanie wysokich liczb iteracji, dla uzyskania jak najlepszych wyników, operacje te są jednak czasochłonne. Na rysunku \ref{def_stopwatch} przedstawiony został graf czasu uruchomienia symulacji jednej sieci dla stu iteracji. Podczas symulacji wykorzystywana była domyślna sieć miasta.
+Większość ustawień została niezmieniona, pochodzi więc od twórców przykładu Sioux Falls. Symulator zawiera jednak ważny parametr ilości iteracji. Zgodnie z założeniami symulatora, podczas każdej kolejnej iteracji, celem agenta jest zwiększenie jego średniego wyniku. Dąży on zatem do optymalizacji swoich planów dnia względem warunków na drodze. Przekłada się to bezpośrednio również na średni czas podróży każdego agenta. Twórcy zalecają stosowanie wysokich liczb iteracji, dla uzyskania jak najlepszych wyników, operacje te są jednak czasochłonne. Na rysunku \ref{def_stopwatch} przedstawiony został graf czasu uruchomienia symulacji jednej sieci dla stu iteracji. Podczas symulacji wykorzystywana była domyślna sieć miasta.
 
 \begin{figure}[ht]
 \centering
@@ -750,8 +750,9 @@ Analizując wykres na rysunku \ref{def_stopwatch}, możemy odczytać czasy trwan
 
 Na wykresach \ref{def_iters} i \ref{def_scorestats}, widać, że wpływ iteracji, ma największe znaczenie w początkowych stadiach. W późniejszych iteracjach zmiana następuje dużo wolniej.
 
-\section{Ustawienia projektu.}
 Po analizie wykresów prezentowanych w sekcji \ref{ukt}, zdecydowaliśmy w projekcie na użycie $10$ iteracji podczas analizy każdej sieci. Wartość ta optymalnie łączy zalety szybkiego spadku wartości średnich czasów podróży i czasu potrzebnego na obliczenia.
+
+\section{Ustawienia projektu.}
 
 Podczas badań wykorzysaliśmy ustawienia algorytmu genetycznego zgodne z listingiem \ref{geneconf}. Wartości zostały dobrane na podstawie doświadczenia nabytego w trakcie studiów literaturowych. 
 	
@@ -783,7 +784,7 @@ Ponieważ w projekcie wykorzystany został elitystyczny model populacji algorytm
 Najlepsze wyniki symulacji przedstawiamy w tabeli \ref{tab_best}. Przedstawione są tutaj wszystkie sieci, które uzyskały wynik lepszy od sieci wejściowej, tj. $1338.4505528474617$. Od teraz, będziemy odnosić się do tych sieci używając ich numeru identyfikacyjnego (pierwsza kolumna).
 
 \begin{minipage}{\linewidth}
-\captionof{table}{Najlepsze sieci otrzymane w wyniku działania algorytmu.}
+\captionof{table}{Zbiór najlepszych otrzymanych sieci.}
 \label{tab_best} 
 \begin{tabularx}{\linewidth}{ | l | X | r | }
 	\hline
@@ -810,123 +811,123 @@ Najlepsze wyniki symulacji przedstawiamy w tabeli \ref{tab_best}. Przedstawione 
 \end{minipage}%
 
 \newpage
-Poniżej prezentujemy grafy uzyskanych sieci, dla wizualizacji rozwiązań.\textbf{ W celu uproszczenia odnajdowania usuniętych węzłów, są one zaznaczone kolorem czerwonym.} Tak, jak w poprzednim przypadku, sieci zostały obrócone o~$90^{\circ}$ w~lewo. W niektórych przypadkach wycięte węzły są trudno widoczne, z powodu nikłej długości strzałki. Dotyczy to przede wszystkim przykładów: \ref{sioux5}, \ref{sioux7}, \ref{sioux9}, \ref{sioux10}, \ref{sioux11}, \ref{sioux12}, \ref{sioux13}, \ref{sioux14}, \ref{sioux16}. W tych sieciach zostały wycięte drogi w pobliżu węzła o numerze $ 15$.
+Na rysunkach \ref{sioux1} - \ref{sioux17} prezentujemy grafy uzyskanych sieci, dla wizualizacji rozwiązań. \textbf{W celu uproszczenia odnajdowania usuniętych węzłów, są one zaznaczone kolorem czerwonym.} Tak, jak w poprzednim przypadku, sieci zostały obrócone o~$90^{\circ}$ w~lewo. W niektórych przypadkach wycięte węzły są trudno widoczne, z powodu nikłej długości strzałki. Dotyczy to przede wszystkim przykładów: \ref{sioux5}, \ref{sioux7}, \ref{sioux9}, \ref{sioux10}, \ref{sioux11}, \ref{sioux12}, \ref{sioux13}, \ref{sioux14}, \ref{sioux16}. W tych sieciach zostały wycięte drogi w pobliżu węzła o numerze $ 15$.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/1/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/1/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 1.}
 \label{sioux1}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/2/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/2/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 2.}
 \label{sioux2}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/3/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/3/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 3.}
 \label{sioux3}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/4/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/4/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 4.}
 \label{sioux4}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/5/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/5/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 5.}
 \label{sioux5}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/6/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/6/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 6.}
 \label{sioux6}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/7/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/7/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 7.}
 \label{sioux7}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/8/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/8/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 8.}
 \label{sioux8}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/9/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/9/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 9.}
 \label{sioux9}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/10/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/10/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 10.}
 \label{sioux10}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/11/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/11/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 11.}
 \label{sioux11}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/12/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/12/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 12.}
 \label{sioux12}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/13/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/13/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 13.}
 \label{sioux13}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/14/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/14/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 14.}
 \label{sioux14}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/15/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/15/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 15.}
 \label{sioux15}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/16/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/16/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 16.}
 \label{sioux16}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/17/network2}
+\includegraphics[totalheight=0.580\textheight, angle=90]{img/sioux-out/17/network2}
 \caption{Sieć miasta Sioux Falls, rozwiązanie nr. 17.}
 \label{sioux17}
 \end{figure}
@@ -957,7 +958,7 @@ W tym folderze zostały zebrane wszystkie źródła literaturowe wykorzystane pr
 \subsubsection{matsim/}
 Folder ten zawiera skompilowane wersje symulatora MATSim oraz jego falsyfikatu wykorzystywanego podczas testów. Symulator został skompilowany ze źródeł dostępnych na repozytorium głównym projektu\footnote {\url{https://svn.code.sf.net/p/matsim/source/matsim/trunk}}. Drobne modyfikacje dotyczyły tylko parametrów logowania oraz uruchomienia symulatora. Nie zostały dokonane żadne zmiany ingerujące w przebieg samej symulacji.
 
-\subsubsection{output/}
+\subsubsection{sioux-out/}
 Jest to domyślny katalog z danymi otrzymanymi w wyniku działania projketu.
 
 \subsubsection{paper/}
