@@ -11,6 +11,8 @@
 \usepackage{indentfirst} % first paragraph ident
 \usepackage{blindtext} % lorem impsum
 \usepackage{geometry}
+\usepackage{caption}
+\usepackage{tabularx}
 
 \widowpenalty=10000
 \clubpenalty=10000
@@ -576,11 +578,11 @@ Po zapoznaniu się z~przykładem, dostarcza on nawet za dużo danych, które by 
 \item wyposażenie każdego agenta w~swój samochód.
 \end{itemize}
 
-Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozytywnym efektem) i~skróciły obliczenia związane z~symulacjami. Na rysunku \ref{siouxsiec} przedstawiamy sieć miasta odwzorowaną w postaci grafu. Dla czytelności obraz sieci został obrócony o~$90^{\circ}$ w~lewo. Natomiast na rysunku \ref{siouxbudynki}  prezentujemy  rozkład miejsc pracy, domostw i~innych zakładów nałożonych na graf sieci drogowej miasta.
+Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozytywnym efektem) i~skróciły obliczenia związane z~symulacjami. Na rysunku \ref{siouxsiec} przedstawiamy sieć miasta odwzorowaną w postaci grafu. Natomiast na rysunku \ref{siouxbudynki}  prezentujemy  rozkład miejsc pracy, domostw i~innych zakładów nałożonych na graf sieci drogowej miasta.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{img/sioux/network}
+\includegraphics[totalheight=0.6\textheight]{img/sioux/network}
 \caption{Sieć miasta Sioux Falls w postaci grafu.} 
 \label{siouxsiec}
 \end{figure}
@@ -592,7 +594,7 @@ Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozyty
 \label{siouxbudynki}
 \end{figure}
 
-Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-4} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. 
+Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. 
 
 \begin{figure}[ht]
 \centering
@@ -616,12 +618,12 @@ Na rysunkach \ref{ex-sioux-1} - \ref{ex-sioux-4} prezentujemy ruch drogowy w~naj
 \label{ex-sioux-3}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
-\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 17.00-18.00.} 
-\label{ex-sioux-4}
-\end{figure}
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[totalheight=0.55\textheight, angle=90]{{{img/sioux/graph17.00-18.00}}}
+%\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 17.00-18.00.} 
+%\label{ex-sioux-4}
+%\end{figure}
 
 
 \chapter{Opis projektu.}\label{rozdz.opis} 
@@ -764,15 +766,171 @@ Podczas badań wykorzysaliśmy ustawienia algorytmu genetycznego zgodne z listin
 </genetics>
 \end{lstlisting}
 
+\newpage
 \section{Wyniki.}
 
-Najlepsze wyniki symulacji przedstawiamy w tabeli:
+Wykres przedstawiający zestawienie wyniku najlepszej sieci wyłonionej w danej iteracji, do wyniku sieci wejściowej przedstawiamy na rysunku \ref{def_fitness}.
 
-\begin{tabular}{ l c r }
-  1 & 2 & 3 \\
-  4 & 5 & 6 \\
-  7 & 8 & 9 \\
-\end{tabular}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.85\textwidth]{img/fitness}
+\caption{Graf wyników algorytmu genetycznego.}
+\label{def_fitness}
+\end{figure}
+
+Ponieważ w projekcie wykorzystany został elitystyczny model populacji algorytmu genetycznego, powyższy wykres nie przedstawia praktycznie żadnych zmian w populacji, która została ulepszona. Wyniki wszystkich chromosomów były jednak zachowywane w bazie. Dzięki temu możemy przedstawić więcej sieci spełniających założenia projektowe.
+
+Najlepsze wyniki symulacji przedstawiamy w tabeli \ref{tab_best}. Przedstawione są tutaj wszystkie sieci, które uzyskały wynik lepszy od sieci wejściowej, tj. $1338.4505528474617$. Od teraz, będziemy odnosić się do tych sieci używając ich numeru identyfikacyjnego (pierwsza kolumna).
+
+\begin{minipage}{\linewidth}
+\captionof{table}{Najlepsze sieci otrzymane w wyniku działania algorytmu.}
+\label{tab_best} 
+\begin{tabularx}{\linewidth}{ | l | X | r | }
+	\hline
+	ID & Reprezentacja binarna & Wynik sieci \\
+	\hline
+	1 & 011111111111111111111111111111111111111111111 	111111111111111111111111111111111111110111111 & 1310.95255617644 \\ \hline
+	2 & 011111111111111111111111011111110111111111111 111111111111111111111111111111111111110111111 & 1312.64143383664 \\ \hline
+	3 & 011111111111111111111111111111111111111111111 111111111111111111110111111111111111110111111 & 1312.73299250981 \\ \hline
+	4 & 011111111111111111111111111111110111111111111 111111111111111111111111111111111111110111111 & 1313.75345975508 \\ \hline
+	5 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110111101 & 1318.77194744977 \\ \hline
+	6 & 011111111111111111111111011111111111111111111 111111111111111111111111111111111111110111111 & 1320.54353227916 \\ \hline
+	7 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110110111 & 1322.64708120319 \\ \hline
+	8 & 011111111111111111111111011111111111111111111 111111111111111111110111111111111111110111111 & 1323.53190464867 \\ \hline
+	9 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110111110 & 1325.07095470218 \\ \hline
+	10 & 01111111111111111111111111111111111111111111 1111111111111111111111110111111111111110111111 & 1327.94727737487 \\ \hline
+	11 & 01111111111111111111111111111111111111111111 1111111111111111111111110111111111111110111101 & 1329.46298894305 \\ \hline
+	12 & 01111111111111111111111101111111111111111111 1111111111111111111111110111111111111110111111 & 1332.87335631911 \\ \hline
+	13 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111111110111011 & 1334.28138152419 \\ \hline
+	14 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111110110111111 & 1334.48972773749 \\ \hline
+	15 & 01111111111111111110111111111111111111111111 1111111111111111111111111111111111111110111111 & 1335.74516109856 \\ \hline
+	16 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111111110111010 & 1335.96306027821 \\ \hline
+	17 & 01111111111111111111111111111111111001111111 1111111111111111111111111111111111111110111111 & 1336.65051123529 \\ \hline
+\end{tabularx}
+\end{minipage}%
+
+\newpage
+Poniżej prezentujemy grafy uzyskanych sieci, dla wizualizacji rozwiązań.\textbf{ W celu uproszczenia odnajdowania usuniętych węzłów, są one zaznaczone kolorem czerwonym.} Tak, jak w poprzednim przypadku, sieci zostały obrócone o~$90^{\circ}$ w~lewo. W niektórych przypadkach wycięte węzły są trudno widoczne, z powodu nikłej długości strzałki. Dotyczy to przede wszystkim przykładów: \ref{sioux5}, \ref{sioux7}, \ref{sioux9}, \ref{sioux10}, \ref{sioux11}, \ref{sioux12}, \ref{sioux13}, \ref{sioux14}, \ref{sioux16}. W tych sieciach zostały wycięte drogi w pobliżu węzła o numerze $ 15$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/1/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 1.}
+\label{sioux1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/2/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 2.}
+\label{sioux2}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/3/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 3.}
+\label{sioux3}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/4/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 4.}
+\label{sioux4}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/5/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 5.}
+\label{sioux5}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/6/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 6.}
+\label{sioux6}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/7/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 7.}
+\label{sioux7}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/8/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 8.}
+\label{sioux8}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/9/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 9.}
+\label{sioux9}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/10/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 10.}
+\label{sioux10}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/11/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 11.}
+\label{sioux11}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/12/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 12.}
+\label{sioux12}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/13/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 13.}
+\label{sioux13}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/14/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 14.}
+\label{sioux14}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/15/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 15.}
+\label{sioux15}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/16/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 16.}
+\label{sioux16}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[totalheight=0.55\textheight, angle=90]{img/output/17/network2}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr. 17.}
+\label{sioux17}
+\end{figure}
+
 
 
 \chapter{Podsumowanie.}\label{rozdz.podsumowanie} 

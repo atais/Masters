@@ -56,7 +56,11 @@ def organise_iters_best(output):
     dirs = [x for x in os.listdir(root) if (not x.startswith('.') and x != 'best')]
     for idx, dirname in enumerate(dirs):
         plot_iters_from(root + dirname, idx)
-    pyplot.savefig(os.path.join(output, 'itersBest.png'), bbox_inches='tight')
+    try:
+        pyplot.savefig(os.path.join(output, 'itersBest.png'), bbox_inches='tight')
+    except Exception:
+        #not tested really :/
+        pass
     pyplot.close()
     pyplot.clf()
     pass
