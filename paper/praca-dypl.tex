@@ -933,14 +933,65 @@ Na rysunkach \ref{sioux1} - \ref{sioux17} prezentujemy grafy uzyskanych sieci, d
 \end{figure}
 
 
-
 \chapter{Podsumowanie.}\label{rozdz.podsumowanie} 
 
 \section{Dyskusja wyników.}
-\blindtext[1]
+Uzyskane wyniki potwierdzają przede wszystkim badawczą stronę pracy. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, co już zostało wspomniane, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w mieście a ponadto zastosowaliśmy jedynie uproszczenie, w którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. W związku z powyższym, uzyskane wyniki, można traktować co najwyżej jako sugestię. 
+
+I gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, nie jest może najefektywniejszym przykładem, jednak skutecznym. Działanie podparte sumienną symulacją może przekazać miarodajne wyniki.
+
+\subsection{Analiza wyników.}
+Pierwszym krokiem, który pomaga w analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie na zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o zamknięciu węzłów między $18$ i $18_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\textwidth, angle=90]{img/sioux-out/obszar1}
+\caption{Fragment grafu z zaznaczonym obszarem 1.}
+\label{frag_1}
+\end{figure}
+
+Ciekawym jest jednak obszar wspólny dla wyników \ref{sioux5}, \ref{sioux7}, \ref{sioux9}, \ref{sioux10}, \ref{sioux11}, \ref{sioux12}, \ref{sioux13}, \ref{sioux14}, \ref{sioux16}. Jest to obszar znajdujący się pomiędzy wspomnianymi wierzchołkami $15$ i $19$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_2}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.80\textwidth]{img/sioux-out/obszar2}
+\caption{Fragment grafu z zaznaczonym obszarem 2.}
+\label{frag_2}
+\end{figure}
+
+Drugim obszarem, który został wybrany w przypadku paru rozwiązań, są ulice pomiędzy skrzyżowaniem (wierzchołkiem) $5$ i $6$. Został on wybrany przez \ref{sioux2}, \ref{sioux4}, \ref{sioux6}, \ref{sioux8}, \ref{sioux12}. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_3}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.75\textwidth]{img/sioux-out/obszar3}
+\caption{Fragment grafu z zaznaczonym obszarem 3.}
+\label{frag_3}
+\end{figure}
+
+Ostatni obszar, który charakteryzował się wspólnym wynikiem dla więcej niż jednego rozwiązania, tj: \ref{sioux3}, \ref{sioux8}, \ref{sioux15} znajduje się pomiędzy wierzchołkiem $3$ i $12$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_4}, obróconym o~$90^{\circ}$ w~lewo.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\textwidth, angle=90]{img/sioux-out/obszar4}
+\caption{Fragment grafu z zaznaczonym obszarem 4.}
+\label{frag_4}
+\end{figure}
+
+Powyższe sugestie mogą zostać użyte w celu poszerzonych badań nad danymi obszarami, decydując czy faktycznie mają one wpływ na komunikację w mieście. Otrzymane wyniki nie oznaczają również, że nie istnieje bardziej optymalne rozwiązanie. Przestrzeń przeszukiwań dla powyższego grafu wynosiła $2^{90}$, a więc zbadanie wszystkich możliwych rozwiązań problemu jest praktycznie niewykonalne.
 
 \section{Perspektywy dalszych badań w~dziedzinie.}
-\blindtext[1]
+Dość oczywistym kierunkiem rozwoju może być oczywiście dalsze przeszukiwanie posiadanego problemu. Jak już zostało wspomniane wyżej, ilość dostępnych rozwiązań jest bardzo duża.
+
+Ciekawszym wydaje się być jednak przeszukiwanie nowych zbiorów. W przypadku symulatora MATSim mamy do swojej dyspozycji dość pokaźną liczbę przykładów opartych o rzeczywiste miasta, na których były prowadzone symulacje. Jeden z dostępnych modeli jest odwzorowaniem miasta Berlin, przy okazji, wykonanym z dużo większą dokładnością niż Sioux Falls \ref{berlin}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{img/berlin2}
+\caption{Sieć drogowa miasta Berlin w postaci grafu.}
+\label{berlin}
+\end{figure}
+
+Ponadto, w pracy można wykorzystać inne twierdzenia i paradoksy dotyczące m.in. transportu miejskiego. Niestety, jak już było wspomniane wcześniej, wiele z tych praw jest opartych o psychologiczne tezy, bez matematycznego podparcia, co powoduje, że wyniki są trudne do przewidzenia.
 
 \section{Struktura projektu.}
 
