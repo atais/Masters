@@ -10,15 +10,15 @@ import re
 import numpy
 from matplotlib import pyplot
 
-
-def plot_iters_from(folder):
-    #Fake matsim pass
+def plot_iters_from(folder, idx=""):
+    # Fake matsim pass
     try:
         y = numpy.fromfile((folder + "/iters.txt"), sep="\n")
-        pyplot.plot(y)
+        pyplot.plot(y, label='sr. czas ' + str(idx))
          
-        x1,x2,y1,_ = pyplot.axis()
-        pyplot.axis((x1,x2,y1,float(y[6])))
+        x1, x2, y1, _ = pyplot.axis()
+        pyplot.axis((x1, x2, y1, float(y[6])))
+        pyplot.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     except IOError:
         pass
     pass
@@ -45,14 +45,18 @@ def organise_iters_in(output):
     text_file.close()
     
     plot_iters_from(output)
-    pyplot.savefig(os.path.join(output, 'iters.png'))
+    pyplot.savefig(os.path.join(output, 'iters.png'), bbox_inches='tight')
+    pyplot.close()
+    pyplot.clf()
     pass
 
 
 def organise_iters_best(output):
     root = output + '/../'
     dirs = [x for x in os.listdir(root) if (not x.startswith('.') and x != 'best')]
-    for dirname in dirs:
-        plot_iters_from(root + dirname)
-    pyplot.savefig(os.path.join(output, 'itersBest.png'))
+    for idx, dirname in enumerate(dirs):
+        plot_iters_from(root + dirname, idx)
+    pyplot.savefig(os.path.join(output, 'itersBest.png'), bbox_inches='tight')
+    pyplot.close()
+    pyplot.clf()
     pass

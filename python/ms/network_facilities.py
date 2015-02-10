@@ -7,7 +7,6 @@ Created on 12 sty 2015
 import os
 
 from lxml import etree
-from pylab import rcParams
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -18,10 +17,11 @@ from xml_to_graph import xml_to_graph
 @timing
 def save_graph(filename):
     plt.axis('off')
-    rcParams['figure.figsize'] = 40, 40
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))
-    plt.savefig(filename, dpi=800)
+    plt.savefig(filename)
+    plt.close()
+    plt.clf()
 
 @timing
 def draw_graph(graph, labels=False):

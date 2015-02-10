@@ -15,8 +15,6 @@ import networkx as nx
 from utils import timing
 import utils
 from xml_to_graph import xml_to_graph
-import datetime
-
 
 def save_graph(graph, filename):
     A = nx.to_agraph(graph)
@@ -27,6 +25,7 @@ def save_graph(graph, filename):
     if not ".png" in filename: 
         filename = filename + ".png"        
     A.draw(filename)
+    A.close()
     
 def correct_pos(node_attr):
     return "%f,%f" % (float(node_attr.get('x')), float(node_attr.get('y')))

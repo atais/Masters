@@ -65,6 +65,10 @@ public class GeneticsModule {
 		.getLength());
 	StoppingCondition stopCond = new FixedGenerationCount(maxGenerations);
 	Population finalPopulation = ga.evolve(population, stopCond);
+	String best = ((LinksChromosome) finalPopulation.getFittestChromosome())
+		.getShortId();
+	logger.info("Best chromosome: " + best);
+	logger.info("--------------------------");
     }
 
     private void initialGraphMethods(LinksChromosome initial) {

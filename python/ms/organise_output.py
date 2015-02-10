@@ -96,9 +96,10 @@ def organise_best(output):
     v = numpy.fromfile((root + "/fitnessInitial.txt"), sep="\n")
     y2 = numpy.linspace(v[0], v[0], num=len(y1))
     
-    pyplot.plot(y1)
-    pyplot.plot(y2)
-    
+    pyplot.plot(y1, label='Najlepsza siec')
+    pyplot.plot(y2, label='Wejsciowa siec')
+    pyplot.legend()
     pyplot.savefig(os.path.join(root, 'fitness.png'))
+    pyplot.close()
     remove_output_events(output)
     pass
