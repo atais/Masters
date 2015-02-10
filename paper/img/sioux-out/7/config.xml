@@ -13,9 +13,9 @@
 
 	<module name="controler">
 		<!-- PARAMETER  -->
-		<param name="outputDirectory" value="/home/atais/Masters/java/../output/siouxfalls-azure/ga.193/58157b50-79e2-4603-9aea-ac3bca6001c1"/>
-		<param name="lastIteration" value="9"/>
-		<param name="writeEventsInterval" value="9"/>
+		<param name="outputDirectory" value="/home/atais/Masters/java/../output/sioux-out/7/"/>
+		<param name="lastIteration" value="100"/>
+		<param name="writeEventsInterval" value="100"/>
 		<!-- PARAMETER  -->
 
 		<param name="writePlansInterval" value="0"/>
@@ -29,7 +29,7 @@
 
 	<module name="network">
 		<!-- PARAMETER  -->
-		<param name="inputNetworkFile" value="/home/atais/Masters/java/../output/siouxfalls-azure/ga.193/58157b50-79e2-4603-9aea-ac3bca6001c1/network.xml"/>
+		<param name="inputNetworkFile" value="/home/atais/Masters/java/../output/sioux-out/7/network.xml"/>
 		<!-- PARAMETER  -->
 	</module>
 
