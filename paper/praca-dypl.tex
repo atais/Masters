@@ -719,7 +719,7 @@ Na rysunkach \ref{ex-sioux-1} i~\ref{ex-sioux-3} prezentujemy ruch drogowy w~naj
 
 Ostatnią ważną kwestią przed realizacją samego zadania optymalizacji jest dobór jego ustawień.~Część z~nich jest oczywiście stała lub nie ma wpływu bezpośrednio na obliczenia. Kluczową rolę dla ostatecznego wyniku odgrywają jednak parametry samej symulacji.
 
-Większość ustawień została niezmieniona, pochodzi więc od twórców przykładu Sioux Falls. Symulator zawiera jednak ważny parametr ilości iteracji. Zgodnie z~założeniami symulatora, podczas każdej kolejnej iteracji, celem agenta jest zwiększenie jego średniego wyniku. Dąży on zatem do optymalizacji swoich planów dnia względem warunków na drodze. Przekłada się to bezpośrednio również na średni czas podróży każdego agenta. Twórcy zalecają stosowanie wysokich liczb iteracji, dla uzyskania jak najlepszych wyników, operacje te są jednak czasochłonne. Na rysunku \ref{def_stopwatch} przedstawiony został graf czasu uruchomienia symulacji jednej sieci dla stu iteracji. Podczas symulacji wykorzystywana była domyślna sieć miasta.
+Większość ustawień została niezmieniona, pochodzi więc od twórców przykładu Sioux Falls. Symulator zawiera jednak ważny parametr ilości iteracji. Zgodnie z~założeniami symulatora, podczas każdej kolejnej iteracji, celem agenta jest zwiększenie jego średniego wyniku. Dąży on zatem do optymalizacji swoich planów dnia względem warunków na drodze. Przekłada się to bezpośrednio również na średni czas podróży każdego agenta. Twórcy zalecają stosowanie wysokich liczb iteracji, dla uzyskania jak najlepszych wyników. Operacje te są jednak czasochłonne. Na rysunku \ref{def_stopwatch} przedstawiony został graf czasu uruchomienia symulacji jednej sieci dla stu iteracji. Podczas symulacji wykorzystywana była domyślna sieć miasta.
 
 \begin{figure}[ht]
 \centering
@@ -728,7 +728,18 @@ Większość ustawień została niezmieniona, pochodzi więc od twórców przyk�
 \label{def_stopwatch}
 \end{figure}
 
-Analizując wykres na rysunku \ref{def_stopwatch}, możemy odczytać czasy trwania kolejnych iteracji, jak również czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu, rysunek \ref{def_iters}. Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{def_scorestats}.
+Warto również omówić kolejne kroki każdej iteracji, w nawiasie podaję nazwy procesów z wykresu:
+\begin{enumerate}
+\item initial demand (iterationStartListeners),
+\item execution (beforeMobSimListeners, mobSim, afterMobSimListeners), 
+\item scoring (scoring),
+\item replanning (replanning),
+\item analyses (iterationEndsListeners).
+\end{enumerate}
+
+W pierwszym punkcie iteracji, agenci przygotowują się do swoich dni. Znając swoje zajęcia, planują oni drogę oraz dokładne godziny swoich akcji. Podczas \textit{execution} następuje sprawdzenie tych planów w akcji, czyli zachodzi właściwa symulacja. Podczas \textit{scoring} agenci zostają ocenieni na podstawie swojego dnia. Generalnie rzecz biorąc wyższy wynik uzyskują agenci, którzy jak najmniej czasu spędzili w podróży a najwięcej podczas zaplanowanych zajęć. Najważniejszym punktem symulacji jest jednak \textit{replanning}. W tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Ostatni punkt iteracji dotyczy stworzenia analizy iteracji dostępnej dla użytkownika.
+
+Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{def_stopwatch}, możemy również odczytać czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu, rysunek \ref{def_iters}. Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{def_scorestats}.
 
 
 \begin{figure}[ht]
@@ -745,7 +756,7 @@ Analizując wykres na rysunku \ref{def_stopwatch}, możemy odczytać czasy trwan
 \label{def_scorestats}
 \end{figure}
 
-Na wykresach \ref{def_iters} i~\ref{def_scorestats}, widać, że wpływ iteracji, ma największe znaczenie w~początkowych stadiach. W~późniejszych iteracjach zmiana następuje dużo wolniej.
+Na wykresach \ref{def_iters} i~\ref{def_scorestats}, widać, że wpływ iteracji, ma największe znaczenie w~początkowych stadiach. W~późniejszych iteracjach zmiana następuje dużo wolniej. Wiąże się to z wykorzystanym algorytmem występującym w fazie \textit{replanning}. 
 
 Po analizie wykresów prezentowanych w~sekcji \ref{ukt}, zdecydowaliśmy w~projekcie na użycie $10$ iteracji podczas analizy każdej sieci. Wartość ta optymalnie łączy zalety szybkiego spadku wartości średnich czasów podróży i~czasu potrzebnego na obliczenia.
 
@@ -1197,4 +1208,8 @@ The application performing the optimisation process uses an external ranking sys
 
 The solution is prepared using Java and Python programming languages. For maximal portability, there is a list of required tools, available. During the research, the process was conducted by a machine operating on Linux Ubuntu 12.04 LTS.
 
+The final result proves the validity of the introduced methods. The genetic algorithm, regarding searching of the optimal solution. And the simlation based rank using the multiagent  simulator resulted in $17$ solutions of the given network with given parameters.
+
+The discussion regarding the MATSim's iteration results and configuration also 
+explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a separate case of study.
 \end{document}

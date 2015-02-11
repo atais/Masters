@@ -22,7 +22,7 @@ def organise_output(output):
     removing all iteration folder & other not important
     moving the output_tripdurations file & parsing it to fitness.txt
     '''
-    organise_iters_in(output)
+#     organise_iters_in(output)
     logging.info("Cleaning up : " + str(output))
     iters = '/ITERS/'
     
@@ -79,7 +79,7 @@ def organise_best(output):
     creating a symlink to the best chromosome folder
     adding score to fitness graph in main dir
     '''
-    organise_iters_best(output)
+#     organise_iters_best(output)
     distance = open(os.path.join(output, 'fitness.txt'), "r")
     dist = distance.readline()
     distance.close()
