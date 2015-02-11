@@ -15,7 +15,7 @@
 		<network>../scenarios/siouxfalls/network.xml</network>
 		<population>../scenarios/siouxfalls/population.xml</population>
 		<facilities>../scenarios/siouxfalls/facilities.xml</facilities>
-		<iterations>9</iterations>
+		<iterations>1</iterations>
 	</scenario>
 	<genetics>
 		<population-size>24</population-size>
