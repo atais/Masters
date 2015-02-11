@@ -58,7 +58,7 @@
 
 \chapter{Wstęp.} \label{rozdz.wstep} 
 
-W rozdziale \ref{rozdz.wstep} zostały pokrótce opisane motywy wyboru tematu pracy dyplomowej i omówiono najważniejsze aspekty tej dziedziny. Ponadto w rozdziale umieszczono sformułowane cele pracy.
+W rozdziale \ref{rozdz.wstep} zostały pokrótce opisane motywy wyboru tematu pracy dyplomowej i~omówiono najważniejsze aspekty tej dziedziny. Ponadto w~rozdziale umieszczono sformułowane cele pracy.
 
 \section{Problematyka i~zakres pracy.}
 
@@ -111,7 +111,7 @@ w którym przedstawiamy wykonaną aplikację oraz wyniki optymalizacji przykład
 
 \chapter{Optymalizacja struktury sieci drogowej.}\label{rozdz.optymalizacja} 
 
-W rozdziale \ref{rozdz.optymalizacja} zostały opisane teoretyczne aspekty pracy. Ich źródła opierają się o wybraną literaturę naukową.
+W rozdziale \ref{rozdz.optymalizacja} zostały opisane teoretyczne aspekty pracy. Ich źródła opierają się o~wybraną literaturę naukową.
 
 \section{Podstawowe definicje.}
 
@@ -489,7 +489,7 @@ Punkty te są wykorzystywane, by podczas losowych mutacji i~krzyżowań w~algory
 
 \chapter{Technologie i~metody użyte.}\label{rozdz.technologie} 
 
-W rozdziale \ref{rozdz.technologie} zostają przedstawione technologie wykorzystane w projekcie, jak również krótki opis ich wykorzystania. Załączamy także opis systemu, na którym zostały wykonane obliczenia.
+W rozdziale \ref{rozdz.technologie} zostają przedstawione technologie wykorzystane w~projekcie, jak również krótki opis ich wykorzystania. Załączamy także opis systemu, na którym zostały wykonane obliczenia.
 
 \section{Symulator transportu.}
 
@@ -728,7 +728,7 @@ Większość ustawień została niezmieniona, pochodzi więc od twórców przyk�
 \label{def_stopwatch}
 \end{figure}
 
-Warto również omówić kolejne kroki każdej iteracji, w nawiasie podaję nazwy procesów z wykresu:
+Warto również omówić kolejne kroki każdej iteracji, w~nawiasie podaję nazwy procesów z~wykresu:
 \begin{enumerate}
 \item initial demand (iterationStartListeners),
 \item execution (beforeMobSimListeners, mobSim, afterMobSimListeners), 
@@ -737,7 +737,7 @@ Warto również omówić kolejne kroki każdej iteracji, w nawiasie podaję nazw
 \item analyses (iterationEndsListeners).
 \end{enumerate}
 
-W pierwszym punkcie iteracji, agenci przygotowują się do swoich dni. Znając swoje zajęcia, planują oni drogę oraz dokładne godziny swoich akcji. Podczas \textit{execution} następuje sprawdzenie tych planów w akcji, czyli zachodzi właściwa symulacja. Podczas \textit{scoring} agenci zostają ocenieni na podstawie swojego dnia. Generalnie rzecz biorąc wyższy wynik uzyskują agenci, którzy jak najmniej czasu spędzili w podróży a najwięcej podczas zaplanowanych zajęć. Najważniejszym punktem symulacji jest jednak \textit{replanning}. W tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Ostatni punkt iteracji dotyczy stworzenia analizy iteracji dostępnej dla użytkownika.
+W pierwszym punkcie iteracji, agenci przygotowują się do swoich dni. Znając swoje zajęcia, planują oni drogę oraz dokładne godziny swoich akcji. Podczas \textit{execution} następuje sprawdzenie tych planów w~akcji, czyli zachodzi właściwa symulacja. Podczas \textit{scoring} agenci zostają ocenieni na podstawie swojego dnia. Generalnie rzecz biorąc wyższy wynik uzyskują agenci, którzy jak najmniej czasu spędzili w~podróży a~najwięcej podczas zaplanowanych zajęć. Najważniejszym punktem symulacji jest jednak \textit{replanning}. W~tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i~starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Ostatni punkt iteracji dotyczy stworzenia analizy iteracji dostępnej dla użytkownika.
 
 Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{def_stopwatch}, możemy również odczytać czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu, rysunek \ref{def_iters}. Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{def_scorestats}.
 
@@ -756,7 +756,7 @@ Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{def_stopwat
 \label{def_scorestats}
 \end{figure}
 
-Na wykresach \ref{def_iters} i~\ref{def_scorestats}, widać, że wpływ iteracji, ma największe znaczenie w~początkowych stadiach. W~późniejszych iteracjach zmiana następuje dużo wolniej. Wiąże się to z wykorzystanym algorytmem występującym w fazie \textit{replanning}. 
+Na wykresach \ref{def_iters} i~\ref{def_scorestats}, widać, że wpływ iteracji, ma największe znaczenie w~początkowych stadiach. W~późniejszych iteracjach zmiana następuje dużo wolniej. Wiąże się to z~wykorzystanym algorytmem występującym w~fazie \textit{replanning}. 
 
 Po analizie wykresów prezentowanych w~sekcji \ref{ukt}, zdecydowaliśmy w~projekcie na użycie $10$ iteracji podczas analizy każdej sieci. Wartość ta optymalnie łączy zalety szybkiego spadku wartości średnich czasów podróży i~czasu potrzebnego na obliczenia.
 
@@ -943,7 +943,7 @@ Na rysunkach \ref{sioux1} - \ref{sioux17} prezentujemy grafy uzyskanych sieci, d
 \clearpage
 \section{Analiza symulacji}
 
-Zgodnie z wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji, do oceny sieci. W celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z wynikami sieci wejściowej. Rysunki \ref{iters1} - \ref{iters5} przedstawiają wyniki tych porównań. Dla poprawienia czytelności wykresy zostały rozdzielone. Numer sieci $0$ odnosi się do sieci wejściowej, natomiast pozostałe numery, do poszczególnych numerów ID sieci wybranych przez algorytm.
+Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji, do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{iters1} - \ref{iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały rozdzielone. Numer sieci $0$ odnosi się do sieci wejściowej, natomiast pozostałe numery, do poszczególnych numerów ID sieci wybranych przez algorytm.
 
 \begin{figure}[ht]
 \centering
@@ -986,11 +986,11 @@ Uzyskane wyniki potwierdzają przede wszystkim badawczą stronę pracy. Dla zada
 \section{Dyskusja wyników.}
 Gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w~sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, nie jest może najefektywniejszym przykładem, jednak skutecznym. Działanie podparte sumienną symulacją może przekazać miarodajne wyniki.
 
-Symulator MATSim zadziałał zgodnie z oczekiwaniami, wykazując dużą zdolność adaptacji agentów do sieci. Przypadek ten można opisać, zadając sobie pytanie, skąd właściwie biorą się korki i zatory drogowe? Są one zwykle efektem braku poprawnego planu podróży uczestników ruchu. Symulator potrafi znaleźć taki plan, który w sposób idealny, dobiera czas podróży oraz najlepszą drogę. Jest to oczywiście możliwe dzięki powtarzającym się w każdej iteracji \textbf{tym samym} warunkom drogowym panującym w sieci. Nie jest to więc sytuacja rzeczywista.
+Symulator MATSim zadziałał zgodnie z~oczekiwaniami, wykazując dużą zdolność adaptacji agentów do sieci. Przypadek ten można opisać, zadając sobie pytanie, skąd właściwie biorą się korki i~zatory drogowe? Są one zwykle efektem braku poprawnego planu podróży uczestników ruchu. Symulator potrafi znaleźć taki plan, który w~sposób idealny, dobiera czas podróży oraz najlepszą drogę. Jest to oczywiście możliwe dzięki powtarzającym się w~każdej iteracji \textbf{tym samym} warunkom drogowym panującym w~sieci. Nie jest to więc sytuacja rzeczywista.
 
-Mając na uwadze powyższe, wybory w iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{iters1} - \ref{iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie więc określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
+Mając na uwadze powyższe, wybory w~iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{iters1} - \ref{iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie więc określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
 
-W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną.
+W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną.
 
 \section{Analiza wyników.}
 Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie na zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
@@ -1204,12 +1204,12 @@ Zawiera prezentację wykorzystaną podczas seminarium dyplomowego, przedstawiaj�
 
 The purpose of the present master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using fixed, set in advance parameters. Paper covers two main fields of the subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly it describes the techniques used to achieve the final goal.
 
-The application performing the optimisation process uses an external ranking system. In this case, a multiagent simulator, MATsim. In paper we describe the aspects of the simulation concering the final results of the project. 
+The application performing the optimisation process uses an external ranking system. In this case, a~multiagent simulator, MATsim. In paper we describe the aspects of the simulation concering the final results of the project. 
 
-The solution is prepared using Java and Python programming languages. For maximal portability, there is a list of required tools, available. During the research, the process was conducted by a machine operating on Linux Ubuntu 12.04 LTS.
+The solution is prepared using Java and Python programming languages. For maximal portability, there is a~list of required tools, available. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
 
 The final result proves the validity of the introduced methods. The genetic algorithm, regarding searching of the optimal solution. And the simlation based rank using the multiagent  simulator resulted in $17$ solutions of the given network with given parameters.
 
 The discussion regarding the MATSim's iteration results and configuration also 
-explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a separate case of study.
+explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a~simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a~separate case of study.
 \end{document}
