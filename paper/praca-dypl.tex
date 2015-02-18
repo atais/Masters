@@ -652,7 +652,7 @@ Wyjaśnienie opcji \textit{genetics}:
 \item population size - rozmiar populacji,
 \item max generations - ilość testowanych generacji (warunek stopu),
 \item elitism rate - ilość najlepszych chromosomów biorących udział w~kolejnej iteracji,
-\item crossover rate - szansa na krzyżowanie osobników z poprzedniej populacji przed dodaniem ich do kolejnej generacji,
+\item crossover rate - szansa na krzyżowanie osobników z~poprzedniej populacji przed dodaniem ich do kolejnej generacji,
 \item mutation rate - szansa na mutację pojedynczego genu wybranych osobników,
 \item tournament rate - ilość osobników biorących udział w~turnieju.
 \end{itemize}
@@ -981,7 +981,7 @@ Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawie
 \end{figure}
 
 \chapter{Podsumowanie.}\label{rozdz.podsumowanie} 
-Uzyskane wyniki potwierdzają możliwość dostosowania sieci drogowej do zadanych potrzeb mieszkańców przy pomocy algorytmu genetycznego. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w~mieście a~ponadto zastosowaliśmy uproszczenie, w~którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. Warto zaznaczyć, że w projekcie można zastosować inną funkcję celu dla oceny osobników. Wpłynie to oczywiście bezpośrednio na otrzymane wyniki.
+Uzyskane wyniki potwierdzają możliwość dostosowania sieci drogowej do zadanych potrzeb mieszkańców przy pomocy algorytmu genetycznego. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w~mieście a~ponadto zastosowaliśmy uproszczenie, w~którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. Warto zaznaczyć, że w~projekcie można zastosować inną funkcję celu dla oceny osobników. Wpłynie to oczywiście bezpośrednio na otrzymane wyniki.
 
 \section{Dyskusja wyników.}
 Gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w~sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, dostarcza wyników, które mogą być przedmiotem dalszej analizy.
@@ -993,7 +993,7 @@ Mając na uwadze ten ,,idealny'' aspekt symulacji, wybory w~iteracjach wcześnie
 W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną.
 
 \section{Analiza wyników.}
-Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie w zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
+Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie w~zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
 
 \begin{figure}[ht]
 \centering
