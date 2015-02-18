@@ -26,7 +26,7 @@
 
 ##################
 # URUCHAMIANIE:
-# perl porzadki.pl plik
+# perl porzadki.pl praca-dypl.tex
 ##################
 
 use strict;

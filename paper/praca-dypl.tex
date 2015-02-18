@@ -52,7 +52,7 @@
 
 \begin{document}
 
-\includepdf[pages={1,2}]{titlepage.pdf}
+\includepdf[pages={1,2}]{doc/titlepage.pdf}
 
 \tableofcontents	% generuje spis treści ze stronami
 
@@ -590,7 +590,7 @@ Korzystając z~powyższego rozwiązania, dzięki któremu projekt jest możliwy 
 
 \chapter{Opis projektu.}\label{rozdz.opis} 
 
-W niniejszym rozdziale opisujemy strukturę projektu z~opisem jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowaliśmy się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku operacji i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których został wykonany projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
+W niniejszym rozdziale opisujemy strukturę projektu oraz sposób jego uruchomienia. Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowaliśmy się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku działania programu i~za jego pomocą kontrolujemy przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których został wykonany projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~Java, skrypty w~Pythonie jedynie wspierają niektóre procesy.
 
 \section{Dane wejściowe.}
 
@@ -608,7 +608,7 @@ Przykładowy plik konfiguracyjny dla projektu z~opisem jego funkcji przedstawion
 
 \vspace*{15px}
 
-Jak widać konfiguracja dzieli się na trzy podstawowe grupy:
+Jak widać, konfiguracja dzieli się na trzy podstawowe grupy:
 \begin{itemize}
 \item project,
 \item scenario,
@@ -640,7 +640,7 @@ Wyjaśnienie opcji \textit{scenario}:
 \begin{itemize}
 \item config - scieżka dostępu pliku konfiguracyjnego scenariusz MATSim,
 \item network - scieżka dostępu pliku z~siecią wejściową scenariusza,
-\item population - scieżka dostępu pliku z~populacja scenariusza,
+\item population - scieżka dostępu pliku z~populacją scenariusza,
 \item facilities - scieżka dostępu pliku z~budynkami scenariusza,
 \item iterations - ilość iteracji symulacji MATSima.
 \end{itemize}
@@ -652,15 +652,15 @@ Wyjaśnienie opcji \textit{genetics}:
 \item population size - rozmiar populacji,
 \item max generations - ilość testowanych generacji (warunek stopu),
 \item elitism rate - ilość najlepszych chromosomów biorących udział w~kolejnej iteracji,
-\item crossover rate - szansa na krzyżowanie osobników,
-\item mutation rate - szansa na mutacje osobników,
+\item crossover rate - szansa na krzyżowanie osobników z poprzedniej populacji przed dodaniem ich do kolejnej generacji,
+\item mutation rate - szansa na mutację pojedynczego genu wybranych osobników,
 \item tournament rate - ilość osobników biorących udział w~turnieju.
 \end{itemize}
 
 
 \section{Badane miasto przykładowe: Sioux Falls}
 
-Główną zaletą korzystania z~MATSima, o~której już wcześniej wspominaliśmy, jest dość pokaźny zbiór danych przykładowych. Jednym z~nich jest materiał zaprezentowany przez twórców aplikacji, który udostępnili w~2013 roku na zgromadzeniu użytkowników platformy~\cite{siux}. Przykład ten dotyczy miasta Sioux Falls w~Południowej Dakocie. Domyślnie scenariusz składa się z:
+Główną zaletą korzystania z~MATSima, jest dość pokaźny zbiór danych przykładowych. Jednym z~nich jest materiał zaprezentowany przez twórców aplikacji, który udostępnili w~2013 roku na zgromadzeniu użytkowników platformy~\cite{siux}. Przykład ten dotyczy miasta Sioux Falls w~Południowej Dakocie. Domyślnie scenariusz składa się z:
 
 \begin{itemize}
 \item dwóch grup zapotrzebowania bez charakterystyk socjodemograficznych:
@@ -668,7 +668,7 @@ Główną zaletą korzystania z~MATSima, o~której już wcześniej wspominaliśm
 \item 68094 agentów z~samochodem oraz korzystających z~transportu publicznego,
 \item 40877 agentów posiadających samochód.
 \end{itemize}
-\item dostosowanej sieci drogowa miasta Sioux Falls,
+\item dostosowanej sieci drogowej miasta Sioux Falls,
 \item transportu publicznego razem z~rozkładem jazdy,
 \item przykładowych miejsc zamieszkania, pracy i~rozrywki.
 \end{itemize}
@@ -697,7 +697,7 @@ Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było dla nas pozyty
 \label{siouxbudynki}
 \end{figure}
 
-Na rysunkach \ref{ex-sioux-1} i~\ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności i~rozmiaru. 
+Na rysunkach \ref{ex-sioux-1} i~\ref{ex-sioux-3} prezentujemy ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki są obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności. 
 
 \begin{figure}[ht]
 \centering
@@ -728,7 +728,7 @@ Większość ustawień została niezmieniona, pochodzi więc od twórców przyk�
 \label{def_stopwatch}
 \end{figure}
 
-Warto również omówić kolejne kroki każdej iteracji, w~nawiasie podaję nazwy procesów z~wykresu:
+Warto również omówić kolejne kroki każdej iteracji, w~nawiasie podajemy nazwy procesów z~wykresu:
 \begin{enumerate}
 \item initial demand (iterationStartListeners),
 \item execution (beforeMobSimListeners, mobSim, afterMobSimListeners), 
@@ -737,9 +737,9 @@ Warto również omówić kolejne kroki każdej iteracji, w~nawiasie podaję nazw
 \item analyses (iterationEndsListeners).
 \end{enumerate}
 
-W pierwszym punkcie iteracji, agenci przygotowują się do swoich dni. Znając swoje zajęcia, planują oni drogę oraz dokładne godziny swoich akcji. Podczas \textit{execution} następuje sprawdzenie tych planów w~akcji, czyli zachodzi właściwa symulacja. Podczas \textit{scoring} agenci zostają ocenieni na podstawie swojego dnia. Generalnie rzecz biorąc wyższy wynik uzyskują agenci, którzy jak najmniej czasu spędzili w~podróży a~najwięcej podczas zaplanowanych zajęć. Najważniejszym punktem symulacji jest jednak \textit{replanning}. W~tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i~starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Ostatni punkt iteracji dotyczy stworzenia analizy iteracji dostępnej dla użytkownika.
+W pierwszym punkcie iteracji, agenci przygotowują się do swoich dni. Znając swoje zajęcia, planują oni drogę oraz dokładne godziny swoich akcji. Podczas fazy \textit{execution} następuje sprawdzenie tych planów w~akcji, czyli zachodzi właściwa symulacja. Podczas fazy \textit{scoring} agenci zostają ocenieni na podstawie swojego dnia. Generalnie rzecz biorąc wyższy wynik uzyskują agenci, którzy jak najmniej czasu spędzili w~podróży a~najwięcej podczas zaplanowanych zajęć. Najważniejszym punktem symulacji jest jednak \textit{replanning}. W~tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i~starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Ostatni punkt iteracji dotyczy stworzenia analizy iteracji dostępnej dla użytkownika.
 
-Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{def_stopwatch}, możemy również odczytać czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu, rysunek \ref{def_iters}. Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{def_scorestats}.
+Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{def_stopwatch}, możemy również odczytać czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu (rysunek \ref{def_iters}). Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{def_scorestats}.
 
 
 \begin{figure}[ht]
@@ -762,13 +762,13 @@ Po analizie wykresów prezentowanych w~sekcji \ref{ukt}, zdecydowaliśmy w~proje
 
 \section{Ustawienia projektu.}
 
-Podczas badań wykorzysaliśmy ustawienia algorytmu genetycznego zgodne z~listingiem \ref{geneconf}. Wartości zostały dobrane na podstawie doświadczenia nabytego w~trakcie studiów literaturowych. 
+Podczas badań wykorzystaliśmy ustawienia algorytmu genetycznego zgodne z~listingiem \ref{geneconf}. Wartości zostały dobrane na podstawie doświadczenia nabytego w~trakcie studiów literaturowych. 
 	
 \begin{lstlisting}[caption=Ustawienia algorytmu genetycznego podczas badań.,label=geneconf]
 <genetics>
 	<population-size>24</population-size>
 	<max-generations>200</max-generations>
-	<elitism-rate>2.0</elitism-rate>
+	<elitism-rate>2</elitism-rate>
 	<crossover-rate>1.0</crossover-rate>
 	<mutation-rate>0.8</mutation-rate>
 	<tournament-arity>4</tournament-arity>
@@ -787,7 +787,7 @@ Wykres przedstawiający zestawienie wyniku najlepszej sieci wyłonionej w~danej 
 \label{def_fitness}
 \end{figure}
 
-Ponieważ w~projekcie wykorzystany został elitystyczny model populacji algorytmu genetycznego, powyższy wykres nie przedstawia praktycznie żadnych zmian w~populacji, która została ulepszona. Wyniki wszystkich chromosomów były jednak zachowywane w~bazie. Dzięki temu możemy przedstawić więcej sieci spełniających założenia projektowe.
+Ponieważ w~projekcie wykorzystany został elitarny model populacji algorytmu genetycznego, powyższy wykres nie przedstawia praktycznie żadnych zmian w~populacji, która została ulepszona. Wyniki wszystkich chromosomów były jednak zachowywane w~bazie. Dzięki temu możemy przedstawić więcej sieci spełniających założenia projektowe.
 
 Najlepsze wyniki symulacji przedstawiamy w~tabeli \ref{tab_best}. Przedstawione są tutaj wszystkie sieci, które uzyskały wynik lepszy od sieci wejściowej, tj. $1338.4505528474617$. Od teraz, będziemy odnosić się do tych sieci używając ich numeru identyfikacyjnego (pierwsza kolumna).
 
@@ -943,7 +943,7 @@ Na rysunkach \ref{sioux1} - \ref{sioux17} prezentujemy grafy uzyskanych sieci, d
 \clearpage
 \section{Analiza symulacji}
 
-Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji, do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{iters1} - \ref{iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały rozdzielone. Numer sieci $0$ odnosi się do sieci wejściowej, natomiast pozostałe numery, do poszczególnych numerów ID sieci wybranych przez algorytm.
+Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{iters1} - \ref{iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały rozdzielone. Numer sieci $0$ odnosi się do sieci wejściowej, natomiast pozostałe numery, do poszczególnych numerów ID sieci wybranych przez algorytm.
 
 \begin{figure}[ht]
 \centering
@@ -981,19 +981,19 @@ Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawie
 \end{figure}
 
 \chapter{Podsumowanie.}\label{rozdz.podsumowanie} 
-Uzyskane wyniki potwierdzają przede wszystkim badawczą stronę pracy. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, co już zostało wspomniane, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w~mieście a~ponadto zastosowaliśmy jedynie uproszczenie, w~którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. W~związku z~powyższym, uzyskane wyniki, można traktować co najwyżej jako sugestię. 
+Uzyskane wyniki potwierdzają możliwość dostosowania sieci drogowej do zadanych potrzeb mieszkańców przy pomocy algorytmu genetycznego. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w~mieście a~ponadto zastosowaliśmy uproszczenie, w~którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. Warto zaznaczyć, że w projekcie można zastosować inną funkcję celu dla oceny osobników. Wpłynie to oczywiście bezpośrednio na otrzymane wyniki.
 
 \section{Dyskusja wyników.}
-Gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w~sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, nie jest może najefektywniejszym przykładem, jednak skutecznym. Działanie podparte sumienną symulacją może przekazać miarodajne wyniki.
+Gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w~sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, dostarcza wyników, które mogą być przedmiotem dalszej analizy.
 
-Symulator MATSim zadziałał zgodnie z~oczekiwaniami, wykazując dużą zdolność adaptacji agentów do sieci. Przypadek ten można opisać, zadając sobie pytanie, skąd właściwie biorą się korki i~zatory drogowe? Są one zwykle efektem braku poprawnego planu podróży uczestników ruchu. Symulator potrafi znaleźć taki plan, który w~sposób idealny, dobiera czas podróży oraz najlepszą drogę. Jest to oczywiście możliwe dzięki powtarzającym się w~każdej iteracji \textbf{tym samym} warunkom drogowym panującym w~sieci. Nie jest to więc sytuacja rzeczywista.
+Symulator MATSim zadziałał zgodnie z~oczekiwaniami, wykazując dużą zdolność adaptacji agentów do sieci. Przypadek ten można opisać, zadając sobie pytanie, skąd właściwie biorą się korki i~zatory drogowe? Są one zwykle efektem braku poprawnego planu podróży uczestników ruchu. Symulator potrafi znaleźć taki plan, który w~sposób idealny, dobiera czas podróży oraz najlepszą drogę. Jest to oczywiście możliwe dzięki powtarzającym się w~każdej iteracji \textbf{tym samym} warunkom drogowym, które panują w~sieci. Scenariusz jest bowiem pozbawiony losowych wypadków oraz czynników ludzkich. Nie jest to więc sytuacja rzeczywista.
 
-Mając na uwadze powyższe, wybory w~iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{iters1} - \ref{iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie więc określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
+Mając na uwadze ten ,,idealny'' aspekt symulacji, wybory w~iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{iters1} - \ref{iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
 
 W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną.
 
 \section{Analiza wyników.}
-Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie na zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
+Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie w zbiory, zamykające podobne obszary (węzły). Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji miejskiej. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{frag_1}, obróconym o~$90^{\circ}$ w~lewo.
 
 \begin{figure}[ht]
 \centering
@@ -1197,7 +1197,7 @@ Zawiera prezentację wykorzystaną podczas seminarium dyplomowego, przedstawiaj�
 
 \end{thebibliography}
 
-\cleardoublepage
+\clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
@@ -1206,10 +1206,19 @@ The purpose of the present master thesis was to find an optimal solution of the 
 
 The application performing the optimisation process uses an external ranking system. In this case, a~multiagent simulator, MATsim. In paper we describe the aspects of the simulation concering the final results of the project. 
 
-The solution is prepared using Java and Python programming languages. For maximal portability, there is a~list of required tools, available. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
+The solution is prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
 
-The final result proves the validity of the introduced methods. The genetic algorithm, regarding searching of the optimal solution. And the simlation based rank using the multiagent  simulator resulted in $17$ solutions of the given network with given parameters.
+The final result proves the validity of the introduced methods. The genetic algorithm, regarding searching of the optimal solution. As well as, the simlation based rank using the multiagent  simulator resulted in several solutions of the given network with given parameters.
 
 The discussion regarding the MATSim's iteration results and configuration also 
 explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a~simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a~separate case of study.
+
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\includepdf[pages=-]{doc/Zalacznik1.pdf}
+
+\clearpage
+\includepdf[pages=-]{doc/Zalacznik2.pdf}
+
 \end{document}
