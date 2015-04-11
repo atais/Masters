@@ -2,6 +2,10 @@
 output/
 python/tests/output
 
+### not needed
+paper/testy.pdf
+paper/testy.tex
+
 *.class
 .DS_Store
 
