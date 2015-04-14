@@ -391,7 +391,7 @@ W klasycznym algorytmie genetycznym możliwa jest sytuacja, w której do nowej p
 
 \subsection{Operacje klasyczne, krzyżowanie}
 
-\textbf{Operacja krzyżowania} jest podstawową operacją algorytmów genetycznych, służącą do rekombinacji materiału genetycznego. Operacja opiera się na dwóch chromosomach, których części materiału genetycznego zostają wymieszane w~celu utworzenia nowego chromosomu. Podstawowa operacja krzyżowania opiera się na jednym punkcie krzyżowania i~została przedstawiona na poglądowym rysunku \ref{fig:krzyzowanie_schemat}~\cite{gene mutikrzyz}.
+\textbf{Operacja krzyżowania} jest podstawową operacją algorytmów genetycznych, służącą do rekombinacji materiału genetycznego. Operacja opiera się na dwóch chromosomach, których części materiału genetycznego zostają wymieszane w~celu utworzenia nowego chromosomu. Podstawowa operacja krzyżowania opiera się na jednym punkcie krzyżowania i~została przedstawiona na poglądowym rysunku \ref{fig:krzyzowanie_schemat}~\cite{genetyczne-teoria}.
 
 \begin{figure}[htbp]
 	\centering
@@ -402,7 +402,7 @@ W klasycznym algorytmie genetycznym możliwa jest sytuacja, w której do nowej p
 
 \subsection{Operacje klasyczne, mutacja}
 
-Proces rekombinacji przez krzyżowanie nie byłby w~stanie odkryć całej przestrzeni poszukiwań, jeżeli dana kombinacja nie byłaby obecna w~sekcjach populacji. To mogłoby prowadzić do błędnego wyniku. \textbf{Operacja mutacji} pozwala na wprowadzenie nowych struktur genetycznych w~obecnej populacji. Dokonuje się tego poprzez losową zmianę dowolnego genu w~chromosomie. Sytuacja jest przedstawiona na poglądowym rysunku \ref{fig:mutacja_schemat} ~\cite{gene mutikrzyz}.
+Proces rekombinacji przez krzyżowanie nie byłby w~stanie odkryć całej przestrzeni poszukiwań, jeżeli dana kombinacja nie byłaby obecna w~sekcjach populacji. To mogłoby prowadzić do błędnego wyniku. \textbf{Operacja mutacji} pozwala na wprowadzenie nowych struktur genetycznych w~obecnej populacji. Dokonuje się tego poprzez losową zmianę dowolnego genu w~chromosomie. Sytuacja jest przedstawiona na poglądowym rysunku \ref{fig:mutacja_schemat} ~\cite{genetyczne-teoria}.
 
 \begin{figure}[htbp]
 	\centering
@@ -1088,7 +1088,7 @@ Powyższe sugestie mogą zostać użyte w~przypadku poszerzonych badań nad dany
 
 \section{Analiza zastosowanych ustawień symulacji}
 
-Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{fig:iters1} - \ref{fig:iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały rozdzielone. \textbf{Legenda wykresów odnosi się do wyniku uzyskanego przez rozwiązanie, które jest przedstawiane w tabeli \ref{tab:tabela_wynikow}. Numer odnosi się do numeru identyfikacyjnego sieci.} \textbf{Wyjątek stanowi numer sieci $0$, który odnosi się do sieci wejściowej}, czyli sieci z dostępnymi wszystkimi ulicami. Ostatni rysunek \ref{fig:iters5} przedstawia porównanie najlepszego rozwiązania uzyskanego przez algorytm, z najgorszym, oraz siecią wejściową.
+Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{fig:iters1} - \ref{fig:iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały podzielone, prezentując za każdym razem tylko część sieci drogowych. \textbf{Legenda wykresów odnosi się do wyniku uzyskanego przez rozwiązanie, które jest przedstawiane w tabeli \ref{tab:tabela_wynikow}. Numer odnosi się do numeru identyfikacyjnego sieci.} \textbf{Wyjątek stanowi numer sieci $0$, który odnosi się do sieci wejściowej}, czyli sieci z dostępnymi wszystkimi ulicami. Ostatni rysunek \ref{fig:iters5} przedstawia porównanie najlepszego rozwiązania uzyskanego przez algorytm, z najgorszym, oraz siecią wejściową.
 
 \begin{figure}[htbp]
 \centering
@@ -1106,7 +1106,7 @@ Najbardziej interesującymi punktami na rysunku \ref{fig:iters1} jest sytuacja p
 \label{fig:iters2}
 \end{figure}
 
-Nie jest zaskoczeniem, że w przypadku rysunku \ref{fig:iters2} sytuacja powtarza się. Początkowo duża przewaga sieci uzyskanych podczas badań zaciera się. Iteracje ponownie nieznacznie wpływają na polepszanie się wyników uzyskanych przez rozwiązań o identyfikatorach: 5, 6, 7, 8 (Rys. \ref{fig:sioux5} - \ref{fig:sioux8}). Mimo wszystko, wszystkie sieci oprócz sieci o identyfikatorze 6 (Rys. \ref{fig:sioux6}) w $100$ iteracji okazują się lepsze od sieci wejściowej, posiadającej wszystkie dostępne ulice (węzły). Oznacza to, że w przypadku dłuższej symulacji kolejność rozwiązań byłaby inna niż obecnie.
+Nie jest zaskoczeniem, że w przypadku rysunku \ref{fig:iters2} sytuacja powtarza się. Początkowo duża przewaga sieci uzyskanych podczas badań zaciera się. Iteracje ponownie nieznacznie wpływają na polepszanie się wyników uzyskanych przez rozwiązania o identyfikatorach: 5, 6, 7, 8 (Rys. \ref{fig:sioux5} - \ref{fig:sioux8}). Wszystkie sieci oprócz sieci o identyfikatorze 6 (Rys. \ref{fig:sioux6}) w $100$ iteracji okazują się jednak lepsze od sieci wejściowej, posiadającej wszystkie dostępne ulice (węzły). Wartym zauważenia jest, że w przypadku dłuższej symulacji kolejność rozwiązań byłaby inna niż obecnie.
 
 \begin{figure}[htbp]
 \centering
@@ -1137,17 +1137,22 @@ Symulator MATSim zadziałał zgodnie z~oczekiwaniami, wykazując dużą zdolnoś
 
 Mając na uwadze ten ,,idealny'' aspekt symulacji, wybory w~iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{fig:iters1} - \ref{fig:iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
 
-W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną. Ich wiedza nie musiałaby sprawdzić się w przypadku zmiany ich planów w ciągu dnia lub wystąpienia losowych czynników na drodze.
+W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną. Ich wiedza nie musiałaby sprawdzić się w przypadku zmiany ich planów dnia lub wystąpienia losowych czynników na drodze.
 
 \chapter{Podsumowanie}\label{rozdz.podsumowanie} 
-Uzyskane wyniki potwierdzają możliwość dostosowania sieci drogowej do zadanych potrzeb mieszkańców przy pomocy algorytmu genetycznego. Dla zadanej sieci udało się zoptymalizować ruch drogowy, stosując zamknięcie określonych węzłów. Trzeba jednak pamiętać, że wynik jest czysto teoretyczny. Symulacja nie odzwierciedla prawdziwego ruchu drogowego w~mieście a~ponadto zastosowaliśmy uproszczenie, w~którym nie są obecne wszystkie węzły rzeczywistej sieci drogowej. Warto zaznaczyć, że w~projekcie można zastosować inną funkcję celu dla oceny osobników. Wpłynie to oczywiście bezpośrednio na otrzymane wyniki.
+Uzyskane wyniki potwierdzają możliwość zoptymalizowania sieci drogowej poprzez zamknięcie określonych ulic, przy użyciu algorytmu genetycznego. Dla zadanej sieci drogowej, poprzez optymalizacje, uzyskano kilkanaście rozwiązań, które mogą posłużyć jako baza do dalszych badań. Zastosowana metoda oceny rozwiązań, czyli zewnętrzny symulator ruchu drogowego również spełnił oczekiwania projektowe. Trzeba jednak pamiętać, że uzyskane wyniki są czysto teoretyczne a całość eksperymentu została przeprowadzona przy wielu uproszczeniach.
 
-Gdyby założyć, że system ten miałby dostarczyć pewnej sugestii w~sprawie podjęcia decyzji dotyczącej usprawnienia ruchu, spełnia on swoje zadanie. Przeszukiwanie przestrzeni rozwiązań wykorzystując algorytmy genetyczne, dostarcza wyników, które mogą być przedmiotem dalszej analizy.
+Pierwszym uproszczeniem jest oczywiście sam symulator. Po pierwsze, w założeniu został zbadany tylko jeden model populacji oraz aktywności dnia (agentów). Model ten przedstawia pewne uśrednienie demograficzne mieszkańców miasta Sioux Falls oraz ich planów komunikacyjnych. Po drugie, w badanym wariancie miasto zostało pozbawione komunikacji miejskiej, co miało na celu zintensyfikowanie ruchu transportu prywatnego. Po trzecie, symulator w sposób nierzeczywisty dokonuje optymalizacji planów dnia agentów, które mogą zostać uznane za nierzeczywiste. Trudnym jest jednak oszacowanie stopnia ,,sztuczności'' dopasowania planu do spodziewanych warunków drogowych.
 
+Drugim uproszczeniem jest model miasta. Z założenia stosowana jest sieć z pominięciem pomniejszych dróg, mało istotnych dla ogółu komunikacji w mieście. Kontynuując, model zakłada jedynie ruch, który jest generowany przez mieszkańców, z pominięciem ruchu napływającego z innych rejonów. Ostatnim są sytuacje losowe, spowodowane zwykle przez czynnik ludzki. Model nie przewiduje awarii, remontów, wypadków, które oczywiście są składnikiem codziennych sytuacji w mieście. 
+
+Podczas badań jest możliwe zastosowanie innego kryterium oceny rozwiązań. Zmiana symulatora lub zupełnie inna metoda oceny tworzonych sieci wpłynie bezsprzecznie na otrzymane wyniki.
+
+Pamiętając zatem, że prezentowane rozwiązanie miało  dostarczyć pewnej sugestii w~sprawie usprawnienia ruchu, spełnia ono swoje zadanie. Innowacja nawet tak dobrze rozwiniętych miast jak te w USA jest możliwa, nie koniecznie poprzez kosztowne inwestycje w tworzenie nowej infrastruktury. 
 
 
 \section{Perspektywy dalszych badań w~dziedzinie}
-Dość oczywistym kierunkiem rozwoju może być oczywiście dalsze przeszukiwanie posiadanego problemu. Jak już zostało wspomniane wyżej, ilość dostępnych rozwiązań jest bardzo duża.
+Dość oczywistym kierunkiem rozwoju może być oczywiście dalsze przeszukiwanie posiadanego problemu. Jak już zostało wspomniane wyżej, ilość możliwych rozwiązań jest bardzo duża ($2^{90}$). Jak zostało przedstawione, zmiana parametrów samej symulacji, również wpłynie na otrzymywane wyniki.
 
 Ciekawszym wydaje się być jednak przeszukiwanie nowych zbiorów. W~przypadku symulatora MATSim mamy do swojej dyspozycji dość pokaźną liczbę przykładów opartych o~rzeczywiste miasta, na których były prowadzone symulacje. Jeden z~dostępnych modeli jest odwzorowaniem miasta Berlin, przy okazji, wykonanym z~dużo większą dokładnością niż Sioux Falls \ref{berlin}.
 
@@ -1159,6 +1164,7 @@ Ciekawszym wydaje się być jednak przeszukiwanie nowych zbiorów. W~przypadku s
 \end{figure}
 
 Ponadto, w~pracy można wykorzystać inne twierdzenia i~paradoksy dotyczące m.in. transportu miejskiego. Niestety, jak już było wspomniane wcześniej, wiele z~tych praw jest opartych o~psychologiczne tezy, bez matematycznego podparcia, co powoduje, że wyniki są trudne do przewidzenia.
+
 
 \section{Struktura projektu}
 
