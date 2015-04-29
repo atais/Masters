@@ -72,6 +72,7 @@ sub PolaczWiersze {
 sub PoprawAkapit {
 	&PoprawNielamliwe;
 	&PoprawPrzestankowe;
+	&PoprawOdniesienia;
 };
 # ------------------------------------------------------------------------
 # Niełamliwe spacje
@@ -86,6 +87,12 @@ sub PoprawNielamliwe {
 #	&NielamliweWyliczenia;
 };
 #  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  
+# AUTOR ATAIS
+# niełamliwe spacje przy odniesieniach \cite i \ref
+sub PoprawOdniesienia {
+	s/([\ \t~])([\\]ref.*})/~$2/g;
+	s/([\ \t~])([\\]cite.*})/~$2/g;
+};
 # niełamliwe spacje przy słowach jednoliterowych (uwaga na cyfrę rzymską "I")
 sub NielamliweSpojniki {
 	s/([\(,]|$Odstep+)($Spojnik)$Odstep+($Spojnik)$Odstep+/$1$2~$3~/g;

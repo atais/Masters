@@ -1,0 +1,1385 @@
+\documentclass[twoside,12pt]{report}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times} % czcionka
+\usepackage{graphicx}
+\usepackage{pdfpages} % insert external PDF
+\usepackage[unicode]{hyperref} % url
+\usepackage{listings} % lstlisting
+\usepackage{fancyhdr} % header and footer
+\usepackage{indentfirst} % first paragraph ident
+\usepackage{blindtext} % lorem impsum
+\usepackage{geometry}
+\usepackage[justification=centering]{caption}
+\usepackage{tabularx}
+\usepackage{tikz} % image stuff
+
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty 10000 
+\sloppy
+
+\geometry{a4paper,left=35mm,right=25mm,top=25mm,bottom=25mm}
+
+\addto\captionspolish{ %
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\chaptername}{Rozdział}
+\renewcommand{\contentsname}{Spis treści}
+\renewcommand{\figurename}{Rys.}
+\renewcommand{\tablename}{Tablica}
+\renewcommand{\lstlistingname}{Listing}
+\renewcommand{\listfigurename}{Spis rysunków}
+\renewcommand{\listtablename}{Spis tabel}
+\renewcommand{\lstlistlistingname}{Spis listingów}
+\renewcommand{\bibname}{Bibliografia}
+}
+
+\linespread{1.3} % Jeśli chcesz używać interlinii równej 1,5 jako wartość należy wstawić "1.3".
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\rightmark}
+\fancyfoot[LE,RO]{\thepage}
+\setlength{\headheight}{15.13202pt}
+\setlength{\parindent}{1.5em}
+\setlength{\emergencystretch}{3em}
+\urlstyle{rm}
+
+\let\oldsection\chapter
+\def\chapter{\cleardoublepage\oldsection}
+
+\newtheorem{definition}{Definicja} % przykład nowego środowiska 
+
+\lstset{
+    language=xml,
+    captionpos=b,
+    tabsize=3,
+    rulesepcolor=\color{gray},
+    keywordstyle=\color{blue}\bf,
+    stringstyle=\color{red},
+    breaklines=true,
+    basicstyle=\ttfamily\scriptsize}
+
+\begin{document}
+
+\includepdf[pages={1,2}]{doc/titlepage.pdf}
+
+\tableofcontents	% generuje spis treści ze stronami
+
+\chapter{Wstęp}\label{rozdz.wstep} 
+
+W poniższym rozdziale zostały opisane motywy wyboru tematu pracy dyplomowej. Omówiono najważniejsze aspekty problemu optymalizacji ruchu drogowego oraz przedstawiono cel niniejszej pracy magisterskiej. Na zakończenie przybliżono strukturę pracy wraz z~krótkim omówieniem kolejnych jej rozdziałów.
+
+\section{Problematyka optymalizacji ruchu drogowego}
+Problemy komunikacji w~dzisiejszych miastach są wszystkim znane. Zatory drogowe i~,,korki'' w~godzinach szczytu są chlebem powszednim. Pomimo wielu prób i~sposobów rozwiązania powyższego problemu, wciąż nie istnieje metoda jednoznacznie rozstrzygająca tę kwestię. Bezspornie dotyczy to wszystkich miast na świecie. Z~teoretycznego punktu widzenia, jedynym rozwiązaniem jest komunikacja publiczna. Oczywistym jest jednak, że nigdy nie doprowadzimy do sytuacji, gdy wszyscy mieszkańcy zrezygnują ze swoich pojazdów. Dodatkowo, wiele osób i~usług wymaga oddzielnej formy transportu. W~obliczu tych faktów miasta decydują się na rozwój swojej infrastruktury drogowej. Budowa nowych tras oraz poszerzanie starych przynosi nadzieję mniejszych zatorów, a~co za tym idzie, szybszego przejazdu do celu. Niestety, historia pokazuje, że takie inwestycje nie zawsze przynoszą oczekiwane korzyści.
+
+Teorii próbujących wytłumaczyć te zjawiska, jak również dowodów, które je popierają lub obalają jest wiele. Jedną z~najpopularniejszych oraz taką, która została wykorzystana w~niektórych miastach na świecie jest \textbf{paradoks Braessa}~\cite{braess}. Jest to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Ma ono również  zastosowanie w~przypadku  sieci komputerowych oraz istnieją jego analogie dla doświadczeń fizycznych.
+
+\section{Cel pracy}
+Tematem niniejszej pracy dyplomowej jest optymalizacja struktury sieci drogowej. Opierając się na wspomnianym paradoksie Braessa, sformułowany został cel pracy, którym jest stworzenie rozwiązania, dokonującego optymalizacji zadanej sieci drogowej. Optymalizację przeprowadzono poprzez wykorzystanie algorytmów genetycznych, które zakładają użycie pewnych z~góry ustalonych parametrów. Modyfikacja sieci drogowej powinna odbyć się poprzez zastosowanie założenia paradoksu, dokładniej przez zamknięcie wybranych ulic.  W~efekcie dla danej sieci drogowej, średni czas podróży powinien ulec skróceniu.
+
+\section{Zakres pracy}
+
+Poniżej przedstawiono zakres prac wykonanych w~celu zgłębienia tematu problematyki optymalizacji ruchu drogowego. Zaprezentowane zostały kolejne etapy tworzenia pracy jak i~przedstawiono krótko stworzone rozwiązanie. 
+
+\subsubsection{Studia literaturowe}
+Badania rozpoczęto od poszukiwania źródeł traktujących o~opisywanym problemie. Paradoks Braessa został sformułowany w~1970 roku i~był od tego czasu wykorzystywany przy planowaniu przestrzeni i~infrastruktury wielu miast, na przykład~\cite{urban}:
+
+\begin{itemize}
+\item Korea, Seul, likwidacja między innymi estakad Cheonggyecheon,
+\item Niemcy, Stuttgart, likwidacja dróg zbudowanych w~latach 60-tych XX wieku,
+\item USA, Nowy Jork, czasowe zamknięcie ulicy 42,
+\item Kanada, Winnipeg.
+\end{itemize}  
+
+\subsubsection{Propozycja rozwiązania problemu}
+Oczywistym rozwiązaniem problemu komunikacji mogłoby być stworzenie idealnej sieci odpowiadającej potrzebom danego miasta. Rozbudowa lub modyfikacja tej infrastruktury jest jednak kosztowna i~czasochłonna. Z~tego powodu sprawdzane jest rozwiązanie zaproponowane przez Braessa. Ponieważ istnieją prace negujące lub podważające paradoks~\cite{newinsights}, zdecydowano, by przy potwierdzaniu wyniku optymalizacji nie kierować się wyłącznie założeniami w~nim zawartymi.
+
+\subsubsection{Opis zastosowania algorytmów genetycznych}
+Ponieważ nie zostały znalezione żadne przesłanki wskazujące na jednoznaczną ocenę co do słuszności zamknięcia danej ulicy, w~pracy zdecydowano się na losowe przeszukiwanie przestrzeni rozwiązań.~Jednym z~rozwiązań w~przypadku takich poszukiwań są algorytmy genetyczne, które zostały wykorzystane w~pracy.
+
+\subsubsection{Przedstawienie oceny optymalizacji}
+Paradoks Braessa zakłada dość oczywiste potwierdzenie swojej wiarygodności. Dlatego w~celu sprawdzenia jego słuszności, wybrany został zewnętrzny sposób oceniania. Taką rolę spełnia system symulacji. W~efekcie ocena rozwiązania jest niezależna od metody twierdzenia, poprzez symulację rzeczywistego ruchu w~danej sieci drogowej. Wynik symulacji jest jednoznaczną wartością liczbową, przedstawiającą średni czas przejazdów wszystkich pojazdów, biorących udział w~danym scenariuszu. Zakładając niezmienne plany docelowe przejazdów, poprzez manipulację strukturą drogową, dążymy oczywiście do minimalizacji średnich ich czasów.
+
+\subsubsection{Ocena możliwości wdrożenia proponowanych rozwiązań}
+Paradoks Braessa nie jest jedynym twierdzeniem traktującym o~problemach komunikacyjnych miast. Wiele teorii jest opartych głównie na socjologicznych lub psychologicznych założeniach. Są to na przykład paradoks Downsa Thomsona~\cite{urban} lub prawo Lewisa Mogridge’a~\cite{lewis}. Niestety są one niemniej ważne. Biorąc pod uwagę złożoność problemu, wynik otrzymany podczas eksperymentu nie może być dowodem ani decydującym głosem w~decyzjach dotyczących ustalania rzeczywistej sieci drogowej miasta. 
+
+\subsubsection{Opis rozwiązania GRoNO}
+W efekcie powyższych badań stworzono rozwiązanie, które przy pomocy algorytmów genetycznych dokonuje optymalizacji zadanej sieci drogowej. Rozwiązanie, \textbf{projekt wykonany w~ramach niniejszej pracy dyplomowej został nazwany GRoNO}, z~angielskiego \textit{Genetic Road Network Optimiser}. W~kolejnych rozdziałach pracy skrót ten będzie używany w~odniesieniu do niego.
+
+%\section{Przegląd literatury w~dziedzinie}
+%By przybliżyć temat problemów komunikacyjnych i~rozwiązania zaproponowanego przez Braessa polecamy pracę magisterską \textit{Leslie Arthura Keith Bloy}~\cite{investigation}. W~pracy zostały opisane również inne twierdzenia dotyczące ruchu drogowego. Publikacja \textit{Reducing the Effects of the Braess Paradox with Information Manipulation}~\cite{reducingtheeffects} jest bardzo dobrym uzupełnieniem tematu o~interesującą nas kwestię symulacji wieloagentowych. Prezentuje ona różnice w~wynikach dla przypadku losowego wyboru drogi przez agentów oraz tej wybranej przy użyciu inteligencji kolektywnej\footnote{ang. Collective Intelligence (COIN)}. 
+
+%Zbiorowa praca napisana na potrzeby międzynarodowej konferencji dotyczącej technologii symulacji~\cite{reducingtheeffects} jest pozycją, która opisuje podobny do podejmowanego przez nas problem. Mianowicie skupia się na modyfikacjach drogi poprzez zmiany dostępności jej składowych.
+
+%W zupełnie oddzielnej tematyce, algorytmów genetycznych, polecamy pozycję, która jest wstępem do tej tematyki~\cite{gene}. Pozycja zawiera bogaty zestaw problemów przykładowych wraz z~opisem ich rozwiązania. Ponadto dogłębnie opisuje ona każdy aspekt działania zastosowanych algorytmów. 
+
+\section{Układ pracy}
+Na początku niniejszej pracy przedstawione zostały zagadnienia dotyczące trudności komunikacyjnych miast oraz znane i~wykorzystywane powszechnie ich rozwiązania. Przybliżony został cel pracy wraz z~opisem zaproponowanej metody optymalizacji problemu. 
+
+Rozdział \ref{rozdz.optymalizacja} zawiera opis teoretyczny zagadnień związanych z~realizacją projektu GRoNO.~Wyjaśnia on wykorzystywane struktury oraz matematyczne prawa zastosowane podczas ich modyfikacji. Wskazano sposób reprezentacji struktur sieci drogowych i~ich optymalizacja.
+
+W~rozdziale \ref{rozdz.technologie} opisano technologie, które zostały użyte podczas tworzenia rozwiązania GRoNO.~Zawiera on opis zewnętrznych bibliotek, użytych w~pracy oraz wyjaśnienie działania kolejnych elementów systemu. Opisano również sposób wdrożenia rozwiązania.
+
+Głównym rozdziałem pracy jest rozdział \ref{rozdz.opis},
+w którym przedstawiono aspekty teoretyczne i~praktyczne wykonanego rozwiązania. Omówiono również parametry uruchomienia projektu GRoNO wykorzystane podczas badań wraz z~ich wartościami. Na zakończenie zaprezentowano wyniki optymalizacji przykładowej sieci. Rezultaty zawierają krótkie omówienie i~analizę.
+
+W~rozdziale \ref{rozdz.podsumowanie},podsumowującym, zawarte są wnioski wraz z~omówieniem wyników badań.~Prezentowane są możliwości rozwoju pracy. 
+
+\chapter{Optymalizacja struktury sieci drogowej}\label{rozdz.optymalizacja} 
+
+Poniższy rozdział zawiera opis teoretyczny zagadnień matematycznych wykorzystanych podczas realizacji projektu GRoNO.~Przybliżono w~nim użyte struktury oraz prawa wykorzystane podczas ich modyfikacji. Wskazany zostaje sposób reprezentacji struktur sieci drogowych i~ich optymalizacja.
+
+%\section{Podstawowe definicje}
+
+\begin{definition}\label{def:graf_nieskierowany}
+\textbf{Grafem (nieskierowanym)} nazywa się parę zbiorów $(V,E)$. Elementy zbioru $V$ nazywają się \textit{wierzchołkami}, natomiast elementy zbioru $E$ to \textit{krawędzie}. Każda krawędź jest parą wierzchołków, tzn. $E \subseteq {{u,v}:u,v \in V}$~\cite{grafy}.
+\end{definition}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.40\textwidth]{img/graf1}
+	\caption{Przykładowy graf nieskierowany} 
+	\label{fig:graf_nieskierowany}
+\end{figure}
+
+Przykładowy graf nieskierowany (Rys. \ref{fig:graf_nieskierowany}) może zostać opisany przez zbiory:
+$
+V=\{1,2,3,4,5,6\}, 
+E=\{\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{6,5\},\{6,1\},\{2,6\},\{3,6\},\{4,6\}\}
+$
+
+\begin{definition}\label{def:graf_skierowany}
+\textbf{Grafem skierowanym} nazywa się taki graf, w~którym każda krawędź ma zdefiniowany początek i~koniec, tzn. pary grafu muszą być uporządkowane. Wtedy $E \subseteq V \times V = {{u,v}:u,v \in V}$.
+Krawędź $(u,v)$ najłatwiej wyobrazić sobie jako strzałkę od $u$ do $v$, dlatego często oznacza się ją przez $u \rightarrow v$~\cite{grafy}.
+\end{definition}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.40\textwidth]{img/graf2}
+\caption{Przykładowy graf skierowany} 
+\label{fig:graf_skierowany} 
+\end{figure}
+
+Przykładowy graf skierowany (Rys. \ref{fig:graf_skierowany}) może zostać opisany przez zbiory:
+\newline
+\begin{math}
+V=\{spodnie, buty, pasek, koszula, krawat, marynarka\}
+\end{math}
+\newline
+\begin{math}
+E=\{\{spodnie \rightarrow buty\},\{spodnie  \rightarrow pasek\},
+	\{pasek \rightarrow koszula\},\{koszula \rightarrow krawat\},
+	\{pasek \rightarrow marynarka\},\{krawat \rightarrow marynarka\}\}
+\end{math}
+
+\section{Sieć drogowa w~postaci grafu}
+W przypadku sieci drogowej mamy oczywiście do czynienia z~abstrakcyjną strukturą sieci. Przez sieć drogową rozumie się bowiem układ dróg lub ulic na przykład w~mieście.W ramach pracy wykorzystano pewien fragment większej sieci. Przykładowo, było to miasto Sioux Falls w~Południowej Dakocie, prezentowane na rysunku \ref{fig:fragment_sieci_siouxfalls}. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.35\textwidth]{img/siec}
+	\caption{Fragment sieci drogowej miasta Sioux Falls, Południowa Dakota} 
+	\label{fig:fragment_sieci_siouxfalls}
+\end{figure}
+
+Posługując się powyższą definicją grafu skierowanego (Def. \ref{def:graf_skierowany}), tworząc graf z~pewnej sieci drogowej, przyjmuje się, że zbiorem $V$ wierzchołków są skrzyżowania, natomiast zbiór krawędzi $E$ odnosi się do ulic pomiędzy tymi skrzyżowaniami. W~pracy posługiwano się zawsze grafem skierowanym. W~związku z~tym, w~przypadku ulic dwukierunkowych tworzone są pary krawędzi z~odpowiednimi kierunkami, nawet jeśli ulice nie są rozłączne w~rzeczywistości. Efekt transformacji fragmentu sieci drogowej zaprezentowanej w~postaci grafu skierowanego zaprezentowano na rysunku \ref{fig:siouxfalls_ex_graf}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.45\linewidth]{img/graf}
+	\caption{Sieć drogowa miasta Sioux Falls w postaci grafu}
+	\label{fig:siouxfalls_ex_graf}
+\end{figure}
+
+Na pierwszy rzut oka nie jest widoczne podobieństwo pomiędzy mapą a~jej odzwierciedleniem w~postaci grafu. Wynika to z~braku dopasowania geometrycznego po przekształceniu. Na rysunku \ref{fig:siouxfalls_ex_graf_geometry} prezentowana jest sieć drogowa miasta w~postaci grafu, po przekształceniu geometrycznym, tak by odzwierciedlał on mniej więcej ulice widoczne na mapie.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/dopasowanie}
+	\caption{Graf sieci drogowej miasta z dopasowaną geometrią}
+	\label{fig:siouxfalls_ex_graf_geometry}
+\end{figure}
+
+\section{Paradoks Braessa}
+
+Jak już wcześniej wspomniano, \textit{paradoks Braessa} to twierdzenie matematyczne orzekające, że w~pewnym modelu ruchu drogowego czasy podróży pojazdów mogą ulec wydłużeniu po dodaniu do sieci drogowej nowego połączenia. Autorem twierdzenia jest niemiecki matematyk Dietrich Braess~\cite{braess}. Paradoks działa w~oparciu o~model ruchu drogowego, który ma następujące cechy~\cite{paradox}:
+
+\begin{enumerate}
+\item Sieć drogowa składa się ze skończenie wielu węzłów i~łączących je odcinków dróg.
+\item Po sieci porusza się skończenie wiele pojazdów, a~każdy z~nich ma wyznaczony węzeł startowy i~węzeł docelowy.
+\item Odcinki dróg mają przypisane sobie czasy przejazdu, przy czym czasy te mogą zależeć od liczby pojazdów pokonujących dany odcinek.
+\item Układ sieci drogowej i~czasy przejazdu poszczególnych odcinków są znane pojazdom.
+\item Celem pojazdów jest przejazd przez sieć z~węzłów początkowych do docelowych po trasie złożonej z~odcinków drogowych tak, by zminimalizować łączny czas ich pokonania.
+\item Decyzję o~wyborze tras pojazdy podejmują indywidualnie i~niezależnie od siebie.
+\end{enumerate}
+
+\subsection{Przykładowy wyjściowy układ drogowy}
+
+Paradoks w~oryginalnym artykule wytłumaczony jest na prostym przykładzie, który został zaprezentowany poniżej. Za punkt wyjściowy przyjmujemy pewny układ dróg o~znanych czasach przejazdów.
+
+\subsubsection{Sieć drogowa i~auta}
+
+Sytuacja, w~której ujawnia się paradoks Braessa jest skonstruowany z~czterech miast $A$, $B$, $X$ i~$Y$. Są one połączone odcinkami drogowymi, jak na rysunku~\ref{fig:wyjsciowy_uklad_drogowy}, z~odpowiednimi czasami przejazdu, przy czym $p$ oznacza gęstość ruchu w~tysiącach aut.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.35\textwidth]{img/braess1}
+	\caption{Przykładowy wyjściowy układ drogowy w postaci grafu}
+	\label{fig:wyjsciowy_uklad_drogowy}
+\end{figure}
+
+Poniżej znajduje się opis dostępnej sieci drogowej przedstawionej na rysunku~\ref{fig:wyjsciowy_uklad_drogowy}.
+
+Autostrady to:\newline
+AX, $t_{AX}(p) =  50 + p$ min\newline
+YB, $t_{YB}(p) =  50 + p$ min\newline
+
+Drogi lokalne to:\newline
+AY, $t_{AY}(p) =  10p$ min\newline
+XB, $t_{XB}(p) =  10p$ min\newline
+
+Aut jest 6000 i~wszystkie mają za zadanie przejechać trasę z~$A$ do $B$.
+
+
+\subsubsection{Analiza równowagi Nasha}
+
+Każde auto musi zdecydować się na wybór trasy: albo $AXB$, albo $AYB$. \textbf{Równowaga Nasha} to taka sytuacja, w~której każdy z~samochodów spowoduje wydłużenie swojego czasu jazdy, zmieniając decyzję dotyczącą wyboru trasy przy niezmienionych decyzjach pozostałych aut. Jeśli $p$ i~$q$ oznaczają liczby aut w~tysiącach, pokonujących odpowiednio trasy $AXB$ i~$AYB$, to na podstawie danych do rysunku \ref{fig:wyjsciowy_uklad_drogowy} otrzymuje się równania:
+
+\begin{center}
+\begin{math}\label{eq:nash1}
+p+q = 6 \newline
+t_{AX}(p)+t_{XB}(p) = t_{AY}(q) + t_{YB}(q) \newline
+50+p+10p = 10q+50+q \newline
+\end{math}
+\end{center}
+
+Rozwiązaniem równania jest $p=q=3$. Wynik może zostać wykorzystany do obliczenia średniego czasu przejazdu aut po dostępnej sieci drogowej. Przy tej gęstości ruchu pokonanie obu dostępnych tras zabiera $50+3+30=83$ minuty.
+
+\subsection{Przykładowy uzupełniony układ drogowy}
+
+Pamiętając o~początkowym stanie dróg i~średnim czasie przejazdu, układ drogowy zostaje uzupełniony o~autostradę, mającą na celu skrócenie czasu potrzebnego na podróż pomiędzy punktami w~grafie.
+
+\subsubsection{Sieć drogowa i~auta}
+Do wyjściowego układu drogowego dodana zostaje autostrada $YX$. Uzupełniony układ drogowy zaprezentowany jest na rysunku \ref{fig:wyjsciowy_uklad_drogowy2}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.35\textwidth]{img/braess2}
+	\caption{Przykładowy uzupełniony układ drogowy w postaci grafu}
+	\label{fig:wyjsciowy_uklad_drogowy2}
+\end{figure}
+
+Poniżej znajduje się opis dotyczący uzupełnionego fragmentu sieci drogowej, przedstawionej na rysunku \ref{fig:wyjsciowy_uklad_drogowy2}.
+
+Autostrady to:\newline
+YX, $t_{YX}(p) =  10 + p$ min\newline
+
+Aut jest nadal 6000 i~wszystkie mają za zadanie przejechać trasę z~$A$ do $B$.
+
+\subsubsection{Analiza równowagi Nasha}
+
+Jeśli $p$, $q$ i~$r$ oznaczają liczby aut w~tysiącach pokonujących odpowiednio trasy $AXB$, $AYB$ i~$AYXB$, to na podstawie danych do rysunku \ref{fig:wyjsciowy_uklad_drogowy2} otrzymuje się równania:
+
+\begin{center}
+\begin{math}
+p+q+r = 6 \newline
+t_{AX}(p)+t_{XB}(p+r) = t_{AY}(q+r) + t_{YB}(q) = t_{AY}(q+r)+t_{YX}(r)+t_{XB}(p+r)\newline
+50+p+10(p+r) = 10(q+r)+50+q = 10(q+r)+ 10 + r + 10(p+r)\newline
+\end{math}
+\end{center}
+
+Rozwiązaniem równania jest $p=q=r=2$. Wynik może zostać wykorzystany do obliczenia średniego czasu przejazdu aut po dostępnej sieci drogowej. Czas przejazdu dla każdej z~tych dróg wynosi wówczas $50+2+10 \cdot (2+2)=92$ minuty.
+
+\subsection{Wyjaśnienie intuicyjne paradoksu Braessa}
+Wąskim gardłem systemu są drogi lokalne, na których czas przejazdu bardzo szybko wzrasta wraz z~intensywnością ruchu. Po pojawieniu się dodatkowej drogi dostępna staje się nowa trasa, prowadząca oprócz nowego skrótu YX tylko drogami lokalnymi.
+
+Z perspektywy całości systemu nowy odcinek drogowy odciąża ruch na autostradach, gdzie jest to mało odczuwalne, a~w~zamian jeszcze bardziej zagęszcza ruch na drogach lokalnych, powodując wydłużenie czasu podróży.
+
+\section{Graf skierowany silnie spójny}
+Na potrzeby wybranego w~projekcie systemu symulacji, sieć drogowa przedstawiona w~postaci grafu skierowanego musi spełniać warunek silnej spójności. 
+
+\begin{definition}
+\textbf{Grafem skierowanym silnie spójnym} nazywamy graf skierowany, w~którym możliwe jest dotarcie do każdego wierzchołka, zaczynając z~dowolnego innego poprzez dowolną ilość krawędzi. Wszystkie wierzchołki w~grafie skierowanym silnie spójnym muszą zatem posiadać przynajmniej jedną krawędź wchodzącą i~jedną wychodzącą \cite{silniespojny}.
+\end{definition}
+
+\begin{definition}
+\textbf{Składowa silnie spójna} (ang. strongly connected component) jest maksymalnym podgrafem, w~którym istnieją ścieżki pomiędzy każdymi dwoma wierzchołkami. Jeśli podgraf ten obejmuje wszystkie wierzchołki grafu, to mówimy, że dany graf skierowany jest silnie spójny (ang. strongly connected digraph). W~grafach nieskierowanych każdy graf spójny jest również silnie spójny. Poglądowo sytuacja ta jest przedstawiona na rysunku \ref{fig:ex_silnie_spojna}.
+\end{definition}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/tajran}
+	\caption{Przykładowy graf z zaznaczonymi składowymi silnie spójnymi}
+	\label{fig:ex_silnie_spojna}
+\end{figure}
+
+W sprawdzaniu grafu pod względem spójności, wykorzystujemy \textbf{algorytm Tarjana} \cite{tarjan} do znajdowania składowych silnie spójnych. Podstawowym założeniem algorytmu jest przeszukiwanie grafu w~głąb zaczynając od dowolnego wierzchołka wybranego w~sposób arbitralny. Tak, jak w~przypadku klasycznego przeszukiwania w~głąb, każdy sąsiadujący wierzchołek po odwiedzeniu zostaje oznaczony i~algorytm nigdy ponownie go nie odwiedza. Dzięki temu tworzy się kolekcję przeszukanych drzew, która jest drzewem rozpinającym grafu. Składowe silnie spójne są następnie odnajdowane jako poddrzewa, a~korzenie tych poddrzew są nazywane korzeniami składowych silnie spójnych. Każdy wierzchołek grafu może być wybrany na korzeń składowej silnie spójnej, jeśli zostanie wybrany jako pierwszy wierzchołek podczas przeszukiwania w~głąb.
+
+W efekcie, zawsze przed rozpoczęciem symulacji sprawdza się, czy graf jest grafem skierowanym silnie spójnym lub dokładniej mówiąc, czy posiada tylko jedną składową silnie spójną.
+
+\section{Klasyczny algorytm genetyczny}
+
+Idea algorytmu genetycznego została zaczerpnięta z~nauk przyrodniczych, opisujących zjawiska doboru naturalnego i~dziedziczenia. Mechanizmy te polegają na
+przetrwaniu osobników najlepiej dostosowanych w~danym środowisku, podczas gdy osobniki gorzej przystosowane są eliminowane. Z~kolei te osobniki, które przetrwają, przekazują informację genetyczną swoim potomkom. Krzyżowanie informacji genetycznej otrzymanej od ,,rodziców'' prowadzi do sytuacji, w~której kolejne pokolenia są przeciętnie coraz lepiej dostosowane do warunków środowiska. Mamy tu więc do czynienia ze swoistym procesem optymalizacji. 
+
+%\subsection{Podstawowe pojecia algorytmów genetycznych}
+
+\begin{definition}
+\textbf{Populacją} nazywamy zbiór osobników o~określonej liczebności.
+\end{definition}
+
+\begin{definition}
+\textbf{Osobnikami} populacji w~algorytmach genetycznych są zakodowane w~postaci chromosomów zbiory parametrów zadania, czyli rozwiązania, określone też jako punkty
+przestrzeni poszukiwań.~Osobniki czasami nazywa się organizmami.
+\end{definition}
+
+\begin{definition}
+\textbf{Chromosomy}, inaczej łańcuchy lub ciągi kodowe, to uporządkowane ciągi genów.
+\end{definition}
+
+\begin{definition}
+\textbf{Gen}, nazywany też cechą, znakiem, detektorem, stanowi pojedynczy element
+genotypu, w~szczególności chromosomu. Genotyp, czyli struktura, to zespół chromosomów
+danego osobnika. Zatem osobnikami populacji mogą być genotypy albo
+pojedyncze chromosomy.
+\end{definition}
+
+\begin{definition}
+\textbf{Fenotyp} jest zestawem wartości, odpowiadających danemu genotypowi, czyli zdekodowaną strukturą, a~wiec jest zbiorem parametrów zadania (rozwiązaniem, punktem przestrzeni
+poszukiwań).
+\end{definition}
+
+\begin{definition}
+\textbf{Allel} to wartość danego genu, określona jako wartość cechy lub wariant cechy.
+\end{definition}
+
+\begin{definition}
+\textbf{Locus} to pozycja, która wskazuje miejsce położenia danego genu w~łańcuchu, czyli chromosomie.
+\end{definition}
+
+\begin{definition}
+\textbf{Funkcja przystosowania} nazywana też \textbf{funkcją dopasowania lub funkcją oceny} Stanowi ona miarę przystosowania (dopasowania) danego osobnika w~populacji.
+\end{definition}
+
+\subsection{Klasyczny algorytm genetyczny}
+
+Na podstawowy (klasyczny) algorytm genetyczny, nazywany także elementarnym lub prostym, składają się następujące kroki:
+
+\begin{enumerate}
+\item inicjacja, czyli wybór początkowej populacji chromosomów,
+\item ocena przystosowania chromosomów w~populacji,
+\item sprawdzenie warunku zatrzymania,
+\item selekcja chromosomów,
+\item zastosowanie operatorów genetycznych,
+\item utworzenie nowej populacji,
+\item wyprowadzenie najlepszego chromosomu.
+\end{enumerate}
+
+Najłatwiej wyobrazić sobie powyższe kroki analizując je na schemacie przedstawionym na rysunku~\ref{fig:ogolny_schemat_alg_genetycznego}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/ogolgene}
+	\caption{Ogólny schemat algorytmu genetycznego}
+	\label{fig:ogolny_schemat_alg_genetycznego}
+\end{figure}
+
+\subsection{Operacje klasyczne - selekcja}
+Selekcja chromosomów polega na wybraniu na podstawie obliczonych wartości funkcji przystosowania, tych chromosomów, które będą brały udział w~tworzeniu potomków do następnego pokolenia, czyli następnej generacji. Wybór ten zwykle odbywa się zgodnie z~zasadą naturalnej selekcji, to znaczy największe szanse na udział w~tworzeniu nowych osobników mają chromosomy o~największej wartości funkcji przystosowania. Istnieje wiele metod selekcji populacji.
+
+W projekcie GRoNO wykorzystana została \textbf{selekcja turniejowa}, która polega na podzieleniu populacji na podgrupy k-elementowe (k to rozmiar turnieju – zwykle $2$ lub $3$) i~wyborze z~każdej podgrupy osobnika o~najlepszym przystosowaniu. Można to zrobić poprzez wybór losowy lub wybór deterministyczny. Wtedy wyboru dokonuje się z~prawdopodobieństwem równym $1$. Metoda turniejowa nadaje się zarówno do problemów maksymalizacji, jak i~minimalizacji.
+
+W klasycznym algorytmie genetycznym możliwa jest sytuacja, w~której do nowej populacji nie zostaną wybrane najlepsze osobniki poprzedniej populacji. Chcąc zapobiec takiej sytuacji zdecydowano się na zastosowanie \textbf{strategii elitarnej}. W~jej przypadku nacisk położony jest na zachowanie w~kolejnych iteracjach najlepiej przystosowanych osobników. Dzięki temu zachowywane jest najlepsze rozwiązanie (lub $N$ najlepszych rozwiązań) pomiędzy iteracjami \cite{genetyczne-teoria}. 
+
+\subsection{Operacje klasyczne - krzyżowanie}
+
+\textbf{Operacja krzyżowania} jest podstawową operacją algorytmów genetycznych, służącą do rekombinacji materiału genetycznego. Operacja opiera się na dwóch chromosomach, których części materiału genetycznego zostają wymieszane w~celu utworzenia nowego chromosomu. Podstawowa operacja krzyżowania opiera się na jednym punkcie krzyżowania i~została przedstawiona na poglądowym rysunku \ref{fig:krzyzowanie_schemat}~\cite{genetyczne-teoria}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{img/crossover}
+	\caption{Ogólny schemat operacji krzyżowania osobników}
+	\label{fig:krzyzowanie_schemat}
+\end{figure}
+
+\subsection{Operacje klasyczne - mutacja}
+
+Proces rekombinacji przez krzyżowanie nie byłby w~stanie odkryć całej przestrzeni poszukiwań, jeżeli dana kombinacja nie byłaby obecna w~sekcjach populacji. To mogłoby prowadzić do błędnego wyniku. \textbf{Operacja mutacji} pozwala na wprowadzenie nowych struktur genetycznych w~obecnej populacji. Dokonuje się tego poprzez losową zmianę dowolnego genu w~chromosomie. Sytuacja jest przedstawiona na poglądowym rysunku \ref{fig:mutacja_schemat} ~\cite{genetyczne-teoria}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.580\textwidth]{img/mutation}
+	\caption{Ogólny schemat operacji mutacji osobników}
+	\label{fig:mutacja_schemat}
+\end{figure}
+
+\section{Użycie grafów w~algorytmie genetycznym}
+
+Niniejsza praca skupia się na optymalizacji grafów. W~tym wypadku klasyczna odmiana algorytmu genetycznego musiałaby zostać zmodyfikowana na potrzeby przedstawienia grafów jako chromosomów. Dodatkowo, wymagałoby to zastosowania nowych sposobów krzyżowania i~mutacji jednostek. 
+
+Zdecydowano, że zamiast przystosowywać algorytm genetyczny do nowej struktury, struktura zostanie przystosowana do algorytmu. Ponieważ postawionym zadaniem jest zdecydowanie o~zamknięciu lub nie danej ulicy (krawędzi grafu), postanowiono przedstawić tę strukturę jako listę opisującą taki stan. Zgodnie z~tą myślą, sieć drogowa (graf) jest tłumaczona na listę elementów przyjmujących wartości:
+
+\begin{itemize}
+\item 1 (prawda) --- dla ulicy (węzła), który jest przejezdny,
+\item 0 (fałsz) --- dla ulicy (węzła) zamkniętego dla ruchu.
+\end{itemize}
+
+Tworzona w~ten sposób lista stanów jest tak naprawdę tablicą booleanowską. Bez problemu może być zatem modyfikowana przez klasyczny algorytm genetyczny. Bardzo łatwym jest również odtworzenie obecnego stanu sieci drogowej. Przykładową sytuację przedstawiają rysunki \ref{fig:bool_network_example} i~\ref{fig:graph_network_example}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/bool}
+	\caption{Fragment sieci drogowej w postaci tablicy binarnej }
+	\label{fig:bool_network_example}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/bool-efect}
+	\caption{Fragment sieci drogowej w postaci grafu}
+	\label{fig:graph_network_example}
+\end{figure}
+
+Przedstawiony na rysunku \ref{fig:bool_network_example} fragment sieci zawiera kolejne elementy zerowe, które w~tłumaczeniu na przykładowy graf są zaznaczone kolorem zielonym (Rys. \ref{fig:graph_network_example}). W~tym przypadku krawędzie te zostaną wyłączone z~ruchu. 
+
+\chapter{Technologie informatyczne użyte w~projekcie GRoNO}\label{rozdz.technologie} 
+
+W niniejszym rozdziale opisane zostają technologie, które zostały użyte podczas tworzenia rozwiązania GRoNO.~Opisano użyte zewnętrzne biblioteki oraz wyjaśniono działanie kolejnych elementów systemu. Opisany został również sposób wdrożenia rozwiązania.
+
+\section{Symulator transportu ruchu drogowego}
+
+\textbf{MATSim} jest środowiskiem do implementacji szerokiej skali symulacji transportu, opartych na agentach. Składa się z~wielu modułów, które mogą zostać połączone lub używane oddzielnie. Moduły można zastępować własnymi implementacjami w~celu przetestowania pojedynczych aspektów pracy~\cite{matsim}.
+
+Oczywiście \textit{MATSim} nie jest jedynym dostępnym symulatorem transportu. Podobnych rozwiązań jest wiele. Wybór motywowany był jednak przede wszystkim dostępnością materiałów szkoleniowych i~przykładowymi scenariuszami. \textit{MATSim} jest żywym projektem, opartym o~licencję otwartego oprogramowania \textit{(ang. open source)}. Dysponuje szerokim zasobem przykładów i~gotowych scenariuszy.
+
+\subsection{Symulacja transportu oparta na agentach}\label{rozdz.agenci}
+Przy pomocy \textit{MATSim} możliwa jest symulacja ruchu dla codziennych zachowań komunikacyjnych. W~tym celu wykorzystywani są agenci, reprezentujący pojedyncze jednostki ludzkie. Każdy agent posiada własny plan dnia, pracę i~cele dodatkowe, które realizuje według swojego uznania. Symulacja zwykle pokrywa cały dzień czynności wykonywanych przez wszystkich agentów jednocześnie. Pozwala to na śledzenie pojedynczych jednostek od momentu wyjścia z~domu do pracy, robienie zakupów i~wieczorny powrót. Celem każdego agenta jest uzyskanie jak najwyższego ,,wyniku'' w~ciągu dnia. Agent zdobywa punkty poprzez realizowanie swoich planów (na przykład: praca, zakupy), natomiast traci je podczas komunikacji lub za spóźnienia.
+
+Agenci potrafią modyfikować swoje początkowe plany, tak by nowe ich warianty pozwoliły im na zdobycie wyższego wyniku. Główne założenie procesu optymalizacji wywodzi się z~algorytmów (co-)ewolucyjnych. Cząstka ,,co'' została dodana ze względu na oddzielność algorytmu genetycznego dla każdego agenta z~osobna, jednak wyniki uzyskanych planów dnia, są zależne od całego systemu agentów. 
+
+\subsection{Symulacja ruchu drogowego}\label{rozdz.symulacja}
+
+Podczas podstawowej symulacji w~środowisku \textit{MATSim}, potrzeby przemieszczania się agentów są symulowane w~zadanym środowisku, na przykład sieci drogowej. Podczas typowej symulacji można wyróżnić pięć podstawowych etapów:
+
+\begin{itemize}
+\item initial demand (\textit{pol. przygotowywanie zapotrzebowania}),
+\item execution (\textit{pol. uruchomienie symulacji}),
+\item scoring (\textit{pol. obliczanie wyników agentów}),
+\item replanning (\textit{pol. ponowne planowanie}),
+\item analysis (\textit{pol. analiza wyników}).
+\end{itemize}
+
+Powyższe kroki uruchamiane są w~kolejności, tak jak przedstawiono na rysunku \ref{fig:schemat_symulacji}. Następnie przedstawione zostaje omówienie kolejnych etapów.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{img/simulation_stages}
+	\caption{Schemat symulacji}
+	\label{fig:schemat_symulacji}
+\end{figure}
+
+Etap \textit{initial demand} zajmuje się przygotowaniem planów dnia agentów. Podczas tego stadium, wczytany zostaje pełny zestaw agentów wraz z~ich planami dnia, co najmniej jednym dla każdego agenta. Taki plan składa się z~listy aktywności (na przykład bycie w~domu, praca), podróży (składa się na to również wybór środka transportu), oraz informacji pobocznych (jak czas wyjścia z~danego miejsca) jak i~dokładnych rozkładów tras. Plan opisuje \textit{intencje} agenta. Jeżeli agent przyjmie zbyt optymistyczne założenia dotyczące na przykład przejazdu do pracy i~utknie w~korku lub spóźni się na autobus, możliwe jest że plan nie zostanie zrealizowany zgodnie z~wcześniejszymi założeniami.
+
+Etap \textit{execution} jest również nazywany \textit{mobility simulation (pol. symulacją transportu)}. W~tej fazie plany agentów zostają uruchomione wraz z~reprezentacją świata fizycznego. Oznacza to przemieszczanie agentów wraz z~ich pojazdami po sieci drogowej (w~rzeczywistości - infrastrukturze miasta). Podczas tego etapu plany agentów oddziałują na siebie oraz wpływają na symulowaną rzeczywistość. Jeżeli zbyt wielu agentów wybierze jedną drogę w~tym samym czasie, tworzą się korki na symulowanych drogach. Dlatego agenci planują swoje \textit{intencje} na dany dzień, jednak nie są w~stanie zaplanować dokładnie przebiegu swojego dnia.
+
+Etap \textit{scoring} następuje po zakończeniu symulacji i~jego głównym celem jest ocena agentów na podstawie przebiegu ich akcji w~ciągu dnia. Funkcja oceniająca jest w~pełni konfigurowalna, jednak główną zasadą jest zwiększanie wyniku agenta  za czas spędzony podczas jego aktywności oraz pomniejszanie go za czas spędzony w~podróży. Zatem najwyższe wyniki uzyskają agenci omijający korki i~wykorzystujący maksymalnie czas na zaplanowane akcje.
+
+Etap \textit{replanning} jest najważniejszą fazą symulacji. W~tym punkcie agenci ,,wyciągają wnioski'' ze swojego dnia i~starają się nie popełnić tych samych błędów, wciąż dążąc do lepszego wyniku. Typowym przykładem takich zmian może być zmiana czasów zakończenia swoich planowanych akcji, zmiana środka transportu lub wybranej drogi. Modyfikacje te są dokonywane przez moduły strategii (\textit{ang. Strategy Modules}).
+
+Etap \textit{analysis} jest ostatnią fazą symulacji i~wykorzystywany jest dla przedstawienia wyników wydajnościowych uzyskanych podczas jej trwania. Mogą to być na przykład takie dane jak typy wybieranego transportu, przebyte kilometry, średni dystans i~czas zależnie od godzin i~trybów podróży. 
+
+W skrócie, dla zadanej liczby uruchomień symulacji powtarzany jest scenariusz tego samego dnia, dla tego samego zestawu agentów. Ci ostatni, jak zostało wspomniane, po każdym uruchomieniu są oceniani i~na podstawie poprzednio uzyskanych wyników, w~kolejnej iteracji próbują swoje wyniki polepszyć. Działanie symulacji jest oczywiście nierealne, ponieważ agenci codziennie ,,przeżywają'' ten sam dzień, próbując jak najlepiej dopasować swój plan transportu do panującej sytuacji na drodze.
+
+\section{Opis badanego miasta Sioux Falls}\label{rozdz.opis_siouxfalls}
+
+Główną zaletą korzystania z~MATSim, jest dość pokaźny zbiór danych przykładowych. Jednym z~nich jest materiał zaprezentowany przez twórców aplikacji, który udostępnili w~2013 roku na zgromadzeniu użytkowników platformy~\cite{siux}. Przykład ten dotyczy miasta Sioux Falls w~Południowej Dakocie. Domyślnie scenariusz składa się z:
+
+\begin{itemize}
+\item dwóch grup zapotrzebowania bez charakterystyk socjodemograficznych:
+\begin{itemize}
+\item 68094 agentów z~samochodem oraz korzystających z~transportu publicznego,
+\item 40877 agentów posiadających samochód.
+\end{itemize}
+\item dostosowanej sieci drogowej miasta Sioux Falls,
+\item transportu publicznego razem z~rozkładem jazdy,
+\item przykładowych miejsc zamieszkania, pracy i~rozrywki.
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[totalheight=0.560\textheight,angle=90]{img/sioux/network}
+	\caption{Graf sieci miasta Sioux Falls wykorzystany w badaniach} 
+	\label{fig:siouxfalls_siec}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{img/sioux/facilities}
+	\caption{Rozkład budynków na grafie miasta Sioux Falls} 
+	\label{fig:siouxfalls_budynki}
+\end{figure}
+
+Dostarczony materiał danych jest zbyt obszerny na potrzeby eksperymentu. Dostosowano go zatem poprzez usunięcie transportu publicznego oraz wyposażenie każdego agenta we własny samochód. Powyższe modyfikacje znacznie wzmogły ruch w~mieście (co było pozytywnym efektem) i~skróciły obliczenia związane z~symulacjami. Na rysunku \ref{fig:siouxfalls_siec} przedstawiono sieć miasta odwzorowaną w~postaci grafu. Rysunek został obrócony o~$90^{\circ}$ w~lewo, dla zwiększenia jego czytelności. Natomiast na rysunku \ref{fig:siouxfalls_budynki} zaprezentowano rozkład miejsc pracy, domostw i~innych zakładów nałożonych na graf sieci drogowej miasta.
+
+Na rysunkach \ref{fig:siouxfalls_natezenie_1} i~\ref{fig:siouxfalls_natezenie_2} zaprezentowano ruch drogowy w~najbardziej intensywnych godzinach dnia, tj. godzinach szczytu. Ruch jest przedstawiony jako natężenie ruchu na każdej krawędzi (ulicy), poprzez odniesienie go do możliwości przepustowości każdego węzła. Kolor zielony oznacza małe obciążenie, żółty średnie i~czerwony - wysokie natężenie ruchu w~tym miejscu. Rysunki zostały obrócone o~$90^{\circ}$ w~lewo, dla zwiększenia ich czytelności. 
+
+\begin{figure}[htbp]
+	\centering
+	%bottom right top left
+	\includegraphics[totalheight=0.560\textheight, angle=90]{{{img/sioux/graph6.00-7.00}}}
+	\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 6.00-7.00} 
+	\label{fig:siouxfalls_natezenie_1}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[totalheight=0.560\textheight, angle=90]{{{img/sioux/graph16.00-17.00}}}
+	\caption{Natężenie ruchu w mieście Sioux Falls w godzinach 16.00-17.00} 
+	\label{fig:siouxfalls_natezenie_2}
+\end{figure}
+\clearpage
+
+\section{Ustawienia symulatora transportu}\label{rozdz.ustawienia_symulatora}
+
+Ważną kwestią przed realizacją samego zadania optymalizacji jest dobór jego ustawień.~Część z~nich jest oczywiście stała lub nie ma wpływu bezpośrednio na obliczenia. Kluczową rolę dla ostatecznego wyniku odgrywają jednak parametry samej symulacji.
+
+Większość ustawień została niezmieniona, pochodzi więc od twórców przykładu Sioux Falls, przybliżonego w~rozdziale \ref{rozdz.opis_siouxfalls}. Symulator zawiera jednak ważny parametr ilości iteracji. Zgodnie z~założeniami symulatora, podczas każdej kolejnej iteracji, celem agenta jest zwiększenie jego średniego wyniku. Dąży on zatem do optymalizacji swoich planów dnia względem warunków na drodze. Krok ten został już opisany w~rozdziale \ref{rozdz.agenci}. Przekłada się to bezpośrednio również na średni czas podróży każdego agenta. Twórcy zalecają stosowanie wysokich liczb iteracji, dla uzyskania jak najlepszych wyników. Operacje te są jednak czasochłonne. Na rysunku \ref{fig:symulacja_czas} przedstawiony został graf czasu uruchomienia symulacji jednej sieci dla stu iteracji. Podczas symulacji wykorzystywana była domyślna sieć miasta Sioux Falls.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{img/def_stopwatch}
+	\caption{Graf czasu trwania symulacji MATSim dla stu iteracji}
+	\label{fig:symulacja_czas}
+\end{figure}
+
+Schemat etapów symulacji został przedstawiony w~rozdziale \ref{rozdz.symulacja}. Poniżej przedstawiamy nazwy procesów z~wykresu w~odniesieniu do wcześniej objaśnionych etapów symulacji:
+\begin{enumerate}
+\item iterationStartListeners --- initial demand,
+\item beforeMobSimListeners, mobSim, afterMobSimListeners --- execution , 
+\item scoring --- scoring,
+\item replanning --- replanning,
+\item iterationEndsListeners --- analyses.
+\end{enumerate}
+
+Analizując wykres czasu trwania kolejnych iteracji, na rysunku \ref{fig:symulacja_czas}, możemy również odczytać czas całej symulacji, który wyniósł dokładnie $52$min.~$43$sek.  W~przypadku analizy wielu (setek) sieci, czas więc jest wyraźnie zbyt długi. Przeanalizowaliśmy wpływ ilości iteracji na średni czas przejazdu (rysunek \ref{fig:iteracje_czas}). Średni wynik\footnote{ang. score} uzyskany przez agentów został natomiast przedstawiony na rysunku \ref{fig:iteracje_wynik}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/def_iters}
+	\caption{Graf średniego czasu przejazdów dla stu iteracji}
+	\label{fig:iteracje_czas}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/def_scorestats}
+	\caption{Graf wyników agentów dla stu iteracji}
+	\label{fig:iteracje_wynik}
+\end{figure}
+
+Na wykresach \ref{fig:iteracje_czas} i~\ref{fig:iteracje_wynik}, widać, że wpływ iteracji, ma największe znaczenie w~początkowych stadiach. W~późniejszych iteracjach zmiana następuje dużo wolniej. Wiąże się to z~wykorzystanym algorytmem występującym w~fazie \textit{replanning}. Ponadto analizując rysunek \ref{fig:symulacja_czas} można wnioskować, iż najbardziej czasochłonnym etapem jest etap realnej symulacji ruchu. W~związku z~tym, najlepszym sposobem na ograniczanie czasu potrzebnego do ukończenia obliczeń, jest zmniejszenie ilości iteracji w~symulacji.
+
+Po analizie danych z~rysunków \ref{fig:iteracje_czas} i~\ref{fig:iteracje_wynik}, zdecydowano by \textbf{w~projekcie użyć $10$ iteracji podczas analizy każdej sieci}. Wartość ta optymalnie łączy zalety szybkiego spadku wartości, średnich czasów podróży oraz~czasu potrzebnego na obliczenia.
+
+\section{Algorytmy genetyczne}
+
+Projekt \textbf{The Apache Commons} jest tworzony przez \textit{Apache Software Foundation}. Głównym celem projektu jest stworzenie wolnego oprogramowania do wielokrotnego użytku w~języku \textit{Java}. Projekt podzielony jest na trzy główne części: \textit{proper}, \textit{sandbox}, i~\textit{dormant}~\cite{math}.
+
+W przypadku głównej części\textit{ Apache Commons Proper} wyróżnia się wiele modułów różniących się funkcjonalnością i~celem. \textit{Apache Commons Math} jest modułem zapewniającym rozwiązywania problemów głównie matematycznych i~statystycznych. Znajduje się w~nim implementacja podstawowej formy algorytmu genetycznego, którą rozszerzono w~pracy.
+
+Na rysunkach \ref{fig:class_math3_1} i~\ref{fig:class_math3_2} zaprezentowane zostały wykorzystane w~projekcie klasy z~projektu \textit{Apache Commons Math}. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{img/math3-1}
+	\caption{Diagram klas pakietu Apache Math Genetics}
+	\label{fig:class_math3_1}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{img/math3-2}
+	\caption{Diagram klas pakietu Apache Math Genetics}
+	\label{fig:class_math3_2}
+\end{figure}
+
+\section{Obsługa grafów}\label{rozdz.obsluga_grafow}
+
+Ponieważ moduł do wizualizacji rozwiązań \textit{MATSim} nie spełniał  oczekiwań zarówno pod względem wydajności, jak i~stabilności zdecydowano się na stworzenie autorskiej implementacji. W~tym celu wykorzystano projekt \textbf{NetworkX}.~Jest to biblioteka wykonana w~języku \textit{Python}, stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji \textit{BSD-new}~\cite{networkx}. Wybór biblioteki oparty był głównie na dostarczanych przez nią gotowych implementacjach, które w~pełni pokrywały się z~wymaganiami projektowymi.
+
+\section{Technologie i~metodologie programistyczne}
+
+Użyte w~pracy technologie programistyczne są poniekąd wymuszone przez języki, w~jakich zostały stworzone wykorzystywane rozwiązania pomocnicze. W~przypadku symulatora \textit{MATSim} jest to \textbf{Java}. Język \textbf{Python} został wykorzystany głównie ze względu na wykorzystaną bibliotekę \textit{NetworkX}, obsługującą grafy.
+
+\section{Wdrożenie}\label{sec:wdrozenie}
+
+Ze względu na duże wymagania sprzętowe obliczeń, a~zarazem ograniczoną przenośność rozwiązania z~powodu skorzystania z~języka \textit{Python}, zdecydowano się na usprawnienie rozwiązania. Wykorzystując system \textit{Linux Ubuntu} stworzono maszynę wirtualną, spełniającą wszystkie wymagania do uruchomienia aplikacji. Dzięki temu stało się możliwe wykorzystanie innych komputerów oprócz tego, na którym zostało stworzone rozwiązanie. Podczas badań wykorzystywany był system \textbf{Linux Ubuntu~12.04~LTS}\cite{ubuntu}.
+
+\section{System obliczeniowy}
+
+Korzystając rozwiązania opisanego w~\ref{sec:wdrozenie}, dzięki któremu projekt jest możliwy do zainstalowania na innych maszynach, do obliczeń wykorzystano zewnętrznego dostawcę mocy obliczeniowej. Przy wyborze decydującym czynnikiem była cena rozwiązania, co w~przypadku chmury\textbf{ Microsoft Azure}~\cite{azure}, pozwoliło na darmowe rozwiązanie. Do wyboru użytkownik posiada dość szeroką gamę konfiguracji, które może dostosować idealnie do swoich potrzeb. W~przypadku poniższego projektu kluczowymi aspektami była ilość niezależnych wątków obliczeniowych. Z~sekcji maszyn wirtualnych Linux, do projektu najlepiej nadawała się warstwa podstawowa, przeznaczona do wystąpień ogólnego zastosowania. Jest to ekonomiczna opcja dla obciążeń związanych z~tworzeniem aplikacji, serwerów testowych i~innych aplikacji, które nie wymagają równoważenia obciążeń, automatycznego skalowania i~maszyn wirtualnych korzystających z~dużej ilości pamięci. Na rysunku \ref{fig:azure_dostepne_opcje} przedstawiamy dostępne rozwiązania. W~pracy wykorzystywana została opcja \textit{A4}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{img/azure_opcje}
+	\caption{Dostępne konfiguracje warstwy podstawowej chmury Microsoft Azure}
+	\label{fig:azure_dostepne_opcje}
+\end{figure}
+
+
+\chapter{Opis projektu GRoNO}\label{rozdz.opis} 
+
+W niniejszym rozdziale przedstawiono aspekty teoretyczne i~praktyczne wykonanego rozwiązania. Omówione zostają również parametry wykorzystane podczas badań wraz z~ich wartościami. Na zakończenie przedstawione zostają wyniki optymalizacji przykładowej sieci. Rezultaty zawierają krótkie omówienie i~analizę.
+
+\section{Obsługa projektu GRoNO}
+Ponieważ przeprowadzane przez projekt obliczenia wymagają wiele czasu, zdecydowano się na pominięcie interfejsu użytkownika przy projektowaniu aplikacji. Całość jest obsługiwana przez plik konfiguracyjny, który zostaje wczytany na początku działania programu i~za jego pomocą kontrolowany jest przebieg obliczeń.~Pomimo dwóch osobnych technologii, w~których został wykonany projekt, są one od siebie zależne. Całość jest obsługiwana przez projekt w~\textit{Java}, skrypty w~języku \textit{Python} jedynie wspierają niektóre procesy. Przykładowy plik konfiguracyjny dla projektu z~opisem jego funkcji przedstawiono na listingu \ref{lst:przykladowy_config}.
+
+\lstinputlisting[language=Xml, caption=Plik konfiguracyjny projektu, label=lst:przykladowy_config]{img/config.xml} 
+
+Analizując listing \ref{lst:przykladowy_config} można wyróżnić trzy podstawowe grupy konfiguracyjne:
+\begin{itemize}
+\item project,
+\item scenario,
+\item genetics.
+\end{itemize}
+
+Grupa \textit{project} odpowiada za główne ustawienia całego projektu, w~\textit{scenario} znajdują się ustawienia dotyczące symulacji przeprowadzanej przez MATSim, natomiast sekcja \textit{genetics} zawiera ustawienia dotyczące algorytmu genetycznego.
+
+Poniżej zostają krótko przybliżone kolejne opcje dostępne w~grupie \textit{project}:
+\begin{itemize}
+\item \textit{name} --- nazwa projektu, używana jako katalog wyjściowy,
+\item \textit{output dir} --- katalog, gdzie zapisujemy wyniki,
+\item \textit{threads} --- ilość wątków, które mają być użyte podczas obliczeń,
+\item \textit{log level} --- poziom logowania Log4J\footnote{zewnętrzna biblioteka do logowania, dostępne poziomy: DEBUG, INFO, WARN, ERROR i~FATAL},
+\item \textit{python path} --- ścieżka instalacji Pythona,
+\item \textit{python main} --- folder ze skryptami pomocniczymi,
+\item \textit{java-path} --- ścieżka instalacji Javy,
+\item \textit{matsim-jar} --- scieżka do biblioteki MATSim,
+\item \textit{matsim-xmx} --- maksymalna pamięć RAM dostępna dla symulatora MATSim.
+\end{itemize}
+
+Kolejno, zostają omówione opcje sekcji \textit{scenario}:
+\begin{itemize}
+\item \textit{config} --- scieżka dostępu pliku konfiguracyjnego scenariusz MATSim,
+\item \textit{network} --- scieżka dostępu pliku z~siecią wejściową scenariusza,
+\item \textit{population} --- scieżka dostępu pliku z~populacją scenariusza,
+\item \textit{facilities} --- scieżka dostępu pliku z~budynkami scenariusza,
+\item \textit{iterations} --- ilość iteracji symulacji MATSima.
+\end{itemize}
+
+Na zakończenie przedstawione zostają opcje grupy \textit{genetics}:
+\begin{itemize}
+\item \textit{population size} --- rozmiar populacji,
+\item \textit{max generations} --- ilość testowanych generacji (warunek stopu),
+\item \textit{elitism rate} --- ilość najlepszych chromosomów biorących udział w~kolejnej iteracji,
+\item \textit{crossover rate} --- szansa na krzyżowanie osobników z~poprzedniej populacji przed dodaniem ich do kolejnej generacji,
+\item \textit{mutation rate} --- szansa na mutację pojedynczego genu wybranych osobników,
+\item \textit{tournament rate} --- ilość osobników biorących udział w~turnieju.
+\end{itemize}
+
+\section{Ustawienia projektu GRoNO wykorzystane podczas badań}
+
+Podczas badań wykorzystane zostały ustawienia algorytmu genetycznego zgodne z~listingiem \ref{lst:wykorzystany_config}. Wartości były dobrane na podstawie doświadczenia nabytego w~trakcie studiów literaturowych. 
+	
+\begin{lstlisting}[caption=Ustawienia algorytmu genetycznego podczas badań, label=lst:wykorzystany_config]
+<genetics>
+	<population-size>24</population-size>
+	<max-generations>200</max-generations>
+	<elitism-rate>2</elitism-rate>
+	<crossover-rate>1.0</crossover-rate>
+	<mutation-rate>0.8</mutation-rate>
+	<tournament-arity>4</tournament-arity>
+</genetics>
+\end{lstlisting}
+
+Poniżej znajduje się krótkie omówienie opcji sekcji \textit{genetics} oraz wartości poszczególnych ustawień wykorzystanych w~projekcie, przedstawionych na listingu \ref{lst:wykorzystany_config}:
+\begin{itemize}
+\item \textit{population size - 24} - Rozmiar populacji został dobrany do wielokrotności dostępnych wątków na serwerze. Ponieważ dostępne było 8 rdzeni obliczeniowych, wielokrotność pozwalała na zmaksymalizowanie liczby równoległych symulacji MATSim podczas pojedynczej generacji.
+
+\item \textit{max generations - 200} - Warunek stopu był przede wszystkim motywowany ograniczeniem czasowym obliczeń.~Przy liczbie 200 generacji spodziewane obliczenia na serwerze miały zostać zakończone w~przeciągu 48 godzin.
+
+\item \textit{elitism rate - 2} - Liczba kopiowanych najlepszych rozwiązań do kolejnej generacji była zwiększona do dwóch z~powodu większego rozmiaru populacji (24) i~wybranej metody selekcji osobników.
+
+\item \textit{crossover rate - 1.0} - Szansa na krzyżowanie osobników z~poprzedniej populacji przed dodaniem ich do kolejnej generacji została ustawiona na 1, by mieć pewność, że zostaną stworzeni nowi osobnicy.
+
+\item \textit{mutation rate - 0.8} - Szansa na mutację pojedynczego genu wybranych osobników została ustawiona na 0.8 ze względu na dużą przestrzeń przeszukiwań rozwiązania. Takie ustawienie pozwalało maksymalizować szanse znalezienia nowych ekstremów lokalnych.
+
+\item \textit{tournament rate - 4} - Ilość osobników biorących udział w~turnieju została zwiększona proporcjonalnie do wielkości populacji. Wciąż, liczba ta stanowi tylko 15\% z~całej generacji.
+\end{itemize}
+
+\section{Wyniki uzyskane podczas badań}
+
+Wykres przedstawiający zestawienie wyniku najlepszej sieci wyłonionej w~danej iteracji, do wyniku sieci wejściowej przedstawiony został na rysunku \ref{fig:wynik_globalny}. Jego analiza pokazuje, iż bardzo długo najlepsze rozwiązania z~zamkniętymi jakimikolwiek węzłami sieci drogowej uzyskiwały gorsze wyniki globalne niż sieć drogowa z~wszystkimi ulicami dostępnymi. Szczęśliwie po około $150$ iteracjach zostało odnalezione minimum, w~którym zamknięcie pewnych ulic powodowało uzyskanie lepszego wyniku.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/fitness}
+	\caption{Wykres prezentujący wynik najlepszego osobnika w danej iteracji w odniesieniu do wyniku uzyskanego na sieci wejściowej}
+	\label{fig:wynik_globalny}
+\end{figure}
+
+Ponieważ w~niniejszym projekcie wykorzystany został elitarny model populacji algorytmu genetycznego, powyższy wykres nie przedstawia praktycznie żadnych zmian w~populacji, która została ulepszona. Pojedyncze rozwiązanie, które okazało się najlepszym wynikiem badań posiada jednak  mutacje, które przedstawiają ciekawą wariację tego rozwiązania. Wyniki wszystkich chromosomów były  zachowywane w~bazie danych, dzięki czemu możliwe jest przedstawienie wszystkich rozwiązań spełniających założenia projektowe.
+
+Najlepsze wyniki uzyskane podczas badań przedstawione zostały w~tabeli \ref{tab:tabela_wynikow}. Znajdują się tutaj wszystkie sieci drogowe, które uzyskały wynik lepszy od sieci wejściowej, to jest $1338.4505528474617$. \textbf{Od teraz, sieci te będą nazywane zgodnie z~ich numerem identyfikacyjnym podanym w~pierwszej kolumnie.} Reprezentacja binarna opisuje zamknięte ulice w~grafie. Kolejność ulic reprezentowana przez ciąg binarny jest zawsze taka sama. Została ona ustalona przez algorytm wczytywania grafu w~bibliotece NetworkX (rozdział \ref{rozdz.obsluga_grafow}) i~taka reprezentacja daje mało informacji o~rzeczywistym wyglądzie danej sieci drogowej. Kolumna \textit{wynik sieci} przedstawia średni czas przejazdu agentów w~dziesiątej iteracji symulacji MATSim, czyli badany przez nas wynik.
+
+\begin{figure}[htbp]
+\centering
+\captionof{table}{Tabelaryczna reprezentacja otrzymanych najlepszych sieci drogowych}
+\label{tab:tabela_wynikow} 
+\begin{tabularx}{\linewidth}{ | l | X | r | }
+	\hline
+	ID & Reprezentacja binarna & Wynik sieci \\
+	\hline
+	1 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110111111 & 1310.95255617644 \\ \hline
+	2 & 011111111111111111111111011111110111111111111 111111111111111111111111111111111111110111111 & 1312.64143383664 \\ \hline
+	3 & 011111111111111111111111111111111111111111111 111111111111111111110111111111111111110111111 & 1312.73299250981 \\ \hline
+	4 & 011111111111111111111111111111110111111111111 111111111111111111111111111111111111110111111 & 1313.75345975508 \\ \hline
+	5 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110111101 & 1318.77194744977 \\ \hline
+	6 & 011111111111111111111111011111111111111111111 111111111111111111111111111111111111110111111 & 1320.54353227916 \\ \hline
+	7 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110110111 & 1322.64708120319 \\ \hline
+	8 & 011111111111111111111111011111111111111111111 111111111111111111110111111111111111110111111 & 1323.53190464867 \\ \hline
+	9 & 011111111111111111111111111111111111111111111 111111111111111111111111111111111111110111110 & 1325.07095470218 \\ \hline
+	10 & 01111111111111111111111111111111111111111111 1111111111111111111111110111111111111110111111 & 1327.94727737487 \\ \hline
+	11 & 01111111111111111111111111111111111111111111 1111111111111111111111110111111111111110111101 & 1329.46298894305 \\ \hline
+	12 & 01111111111111111111111101111111111111111111 1111111111111111111111110111111111111110111111 & 1332.87335631911 \\ \hline
+	13 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111111110111011 & 1334.28138152419 \\ \hline
+	14 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111110110111111 & 1334.48972773749 \\ \hline
+	15 & 01111111111111111110111111111111111111111111 1111111111111111111111111111111111111110111111 & 1335.74516109856 \\ \hline
+	16 & 01111111111111111111111111111111111111111111 1111111111111111111111111111111111111110111010 & 1335.96306027821 \\ \hline
+	17 & 01111111111111111111111111111111111001111111 1111111111111111111111111111111111111110111111 & 1336.65051123529 \\ \hline
+\end{tabularx}
+\end{figure}%
+\clearpage
+
+Na rysunkach \ref{fig:sioux1} - \ref{fig:sioux17} prezentowane są grafy uzyskanych sieci drogowych, wizualizacja rozwiązań wymienionych w~tabeli \ref{tab:tabela_wynikow}. Zostały one wymienione kolejno oraz zostały oznaczone odpowiednim numerem identyfikacyjnym. \textbf{W celu uproszczenia odnajdowania usuniętych węzłów zostały one zaznaczone czerwonymi prostokątami. Usunięte węzły oznaczone są kolorem czerwonym.}  W~niektórych przypadkach wycięte węzły są trudno widoczne, z~powodu nikłej długości strzałki. Dotyczy to przede wszystkim rysunków: \ref{fig:sioux5}, \ref{fig:sioux7}, \ref{fig:sioux9}, \ref{fig:sioux10}, \ref{fig:sioux11}, \ref{fig:sioux12}, \ref{fig:sioux13}, \ref{fig:sioux14}, \ref{fig:sioux16}. Tak, jak w~poprzednich przypadkach, rysunki przedstawiające sieci drogowe zostały obrócone o~$90^{\circ}$ w~lewo. 
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/1/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 1}
+\label{fig:sioux1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/2/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 2}
+\label{fig:sioux2}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/3/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 3}
+\label{fig:sioux3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/4/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 4}
+\label{fig:sioux4}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/5/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.4,6.2) rectangle (11.8,7.6);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 5}
+\label{fig:sioux5}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/6/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 6}
+\label{fig:sioux6}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/7/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.6,7.2) rectangle (11.5,8.2);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 7}
+\label{fig:sioux7}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/8/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 8}
+\label{fig:sioux8}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/9/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.7,5.7) rectangle (11.5,6.7);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 9}
+\label{fig:sioux9}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/10/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.7,5.7) rectangle (11.5,6.7);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 10}
+\label{fig:sioux10}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/11/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.5,5.5) rectangle (11.8,7.7);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 11}
+\label{fig:sioux11}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/12/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.7,5.7) rectangle (11.5,6.7);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 12}
+\label{fig:sioux12}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/13/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.4,6.2) rectangle (11.8,7.8);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 13}
+\label{fig:sioux13}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/14/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.7,7.2) rectangle (11.4,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 14}
+\label{fig:sioux14}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/15/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 15}
+\label{fig:sioux15}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/16/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+%	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\draw[red,ultra thick] (10.5,5.8) rectangle (11.7,7.5);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 16}
+\label{fig:sioux16}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/17/network2}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\draw[red,ultra thick] (6.3,5.8) rectangle (8,8.7);
+%	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+%	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+\end{tikzpicture}
+\caption{Sieć miasta Sioux Falls, rozwiązanie nr 17}
+\label{fig:sioux17}
+\end{figure}
+
+\clearpage
+\section{Analiza uzyskanych wyników}\label{rozdz.analiza_uzyskanych_wynikow}
+Pierwszym krokiem, który pomaga w~analizie otrzymanych wyników jest ich zgrupowanie. Dość intuicyjnym jest grupowanie w~zbiory zamykające podobne obszary (węzły). Wyniki należy interpretować z~uwzględnieniem natężenia ruchu panującego w~mieście oraz rozkładu budynków. Informacje te zostały przybliżone w~rozdziale \ref{rozdz.opis_siouxfalls}. Natężenie ruchu prezentowane jest na rysunkach \ref{fig:siouxfalls_natezenie_1} i~\ref{fig:siouxfalls_natezenie_2}, natomiast rozkład budynków znajduje się na rysunku \ref{fig:siouxfalls_budynki}.
+
+Na pierwszy rzut oka widać wyraźną zbieżność w~jednym rejonie. Niestety, choć zdecydowanie musi mieć on wpływ na poprawę czasu symulacji, nie wydaje się on punktem ,,strategicznym'' komunikacji w~mieście. Mowa oczywiście o~zamknięciu węzłów między $18$ i~$18\_542$. Przedstawiamy zaznaczony fragment na rysunku \ref{fig:frag_1}, obróconym o~$90^{\circ}$ w~lewo. Analizując ten fragment pod kątem rozkładu budynków w~mieście, można zauważyć duże skupienie w~pobliżu tego węzła. Bardzo prawdopodobnym jest tutaj wpływ zamknięcia tych ulic na odległość domostw od najbliższego, możliwego punktu zostawienia samochodu. Podczas zamknięcia tego fragmentu, nastąpiło wydłużenie odcinka pokonywanego bez samochodu dla wielu mieszkańców. Mogło to zmusić ich do wcześniejszego wychodzenia z~domu, oraz wcześniejszego rozpoczęcia podróży. To z~kolei wpłynęło na równomierniejsze rozłożenie ruchu w~godzinach szczytu.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/network1}};
+	
+	\draw[red,ultra thick] (7.7,9.5) rectangle (9.5,0 |- image.north);
+	\fill [draw=none, fill=white, fill opacity=0.8] 
+		(image.south west) 			rectangle (7.7	,0 |- image.north)
+		(7.7	,0 |- image.south) 	rectangle (9.5	,9.5)
+		(9.5	,0 |- image.south) 	rectangle (image.north east);
+\end{tikzpicture}
+\caption{Fragment grafu z zaznaczonym obszarem 1}
+\label{fig:frag_1}
+\end{figure}
+
+Ciekawym jest jednak obszar wspólny dla wyników prezentowanych na rysunkach \ref{fig:sioux5}, \ref{fig:sioux7}, \ref{fig:sioux9}, \ref{fig:sioux10}, \ref{fig:sioux11}, \ref{fig:sioux12}, \ref{fig:sioux13}, \ref{fig:sioux14}, \ref{fig:sioux16}. Jest to obszar znajdujący się pomiędzy wierzchołkami $15$ i~$19$. Analizując położenie tych ulic w~mieście, obszar ten znajduje się niedaleko bardzo zakorkowanych ulic, często używanych przez agentów symulacji. Region ten można by określić jako centrum miasta. Na pewno wielu agentów dociera tam w~ramach pracy lub swoich zainteresowań.~Jego usunięcie może znacząco wpływać na wybór drogi jak również sposób dojazdu do miejsc znajdujących się w~okolicy. Oczywiście, pomimo że w~symulatorze węzły te nie były dostępne dla aut, agenci dalej mogli docierać do swoich celów, zostawiając auto w~uprzednio wybranym punkcie. Opisywany fragment zostaje przedstawiony na rysunku \ref{fig:frag_2}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/network2}};
+	
+	\draw[red,ultra thick] (10.4,5.5) rectangle (11.8,8.3);
+	\fill [draw=none, fill=white, fill opacity=0.8] 
+		(image.south west) 			rectangle (10.4		,0 |- image.north)
+		(10.4	,0 |- image.south) 	rectangle (11.8		,5.5)
+		(10.4	,8.3) 				rectangle (11.8		,0 |- image.north)
+		(11.8	,0 |- image.south) 	rectangle (image.north east);
+\end{tikzpicture}
+\caption{Fragment grafu z zaznaczonym obszarem 2}
+\label{fig:frag_2}
+\end{figure}
+
+Drugim obszarem, który został wybrany w~przypadku paru rozwiązań, są ulice pomiędzy skrzyżowaniem (wierzchołkiem) $5$ i~$6$. Został on wybrany przez rozwiązania prezentowane na rysunkach: \ref{fig:sioux2}, \ref{fig:sioux4}, \ref{fig:sioux6}, \ref{fig:sioux8}, \ref{fig:sioux12}. Region ten jest jednak oddalony od centrum i~prawdopodobnym jest, że zamknięcie drogi wpłynęło przede wszystkim na dojazd dla wielu osób. Jest to sytuacja analogiczna do tej z~analizowanego wcześniej przypadku przedstawionego na rysunku \ref{fig:frag_1}). Omawiany fragment prezentowany jest na rysunku \ref{fig:frag_3}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/network3}};
+	
+	\draw[red,ultra thick] (4.35,5.15) rectangle (6.75,8.0);
+	\fill [draw=none, fill=white, fill opacity=0.8] 
+		(image.south west) 			rectangle (4.35,0 |- image.north)
+		(4.35	,0 |- image.south) 	rectangle (6.75,5.15)
+		(4.35	,8.0) 				rectangle (6.75,0 |- image.north)
+		(6.75	,0 |- image.south)	rectangle (image.north east);
+\end{tikzpicture}
+\caption{Fragment grafu z zaznaczonym obszarem 3}
+\label{fig:frag_3}
+\end{figure}
+
+Ostatni obszar, który charakteryzował się wspólnym wynikiem dla więcej niż jednego rozwiązania, to jest wyników prezentowanych na rysunkach: \ref{fig:sioux3}, \ref{fig:sioux8}, \ref{fig:sioux15} znajduje się pomiędzy wierzchołkiem $3$ i~$12$. Przedstawiamy zaznaczony fragment na rysunku \ref{fig:frag_4}, obróconym o~$90^{\circ}$ w~lewo. Wyraźnie jednak region ten nie znajduje się ani na drodze wielu agentów, ani nie jest węzłem często użytkowanym przez agentów. Jego zamknięcie wpłynęło prawdopodobnie na brak gorszej drogi alternatywnej, którą ten węzeł reprezentował w~wielu przypadkach.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west] (image) at (0,0)
+    {\includegraphics[totalheight=0.550\textheight, angle=90]{img/sioux-out/network4}};
+	
+	\draw[red,ultra thick] (5.3,0) rectangle (9.6,1.6);
+	\fill [draw=none, fill=white, fill opacity=0.8] 
+		(image.south west) 		rectangle (5.3,0 |- image.north)
+		(5.3,1.6) 				rectangle (9.6,0 |- image.north)
+		(9.6,0 |- image.south) 	rectangle (image.north east);
+\end{tikzpicture}
+\caption{Fragment grafu z zaznaczonym obszarem 4}
+\label{fig:frag_4}
+\end{figure}
+
+Powyższe sugestie mogą zostać użyte w~przypadku poszerzonych badań nad danymi obszarami. Decydując czy faktycznie mają one wpływ na komunikację w~mieście trzeba by przede wszystkim sprawdzić dokładnie drogi wybierane przez agentów scenariusza. W~prezentowanych sieciach drogowych zamknięte drogi zwykle nie znajdowały się w~kluczowych punktach komunikacyjnych, co przede wszystkim wymusza dogłębniejsze zbadanie algorytmu samej symulacji. Otrzymane wyniki nie oznaczają również, że nie istnieje bardziej optymalne rozwiązanie. Przestrzeń przeszukiwań dla powyższego grafu wynosiła $2^{90}$, a~więc zbadanie wszystkich możliwych rozwiązań problemu jest praktycznie niewykonalne.
+
+\section{Analiza zastosowanych ustawień symulacji}
+
+Zgodnie z~wcześniejszymi założeniami, podczas poszukiwań wybraliśmy ustawienie $10$ iteracji symulacji do oceny sieci. W~celu zweryfikowania wyników, dla najlepszych $17$ sieci przeprowadziliśmy ponowną symulację dla $100$ iteracji. Wyniki te porównujemy z~wynikami sieci wejściowej. Rysunki \ref{fig:iters1} - \ref{fig:iters5} przedstawiają wyniki tych porównań.~Dla poprawienia czytelności wykresy zostały podzielone, prezentując za każdym razem tylko część sieci drogowych. \textbf{Legenda wykresów odnosi się do wyniku uzyskanego przez rozwiązanie, które jest przedstawiane w~tabeli \ref{tab:tabela_wynikow}. Numer odnosi się do numeru identyfikacyjnego sieci.} \textbf{Wyjątek stanowi numer sieci $0$, który odnosi się do sieci wejściowej}, czyli sieci z~dostępnymi wszystkimi ulicami. Ostatni rysunek \ref{fig:iters5} przedstawia porównanie najlepszego rozwiązania uzyskanego przez algorytm, z~najgorszym, oraz siecią wejściową.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{img/iters/iters1}
+\caption{Wykres zmiany średniego czasu przejazdu od iteracji dla sieci wynikowych z ujęciem sieci wejściowej}
+\label{fig:iters1}
+\end{figure}
+
+Najbardziej interesującymi punktami na rysunku \ref{fig:iters1} jest sytuacja podczas pierwszych $20$ iteracji i~ta zachodząca pod sam koniec. Przede wszystkim zauważalna jest wyraźna przewaga sieci z~zamkniętymi węzłami występująca w~początkowych iteracjach, która stopniowo maleje. Ważnym jest również, że podczas gdy wynik uzyskiwany w~kolejnych iteracjach dla sieci wejściowej stopniowo poprawia się, zmiana ta nie jest tak widoczna w~przypadku sieci uzyskanych podczas badań. W~iteracji $100$ sieć z~numerem 4 (Rys. \ref{fig:sioux4}) uzyskuje gorszy wynik niż sieć wejściowa, natomiast wyniki pozostałych sieci (Rys. \ref{fig:sioux1}-\ref{fig:sioux3}) są marginalnie lepsze.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{img/iters/iters2}
+\caption{Wykres zmiany średniego czasu przejazdu od iteracji dla sieci wynikowych z ujęciem sieci wejściowej}
+\label{fig:iters2}
+\end{figure}
+
+Nie jest zaskoczeniem, że w~przypadku rysunku \ref{fig:iters2} sytuacja powtarza się. Początkowo duża przewaga sieci uzyskanych podczas badań zaciera się. Iteracje ponownie nieznacznie wpływają na polepszanie się wyników uzyskanych przez rozwiązania o~identyfikatorach: 5, 6, 7, 8 (Rys. \ref{fig:sioux5} - \ref{fig:sioux8}). Wszystkie sieci oprócz sieci o~identyfikatorze 6 (Rys. \ref{fig:sioux6}) w~$100$ iteracji okazują się jednak lepsze od sieci wejściowej, posiadającej wszystkie dostępne ulice (węzły). Wartym zauważenia jest, że w~przypadku dłuższej symulacji kolejność rozwiązań byłaby inna niż obecnie.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{img/iters/iters3}
+\caption{Wykres zmiany średniego czasu przejazdu od iteracji dla sieci wynikowych z ujęciem sieci wejściowej}
+\label{fig:iters3}
+\end{figure}
+
+W przypadku rozwiązań o~identyfikatorach: 9, 10, 11, 12 (Rys. \ref{fig:sioux9}-\ref{fig:sioux12}) wyniki nie są już jednak tak obiecujące. Trend poprzednich wykresów utrzymuje się i~w~przypadku wykresu na rysunku \ref{fig:iters3} wyraźnie widać, że sieć wejściowa w~$100$ iteracji uzyskuje lepszy wynik niż uzyskane rozwiązania. Sytuacja jest jeszcze bardziej widoczna dla kolejnych rozwiązań: 13, 14, 15, 16 i~17 (Rys. \ref{fig:sioux13}-\ref{fig:sioux17}), których wyniki jeszcze bardziej różnią od tych uzyskanych przez sieć wejściową (Rys. \ref{fig:iters4}). Wybór wyższego parametru iteracji symulacji MATSim, omawianym w~rozdziale \ref{rozdz.ustawienia_symulatora}, wpłynąłby zatem znacznie  na liczbę otrzymanych sieci wynikowych, zmniejszając tę pulę o~połowę.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{img/iters/iters4}
+\caption{Wykres zmiany średniego czasu przejazdu od iteracji dla sieci wynikowych z ujęciem sieci wejściowej}
+\label{fig:iters4}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{img/iters/iters5}
+\caption{Wykres zmiany średniego czasu przejazdu od iteracji dla sieci najlepszej z ujęciem sieci wejściowej}
+\label{fig:iters5}
+\end{figure}
+
+Prezentowane wykresy na rysunkach \ref{fig:iters1} - \ref{fig:iters4} doskonale podsumowuje wykres na rysunku \ref{fig:iters5}, gdzie porównywane jest najlepsze rozwiązanie z~najgorszym. Sieć wejściowa oraz zmiana wyniku pozwala wyciągnąć wnioski na temat działania samego symulatora.
+
+Symulator MATSim zadziałał zgodnie z~oczekiwaniami, wykazując dużą zdolność adaptacji agentów do sieci. Przypadek ten można opisać, zadając sobie pytanie, skąd właściwie biorą się korki i~zatory drogowe? Są one zwykle efektem braku poprawnego planu podróży uczestników ruchu. Symulator potrafi znaleźć taki plan, który w~sposób idealny, dobiera czas podróży oraz najlepszą drogę. Jest to oczywiście możliwe dzięki powtarzającym się w~każdej iteracji \textbf{tym samym} warunkom drogowym, które panują w~sieci. Scenariusz jest bowiem pozbawiony losowych wypadków oraz czynników ludzkich. Nie jest to więc sytuacja rzeczywista.
+
+Mając na uwadze ten ,,idealny'' aspekt symulacji, wybory w~iteracjach wcześniejszych są mniej idealne, można powiedzieć, bardziej ludzkie. Wykresy \ref{fig:iters1} - \ref{fig:iters5} wyraźnie pokazują, że dla zmodyfikowanej sieci, znacznie trudniej jest popełnić błąd przy planowaniu trasy, mając ograniczoną wiedzę na temat warunków drogowych. Wymuszenie określonych dróg na agentach pozwoliło im szybciej dokonywać prawidłowych wyborów.
+
+W przypadku długiej symulacji, część sieci zmodyfikowanych osiągała gorszy rezultat niż sieć wejściowa. Oprócz wyżej wymienionych czynników, musimy bowiem pamiętać, że generalnie większa liczba węzłów oznacza większe możliwości przepływowe sieci. Efekt dłuższej symulacji można porównać z~dopasowaniem sieci drogowej do potrzeb zadanego modelu agentów. Taka sieć spełniałaby idealnie wymogi danej symulacji. Nie sprawdziłaby się, jednak gdyby model został zmieniony. W~przypadku długiej nauki agentów, na temat danej sieci, mamy sytuację odwrotną. Ich wiedza nie musiałaby sprawdzić się w~przypadku zmiany ich planów dnia lub wystąpienia losowych czynników na drodze.
+
+\chapter{Podsumowanie}\label{rozdz.podsumowanie} 
+Uzyskane wyniki potwierdzają możliwość zoptymalizowania sieci drogowej poprzez zamknięcie określonych ulic, przy użyciu algorytmu genetycznego. Dla zadanej sieci drogowej, poprzez optymalizacje, uzyskano kilkanaście rozwiązań, które mogą posłużyć jako baza do dalszych badań.~Zastosowana metoda oceny rozwiązań, czyli zewnętrzny symulator ruchu drogowego również spełnił oczekiwania projektowe. Trzeba jednak pamiętać, że uzyskane wyniki są czysto teoretyczne a~całość eksperymentu została przeprowadzona przy wielu uproszczeniach.
+
+Pierwszym uproszczeniem jest oczywiście sam symulator. Po pierwsze, w~założeniu został zbadany tylko jeden model populacji oraz aktywności dnia (agentów). Model ten przedstawia pewne uśrednienie demograficzne mieszkańców miasta Sioux Falls oraz ich planów komunikacyjnych. Po drugie, w~badanym wariancie miasto zostało pozbawione komunikacji miejskiej, co miało na celu zintensyfikowanie ruchu transportu prywatnego. Po trzecie, symulator w~sposób nierzeczywisty dokonuje optymalizacji planów dnia agentów, które mogą zostać uznane za nierzeczywiste. Trudnym jest jednak oszacowanie stopnia ,,sztuczności'' dopasowania planu do spodziewanych warunków drogowych.
+
+Drugim uproszczeniem jest model miasta. Z~założenia stosowana jest sieć z~pominięciem pomniejszych dróg, mało istotnych dla ogółu komunikacji w~mieście. Kontynuując, model zakłada jedynie ruch, który jest generowany przez mieszkańców, z~pominięciem ruchu napływającego z~innych rejonów. Ostatnim są sytuacje losowe, spowodowane zwykle przez czynnik ludzki. Model nie przewiduje awarii, remontów, wypadków, które oczywiście są składnikiem codziennych sytuacji w~mieście. 
+
+Podczas badań jest możliwe zastosowanie innego kryterium oceny rozwiązań.~Zmiana symulatora lub zupełnie inna metoda oceny tworzonych sieci wpłynie bezsprzecznie na otrzymane wyniki.
+
+Pamiętając zatem, że prezentowane rozwiązanie miało  dostarczyć pewnej sugestii w~sprawie usprawnienia ruchu, spełnia ono swoje zadanie. Innowacja nawet tak dobrze rozwiniętych miast jak te w~USA jest możliwa, nie koniecznie poprzez kosztowne inwestycje w~tworzenie nowej infrastruktury. 
+
+
+\section{Perspektywy dalszych badań w~dziedzinie}
+Dość oczywistym kierunkiem rozwoju może być oczywiście dalsze przeszukiwanie posiadanego problemu. Jak już zostało wspomniane wyżej, ilość możliwych rozwiązań jest bardzo duża ($2^{90}$). Jak zostało przedstawione, zmiana parametrów samej symulacji, również wpłynie na otrzymywane wyniki.
+
+Ciekawszym wydaje się być jednak przeszukiwanie nowych zbiorów. W~przypadku symulatora MATSim mamy do swojej dyspozycji dość pokaźną liczbę przykładów opartych o~rzeczywiste miasta, na których były prowadzone symulacje. Jeden z~dostępnych modeli jest odwzorowaniem miasta Berlin, przy okazji, wykonanym z~dużo większą dokładnością niż Sioux Falls \ref{berlin}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{img/berlin2}
+\caption{Sieć drogowa miasta Berlin w postaci grafu}
+\label{berlin}
+\end{figure}
+
+Ponadto, w~pracy można wykorzystać inne twierdzenia i~paradoksy dotyczące m.in. transportu miejskiego. Niestety, jak już było wspomniane wcześniej, wiele z~tych praw jest opartych o~psychologiczne tezy, bez matematycznego podparcia, co powoduje, że wyniki są trudne do przewidzenia.
+
+
+\section{Struktura plików projektu GRoNO}
+
+Załączone na płycie źródła pozwalają na odtworzenie pełnego projektu używając wymienionych wcześniej środowisk programistycznych, Eclipse \cite{eclipse} i~PyDev \cite{pydev}. Poniżej przedstawiona zostaje struktura katalogów, w~kolejności alfabetycznej, wraz z~krótkim opisem zawartości.
+
+\subsubsection{fakematsim/}
+Jest to sztuczna implementacja symulatora pozwalająca na testowanie działania algorytmu genetycznego w~oparciu o~losowe wyniki. Działanie opiera się o~rozpakowanie gotowego folderu z~wcześniej przygotowanymi obliczeniami oraz podmianę wyniku na losową liczbę. Projekt jest przygotowany w~oparciu o~strukturę projektu \textit{Maven}. Jego skompilowane źródła znajdują się  w~katalogu \textit{matsim}.
+
+\subsubsection{java/}
+Tutaj znajduje się główny projekt zarządzający aplikacją obliczeniową. Jest on przygotowany w~oparciu o~strukturę projektu \textit{Maven}. Zawiera przykładowe pliki konfiguracyjne i~przygotowane testy \textit{JUnit} pozwalające na ich bezpośrednie wykorzystanie.
+
+\subsubsection{literature/}
+W tym folderze zostały zebrane wszystkie źródła literaturowe wykorzystane przy tworzeniu pracy.
+
+\subsubsection{matsim/}
+Folder ten zawiera skompilowane wersje symulatora MATSim oraz jego falsyfikatu wykorzystywanego podczas testów. Symulator został skompilowany ze źródeł dostępnych na repozytorium głównym projektu\footnote {\url{https://svn.code.sf.net/p/matsim/source/matsim/trunk}}. Drobne modyfikacje dotyczyły tylko parametrów logowania oraz uruchomienia symulatora. Nie zostały dokonane żadne zmiany ingerujące w~przebieg samej symulacji.
+
+\subsubsection{sioux-out/}
+Jest to domyślny katalog z~danymi otrzymanymi w~wyniku działania projketu.
+
+\subsubsection{paper/}
+Katalog ze źródłami pracy pisemnej w~formacie TeX.
+
+\subsubsection{python/}
+Znajdują się tutaj wszystkie wykorzystane w~projekcie skrypty Python wraz z~testami jednostkowymi. Jest to również katalog domyślny wywołań skryptów podczas obliczeń.
+
+\subsubsection{README.md}
+Plik zawierający opis instalacji wymaganych przez projekt zależności i~bibliotek na podstawie systemu Linux Ubuntu 12.04 LTS.
+
+\subsubsection{scenarios/}
+Zawiera przykładowe scenariusze, które mogą być wykorzystane przy pracy z~symulatorem MATSim. Znajduje się tutaj, oprócz wykorzystanego miasta Sioux Falls, Berlin i~Bruksela. Ponadto zawiera parę przykładowych plików konfiguracyjnych symulatora.
+
+\subsubsection{seminar/}
+Zawiera prezentację wykorzystaną podczas seminarium dyplomowego, przedstawiającą wstępne założenia projektu.
+
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename} 
+\listoffigures
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename} 
+\listoftables
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
+\lstlistoflistings
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname} 
+\begin{thebibliography}{99}
+
+\bibitem{genetyczne}
+	D.~Rutkowska, M.~Piliński i~L.~Rutkowski,
+	\textit{Sieci neuronowe, algorytmy genetyczne i~systemy rozmyte},
+	PWN, Warszawa 1997.
+	
+\bibitem{genetyczne-teoria}
+	Michalewicz Z., 
+	\textit{Algorytmy genetyczne + struktury danych = programy ewolucyjne}, 
+	Wydawnictwo Naukowo-Techniczne, Warszawa 1999.
+
+\bibitem{gene}
+	Mitchell Melanie,
+	\textit{An Introduction to Genetic Algorithms},
+	A~Bradford Book The MIT Press, 1998.	
+	
+\bibitem{investigation} 
+	Leslie Arthur Keith Bloy, 
+	\textit{An investigation into Braess’ paradox}, 
+	Thesis, 02/2007.
+
+\bibitem{paradox}
+	Dietrich Braess,
+	\textit{Über ein Paradoxon aus der Verkehrsplanung. ,,Unternehmensforschung''},
+	1968 (niem.).
+	
+\bibitem{paradox-eng}
+	A.~Nagurney, and T.~Wakolbinger,
+	\textit{On a~Paradox of Traffic Planning, translated from the (1968) original D.~Braess paper from German to English by D.~Braess},
+	Transportation Science 39/4, 2005.
+
+\bibitem{newinsights}
+	Rric Pas and Shari Principio,
+	\textit{Braess’ paradox: Some new insights}, 
+	April 1996.
+
+\bibitem{grafy}
+	Łukasz Kowalik,
+	\textit{Algorytmy i~struktury danych, grafy},
+	Wykład, 2003.
+	
+\bibitem{siux}
+	A.~Chakirov,
+	\textit{Enriched Sioux Falls Scenario with Dynamic Demand},
+	MATSim User Meeting, Zurich/Singapore, June 2013.
+		
+\bibitem{matsim userg}
+	M.~Rieser, C.~Dobler, T.~Dubernet, D.~Grether, A.~Horni, G.~Lammel, R.~Waraich, M.~Zilske, Kay W.~Axhausen, Kai Nagel,
+	\textit{MATSim User Guide},
+	updated October 30, 2014.
+
+\bibitem{reducingtheeffects}
+	Ana L.~C.~Bazzan and Franziska Klügl,
+	\textit{Reducing the Effects of the Braess Paradox with Information Manipulation}.
+
+\bibitem{conference} 
+	Wataru Nanya, Hiroshi Kitada, Azusa Hara, Yukiko Wakita, Tatsuhiro Tamaki, and Eisuke Kita,
+	\textit{Road Network Optimization for Increasing Traffic Flow},
+	Int. Conference on Simulation Technology, JSST 2013.
+
+\bibitem{tarjan}
+	Tarjan, R. E.,
+	\textit{Depth-first search and linear graph algorithms},
+	SIAM Journal on Computing, Vol 1, No. 2, 06.1972
+	
+\bibitem{braess}
+	Polskie tłumaczenie paradoksu Braessa,
+	\url{http://pl.wikipedia.org/wiki/Paradoks_Braessa},
+	dostęp 10.04.2015.
+	
+\bibitem{urban}
+	Marek Karabon, Kontr-intuicyjne metody ograniczania korków w~miastach,
+	\url{http://www.tnn.pl/k_675_m_3.html},
+	dostęp 10.04.2015.
+	
+\bibitem{lewis}
+	Wojciech Szymalski: Prawo Lewisa-Mogridge’a w~Warszawie – wprowadzenie,
+	\url{http://www.zm.org.pl/?a=lewis-mogridge-14-00_wprowadzenie},
+	dostęp 10.04.2015.
+	   
+\bibitem{silniespojny}
+	Matematyczne twierdzenie grafu silnie spójnego,
+	\url{http://mathworld.wolfram.com/StronglyConnectedDigraph.html},
+	dostęp 10.04.2015.	
+
+\bibitem{matsim}
+	Strona główna projektu MATSim,
+	\url{http://matsim.org},
+	dostęp 10.04.2015.
+
+\bibitem{math}
+	Strona główna projektu Apache Commons Math,
+	\url{http://commons.apache.org/proper/commons math},
+	dostęp 10.04.2015.
+	
+\bibitem{networkx}
+	Strona główna projektu NetworkX,
+	\url{http://networkx.github.io},
+	dostęp 10.04.2015.
+
+\bibitem{java} 
+	Strona główna języka Java,
+	\url{http://www.java.com/pl/},
+	dostęp 10.04.2015.
+
+\bibitem{eclipse}
+	Strona główna projektu IDE Eclipse, 
+	\url{https://eclipse.org},
+	dostęp 10.04.2015.
+				
+\bibitem{python} 
+	Strona główna języka Python,
+	\url{http://pl.python.org},
+	dostęp 10.04.2015.
+	
+\bibitem{pydev} 
+	Strona główna projektu IDE PyDev,
+	\url{http://pydev.org},
+	dostęp 10.04.2015.
+	
+\bibitem{ubuntu}
+	Strona główna systemu Linux Ubuntu,
+	\url{http://www.ubuntu.com},
+	dostęp 10.04.2015.
+	
+\bibitem{azure}
+	Strona główna chmury Microsoft Azure,
+	\url{http://azure.microsoft.com},
+	dostęp 10.04.2015.
+			
+
+
+\end{thebibliography}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
+\chapter*{Abstract}
+
+The purpose of the present master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using fixed, set in advance parameters. Paper covers two main fields of the subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly it describes the techniques used to achieve the final goal.
+
+The application performing the optimisation process uses an external ranking system. In this case, a~multiagent simulator, MATsim. In paper we describe the aspects of the simulation concering the final results of the project. 
+
+The solution is prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
+
+The final result proves the validity of the introduced methods. The genetic algorithm, regarding searching of the optimal solution. As well as, the simlation based rank using the multiagent  simulator resulted in several solutions of the given network with given parameters.
+
+The discussion regarding the MATSim's iteration results and configuration also 
+explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a~simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a~separate case of study.
+
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\includepdf[pages=-]{doc/Zalacznik1.pdf}
+
+\clearpage
+\includepdf[pages=-]{doc/Zalacznik2.pdf}
+
+\end{document}
