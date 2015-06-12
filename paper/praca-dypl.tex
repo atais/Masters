@@ -829,10 +829,10 @@ Analizując klasy dostarczone przez pakiet \textit{Apache Math Genetics} (Rys. ~
 
 Na diagramie zaprezentowanym na rysunku~\ref{fig:class_math3_2} przedstawiono klasy odpowiadające za sam przebieg działania algorytmu genetycznego. Znalazły się tutaj podstawowe klasy odpowiadające metodom, omawianym w~podrozdziale \ref{sec:selekcja}, takie jak \textit{BinaryMutation} --- klasyczna mutacja, \textit{TournamentSelection} --- selekcja turniejowa oraz kilka klas dotyczących krzyżowania. W~projekcie \textit{GRoNO} wykorzystano krzyżowanie jednopunktowe, które zostało zrealizowane w~klasie \textit{OnePointCrossover}.
 
-Oczywiście w~projekcie wiele klas podstawowych zostało przeciążonych tak by realizowały niektóre specyficzne aspekty projektu \textit{GRoNO}.~Schemat działania samego algorytmu został jednak zachowany.
+Oczywiście w~projekcie wiele klas podstawowych zostało przeciążonych tak, by realizowały niektóre specyficzne aspekty projektu \textit{GRoNO}.~Schemat działania samego algorytmu został jednak zachowany.
 
 \section{Biblioteka do obsługi grafów}\label{rozdz.obsluga_grafow}
-Ponieważ moduł do wizualizacji rozwiązań \textit{MATSim} nie spełniał  oczekiwań zarówno pod względem wydajności, jak i~stabilności zdecydowano się na stworzenie autorskiej jego implementacji. W~tym celu wykorzystano projekt \textbf{NetworkX}.~Jest to biblioteka wykonana w~języku \textit{Python}, stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji \textit{BSD-new}~\cite{networkx}. Wybór biblioteki oparty był głównie na dostarczanych przez nią gotowych implementacjach, które w~pełni pokrywały się z~wymaganiami projektowymi.
+Ponieważ moduł do wizualizacji rozwiązań \textit{MATSim} nie spełniał  oczekiwań zarówno pod względem wydajności, jak i~stabilności zdecydowano się na stworzenie jego autorskiej implementacji. W~tym celu wykorzystano projekt \textbf{NetworkX}.~Jest to biblioteka wykonana w~języku \textit{Python}, stworzona z~myślą o~grafach i~sieciach. Jest ona dostarczana jako darmowe oprogramowanie na licencji \textit{BSD-new}~\cite{networkx}. Wybór biblioteki oparty był głównie na dostarczanych przez nią gotowych implementacjach, które w~pełni pokrywały się z~wymaganiami projektowymi.
 
 Przede wszystkim bardzo wygodna w~użyciu była pełna integracja biblioteki z~popularną biblioteką graficzną \textit{matplotlib}, skupiającą się na rysowaniu wykresów oraz grafach. Dzięki temu połączeniu struktury grafów tworzone w~NetworkX mogły być wizualizowane bez konieczności konwersji. 
 
@@ -908,16 +908,16 @@ Wszystkie kroki następujące po uruchomieniu projektu \textit{GRoNO} ujęte są
 \item Zastosowanie sieci wejściowej jako osobnika wzorcowego populacji algorytmu genetycznego.
 \item Ocena funkcji przystosowania osobnika wzorcowego.
 \begin{enumerate}
-\item Sprawdzenie w~bazie wyników czy dana sieć drogowa nie była już poddana symulacji.
+\item Sprawdzenie w~bazie wyników, czy dana sieć drogowa nie była już poddana symulacji.
 
 Jeśli nie istnieje wynik symulacji dla danej sieci drogowej:
 \begin{enumerate}
-\item Uruchomienie symulatora \textit{MATSim} z~wcześniej ustalonymi parametrami i~zadana siecią drogową.
-\item Zapisanie wyniku średniego czasu podróży agentów w~bazie.
+\item Uruchomienie symulatora \textit{MATSim} z~wcześniej ustalonymi parametrami i~zadaną siecią drogową.
+\item Zapisanie wyniku średniego czasu podróży agentów w~bazie danych.
 \item Stworzenie dodatkowych grafów i~wykresów wizualizujących otrzymaną sieć i~jej wynik.
 \end{enumerate}
 
-W przypadku gdy sieć była już poddana symulacji:
+W przypadku, gdy sieć była już poddana symulacji:
 \begin{enumerate}
 \item Odczyt wyniku średniego czasu przejazdów agentów z~bazy danych.
 \end{enumerate}
@@ -939,7 +939,15 @@ W przypadku gdy sieć była już poddana symulacji:
 	\label{fig:grono_schemat}
 \end{figure}
 
-Przede wszystkim analizując schemat z~rysunku~\ref{fig:grono_schemat} można zauważyć, że struktura w~dużej części pokrywa się z~klasycznym algorytmem genetycznym, opisanym w~sekcji \ref{section.klasycnzy_genenetyczny}. Oprócz pierwszych trzech kroków, reszta wywołań z~głównej ścieżki jest oparta o~ten algorytm, realizując zadanie optymalizacji sieci. Krok $1$, wczytanie pliku konfiguracyjnego, został szerzej wytłumaczony w~sekcji \ref{rozdz.konfiguracja_GRoNO}. W~kroku $2$, przygotowanie struktury plików, oraz $3$, wczytanie wejściowej sieci drogowej i~ustawień symulatora, wykonywane są mniej istotne operacje związane z~przygotowaniem programu do uruchomienia obliczeń.~Najistotniejsza część następuje po kroku $4$, zastosowaniu sieci wejściowej jako osobnika wzorcowego, w~którym rozpoczyna się właściwa optymalizacja. Kluczowym aspektem jest informacja na temat sieci drogowej, która zgodnie z~opisem w~podrozdziale \ref{rozdz.przystosowanie} jest tłumaczona z~postaci tablicy binarnej do grafu i~odwrotnie. Proces ten został zrealizowany z~użyciem biblioteki obsługującej grafy opisywanej w~podrozdziale \ref{rozdz.obsluga_grafow}. W~projekcie \textit{GRoNO} zastosowano lokalną bazę danych, w~której przechowywane są wyniki symulacji sieci drogowych. Rozwiązanie to pozwoliło uniknąć sytuacji, w~której badana jest dwukrotnie ta sama sieć, tracąc czas i~moc obliczeniową na ponowną symulację, która w~ostateczności daje ten sam wynik. Powtórzenia w~przypadku losowego tworzenia i~mieszania populacji były niestety nieuniknione. W~kroku $9$, zastosowaniu operatorów genetycznych, również zastosowane zostały pewne usprawnienia. W~przypadku losowego zmieniania wartości w~tablicy binarnej możliwa była bowiem sytuacja utworzenia sieci drogowej, której graf nie spełniałaby warunku spójności. Rozwiązanie problemu opisane zostało w~podrozdziale \ref{sec:graf_spojny}. Generalnie, by uniknąć problematycznej sytuacji stworzenia niewłaściwej sieci drogowej, po zastosowaniu operatora krzyżowania i~mutacji, sieć zostaje sprawdzona. W~przypadku niewłaściwej kombinacji, podejmowane są dodatkowe próby, których liczba jest określona w~konfiguracji projektu \textit{GRoNO}. W~przypadku wielokrotnych niepowodzeń operatory nie są stosowane i~sieć przechodzi w~stanie niezmienionym do kolejnej populacji. Sytuacja ta jest oczywiście wyjątkowo rzadka, ponieważ szanse wielokrotnego niepowodzenia w~przypadku zamknięcia jednego węzła sieci są bardzo małe. Projekt \textit{GRoNO} powtarza kroki optymalizacji sieci drogowej dopóki nie zostanie osiągnięta założona w~konfiguracji projektu liczba iteracji. Po zakończeniu działania programu prezentowane są wyniki, które zostały przedstawione w~rozdziale \ref{rozdz.grono-praktyka}.
+Przede wszystkim analizując schemat z~rysunku~\ref{fig:grono_schemat} można zauważyć, że struktura w~dużej części pokrywa się z~klasycznym algorytmem genetycznym, opisanym w~sekcji \ref{section.klasycnzy_genenetyczny}. Oprócz pierwszych trzech kroków, reszta wywołań z~głównej ścieżki jest oparta o~ten algorytm, realizując zadanie optymalizacji sieci. Krok $1$ (,,wczytanie pliku konfiguracyjnego'') został szerzej opisany w~podrozdziale \ref{rozdz.konfiguracja_GRoNO}. W~kroku $2$ (,,przygotowanie struktury plików'') oraz $3$ (,,wczytanie wejściowej sieci drogowej i~ustawień symulatora'') wykonywane są mniej istotne operacje związane z~przygotowaniem programu do uruchomienia obliczeń.
+
+Najistotniejsza część następuje po kroku $4$ (,,zastosowaniu sieci wejściowej jako osobnika wzorcowego'') w~którym rozpoczyna się właściwa optymalizacja. Kluczowym aspektem jest informacja na temat sieci drogowej, która zgodnie z~opisem w~podrozdziale \ref{rozdz.przystosowanie} jest tłumaczona z~postaci tablicy binarnej do grafu i~odwrotnie. Proces ten został zrealizowany z~użyciem biblioteki obsługującej grafy, opisywanej w~podrozdziale \ref{rozdz.obsluga_grafow}. 
+
+W~projekcie \textit{GRoNO} zastosowano lokalną bazę danych, w~której przechowywane są wyniki symulacji sieci drogowych. Rozwiązanie to pozwoliło uniknąć sytuacji, w~której badana jest dwukrotnie ta sama sieć, tracąc czas i~moc obliczeniową na ponowną symulację, która w~ostateczności daje ten sam wynik. Powtórzenia w~przypadku losowego tworzenia i~mieszania populacji były niestety nieuniknione.
+
+W~kroku $9$ (,,zastosowanie operatorów genetycznych''), również zastosowane zostały pewne usprawnienia. W~przypadku losowego zmieniania wartości w~tablicy binarnej możliwa była bowiem sytuacja utworzenia sieci drogowej, której graf nie spełniałaby warunku spójności. Rozwiązanie problemu opisane zostało w~sekcji \ref{sec:graf_spojny}. 
+
+Generalnie, by uniknąć problematycznej sytuacji stworzenia niewłaściwej sieci drogowej, po zastosowaniu operatora krzyżowania i~mutacji, sieć zostaje sprawdzona. W~przypadku niewłaściwej kombinacji, podejmowane są dodatkowe próby zastosowania tych operatorów, których liczba jest określona w~konfiguracji projektu \textit{GRoNO}. W~przypadku wielokrotnych niepowodzeń operatory nie są stosowane i~sieć przechodzi w~stanie niezmienionym do kolejnej populacji. Sytuacja ta jest oczywiście wyjątkowo rzadka, ponieważ szanse wielokrotnego niepowodzenia w~przypadku zamknięcia jednego węzła sieci są bardzo małe. Projekt \textit{GRoNO} powtarza kroki optymalizacji sieci drogowej dopóki nie zostanie osiągnięta założona w~konfiguracji projektu liczba iteracji. Po zakończeniu działania programu prezentowane są wyniki, które zostały przedstawione w~rozdziale \ref{rozdz.grono-praktyka} niniejszej pracy.
 
 \section{Struktura plików projektu GRoNO}
 Umieszczone na płycie dołączonej do niniejszej pracy źródła pozwalają na odtworzenie pełnego projektu, używając wymienionych wcześniej środowisk programistycznych, \textit{Eclipse} i~\textit{PyDev}. Struktura katalogów, w~kolejności alfabetycznej wraz z~krótkim opisem zawartości, jest następująca:
@@ -1635,15 +1643,15 @@ Ponadto, w~dalszej pracy można wykorzystać inne twierdzenia i~paradoksy dotycz
 \addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
 
-The purpose of the present master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using fixed set in advance parameters. This thesis covers two main fields of presented subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly, it describes the techniques used to achieve the final goal.
+The purpose of presented master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using a fixed, set in advance parameters. This thesis covers two main fields of presented subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly, it describes the techniques used to achieve the final goal.
 
-The application performing the optimisation process uses an external ranking system. This provides a~wide choice of options for future work or similar experiments. In the thesis, a~multiagent simulator, \textit{MATsim} is used. The aspects of the simulation concering the final results of the project are also described. 
+The application performing the optimisation process uses an external ranking system. This provides a~wide choice of options for future work or similar experiments. A~multiagent simulator, \textit{MATsim} is used in the thesis. The aspects of the simulation concering the final results of the project are also described. 
 
-The solution is prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
+The solution was prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
 
 The final result proves the validity of the introduced methods: the genetic algorithm, regarding searching of the optimal solution, as well as the simlation based rank using the multiagent  simulator resulted in several solutions of the given network with given parameters.
 
-The discussion regarding the \textit{MATSim's} iteration results and configuration also explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a~simple, fast solution to experienced problem. Therefore, lower average time of travel for agents during longer iterations would be a~separate case of study.
+The discussion regarding the \textit{MATSim's} iteration results and configuration also explain the differences in long-term evaluation of the simulation. Since the optimal parameters for any simulation are discussable, in the thesis the main goal was to find a~simple, fast solution to experienced problem. Therefore, the lower average time of travel for agents during longer iterations would be a~separate case of study.
 
 \clearpage
 \thispagestyle{empty}
