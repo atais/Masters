@@ -925,7 +925,7 @@ W przypadku, gdy sieć była już poddana symulacji:
 \end{enumerate}
 
 \item Stworzenie losowych sieci drogowych jako populacji początkowej algorytmu genetycznego.
-\item Ocena każdego osobnika zgodnie z~działaniami opisanymi w~punkcie 5, a na rysunku~\ref{fig:grono_schemat} przedstawione jako \textit{przypadek \#2}.
+\item Ocena każdego osobnika zgodnie z~działaniami opisanymi w~punkcie 5, a~na rysunku~\ref{fig:grono_schemat} przedstawione jako \textit{przypadek \#2}.
 \item Zastosowanie metod selekcji osobników.
 \item Zastosowanie operatorów genetycznych, mutacji i~krzyżowania.
 \item Do momentu osiągnięcia zadanej liczby iteracji powtarzanie czynności od kroku 7.
@@ -941,13 +941,13 @@ W przypadku, gdy sieć była już poddana symulacji:
 
 Przede wszystkim analizując schemat z~rysunku~\ref{fig:grono_schemat} można zauważyć, że struktura w~dużej części pokrywa się z~klasycznym algorytmem genetycznym, opisanym w~sekcji \ref{section.klasycnzy_genenetyczny}. Oprócz pierwszych trzech kroków, reszta wywołań z~głównej ścieżki jest oparta o~ten algorytm, realizując zadanie optymalizacji sieci. Krok $1$ (,,wczytanie pliku konfiguracyjnego'') został szerzej opisany w~podrozdziale \ref{rozdz.konfiguracja_GRoNO}. W~kroku $2$ (,,przygotowanie struktury plików'') oraz $3$ (,,wczytanie wejściowej sieci drogowej i~ustawień symulatora'') wykonywane są mniej istotne operacje związane z~przygotowaniem programu do uruchomienia obliczeń.
 
-Najistotniejsza część następuje po kroku $4$ (,,zastosowaniu sieci wejściowej jako osobnika wzorcowego'') w~którym rozpoczyna się właściwa optymalizacja. Kluczowym aspektem jest informacja na temat sieci drogowej, która zgodnie z~opisem w~podrozdziale \ref{rozdz.przystosowanie} jest tłumaczona z~postaci tablicy binarnej do grafu i~odwrotnie. Proces ten został zrealizowany z~użyciem biblioteki obsługującej grafy, opisywanej w~podrozdziale \ref{rozdz.obsluga_grafow}. 
+Najistotniejsza część następuje po kroku $4$ (,,zastosowaniu sieci wejściowej jako osobnika wzorcowego'') w~którym rozpoczyna się właściwa optymalizacja. Kluczowym aspektem jest informacja na temat sieci drogowej, która zgodnie z~opisem w~podrozdziale~\ref{rozdz.przystosowanie} jest tłumaczona z~postaci tablicy binarnej do grafu i~odwrotnie. Proces ten został zrealizowany z~użyciem biblioteki obsługującej grafy, opisywanej w~podrozdziale \ref{rozdz.obsluga_grafow}. 
 
 W~projekcie \textit{GRoNO} zastosowano lokalną bazę danych, w~której przechowywane są wyniki symulacji sieci drogowych. Rozwiązanie to pozwoliło uniknąć sytuacji, w~której badana jest dwukrotnie ta sama sieć, tracąc czas i~moc obliczeniową na ponowną symulację, która w~ostateczności daje ten sam wynik. Powtórzenia w~przypadku losowego tworzenia i~mieszania populacji były niestety nieuniknione.
 
-W~kroku $9$ (,,zastosowanie operatorów genetycznych''), również zastosowane zostały pewne usprawnienia. W~przypadku losowego zmieniania wartości w~tablicy binarnej możliwa była bowiem sytuacja utworzenia sieci drogowej, której graf nie spełniałaby warunku spójności. Rozwiązanie problemu opisane zostało w~sekcji \ref{sec:graf_spojny}. 
+W~kroku $9$ (,,zastosowanie operatorów genetycznych''), również zastosowane zostały pewne usprawnienia. W~przypadku losowego zmieniania wartości w~tablicy binarnej możliwa była bowiem sytuacja utworzenia sieci drogowej, której graf nie spełniałaby warunku spójności. Rozwiązanie problemu opisane zostało w~sekcji~\ref{sec:graf_spojny}. 
 
-Generalnie, by uniknąć problematycznej sytuacji stworzenia niewłaściwej sieci drogowej, po zastosowaniu operatora krzyżowania i~mutacji, sieć zostaje sprawdzona. W~przypadku niewłaściwej kombinacji, podejmowane są dodatkowe próby zastosowania tych operatorów, których liczba jest określona w~konfiguracji projektu \textit{GRoNO}. W~przypadku wielokrotnych niepowodzeń operatory nie są stosowane i~sieć przechodzi w~stanie niezmienionym do kolejnej populacji. Sytuacja ta jest oczywiście wyjątkowo rzadka, ponieważ szanse wielokrotnego niepowodzenia w~przypadku zamknięcia jednego węzła sieci są bardzo małe. Projekt \textit{GRoNO} powtarza kroki optymalizacji sieci drogowej dopóki nie zostanie osiągnięta założona w~konfiguracji projektu liczba iteracji. Po zakończeniu działania programu prezentowane są wyniki, które zostały przedstawione w~rozdziale \ref{rozdz.grono-praktyka} niniejszej pracy.
+Generalnie, by uniknąć problematycznej sytuacji stworzenia niewłaściwej sieci drogowej, po zastosowaniu operatora krzyżowania i~mutacji, sieć zostaje sprawdzona. W~przypadku niewłaściwej kombinacji, podejmowane są dodatkowe próby zastosowania tych operatorów, których liczba jest określona w~konfiguracji projektu \textit{GRoNO}. W~przypadku wielokrotnych niepowodzeń operatory nie są stosowane i~sieć przechodzi w~stanie niezmienionym do kolejnej populacji. Sytuacja ta jest oczywiście wyjątkowo rzadka, ponieważ szanse wielokrotnego niepowodzenia w~przypadku zamknięcia jednego węzła sieci są bardzo małe. Projekt \textit{GRoNO} powtarza kroki optymalizacji sieci drogowej dopóki nie zostanie osiągnięta założona w~konfiguracji projektu liczba iteracji. Po zakończeniu działania programu prezentowane są wyniki, które zostały przedstawione w~rozdziale~\ref{rozdz.grono-praktyka} niniejszej pracy.
 
 \section{Struktura plików projektu GRoNO}
 Umieszczone na płycie dołączonej do niniejszej pracy źródła pozwalają na odtworzenie pełnego projektu, używając wymienionych wcześniej środowisk programistycznych, \textit{Eclipse} i~\textit{PyDev}. Struktura katalogów, w~kolejności alfabetycznej wraz z~krótkim opisem zawartości, jest następująca:
@@ -974,7 +974,7 @@ Katalog ze źródłami pracy pisemnej w~formacie TeX.
 Znajdują się tutaj wszystkie wykorzystane w~projekcie skrypty Python wraz z~testami jednostkowymi. Jest to również domyślny katalog wywołań skryptów podczas obliczeń.
 
 \subsubsection{README.md}
-Plik zawierający opis wymaganych przez projekt instalacji zależności i~bibliotek na podstawie systemu Linux Ubuntu 12.04 LTS.
+Plik zawierający opis wymaganych przez projekt instalacji zależności i~bibliotek na podstawie systemu Linux Ubuntu~12.04~LTS.
 
 \subsubsection{scenarios/}
 Zawiera przykładowe scenariusze symulacji transportu ruchu drogowego, które mogą być wykorzystane przy pracy z~symulatorem \textit{MATSim}. Znajduje się tutaj, oprócz wykorzystanego miasta Sioux Falls, również scenariusze dla miast Berlin i~Bruksela. Ponadto, zawiera on parę przykładowych plików konfiguracyjnych symulatora.
@@ -1643,11 +1643,11 @@ Ponadto, w~dalszej pracy można wykorzystać inne twierdzenia i~paradoksy dotycz
 \addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
 
-The purpose of presented master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using a fixed, set in advance parameters. This thesis covers two main fields of presented subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly, it describes the techniques used to achieve the final goal.
+The purpose of presented master thesis was to find an optimal solution of the given road network using genetic algorithm. The optimisation is performed using a~fixed, set in advance parameters. This thesis covers two main fields of presented subject. Firstly it introduces the topic of road network optimisation and Braess paradox. Secondly, it describes the techniques used to achieve the final goal.
 
 The application performing the optimisation process uses an external ranking system. This provides a~wide choice of options for future work or similar experiments. A~multiagent simulator, \textit{MATsim} is used in the thesis. The aspects of the simulation concering the final results of the project are also described. 
 
-The solution was prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu 12.04 LTS.
+The solution was prepared using Java and Python programming languages. During the research, the process was conducted by a~machine operating on Linux Ubuntu~12.04~LTS.
 
 The final result proves the validity of the introduced methods: the genetic algorithm, regarding searching of the optimal solution, as well as the simlation based rank using the multiagent  simulator resulted in several solutions of the given network with given parameters.
 
@@ -1657,8 +1657,10 @@ The discussion regarding the \textit{MATSim's} iteration results and configurati
 \thispagestyle{empty}
 \mbox{}
 \includepdf[pages=-]{doc/Zalacznik1.pdf}
+%\includepdf[pages=-]{doc/Zalacznik1-bez.pdf}
 
 \clearpage
 \includepdf[pages=-]{doc/Zalacznik2.pdf}
+%\includepdf[pages=-]{doc/Zalacznik2-bez.pdf}
 
 \end{document}
